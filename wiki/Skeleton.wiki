@@ -1,0 +1,31 @@
+#summary Description of the Zend Framework skeleton in Rend.
+
+= Zend Framework Skeleton =
+
+The structure of the Rend source code files and directories is setup to match the [http://framework.zend.com/manual/en/zend.controller.modular.html Zend Controller modular directory structure] and borrows the rest of it's structure from [http://www.ilovejackdaniels.com/ruby_on_rails_cheat_sheet.pdf Ruby On Rails] (with some modifications).
+
+ * application
+   * __module__
+     * controllers
+     * models
+     * views
+       * filters
+       * helpers
+       * scripts
+ * config
+ * docroot
+   * images
+   * scripts
+   * styles
+ * forms
+ * languages
+ * libraries
+   * Project
+   * Rend
+   * Zend
+ * logs
+ * lucene
+ * tests
+ * tmp
+
+All this allows you to begin developing your application immediately, without having to do the setup of a Zend Framework site.
