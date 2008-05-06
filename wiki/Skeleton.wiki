@@ -5,7 +5,7 @@
 The structure of the Rend source code files and directories is setup to match the [http://framework.zend.com/manual/en/zend.controller.modular.html Zend Controller modular directory structure] and borrows the rest of it's structure from [http://www.ilovejackdaniels.com/ruby_on_rails_cheat_sheet.pdf Ruby On Rails] (with some modifications).
 
  * application
-   * __module__
+   * _module_
      * controllers
      * models
      * views
