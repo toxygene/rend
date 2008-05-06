@@ -1,0 +1,19 @@
+#summary Error handling.
+
+= Enhanced Error Handling =
+
+Rend expands on the [http://framework.zend.com/manual/en/zend.controller.plugins.html#zend.controller.plugins.standard.errorhandler Zend_Controller_Plugin_ErrorHandler] by forwarding to error specific actions based on error types.
+
+== Controller ==
+`EXCEPTION_NO_CONTROLLER` and `EXCEPTION_NO_ACTION` are simply forwarded to the `pageNotFoundAction()`, where a 404 header is sent and the `page-not-found.phtml` script is rendered. `EXCEPTION_NO_CONTROLLER` is automatically thrown by the dispatcher when a controller can't be found. `EXCEPTION_NO_ACTION` is automatically thrown by the controller when an action can't be find.
+
+You can use this behavior by throwing a `Zend_Controller_Action_Exception` with a code of 404.
+
+ Previous versions of the Zend Framework did not require the 404 code. The code became a requirement in the Zend Framework 1.5.x. If you do not supply the code, the error handler will consider the exception an internal error, not a 404.
+
+Other exceptions are handled based on the exceptions class. `Rend_Controller_Action_Exception_Auth` (which is thrown by the Acl helper) forwards to `unauthorizedAction()`, where a 401 header is sent and the `unauthorized.phtml` script is rendered. `Rend_Controller_Action_Exception_Acl` (which is also thrown by the Acl helper) forwards to `forbiddinAction()`, where a 403 header is sent and the `forbiddin.phtml` script is rendered.
+
+The remaining exceptions are assumed to be unhandled exceptions from your applications actions, so these are forwarded to `internalErrorAction()` where a 500 header is sent and the `internal-error.phtml` script is rendered.
+
+== View ==
+All the !ErrorController's views conditionally display information about the exception based on the display_errors setting in the config file. If the display is enabled, the exception will be displayed in an expandable box that shows the exception message and stack trace.
