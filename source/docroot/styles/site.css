@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+@import 'debug.css';
+
+/* Global overrides */
+body {
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+}
