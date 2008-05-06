@@ -1,0 +1,7 @@
+#summary Rend thank yous.
+
+ * Kris, for the Rend name.
+ * [http://www.sierra-bravo.com/ Sierra Bravo], for letting take this from an internal project to an open source project.
+ * [http://www.zend.com/ Zend], for taking the lead on developing the Zend Framework.
+ * [http://framework.zend.com/ The Zend Framework developers and community], for helping build a top-notch set of libraries (and making programming fun for me again).
+ * [http://f1webchallenge.com/teams/10-The-Mighty-Polymorphin-Power-Rangers The Mighty Polymorphin' Power Rangers], for putting Rend through it's paces at the [http://f1webchallenge.com/ F1 Web Challenge]. 
