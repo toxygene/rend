@@ -1,0 +1,29 @@
+#debug {
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+
+    background-color: #FEE;
+    border: 1px solid #F00;
+    margin: 1em;
+    padding: .5em;
+}
+
+#debug h1, h2 {
+    margin: 0;
+}
+
+#debug p {
+    cursor: pointer;
+    margin: 0;
+    text-decoration: underline;
+}
+
+#debug PRE {
+    font-size: 88%;
+    margin: 1em 0;
+}
+
+#debug .exception {
+    display: none;
+    margin-top: 1em;
+}
