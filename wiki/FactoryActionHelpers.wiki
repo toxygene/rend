@@ -1,0 +1,18 @@
+#summary Documentation of the factory action helpers.
+
+= Factory Action Helpers =
+Rend includes a number of action helpers that work as factories for easily creating common objects based on values in the config file.
+
+ * Zend_Acl
+ * Zend_Auth
+ * Zend_Auth_Adapter
+ * Zend_Config
+ * Zend_Db_Adapter
+ * Zend_Db_Table
+ * Zend_Locale
+ * Zend_Log
+ * Zend_Search_Lucene
+ * Zend_Mail
+ * Zend_Mail_Transport
+ * Zend_Translate
+ * Zend_View
