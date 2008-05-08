@@ -1,3 +1,4 @@
 #summary Rend documentation.
+#labels Featured
 
- * FactoryActionHelper
+ * FactoryActionHelpers
