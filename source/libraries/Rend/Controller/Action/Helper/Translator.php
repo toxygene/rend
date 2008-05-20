@@ -154,4 +154,14 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
         }
     }
 
+    /**
+     * Set the locale for the translator prior to dispatch
+     */
+    public function preDispatch()
+    {
+        if ($this->isEnabled()) {
+            $this->getTranslator()->setLocale($this->getLocale());
+        }
+    }
+
 }
