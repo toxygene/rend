@@ -1,6 +1,8 @@
 #summary Rend documentation.
 #labels Featured
 
+ * Front Controller
+   * Request
  * Action Helpers
    * Factories
    * IsAllowed
@@ -9,11 +11,10 @@
  * Filters
    * Boolean
    * Null
- * View
-   * Helpers
-     * BaseUrl
-     * Cycle
-     * DefaultValue
-     * FullUrl
-     * IsAllowed
-     * Truncate
+ * View Helpers
+   * BaseUrl
+   * Cycle
+   * DefaultValue
+   * FullUrl
+   * IsAllowed
+   * Truncate
