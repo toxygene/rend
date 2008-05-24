@@ -4,7 +4,7 @@
  * Action Helpers
    * Factories
    * IsAllowed
-    * Layout Selector
+   * Layout Selector
    * SSL Selector
  * Filters
    * Boolean
