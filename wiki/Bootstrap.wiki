@@ -1,0 +1,9 @@
+#summary Documentation of the bootstrap process.
+
+= Description =
+
+== common.php ==
+
+== index.php ==
+
+== setup.php ==
