@@ -106,7 +106,7 @@ class Rend_Controller_Action_Helper_Locale extends Rend_Controller_Action_Helper
      */
     public function setLocale($locale)
     {
-        $this->getLocale()->setLocale($locale);
+        $this->getLocale()->setLocale($locale->toString());
         $this->notify();
         return $this;
     }
