@@ -66,11 +66,6 @@ class Rend_View_Helper_IsAllowedTest extends PHPUnit_Framework_TestCase
         unset($this->_helper);
     }
 
-    public function testReturnsFalseWhenNoIdentityIsPresent()
-    {
-        $this->assertFalse($this->_helper->isAllowed('test', 'test'));
-    }
-
     public function testReturnsTrueWhenTheRoleHasAccessToTheResource()
     {
         Zend_Controller_Action_HelperBroker::getExistingHelper('isAllowed')->setRole('guest');

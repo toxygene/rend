@@ -57,7 +57,7 @@ class Rend_Controller_Action_Helper_LayoutSelectorTest extends PHPUnit_Framework
             new Zend_Controller_Response_Cli()
         ));
 
-        $this->_helper->getFrontController()->addControllerDirectory('_files/test_module', 'test_module');
+        $this->_helper->getFrontController()->addControllerDirectory('test_module/controllers', 'test_module');
     }
 
     public function tearDown()
@@ -125,7 +125,7 @@ class Rend_Controller_Action_Helper_LayoutSelectorTest extends PHPUnit_Framework
         $this->_helper->preDispatch();
 
         $this->assertEquals('test_layout.phtml', $this->_helper->getLayout()->getLayout());
-        $this->assertEquals('_files/test_module/views/scripts', $this->_helper->getLayout()->getLayoutPath());
+        $this->assertEquals('test_module/views/scripts', $this->_helper->getLayout()->getLayoutPath());
     }
 
     public function testZendLayoutDefaultLayoutIsUsedWhenNoLayoutIsSpecified()

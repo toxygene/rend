@@ -64,11 +64,11 @@ class Rend_Controller_Action_Helper_LocaleTest extends PHPUnit_Framework_TestCas
 
     public function testLocaleCanBeOverwritten()
     {
-        $locale = new Zend_Locale();
+        $locale = new Zend_Locale('fr_CA');
 
         $this->_helper->setLocale($locale);
 
-        $this->assertSame($locale, $this->_helper->getLocale());
+        $this->assertEquals($locale, $this->_helper->getLocale());
     }
 
 }
