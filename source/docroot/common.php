@@ -21,6 +21,6 @@ require_once 'Rend/Controller/Front.php';
 /** Zend_Controller_Action_HelperBroker */
 require_once 'Zend/Controller/Action/HelperBroker.php';
 
-$front = Rend_Controller_Front::getInstance();
-
 Zend_Controller_Action_HelperBroker::addPrefix('Rend_Controller_Action_Helper');
+
+$front = Rend_Controller_Front::getInstance();
