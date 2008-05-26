@@ -86,11 +86,7 @@ class Rend_Controller_Action_Helper_View extends Rend_Controller_Action_Helper_A
     public function getPath()
     {
         if (!$this->_path) {
-            $path = $this->getFrontController()->getParam('rendPath');
-            if (!$path) {
-                $path = '.';
-            }
-            $this->_path = $path . '/libraries/Rend/View/Helper';
+            $this->_path = $this->getFrontController()->getPath() . '/libraries/Rend/View/Helper';
         }
         return $this->_path;
     }
