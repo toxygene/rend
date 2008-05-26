@@ -9,7 +9,7 @@ require_once 'Rend/Controller/Action/Helper/Abstract.php';
 /**
  *
  */
-class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_Helper_Abstract implements SplObserver
 {
 
     /**
@@ -19,20 +19,8 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
     private $_directory;
 
     /**
-     * Enabled flag
-     * @var     boolean
-     */
-    private $_enabled;
-
-    /**
-     * Locale object
-     * @var     Zend_Locale
-     */
-    private $_locale;
-
-    /**
      * Translator object
-     * @var     Zend_Translate
+     * @var     Zend_Translate_Adapter
      */
     private $_translator;
 
@@ -42,14 +30,16 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
      * @param   string          $directory
      * @param   Zend_Locale     $locale
      */
-    public function __construct($directory = null, Zend_Locale $locale = null)
+    public function __construct($directory = null, $locale = null)
     {
         $this->_directory = $directory;
         $this->_locale    = $locale;
     }
 
     /**
+     * Get the translator
      *
+     * @return  Zend_Translator_Adapter
      */
     public function direct()
     {
@@ -64,24 +54,19 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
     public function getDirectory()
     {
         if (!$this->_directory) {
-            $path = $this->getFrontController()->getParam('rendPath');
-            if (!$path) {
-                $path = '..';
-            }
-            $this->_directory = $path . '/languages';
+            $this->_directory = $this->getFrontController()->getParam('rendPath') . '/languages';
         }
         return $this->_directory;
     }
 
     /**
-     * Get the locale object
      *
-     * @return  Zend_Locale
      */
     public function getLocale()
     {
         if (!$this->_locale) {
             $this->_locale = $this->_getActionHelper('locale')->getLocale();
+            $this->_getActionHelper('locale')->attach($this);
         }
         return $this->_locale;
     }
@@ -125,7 +110,18 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
 
             $this->_translator->setLocale($this->getLocale());
         }
+
         return $this->_translator;
+    }
+
+    /**
+     * Determine if translations are enabled
+     *
+     * @return  boolean
+     */
+    public function isEnabled()
+    {
+        return (boolean) $this->_translator || ($this->_getConfig()->translator && $this->_getConfig()->translator->valid());
     }
 
     /**
@@ -141,27 +137,13 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
     }
 
     /**
-     * Determine if translations are enabled
+     * Update based on an observer
      *
-     * @return  boolean
+     * @param   SplSubject  $subject
      */
-    public function isEnabled()
+    public function update(SplSubject $subject)
     {
-        if ($this->_translator) {
-            return true;
-        } else {
-            return $this->_getConfig()->translator && $this->_getConfig()->translator->valid();
-        }
-    }
-
-    /**
-     * Set the locale for the translator prior to dispatch
-     */
-    public function preDispatch()
-    {
-        if ($this->isEnabled()) {
-            $this->getTranslator()->setLocale($this->getLocale());
-        }
+        $this->getTranslator()->setLocale($subject->getLocale());
     }
 
 }

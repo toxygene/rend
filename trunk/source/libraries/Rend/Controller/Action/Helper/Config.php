@@ -99,11 +99,7 @@ class Rend_Controller_Action_Helper_Config extends Rend_Controller_Action_Helper
     public function getFilename()
     {
         if (!$this->_filename) {
-            $path = $this->getFrontController()->getParam('rendPath');
-            if (!$path) {
-                $path = '..';
-            }
-            $this->_filename = $path . '/config/config.ini';
+            $this->_filename = $this->getFrontController()->getPath() . '/config/config.ini';
         }
         return $this->_filename;
     }
@@ -116,10 +112,7 @@ class Rend_Controller_Action_Helper_Config extends Rend_Controller_Action_Helper
     public function getMode()
     {
         if (!$this->_mode) {
-            $this->_mode = $this->getFrontController()->getParam('rendMode');
-            if (!$this->_mode) {
-                $this->_mode = self::PRODUCTION;
-            }
+            $this->_mode = $this->getFrontController()->getMode();
         }
         return $this->_mode;
     }

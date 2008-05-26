@@ -37,7 +37,7 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     /**
      * Retrieve front controller instance
      *
-     * @return Rend_Controller_Front
+     * @return  Rend_Controller_Front
      */
     public function getFrontController()
     {
@@ -73,10 +73,18 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     {
         $action = $this->getRequest()->getActionName();
         if (empty($action)) {
-            $action = $this->getFrontController()->getDispatcher()->getDefaultAction();
+            $action = $this->getFrontController()
+                           ->getDispatcher()
+                           ->getDefaultAction();
         }
 
-        return substr($this->getFrontController()->getDispatcher()->formatActionName($action), 0, -6);
+        return substr(
+            $this->getFrontController()
+                 ->getDispatcher()
+                 ->formatActionName($action),
+            0,
+            -6
+        );
     }
 
     /**

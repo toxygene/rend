@@ -53,7 +53,7 @@ class Rend_Controller_Action_Helper_Model extends Rend_Controller_Action_Helper_
     public function getDatabase()
     {
         if (!$this->_database) {
-            $this->_database = $this->_getActionHelper()->database->getDatabase();
+            $this->_database = $this->_getActionHelper('database')->getDatabase();
         }
         return $this->_database;
     }

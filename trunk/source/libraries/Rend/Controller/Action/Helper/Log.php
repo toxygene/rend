@@ -84,11 +84,7 @@ class Rend_Controller_Action_Helper_Log extends Rend_Controller_Action_Helper_Ab
     public function getFilename()
     {
         if (!$this->_filename) {
-            $path = $this->getFrontController()->getParam('rendPath');
-            if (!$path) {
-                $path = '..';
-            }
-            $this->_filename = $path . '/config/log.php';
+            $this->_filename = $this->getFrontController()->getParam('rendPath') . '/config/log.php';
         }
         return $this->_filename;
     }

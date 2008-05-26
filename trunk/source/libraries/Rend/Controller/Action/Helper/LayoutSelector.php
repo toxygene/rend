@@ -52,8 +52,8 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     public function getLayout()
     {
         if (!$this->_layout) {
-            $this->_layout = $this->_getActionHelper('layout')
-                                  ->getLayoutInstance();
+             $this->_layout = $this->_getActionHelper('layout')
+                                   ->getLayoutInstance();
         }
         return $this->_layout;
     }

@@ -61,10 +61,6 @@ class Rend_View_Helper_IsAllowed
 
         $role = $this->getRole();
 
-        if (!$role) {
-            return false;
-        }
-
         return $this->getAcl()->isAllowed($role, $resource, $permission);
     }
 
