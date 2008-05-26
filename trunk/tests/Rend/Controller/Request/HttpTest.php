@@ -19,8 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Request_Http */
-require_once 'Rend/Controller/Request/Http.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
 /**
  *

@@ -19,8 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Factory */
-require_once 'Rend/Utilities.php';
+/** TestHelper */
+require_once dirname(dirname(__FILE__)) . '/TestHelper.php';
 
 /**
  *

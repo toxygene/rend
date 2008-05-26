@@ -19,20 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Action_Helper_View */
-require_once 'Rend/Controller/Action/Helper/View.php';
-
-/** Rend_Controller_Front */
-require_once 'Rend/Controller/Front.php';
-
-/** Zend_Controller_Action_HelperBroker */
-require_once 'Zend/Controller/Action/HelperBroker.php';
-
-/** Zend_Translate */
-require_once 'Zend/Translate.php';
-
-/** Zend_View */
-require_once 'Zend/View.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/TestHelper.php';
 
 /**
  *

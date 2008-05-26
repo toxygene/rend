@@ -7,11 +7,8 @@ if(!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }
 
-/** TestHelper file */
+/** TestHelper */
 require_once 'TestHelper.php';
-
-/** Rend_AllTests */
-require_once 'Rend/AllTests.php';
 
 /**
  *

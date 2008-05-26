@@ -19,29 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Action_Helper_IsAllowed */
-require_once 'Rend/Controller/Action/Helper/IsAllowed.php';
-
-/** Rend_Controller_Front */
-require_once 'Rend/Controller/Front.php';
-
-/** Rend_Controller_Request_Http */
-require_once 'Rend/Controller/Request/Http.php';
-
-/** Zend_Acl */
-require_once 'Zend/Acl.php';
-
-/** Zend_Acl_Resource */
-require_once 'Zend/Acl/Resource.php';
-
-/** Zend_Acl_Role */
-require_once 'Zend/Acl/Role.php';
-
-/** Rend_Controller_Action */
-require_once 'Zend/Controller/Action.php';
-
-/** Zend_Controller_Response_Cli */
-require_once 'Zend/Controller/Response/Cli.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/TestHelper.php';
 
 /**
  *

@@ -19,17 +19,12 @@
  * @version    $Id$
  */
 
-/** Rend_Pagination */
-require_once 'Rend/Pagination.php';
+/** TestHelper */
+require_once dirname(dirname(__FILE__)) . '/TestHelper.php';
 
 /**
  *
  */
 class Rend_PaginationTest extends PHPUnit_Framework_TestCase
 {
-
-    public function testSomething()
-    {
-    }
-
 }

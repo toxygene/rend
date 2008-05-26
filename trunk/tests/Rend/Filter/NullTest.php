@@ -19,8 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Filter_Null */
-require_once 'Rend/Filter/Null.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
 
 /**
  *

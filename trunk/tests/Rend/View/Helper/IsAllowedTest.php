@@ -19,20 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Action_Helper_IsAllowed */
-require_once 'Rend/Controller/Action/Helper/IsAllowed.php';
-
-/** Rend_View_Helper_IsAllowed */
-require_once 'Rend/View/Helper/IsAllowed.php';
-
-/** Zend_Acl */
-require_once 'Zend/Acl.php';
-
-/** Zend_Acl_Resource */
-require_once 'Zend/Acl/Resource.php';
-
-/** Zend_Acl_Role */
-require_once 'Zend/Acl/Role.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
 /**
  *

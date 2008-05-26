@@ -19,17 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Front */
-require_once 'Rend/Controller/Front.php';
-
-/** Zend_Auth */
-require_once 'Zend/Auth.php';
-
-/** Zend_Auth_Storage_NonPersistent */
-require_once 'Zend/Auth/Storage/NonPersistent.php';
-
-/** Zend_Controller_Response_Cli */
-require_once 'Zend/Controller/Response/Cli.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
 
 /**
  *

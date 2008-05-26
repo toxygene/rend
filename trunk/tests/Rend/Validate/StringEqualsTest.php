@@ -19,8 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Validate_StringEquals */
-require_once 'Rend/Validate/StringEquals.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
 
 /**
  *
