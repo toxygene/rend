@@ -19,23 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Action_Helper_SslSelector */
-require_once 'Rend/Controller/Action/Helper/SslSelector.php';
-
-/** Rend_Controller_Front */
-require_once 'Rend/Controller/Front.php';
-
-/** Rend_Controller_Request_Http */
-require_once 'Rend/Controller/Request/Http.php';
-
-/** Zend_Controller_Action */
-require_once 'Zend/Controller/Action.php';
-
-/** Zend_Controller_Action_Helper_Redirector */
-require_once 'Zend/Controller/Action/Helper/Redirector.php';
-
-/** Zend_Controller_Response_Cli */
-require_once 'Zend/Controller/Response/Cli.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/TestHelper.php';
 
 /**
  *

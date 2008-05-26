@@ -19,14 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Front */
-require_once 'Rend/Controller/Front.php';
-
-/** Rend_Controller_Request_Http */
-require_once 'Rend/Controller/Request/Http.php';
-
-/** Rend_View_Helper_BaseUrl */
-require_once 'Rend/View/Helper/BaseUrl.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
 /**
  *

@@ -23,80 +23,8 @@ if(!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Rend_AllTests::main');
 }
 
-/** Rend_Controller_Action_Helper_AclTest */
-require_once 'Rend/Controller/Action/Helper/AclTest.php';
-
-/** Rend_Controller_Action_Helper_AuthTest */
-require_once 'Rend/Controller/Action/Helper/AuthTest.php';
-
-/** Rend_Controller_Action_Helper_ConfigTest */
-require_once 'Rend/Controller/Action/Helper/ConfigTest.php';
-
-/** Rend_Controller_Action_Helper_DatabaseTest */
-require_once 'Rend/Controller/Action/Helper/DatabaseTest.php';
-
-/** Rend_Controller_Action_Helper_IsAllowedTest */
-require_once 'Rend/Controller/Action/Helper/IsAllowedTest.php';
-
-/** Rend_Controller_Action_Helper_LayoutSelectorTest */
-require_once 'Rend/Controller/Action/Helper/LayoutSelectorTest.php';
-
-/** Rend_Controller_Action_Helper_LocaleTest */
-require_once 'Rend/Controller/Action/Helper/LocaleTest.php';
-
-/** Rend_Controller_Action_Helper_MailTest */
-require_once 'Rend/Controller/Action/Helper/MailTest.php';
-
-/** Rend_Controller_Action_Helper_ModelTest */
-require_once 'Rend/Controller/Action/Helper/ModelTest.php';
-
-/** Rend_Controller_Action_Helper_SslSelectorTest */
-require_once 'Rend/Controller/Action/Helper/SslSelectorTest.php';
-
-/** Rend_Controller_Action_Helper_TranslatorTest */
-require_once 'Rend/Controller/Action/Helper/TranslatorTest.php';
-
-/** Rend_Controller_Action_Helper_ViewTest */
-require_once 'Rend/Controller/Action/Helper/ViewTest.php';
-
-/** Rend_Controller_FrontTest */
-require_once 'Rend/Controller/FrontTest.php';
-
-/** Rend_Controller_Request_HttpTest */
-require_once 'Rend/Controller/Request/HttpTest.php';
-
-/** Rend_Filter_BooleanTest */
-require_once 'Rend/Filter/BooleanTest.php';
-
-/** Rend_Filter_NullTest */
-require_once 'Rend/Filter/NullTest.php';
-
-/** Rend_PaginationTest */
-require_once 'Rend/PaginationTest.php';
-
-/** Rend_UtilitiesTest */
-require_once 'Rend/UtilitiesTest.php';
-
-/** Rend_Validate_StringEqualsTest */
-require_once 'Rend/Validate/StringEqualsTest.php';
-
-/** Rend_View_Helper_BaseUrlTest */
-require_once 'Rend/View/Helper/BaseUrlTest.php';
-
-/** Rend_View_Helper_CycleTest */
-require_once 'Rend/View/Helper/CycleTest.php';
-
-/** Rend_View_Helper_DefaultValueTest */
-require_once 'Rend/View/Helper/DefaultValueTest.php';
-
-/** Rend_View_Helper_FullUrlTest */
-require_once 'Rend/View/Helper/FullUrlTest.php';
-
-/** Rend_View_Helper_IsAllowedTest */
-require_once 'Rend/View/Helper/IsAllowedTest.php';
-
-/** Rend_View_Helper_TruncateTest */
-require_once 'Rend/View/Helper/TruncateTest.php';
+/** TestHelper */
+require_once dirname(dirname(__FILE__)) . '/TestHelper.php';
 
 /**
  *

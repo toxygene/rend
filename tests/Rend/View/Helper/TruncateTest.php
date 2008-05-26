@@ -19,8 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_View_Helper_Truncate */
-require_once 'Rend/View/Helper/Truncate.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
 /**
  *

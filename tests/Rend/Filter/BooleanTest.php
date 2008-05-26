@@ -19,8 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Filter_Boolean */
-require_once 'Rend/Filter/Boolean.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
 
 /**
  *

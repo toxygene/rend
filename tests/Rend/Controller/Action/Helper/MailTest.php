@@ -19,17 +19,8 @@
  * @version    $Id$
  */
 
-/** Rend_Controller_Action_Helper_Mail */
-require_once 'Rend/Controller/Action/Helper/Mail.php';
-
-/** Rend_Controller_Front */
-require_once 'Rend/Controller/Front.php';
-
-/** Zend_Controller_Action_HelperBroker */
-require_once 'Zend/Controller/Action/HelperBroker.php';
-
-/** Zend_Mail */
-require_once 'Zend/Mail.php';
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/TestHelper.php';
 
 /**
  *
