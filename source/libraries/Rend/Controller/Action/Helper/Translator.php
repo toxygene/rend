@@ -54,7 +54,7 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
     public function getDirectory()
     {
         if (!$this->_directory) {
-            $this->_directory = $this->getFrontController()->getParam('rendPath') . '/languages';
+            $this->_directory = $this->getFrontController()->getPath() . '/languages';
         }
         return $this->_directory;
     }
