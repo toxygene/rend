@@ -103,7 +103,19 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
      */
     private function _getModuleViewDirectory($module)
     {
-        return $this->getFrontController()->getDispatcher()->getControllerDirectory($module) . '/../views/scripts';
+        $path = explode(
+            DIRECTORY_SEPARATOR,
+            $this->getFrontController()->getDispatcher()->getControllerDirectory($module)
+        );
+
+        array_pop($path);
+        array_push($path, 'views');
+        array_push($path, 'scripts');
+
+        return implode(
+            DIRECTORY_SEPARATOR,
+            $path
+        );
     }
 
 }
