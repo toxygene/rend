@@ -1,35 +1,37 @@
 <?php
+$rendPath = dirname(dirname(__FILE__)) . '/source';
+
 set_include_path(implode(
     PATH_SEPARATOR,
     array(
         get_include_path(),
-        '../source/libraries',
+        $rendPath . '/libraries',
         implode(
             PATH_SEPARATOR,
-            glob('../source/application/*/models')
+            glob($rendPath . '/application/*/models')
         )
     )
 ));
 
 error_reporting(E_ALL | E_STRICT);
 
-/** PHPUnit_Framework */
-require_once 'PHPUnit/Framework.php';
+/** Zend_Loader */
+require_once 'Zend/Loader.php';
 
-/** PHPUnit_TextUI_TestRunner */
-require_once 'PHPUnit/TextUI/TestRunner.php';
+Zend_Loader::registerAutoload();
 
-/** PHPUnit_Util_Filter */
-require_once 'PHPUnit/Util/Filter.php';
-
-/** Zend_Config_Ini */
-require_once 'Zend/Config/Ini.php';
-
-/** Zend_Controller_Action_HelperBroker */
-require_once 'Zend/Controller/Action/HelperBroker.php';
-
-PHPUnit_Util_Filter::addDirectoryToWhiteList('../source/libraries/Rend', '.php');
-
-date_default_timezone_set('America/Chicago');
+Zend_Session::start();
 
 Zend_Controller_Action_HelperBroker::addPrefix('Rend_Controller_Action_Helper');
+
+Rend_Controller_Front::getInstance()
+                     ->setMode(Rend_Controller_Front::TESTING)
+                     ->setPath($rendPath);
+
+$timezone = Zend_Controller_Action_HelperBroker::getStaticHelper('config')
+                                               ->direct();
+                                               ->timezone;
+
+date_default_timezone_set($timezone);
+
+PHPUnit_Util_Filter::addDirectoryToWhiteList($rendPath . '/libraries/Rend', '.php');
