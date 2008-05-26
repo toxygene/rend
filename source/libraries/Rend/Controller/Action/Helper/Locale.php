@@ -3,13 +3,13 @@
  *
  */
 
-/** Zend_Controller_Action_Helper_Abstract */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
+/** Rend_Controller_Action_Helper_Abstract */
+require_once 'Rend/Controller/Action/Helper/Abstract.php';
 
 /**
  *
  */
-class Rend_Controller_Action_Helper_Locale extends Zend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_Locale extends Rend_Controller_Action_Helper_Abstract implements SplSubject
 {
 
     /**
@@ -19,10 +19,47 @@ class Rend_Controller_Action_Helper_Locale extends Zend_Controller_Action_Helper
     private $_locale;
 
     /**
+     * Observers
+     * @var     array
+     */
+    private $_observers = array();
+
+    /**
+     * Constructor
      *
+     * @param   Zend_Locale|string  $locale
      */
     public function __construct($locale = null)
     {
+        if ($locale) {
+            $this->setLocale($locale);
+        }
+    }
+
+    /**
+     * Attach an observer
+     *
+     * @param   SplObserver     $observer
+     */
+    public function attach(SplObserver $observer)
+    {
+        $this->_observers[] = $observer;
+        return $this;
+    }
+
+    /**
+     * Detach an observer
+     *
+     * @param   SplObserver     $observer
+     */
+    public function detach(SplObserver $observer)
+    {
+        foreach ($this->_observers as &$ob) {
+            if ($observer === $ob) {
+                unset($ob);
+            }
+        }
+        return $this;
     }
 
     /**
@@ -51,14 +88,26 @@ class Rend_Controller_Action_Helper_Locale extends Zend_Controller_Action_Helper
     }
 
     /**
+     * Notify observers
+     */
+    public function notify()
+    {
+        foreach ($this->_observers as &$observer) {
+            $observer->update($this);
+        }
+        return $this;
+    }
+
+    /**
      * Set the locale object
      *
-     * @param   Zend_Locale     $locale
+     * @param   string|Zend_Locale  $locale
      * @return  Rend_Controller_Action_Helper_Locale
      */
-    public function setLocale(Zend_Locale $locale)
+    public function setLocale($locale)
     {
-        $this->_locale = $locale;
+        $this->getLocale()->setLocale($locale);
+        $this->notify();
         return $this;
     }
 

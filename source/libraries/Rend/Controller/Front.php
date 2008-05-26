@@ -66,6 +66,11 @@ class Rend_Controller_Front extends Zend_Controller_Front
      */
     public function dispatch(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null)
     {
+        if (!$this->getParam('noViewRenderer') && !Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer')) {
+            require_once 'Rend/Controller/Action/Helper/ViewRenderer.php';
+            Zend_Controller_Action_HelperBroker::addHelper(new Rend_Controller_Action_Helper_ViewRenderer());
+        }
+
         /**
          * Instantiate default request object (HTTP version) if none provided
          */
@@ -90,13 +95,15 @@ class Rend_Controller_Front extends Zend_Controller_Front
             $this->setResponse($response);
         }
 
-        $this->_response->setHeader('Content-type', "text/html; charset={$this->getConfig()->encoding}");
+        $this->getResponse()->setHeader(
+            'Content-type',
+             "text/html; charset={$this->getConfig()->encoding}"
+         );
 
         try {
             $this->enableIsAllowedHelper()
                  ->enableLayoutSelectorHelper()
-                 ->enableSslSelectorHelper()
-                 ->enableViewRendererHelper();
+                 ->enableSslSelectorHelper();
         } catch (Exception $e) {
             if ($this->throwExceptions()) {
                 throw $e;
@@ -197,37 +204,51 @@ class Rend_Controller_Front extends Zend_Controller_Front
     }
 
     /**
-     * Setup the view object
+     * Get the Rend path
      *
-     * This creates a view object from the view helper, passes it to the view
-     * renderer helper and configures the filter and helper paths to
-     * additionally load from the default module.
+     * @return  string
+     */
+    public function getPath()
+    {
+        if (!$this->getParam('rendPath')) {
+            $this->setParam('rendPath', '..');
+        }
+        return $this->getParam('rendPath');
+    }
+
+    /**
+     * Set the Rend path
      *
+     * @param   string  $path
      * @return  Rend_Controller_Front
      */
-    public function enableViewRendererHelper()
+    public function setPath($path)
     {
-        if ($this->getParam('noViewRenderer') || Zend_Controller_Action_HelperBroker::hasHelper('viewRenderer')) {
-            return $this;
+        return $this->setParam('rendPath', $path);
+    }
+
+    /**
+     * Get the Rend mode
+     *
+     * @return  string
+     */
+    public function getMode()
+    {
+        if (!$this->getParam('rendMode')) {
+            $this->setParam('rendMode', self::DEVELOPMENT);
         }
+        return $this->getParam('rendMode');
+    }
 
-        /** Zend_Controller_Action_Helper_ViewRenderer */
-        require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
-
-        $renderer = new Zend_Controller_Action_Helper_ViewRenderer(
-            Zend_Controller_Action_HelperBroker::getStaticHelper('view')->getView()
-        );
-
-        $renderer->initView();
-
-        $path = $this->getDispatcher()->getControllerDirectory($this->getDefaultModule()) . '/../views';
-
-        $renderer->view->addHelperPath($path . '/helpers');
-        $renderer->view->addFilterPath($path . '/filters');
-
-        Zend_Controller_Action_HelperBroker::addHelper($renderer);
-
-        return $this;
+    /**
+     * Set the Rend mode
+     *
+     * @param   string  $mode
+     * @return  Rend_Controller_Front
+     */
+    public function setMode($mode)
+    {
+        return $this->setParam('rendMode', $mode);
     }
 
 }

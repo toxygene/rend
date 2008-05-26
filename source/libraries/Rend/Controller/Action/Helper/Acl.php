@@ -91,11 +91,7 @@ class Rend_Controller_Action_Helper_Acl extends Rend_Controller_Action_Helper_Ab
     public function getFilename()
     {
         if (!$this->_filename) {
-            $path = $this->getFrontController()->getParam('rendPath');
-            if (!$path) {
-                $path = '..';
-            }
-            $this->_filename = $path . '/config/acl.php';
+            $this->_filename = $this->getFrontController()->getParam('rendPath') . '/config/acl.php';
         }
         return $this->_filename;
     }
