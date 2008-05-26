@@ -80,7 +80,7 @@ class Rend_Controller_Action_Helper_ConfigTest extends PHPUnit_Framework_TestCas
         $helper = new Rend_Controller_Action_Helper_Config();
 
         $this->assertEquals(
-            Rend_Controller_Action_Helper_Config::PRODUCTION,
+            Rend_Controller_Action_Helper_Config::DEVELOPMENT,
             $helper->getMode()
         );
     }

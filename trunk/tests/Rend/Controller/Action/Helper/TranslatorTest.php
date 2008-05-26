@@ -57,7 +57,7 @@ class Rend_Controller_Action_Helper_TranslatorTest extends PHPUnit_Framework_Tes
 
         $helper = new Rend_Controller_Action_Helper_Translator();
 
-        $this->assertSame($locale, $helper->getLocale());
+        $this->assertEquals($locale, $helper->getLocale());
     }
 
     public function testTranslatorIsLazyLoaded()

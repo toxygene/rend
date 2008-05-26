@@ -91,27 +91,4 @@ class Rend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testViewRendererUsesTheViewHelper()
-    {
-        Zend_Controller_Action_HelperBroker::getStaticHelper('config')->setConfig(
-            new Zend_Config(array(
-                'encoding' => 'UTF8'
-            ))
-        );
-
-        $this->_front->enableViewRendererHelper();
-
-        $paths = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view->getAllPaths();
-
-        $this->assertContains(
-            array('prefix' => 'Zend_View_Helper_', 'dir' => './../views/helpers/'),
-            $paths['helper']
-        );
-
-        $this->assertContains(
-            array('prefix' => 'Zend_View_Filter_', 'dir' => './../views/filters/'),
-            $paths['filter']
-        );
-    }
-
 }
