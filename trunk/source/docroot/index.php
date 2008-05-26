@@ -3,8 +3,11 @@ $rendPath = dirname(dirname(__FILE__));
 
 include 'common.php';
 
-$front->setParam('rendPath', $rendPath)
-      ->setParam('rendMode', isset($_SERVER['REND_MODE']) ? $_SERVER['REND_MODE'] : Rend_Controller_Front::PRODUCTION);
+$front->setPath($rendPath);
+
+if (isset($_SERVER['REND_MODE'])) {
+    $front->setMode($_SERVER['REND_MODE']);
+}
 
 ini_set('display_errors', $front->getConfig()->display_errors);
 date_default_timezone_set($front->getConfig()->timezone);
