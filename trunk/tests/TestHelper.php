@@ -29,7 +29,7 @@ Rend_Controller_Front::getInstance()
                      ->setPath($rendPath);
 
 $timezone = Zend_Controller_Action_HelperBroker::getStaticHelper('config')
-                                               ->direct();
+                                               ->direct()
                                                ->timezone;
 
 date_default_timezone_set($timezone);
