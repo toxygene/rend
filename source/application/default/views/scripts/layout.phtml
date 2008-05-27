@@ -3,13 +3,13 @@ $this->headMeta()
      ->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->getEncoding());
 
 $this->headLink()
-     ->appendStylesheet($this->baseUrl() . '/styles/reset-fonts-grids.css')
-     ->appendStylesheet($this->baseUrl() . '/styles/base-min.css')
-     ->appendStylesheet($this->baseUrl() . '/styles/site.css');
+     ->prependStylesheet($this->baseUrl() . '/styles/global.css')
+     ->prependStylesheet($this->baseUrl() . '/styles/base-min.css')
+     ->prependStylesheet($this->baseUrl() . '/styles/reset-fonts-grids.css');
 
 $this->headScript()
-     ->appendFile($this->baseUrl() . '/scripts/jquery-1.2.3.min.js')
-     ->appendFile($this->baseUrl() . '/scripts/site.js');
+     ->prependFile($this->baseUrl() . '/scripts/global.js')
+     ->prependFile($this->baseUrl() . '/scripts/jquery-1.2.3.min.js');
 
 echo $this->doctype('XHTML1_STRICT');
 ?>
@@ -23,6 +23,8 @@ echo $this->doctype('XHTML1_STRICT');
 <?php echo $this->headLink(); ?>
 
 <?php echo $this->headScript(); ?>
+
+<?php echo $this->headStyle(); ?>
 
     </head>
     <body>

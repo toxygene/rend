@@ -1,4 +1,4 @@
-#debug {
+#debug_summary {
     -moz-border-radius: .5em;
     border-radius: .5em;
 
@@ -8,22 +8,18 @@
     padding: .5em;
 }
 
-#debug h1, h2 {
+#debug_summary H2, #debug_complete H3 {
     margin: 0;
 }
 
-#debug p {
-    cursor: pointer;
-    margin: 0;
-    text-decoration: underline;
-}
-
-#debug PRE {
-    font-size: 88%;
-    margin: 1em 0;
-}
-
-#debug .exception {
+#debug_complete {
     display: none;
     margin-top: 1em;
+}
+
+#debug_complete TEXTAREA {
+    font-size: 88%;
+    height: 20em;
+    margin: 1em 0;
+	width: 75em;
 }
