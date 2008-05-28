@@ -43,12 +43,33 @@ class Rend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $defaultModule = $this->getFrontController()
                               ->getDefaultModule();
 
-        $path = $this->getFrontController()
-                     ->getDispatcher()
-                     ->getControllerDirectory("{$defaultModule}/../views");
+        $path = $this->_getModuleViewDirectory($defaultModule);
 
         $this->view->addHelperPath("{$path}/helpers");
         $this->view->addFilterPath("{$path}/filters");
+    }
+
+    /**
+     * Get the path to the views for a module
+     *
+     * @param   string  $module
+     * @return  string
+     */
+    private function _getModuleViewDirectory($module)
+    {
+        $path = explode(
+            DIRECTORY_SEPARATOR,
+            $this->getFrontController()->getDispatcher()->getControllerDirectory($module)
+        );
+
+        array_pop($path);
+        array_push($path, 'views');
+        array_push($path, 'scripts');
+
+        return implode(
+            DIRECTORY_SEPARATOR,
+            $path
+        );
     }
 
 }
