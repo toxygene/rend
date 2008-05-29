@@ -23,3 +23,29 @@
     margin: 1em 0;
 	width: 75em;
 }
+
+#facebox TD,
+#facebox TH {
+    border:0;
+	padding:0;
+}
+
+#facebox .b {
+  background:url(../facebox/b.png);
+}
+
+#facebox .tl {
+  background:url(../facebox/tl.png);
+}
+
+#facebox .tr {
+  background:url(../facebox/tr.png);
+}
+
+#facebox .bl {
+  background:url(../facebox/bl.png);
+}
+
+#facebox .br {
+  background:url(../facebox/br.png);
+}
