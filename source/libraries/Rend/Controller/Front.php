@@ -170,7 +170,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
         /** Zend_Layout */
         require_once 'Zend/Layout.php';
 
-        $layout = new Zend_Layout(null, true);
+        $layout = Zend_Layout::startMvc();
 
         /** Rend_Controller_Action_Helper_LayoutSelector */
         require_once 'Rend/Controller/Action/Helper/LayoutSelector.php';
