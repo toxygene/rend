@@ -1,0 +1,31 @@
+<?php
+if($this->errors):
+    $this->headScript()->appendFile($this->baseUrl() . '/facebox/facebox.js');
+
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/facebox/facebox.css')
+                     ->appendStylesheet($this->baseUrl() . '/styles/debug.css');
+?>
+<?php $this->headScript()->captureStart(); ?>
+$(enableDebugFacebox)
+
+function enableDebugFacebox() {
+    $('#debug_exception').hide();
+    $('a[rel*=facebox]').facebox({
+        loading_image : '<?php echo $this->baseUrl(); ?>/facebox/loading.gif',
+        close_image   : '<?php echo $this->baseUrl(); ?>/facebox/closelabel.gif'
+    });
+}
+<?php $this->headScript()->captureEnd(); ?>
+<div id="debug_summary">
+    <h2><?php echo $this->errors->exception->getMessage(); ?></h2>
+    <a href="#debug_complete" rel="facebox">(Click here to show/hide the exception)</a>
+</div>
+
+<div id="debug_complete">
+    <h3>Message</h3>
+    <textarea><?php echo $this->errors->exception; ?></textarea>
+
+    <h3>Complete Stack Trace</h3>
+    <textarea><?php print_r($this->errors->exception->getTrace()); ?></textarea>
+</div>
+<?php endif; ?>

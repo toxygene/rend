@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+/* Global overrides */
+BODY {
+    text-align: left;
+}
+
+TABLE {
+    border-collapse: collapse;
+}
+
+TD, TH {
+    border: 0;
+}
