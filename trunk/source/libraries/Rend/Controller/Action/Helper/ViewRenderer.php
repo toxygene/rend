@@ -64,7 +64,6 @@ class Rend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
         array_pop($path);
         array_push($path, 'views');
-        array_push($path, 'scripts');
 
         return implode(
             DIRECTORY_SEPARATOR,
