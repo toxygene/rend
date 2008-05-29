@@ -4,15 +4,16 @@ if($this->errors):
 
     $this->headLink()->appendStylesheet($this->baseUrl() . '/facebox/facebox.css')
                      ->appendStylesheet($this->baseUrl() . '/styles/debug.css');
-
-    $this->setupFacebox();
 ?>
 <?php $this->headScript()->captureStart(); ?>
 $(enableDebugFacebox)
 
 function enableDebugFacebox() {
     $('#debug_exception').hide();
-    $('a[rel*=facebox]').facebox();
+    $('a[rel*=facebox]').facebox({
+        loading_image : '<?php echo $this->baseUrl(); ?>/facebox/loading.gif',
+        close_image   : '<?php echo $this->baseUrl(); ?>/facebox/closelabel.gif'
+    });
 }
 <?php $this->headScript()->captureEnd(); ?>
 <div id="debug_summary">
