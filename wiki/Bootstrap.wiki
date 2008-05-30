@@ -1,4 +1,5 @@
 #summary Documentation of the bootstrap process.
+#labels Phase-Implementation
 
 = Description =
 Rend breaks the dispatch script into three parts to make reuse easier.
