@@ -1,7 +1,7 @@
 #summary Documentation of the factory action helpers.
 
 = Factory Action Helpers =
-Rend includes a number of action helpers that work as factories for easily creating common objects based on values in the config file.
+Rend includes a number of action helpers that work as factories for easily creating common objects based on values in the configuration file.
 
  * Zend_Acl
  * Zend_Auth
@@ -11,8 +11,20 @@ Rend includes a number of action helpers that work as factories for easily creat
  * Zend_Db_Table
  * Zend_Locale
  * Zend_Log
- * Zend_Search_Lucene
  * Zend_Mail
  * Zend_Mail_Transport
  * Zend_Translate
  * Zend_View
+
+The specific configuration values used by each helper are documented in each helpers documentation page.
+
+== Usage ==
+Each action helper implements the direct() method, allowing for easy access in controllers. The following code will get you an instance of the object.
+{{{
+$object = $this->_helper->nameOfActionHelper();
+}}}
+
+Outside of controllers, you can access helpers through the static methods of the HelperBroker with the following code:
+{{{
+$object = Zend_Controller_Action_HelperBroker::getStaticHelper('nameOfActionHelper')->direct();
+}}}
