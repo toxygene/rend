@@ -1,4 +1,5 @@
 #summary Description of the Zend Framework skeleton in Rend.
+#labels Phase-Implementation
 
 = Zend Framework Skeleton =
 
