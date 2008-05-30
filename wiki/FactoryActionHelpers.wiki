@@ -1,4 +1,5 @@
 #summary Documentation of the factory action helpers.
+#labels Phase-Implementation
 
 = Factory Action Helpers =
 Rend includes a number of action helpers that work as factories for easily creating common objects based on values in the configuration file.
