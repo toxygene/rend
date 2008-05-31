@@ -38,9 +38,7 @@ class Rend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
         $this->_front->setControllerDirectory('.')
                      ->setResponse(new Zend_Controller_Response_Cli())
-                     ->setParam('noErrorHandler', true)
-                     ->returnResponse(true)
-                     ->throwExceptions(false);
+                     ->setParam('noErrorHandler', true);
     }
 
     public function tearDown()
