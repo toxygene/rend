@@ -71,7 +71,7 @@ class Rend_Controller_Action_Helper_ConfigTest extends PHPUnit_Framework_TestCas
         $helper = new Rend_Controller_Action_Helper_Config();
 
         $this->assertEquals(
-            Rend_Controller_Action_Helper_Config::DEVELOPMENT,
+            Rend_Controller_Front::DEVELOPMENT,
             $helper->getMode()
         );
     }
@@ -82,11 +82,11 @@ class Rend_Controller_Action_Helper_ConfigTest extends PHPUnit_Framework_TestCas
 
         $helper->getFrontController()->setParam(
             'rendMode',
-            Rend_Controller_Action_Helper_Config::PRODUCTION
+            Rend_Controller_Front::PRODUCTION
         );
 
         $this->assertEquals(
-            Rend_Controller_Action_Helper_Config::PRODUCTION,
+            Rend_Controller_Front::PRODUCTION,
             $helper->getMode()
         );
     }
