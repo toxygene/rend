@@ -43,6 +43,8 @@ class Rend_View_Helper_FullUrl extends Rend_View_Helper
      */
     public function fullUrl(array $urlOptions = array(), $name = 'default', $reset = false)
     {
+        /** Rend_Controller_Front */
+        require_once 'Rend/Controller/Front.php';
         $request = Rend_Controller_Front::getInstance()->getRequest();
 
         if ($this->_isHttps()) {
@@ -67,6 +69,8 @@ class Rend_View_Helper_FullUrl extends Rend_View_Helper
      */
     private function _isHttps()
     {
+        /** Rend_Controller_Front */
+        require_once 'Rend/Controller/Front.php';
         return Rend_Controller_Front::getInstance()->getRequest()->isSsl();
     }
 

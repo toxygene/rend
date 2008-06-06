@@ -36,7 +36,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
 
     /**#@+
      * Modes
-     * @var string
+     * @var     string
      */
     const PRODUCTION  = 'production';
     const DEVELOPMENT = 'development';
@@ -46,14 +46,13 @@ class Rend_Controller_Front extends Zend_Controller_Front
     /**
      * Singleton instance
      *
-     * @return Rend_Controller_Front
+     * @return  Rend_Controller_Front
      */
     public static function getInstance()
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
         }
-
         return self::$_instance;
     }
 
@@ -79,7 +78,6 @@ class Rend_Controller_Front extends Zend_Controller_Front
         } elseif ((null === $request) && (null === ($request = $this->getRequest()))) {
             /** Rend_Controller_Request_Http */
             require_once 'Rend/Controller/Request/Http.php';
-
             $this->setRequest(new Rend_Controller_Request_Http());
         }
 
@@ -91,7 +89,6 @@ class Rend_Controller_Front extends Zend_Controller_Front
         } elseif ((null === $this->_response) && (null === ($this->_response = $this->getResponse()))) {
             require_once 'Zend/Controller/Response/Http.php';
             $response = new Zend_Controller_Response_Http();
-
             $this->setResponse($response);
         }
 
@@ -170,7 +167,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
         /** Zend_Layout */
         require_once 'Zend/Layout.php';
 
-        $layout = Zend_Layout::startMvc();
+        Zend_Layout::startMvc();
 
         /** Rend_Controller_Action_Helper_LayoutSelector */
         require_once 'Rend/Controller/Action/Helper/LayoutSelector.php';
@@ -183,7 +180,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
     }
 
     /**
-     * Enable the ssl helper
+     * Enable the SslSelector helper
      *
      * @return  Rend_Controller_Front
      */

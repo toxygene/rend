@@ -15,7 +15,7 @@
  * @copyright   2008 Justin Hendrickson
  * @license     http://rend.superglobals.com/license/new-bsd    New BSD License
  * @link        http://rend.superglboals.com/
- * @since       1.0.0
+ * @since       1.0.4
  * @version     $Id$
  */
 
@@ -33,12 +33,15 @@ require_once 'Zend/Validate/Abstract.php';
 class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
 {
 
-    /**
-     *
+    /**#@+
+     * Errors
+     * @var     string
      */
     const NOT_MATCH = 'notMatch';
+    /**#@-*/
 
     /**
+     * Error templates
      * @var array
      */
     protected $_messageTemplates = array(
@@ -75,9 +78,7 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
-     * Returns true if and only if $value matches against the field option's value
+     * Confirms the value matches another field
      *
      * @param  string $value
      * @throws Zend_Validate_Exception if there is a fatal error in field matching
@@ -86,7 +87,7 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
     public function isValid($value, $context = null)
     {
         $value = $value;
-        
+
         $this->_setValue($value);
 
         if (is_array($context)) {
