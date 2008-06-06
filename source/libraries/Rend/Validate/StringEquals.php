@@ -27,8 +27,10 @@ require_once 'Zend/Validate/Abstract.php';
  *
  * Compares two supplied strings for equality
  *
+ * @deprecated
  * @category    Rend
  * @package     Validate
+ * @see         Rend_Validate_ConfirmField
  */
 class Rend_Validate_StringEquals extends Zend_Validate_Abstract
 {
