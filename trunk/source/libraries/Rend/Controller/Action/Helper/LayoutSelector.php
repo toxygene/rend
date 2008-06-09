@@ -71,27 +71,29 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     }
 
     /**
-     * Hook into action controller preDispatch() workflow
+     * Set the layout based on the requested action
      */
     public function preDispatch()
     {
-        $actionController = $this->getActionController();
-        $actionName       = $this->_getActionName();
+        if ($this->getLayout()->isEnabled()) {
+            $actionController = $this->getActionController();
+            $actionName       = $this->_getActionName();
 
-        if (!isset ($actionController->layouts) || !isset($actionController->layouts[$actionName])) {
-            return;
-        }
+            if (!isset ($actionController->layouts) || !isset($actionController->layouts[$actionName])) {
+                return;
+            }
 
-        $layout = $actionController->layouts[$actionName];
+            $layout = $actionController->layouts[$actionName];
 
-        if (!is_array($layout)) {
-            $layout = array($layout);
-        }
+            if (!is_array($layout)) {
+                $layout = array($layout);
+            }
 
-        $this->getLayout()->setLayout($layout[0]);
+            $this->getLayout()->setLayout($layout[0]);
 
-        if (isset($layout[1])) {
-            $this->getLayout()->setLayoutPath($this->_getModuleViewDirectory($layout[1]));
+            if (isset($layout[1])) {
+                $this->getLayout()->setLayoutPath($this->_getModuleViewDirectory($layout[1]));
+            }
         }
     }
 
