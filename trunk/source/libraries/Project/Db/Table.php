@@ -16,12 +16,12 @@ abstract class Project_Db_Table extends Zend_Db_Table_Abstract
      * Row class name
      * @var     string
      */
-    protected $_rowClass = 'Project_Db_Row';
+    protected $_rowClass = 'Project_Db_Table_Row';
 
     /**
      * Rowset class name
      * @var     string
      */
-    protected $_rowsetClass = 'Project_Db_Rowset';
+    protected $_rowsetClass = 'Project_Db_Table_Rowset';
 
 }
