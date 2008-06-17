@@ -11,8 +11,8 @@ $(enableDebugFacebox)
 function enableDebugFacebox() {
     $('#debug_exception').hide();
     $('a[rel*=facebox]').facebox({
-        loading_image : '<?php echo $this->baseUrl(); ?>/facebox/loading.gif',
-        close_image   : '<?php echo $this->baseUrl(); ?>/facebox/closelabel.gif'
+        loadingImage : '<?php echo $this->baseUrl(); ?>/facebox/loading.gif',
+        closeImage   : '<?php echo $this->baseUrl(); ?>/facebox/closelabel.gif'
     });
 }
 <?php $this->headScript()->captureEnd(); ?>
