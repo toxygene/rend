@@ -19,8 +19,8 @@
  * @version     $Id$
  */
 
-/** Rend_Validate_Abstract */
-require_once 'Rend/Validate/Abstract.php';
+/** Zend_Validate_Abstract */
+require_once 'Zend/Validate/Abstract.php';
 
 /** Zend_Auth_Result */
 require_once 'Zend/Auth/Result.php';
@@ -31,7 +31,7 @@ require_once 'Zend/Auth/Result.php';
  * @category    Rend
  * @package     Validate
  */
-class Rend_Validate_Authentication extends Rend_Validate_Abstract
+class Rend_Validate_Authentication extends Zend_Validate_Abstract
 {
 
     /**#@+
@@ -51,6 +51,7 @@ class Rend_Validate_Authentication extends Rend_Validate_Abstract
     const IDENTITY_AMBIGUOUS       = 'identityAmbiguous';
     const CREDENTIAL_INVALID       = 'credentialInvalid';
     const UNCATEGORIZED_AUTH_ERROR = 'uncategorizedAuthError';
+    const MISSING_FIELD            = 'missingField';
     /**#@-*/
 
     /**
@@ -70,10 +71,11 @@ class Rend_Validate_Authentication extends Rend_Validate_Abstract
      * @var     array
      */
     protected $_messageTemplates = array(
-        Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND => 'Identity not found',
-        Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS => 'Identity was ambiguous',
-        Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID => 'Credential is invalid',
-        Zend_Auth_Result::FAILURE_UNCATEGORIZED      => 'General authentication failure'
+        self::IDENTITY_NOT_FOUND       => 'Identity not found',
+        self::IDENTITY_AMBIGUOUS       => 'Identity was ambiguous',
+        self::CREDENTIAL_INVALID       => 'Credential is invalid',
+        self::UNCATEGORIZED_AUTH_ERROR => 'General authentication failure',
+        self::MISSING_FIELD            => 'Missing field'
     );
 
     /**
@@ -99,6 +101,18 @@ class Rend_Validate_Authentication extends Rend_Validate_Abstract
      * @var     string
      */
     private $_identityField;
+
+    /**
+     * Constructor
+     *
+     * @param   string  $identityField
+     * @param   string  $credentialField
+     */
+    public function __construct($identityField = null, $credentialField = null)
+    {
+        $this->_identityField   = $identityField;
+        $this->_credentialField = $credentialField;
+    }
 
     /**
      * Get the authentication adapter object
@@ -208,12 +222,19 @@ class Rend_Validate_Authentication extends Rend_Validate_Abstract
 
     /**
      * Validate
-     *
-     * @todo    Check for the existance of the identity and credential fields
-     * @todo    Exception handling
      */
     public function isValid($value, $context = null)
     {
+        if (!isset($context[$this->_identityField])) {
+            $this->_error(self::MISSING_FIELD);
+            return false;
+        }
+
+        if (!isset($context[$this->_credentialField])) {
+            $this->_error(self::MISSING_FIELD);
+            return false;
+        }
+
         $adapter = $this->getAdapter();
 
         $adapter->setIdentity($context[$this->_identityField])
@@ -222,7 +243,7 @@ class Rend_Validate_Authentication extends Rend_Validate_Abstract
         $result = $this->getAuth()
                        ->authenticate($adapter);
 
-        if ($result->getCode() != Zend_Auth_Result::SUCCESS) {
+        if (!$result->isValid()) {
             $this->_error($this->_codesToErrors[$result->getCode()]);
             return false;
         }
