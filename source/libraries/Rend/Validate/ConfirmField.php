@@ -56,6 +56,16 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
     protected $_field;
 
     /**
+     * Constructor
+     *
+     * @param   string  $field
+     */
+    public function __construct($field = null)
+    {
+        $this->_field = $field;
+    }
+
+    /**
      * Returns the field option
      *
      * @return string
