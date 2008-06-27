@@ -13,6 +13,9 @@ $this->headScript()
 
 echo $this->doctype('XHTML1_STRICT');
 ?>
+<?php $this->headScript()->captureStart(); ?>
+var baseUrl = '<?php echo $this->baseUrl(); ?>';
+<?php $this->headScript()->captureEnd(); ?>
 
 <html>
     <head>
