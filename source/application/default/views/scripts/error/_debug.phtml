@@ -2,7 +2,7 @@
 if($this->errors):
     $this->headScript()
          ->appendFile($this->baseUrl() . '/facebox/facebox.js')
-         ->appendFile($this->baseUrl() . '/scripts/facebox.js');
+         ->appendFile($this->baseUrl() . '/scripts/debug.js');
 
     $this->headLink()
          ->appendStylesheet($this->baseUrl() . '/facebox/facebox.css')
@@ -10,14 +10,12 @@ if($this->errors):
 ?>
 <div id="debug_summary">
     <h2><?php echo $this->errors->exception->getMessage(); ?></h2>
-    <a href="#debug_complete" rel="facebox">(Click here to show/hide the exception)</a>
-</div>
+    <div id="debug_complete">
+        <h3>Message</h3>
+        <textarea><?php echo $this->errors->exception; ?></textarea>
 
-<div id="debug_complete">
-    <h3>Message</h3>
-    <textarea><?php echo $this->errors->exception; ?></textarea>
-
-    <h3>Complete Stack Trace</h3>
-    <textarea><?php print_r($this->errors->exception->getTrace()); ?></textarea>
+        <h3>Complete Stack Trace</h3>
+        <textarea><?php print_r($this->errors->exception->getTrace()); ?></textarea>
+    </div>
 </div>
 <?php endif; ?>
