@@ -19,9 +19,6 @@
  * @version     $Id$
  */
 
-/** Rend_View_Helper */
-require_once 'Rend/View/Helper.php';
-
 /**
  * Url helper
  *
@@ -30,7 +27,7 @@ require_once 'Rend/View/Helper.php';
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_FullUrl extends Rend_View_Helper
+class Rend_View_Helper_FullUrl
 {
 
     /**
