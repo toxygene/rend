@@ -39,7 +39,8 @@ class ErrorController extends Project_Controller_Action
                 break;
 
             default:
-                $this->_helper->log()->err($errors->exception->getMessage());
+                $this->_helper
+                     ->log($errors->exception->getMessage(), 3);
 
                 switch (get_class($errors->exception)) {
                     case 'Rend_Controller_Action_Exception_Auth':
@@ -63,7 +64,8 @@ class ErrorController extends Project_Controller_Action
      */
     public function unauthorizedAction()
     {
-        $this->getResponse()->setHttpResponseCode(401);
+        $this->getResponse()
+             ->setHttpResponseCode(401);
     }
 
     /**
@@ -71,7 +73,8 @@ class ErrorController extends Project_Controller_Action
      */
     public function forbiddenAction()
     {
-        $this->getResponse()->setHttpResponseCode(403);
+        $this->getResponse()
+             ->setHttpResponseCode(403);
     }
 
     /**
@@ -79,7 +82,8 @@ class ErrorController extends Project_Controller_Action
      */
     public function pageNotFoundAction()
     {
-        $this->getResponse()->setHttpResponseCode(404);
+        $this->getResponse()
+             ->setHttpResponseCode(404);
     }
 
     /**
@@ -87,7 +91,8 @@ class ErrorController extends Project_Controller_Action
      */
     public function internalErrorAction()
     {
-        $this->getResponse()->setHttpResponseCode(500);
+        $this->getResponse()
+             ->setHttpResponseCode(500);
     }
 
 }
