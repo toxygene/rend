@@ -73,9 +73,9 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     /**
      * Set the layout based on the requested action
      */
-    public function preDispatch()
+    public function postDispatch()
     {
-        if ($this->getLayout()->isEnabled()) {
+        if ($this->getRequest()->isDispatched() && $this->getLayout()->isEnabled()) {
             $actionController = $this->getActionController();
             $actionName       = $this->_getActionName();
 

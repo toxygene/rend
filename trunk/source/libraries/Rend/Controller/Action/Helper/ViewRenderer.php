@@ -32,43 +32,15 @@ class Rend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     public function initView($path = null, $prefix = null, array $options = array())
     {
         if (null === $this->view) {
-            $view = Zend_Controller_Action_HelperBroker::getStaticHelper('view')
-                                                       ->direct();
-
-            $this->setView($view);
+            $this->setView($this->_factory->view);
         }
 
         parent::initView($path, $prefix, $options);
 
-        $defaultModule = $this->getFrontController()
-                              ->getDefaultModule();
-
-        $path = $this->_getModuleViewDirectory($defaultModule);
+        $path = $this->_getModuleDirectory() . '/views';
 
         $this->view->addHelperPath("{$path}/helpers");
         $this->view->addFilterPath("{$path}/filters");
-    }
-
-    /**
-     * Get the path to the views for a module
-     *
-     * @param   string  $module
-     * @return  string
-     */
-    private function _getModuleViewDirectory($module)
-    {
-        $path = explode(
-            DIRECTORY_SEPARATOR,
-            $this->getFrontController()->getDispatcher()->getControllerDirectory($module)
-        );
-
-        array_pop($path);
-        array_push($path, 'views');
-
-        return implode(
-            DIRECTORY_SEPARATOR,
-            $path
-        );
     }
 
 }

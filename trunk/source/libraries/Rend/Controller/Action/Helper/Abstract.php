@@ -35,31 +35,60 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
 {
 
     /**
+     * Constructor
+     *
+     * @param   array|Zend_Config   $options
+     */
+    public function __construct($options = null)
+    {
+        if ($options) {
+            if ($options instanceof Zend_Config) {
+                $this->setConfig($options);
+            } elseif (is_array($options)) {
+                $this->setOptions($options);
+            }
+        }
+
+        $this->_factory = $this->getFrontController()
+                               ->getFactory();
+    }
+
+    /**
      * Retrieve front controller instance
      *
      * @return  Rend_Controller_Front
      */
     public function getFrontController()
     {
-        if (null === $this->_frontController) {
-            /** Rend_Controller_Front */
-            require_once 'Rend/Controller/Front.php';
-
-            $this->_frontController = Rend_Controller_Front::getInstance();
-        }
-
-        return $this->_frontController;
+        return Rend_Controller_Front::getInstance();
     }
 
     /**
-     * Get an action helper from the helper broker
+     * Set the options from a Zend_Config object
      *
-     * @param   string  $name
-     * @return  Zend_Controller_Action_Helper_Abstract
+     * @param   Zend_Config     $config
+     * @return  Rend_Controller_Action_Helper_Abstract
      */
-    protected function _getActionHelper($name)
+    public function setConfig(Zend_Config $config)
     {
-        return Zend_Controller_Action_HelperBroker::getStaticHelper($name);
+        return $this->setOptions($config->toArray());
+    }
+
+    /**
+     * Set the options from an array
+     *
+     * @param   array   $options
+     * @Return  Rend_Controller_Action_Helper_Abstract
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+        return $this;
     }
 
     /**
@@ -67,34 +96,48 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
      *
      * Note: the 'Action' suffix is removed.
      *
+     * @param   string  $action
      * @return  string
      */
-    protected function _getActionName()
+    protected function _getActionName($action = null)
     {
-        $action = $this->getRequest()->getActionName();
-        if (empty($action)) {
-            $action = $this->getFrontController()
-                           ->getDispatcher()
-                           ->getDefaultAction();
+        if (!$action) {
+            $action = $this->getRequest()->getActionName();
+            if (!$action) {
+                $action = $this->getFrontController()
+                               ->getDispatcher()
+                               ->getDefaultAction();
+            }
         }
 
-        return substr(
+        return preg_replace(
+            '/Action$/',
+            '',
             $this->getFrontController()
                  ->getDispatcher()
-                 ->formatActionName($action),
-            0,
-            -6
+                 ->formatActionName($action)
         );
     }
 
     /**
-     * Get the config object from the config helper
+     * Get the path to the views for a module
      *
-     * @return  Zend_Config
+     * @param   string  $module
+     * @return  string
      */
-    protected function _getConfig()
+    private function _getModuleDirectory($module = null)
     {
-        return $this->_getActionHelper('config')->getConfig();
+        if (!$module) {
+            $module = $this->getFrontController()
+                           ->getDefaultModule();
+        }
+
+        return preg_replace(
+            '/(.*)\/.*/',
+            '\\1',
+            $this->getFrontController()
+                 ->getControllerDir($module)
+        );
     }
 
 }

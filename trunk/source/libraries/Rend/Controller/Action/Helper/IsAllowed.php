@@ -54,19 +54,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_role;
 
     /**
-     * Constructor
-     *
-     * @param   Zend_Acl    $acl
-     * @param   string      $role
-     */
-    public function __construct(Zend_Acl $acl = null, $role = null)
-    {
-        $this->_acl  = $acl;
-        $this->_role = $role;
-    }
-
-    /**
-     * Get the Acl object
+     * Get the ACL object
      *
      * @return  Zend_Acl
      */
@@ -81,7 +69,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Get the role name
      *
-     * @return  mixed
+     * @return  string
      */
     public function getRole()
     {
@@ -89,10 +77,22 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
+     * Set the ACL
+     *
+     * @param   Zend_Acl    $acl
+     * @return  Rend_Controller_Action_Helper_IsAllowed
+     */
+    public function setAcl(Zend_Acl $acl)
+    {
+        $this->_acl = $acl;
+        return $this;
+    }
+
+    /**
      * Set the role name
      *
      * @param   string  $role
-     * @return  Rend_Controller_Action_Helper_Acl
+     * @return  Rend_Controller_Action_Helper_IsAllowed
      */
     public function setRole($role = null)
     {
@@ -108,26 +108,21 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function preDispatch()
     {
-        list ($resource, $permission) = $this->_getRequiredResourceAndPermission($this->_getActionName());
+        list ($resource, $permission) = $this->_getRequiredResourceAndPermission(
+            $this->_getActionName()
+        );
 
         if (!$resource) {
             return;
         }
 
-        $role = $this->getRole();
+        if (!$this->getAcl()->isAllowed($this->getRole(), $resource, $permission)) {
+            // redirect?
 
-        if (!$role) {
-            $permission = $permission ? $permission : '*';
-            /** Rend_Controller_Action_Exception_Auth */
-            require_once 'Rend/Controller/Action/Exception/Auth.php';
-            throw new Rend_Controller_Action_Exception_Auth("Unauthenticated users cannot access action '{$this->_getActionName()}' (requires permission '{$permission}' on resource '{$resource}')");
-        }
-
-        if (!$this->getAcl()->isAllowed($role, $resource, $permission)) {
-            $permission = $permission ? $permission : '*';
-            /** Rend_Controller_Action_Exception_Acl */
-            require_once 'Rend/Controller/Action/Exception/Acl.php';
-            throw new Rend_Controller_Action_Exception_Acl("Role '{$role}' cannot access action '{$this->_getActionName()}' (requires permission '{$permission}' on resource '{$resource}')");
+#            $permission = $permission ? $permission : '*';
+#            /** Rend_Controller_Action_Exception_Acl */
+#            require_once 'Rend/Controller/Action/Exception/Acl.php';
+#            throw new Rend_Controller_Action_Exception_Acl("Role '{$this->getRole()}' cannot access action '{$this->_getActionName()}' (requires permission '{$permission}' on resource '{$resource}')");
         }
     }
 
