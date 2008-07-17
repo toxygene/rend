@@ -19,16 +19,13 @@
  * @version     $Id$
  */
 
-/** Rend_View_Helper */
-require_once 'Rend/View/Helper.php';
-
 /**
  * BaseUrl helper
  *
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_BaseUrl extends Rend_View_Helper
+class Rend_View_Helper_BaseUrl
 {
 
     /**
