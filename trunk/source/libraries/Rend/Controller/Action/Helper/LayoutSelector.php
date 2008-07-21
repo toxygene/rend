@@ -85,14 +85,17 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
 
             $layout = $actionController->layouts[$actionName];
 
-            if (!is_array($layout)) {
-                $layout = array($layout);
+            if (is_array($layout)) {
+                $file   = $layout[0];
+                $module = $layout[1];
+            } else {
+                $file   = $layout;
+                $module = $this->getRequest()->getModuleName();
             }
 
-            $this->getLayout()->setLayout($layout[0]);
-
-            if (isset($layout[1])) {
-                $this->getLayout()->setLayoutPath($this->_getModuleViewDirectory($layout[1]));
+            $this->getLayout()
+                 ->setLayout($file)
+                 ->setLayoutPath($this->_getModuleViewDirectory($module));
             }
         }
     }
