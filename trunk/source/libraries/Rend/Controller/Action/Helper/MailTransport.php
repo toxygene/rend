@@ -15,13 +15,12 @@ class Rend_Controller_Action_Helper_MailTransport extends Rend_Controller_Action
     /**
      * Send an email
      *
-     * @param   Zend_Mail
+     * @param   Zend_Mail   $mail
+     * @return  unknown
      */
     public function direct(Zend_Mail $mail)
     {
-        return $this->_factory
-                    ->mailTransport
-                    ->send($mail);
+        return $mail->send($this->_factory->mailTransport);
     }
 
 }
