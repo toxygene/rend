@@ -30,6 +30,12 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
 {
 
     /**
+     * Wildcard character
+     * @var     string
+     */
+    const WILDCARD = '*';
+
+    /**
      * @var Zend_Layout
      */
     private $_layout;
@@ -41,7 +47,7 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
      */
     public function __construct(Zend_Layout $layout = null)
     {
-        $this->setLayout($layout);
+        $this->_layout = $layout;
     }
 
     /**
@@ -64,7 +70,7 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
      * @param   Zend_Layout     $layout
      * @return  Rend_Controller_Action_Helper_LayoutSelector
      */
-    public function setLayout(Zend_Layout $layout = null)
+    public function setLayout(Zend_Layout $layout)
     {
         $this->_layout = $layout;
         return $this;
@@ -76,14 +82,10 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     public function postDispatch()
     {
         if ($this->getRequest()->isDispatched() && $this->getLayout()->isEnabled()) {
-            $actionController = $this->getActionController();
-            $actionName       = $this->_getActionName();
-
-            if (!isset ($actionController->layouts) || !isset($actionController->layouts[$actionName])) {
+            $filePath = $this->_determineFilePath();
+            if (!$filePath) {
                 return;
             }
-
-            $layout = $actionController->layouts[$actionName];
 
             if (is_array($layout)) {
                 $file   = $layout[0];
@@ -95,32 +97,27 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
 
             $this->getLayout()
                  ->setLayout($file)
-                 ->setLayoutPath($this->_getModuleViewDirectory($module));
-            }
+                 ->setLayoutPath($this->_getModuleDirectory($module) . '/views/scripts');
         }
     }
 
     /**
-     * Get the path to the views for a module
      *
-     * @param   string  $module
-     * @return  string
      */
-    private function _getModuleViewDirectory($module)
+    private function _determineFilePath()
     {
-        $path = explode(
-            DIRECTORY_SEPARATOR,
-            $this->getFrontController()->getDispatcher()->getControllerDirectory($module)
-        );
+        $actionController = $this->getActionController();
+        $actionName       = $this->_getActionName();
 
-        array_pop($path);
-        array_push($path, 'views');
-        array_push($path, 'scripts');
-
-        return implode(
-            DIRECTORY_SEPARATOR,
-            $path
-        );
+        if (!isset($actionController->layouts)) {
+            return;
+        } elseif (isset($actionController->layouts[$actionName])) {
+            return $actionController->layouts[$actionName];
+        } elseif (isset($actionController->layouts[self::WILDCARD])) {
+            return $actionController->layouts[self::WILDCARD];
+        } else {
+            return;
+        }
     }
 
 }
