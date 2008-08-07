@@ -34,15 +34,6 @@ require_once 'Zend/Controller/Front.php';
 class Rend_Controller_Front extends Zend_Controller_Front
 {
 
-    /**#@+
-     * Modes
-     * @var     string
-     */
-    const PRODUCTION  = 'production';
-    const DEVELOPMENT = 'development';
-    const TESTING     = 'testing';
-    /**#@-*/
-
     /**
      * Singleton instance
      *
@@ -110,17 +101,6 @@ class Rend_Controller_Front extends Zend_Controller_Front
         }
 
         parent::dispatch($request, $response);
-    }
-
-    /**
-     * Get the config object from the config helper
-     *
-     * @return  Zend_Config
-     */
-    public function getConfig()
-    {
-        return Zend_Controller_Action_HelperBroker::getStaticHelper('config')
-                                                  ->getConfig();
     }
 
     /**
@@ -201,51 +181,106 @@ class Rend_Controller_Front extends Zend_Controller_Front
     }
 
     /**
-     * Get the Rend path
+     * Get the config
      *
-     * @return  string
+     * @return  Zend_Config
      */
-    public function getPath()
+    public function getConfig()
     {
-        if (!$this->getParam('rendPath')) {
-            $this->setParam('rendPath', '..');
+        if (!$this->getParam('config')) {
+            $this->setParam(
+                'config',
+                new Zend_Config_Ini(
+                    "{$this->getParam('path')}/config/config.ini",
+                    $this->getParam('mode')
+                )
+            );
         }
-        return $this->getParam('rendPath');
+        return $this->getParam('config');
     }
 
     /**
-     * Set the Rend path
+     * Get the factory plugin loader
      *
-     * @param   string  $path
-     * @return  Rend_Controller_Front
+     * @return  Zend_Loader_PluginLoader
      */
-    public function setPath($path)
+    public function getFactoryPluginLoader()
     {
-        return $this->setParam('rendPath', $path);
-    }
-
-    /**
-     * Get the Rend mode
-     *
-     * @return  string
-     */
-    public function getMode()
-    {
-        if (!$this->getParam('rendMode')) {
-            $this->setParam('rendMode', self::DEVELOPMENT);
+        if (!$this->getParam('factoryLoader')) {
+            $this->setParam(
+                'factoryLoader',
+                new Zend_Loader_PluginLoader(array(
+                    'Rend_Factory' => array('Rend/Factory' => '')
+                ))
+            );
         }
-        return $this->getParam('rendMode');
+        return $this->getParam('factoryLoader');
     }
 
     /**
-     * Set the Rend mode
+     * Get the form plugin loader
+     *
+     * @return  Zend_Loader_PluginLoader
+     */
+    public function getFormPluginLoader()
+    {
+        if (!$this->getParam('formLoader')) {
+            $this->setParam(
+                'formLoader',
+                new Zend_Loader_PluginLoader()
+            );
+
+            foreach ($this->getControllerDirectory() as $controllerDirectory) {
+                $this->getParam('formLoader')
+                     ->addPrefixPath('Form', "{$controllerDirectory}/../forms");
+            }
+        }
+        return $this->getParam('formLoader');
+    }
+
+    /**
+     * Get the model plugin loader
+     *
+     * @return  Zend_Loader_PluginLoader
+     */
+    public function getModelPluginLoader()
+    {
+        if (!$this->getParam('modelLoader')) {
+            $this->setParam(
+                'modelLoader',
+                new Zend_Loader_PluginLoader()
+            );
+
+            foreach ($this->getControllerDirectory() as $controllerDirectory) {
+                $this->getParam('modelLoader')
+                     ->addPrefixPath('', "{$controllerDirectory}/../models");
+            }
+        }
+        return $this->getParam('modelLoader');
+    }
+
+    /**
+     * Set the mode
      *
      * @param   string  $mode
      * @return  Rend_Controller_Front
      */
     public function setMode($mode)
     {
-        return $this->setParam('rendMode', $mode);
+        $this->setParam('mode', $mode);
+        return $this;
+    }
+
+    /**
+     * Set the path
+     *
+     * @param   string  $path
+     * @return  Rend_Controller_Front
+     */
+    public function setPath($path)
+    {
+        $this->setParam('path', $path);
+        return $this;
     }
 
 }
