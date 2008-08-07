@@ -1,17 +1,11 @@
 <?php
 $rendPath = dirname(dirname(__FILE__)) . '/source';
 
-set_include_path(implode(
-    PATH_SEPARATOR,
-    array(
-        get_include_path(),
-        $rendPath . '/libraries',
-        implode(
-            PATH_SEPARATOR,
-            glob($rendPath . '/application/*/models')
-        )
-    )
-));
+set_include_path(
+    get_include_path() .
+    PATH_SEPARATOR . 
+    "{$rendPath}}/libraries"
+);
 
 error_reporting(E_ALL | E_STRICT);
 
@@ -34,4 +28,7 @@ $timezone = Zend_Controller_Action_HelperBroker::getStaticHelper('config')
 
 date_default_timezone_set($timezone);
 
-PHPUnit_Util_Filter::addDirectoryToWhiteList($rendPath . '/libraries/Rend', '.php');
+PHPUnit_Util_Filter::addDirectoryToWhiteList(
+    "{$rendPath}/libraries",
+    '.php'
+);
