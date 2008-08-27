@@ -3,6 +3,8 @@
 
 = Zend Framework Skeleton =
 
+Currently, you must create all the folders required for a Zend Framework-based site. While the Zend Framework developers are creating tools to solve this problem ([http://framework.zend.com/wiki/display/ZFPROP/Zend_Build+-+Wil+Sinclair Zend_Build]), Rend provides a simple directory structure out of the box.
+
 The structure of the Rend source code files and directories is setup to match the [http://framework.zend.com/wiki/display/ZFPROP/Zend+Framework+Default+Project+Structure+-+Wil+Sinclair new, proposed Zend Controller modular directory structure].
 
  * application
