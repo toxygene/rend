@@ -1,4 +1,0 @@
-#summary Description of move to Google Code from custom Trac server.
-#labels Featured
-
-I've moved Rend from the custom (and unstable) VPS server to Google Code. You can read more about the move on the new [http://rend-news.blogspot.com/2008/05/moving-day.html Rend News] blog
