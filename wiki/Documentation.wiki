@@ -1,25 +1,36 @@
 #summary Rend documentation.
 #labels Featured,Phase-Implementation
 
- * Front Controller
+ * [FrontController Front Controller]
+   * Config
    * Request
- * Action Helpers
-   * [FactoryActionHelpers Factories]
-     * Acl
-     * Auth & Auth Adapter
-     * Config
-     * Db
-     * Locale
-     * Mail & Mail Transport
-     * Translate
-     * View
+ * [ActionHelpers Action Helpers]
+   * Acl
+   * Auth
    * IsAllowed
    * Layout Selector
+   * Locale
+   * Log
+   * MailTransport
+   * Model
    * SSL Selector
- * Filters
+   * Translator
+   * ViewRenderer
+ * [Factories Factories]
+   * Acl
+   * Auth
+   * Auth Adapter
+   * Database
+   * Mail
+   * Mail Transport
+   * Translator
+   * View
+ * [Filters Filters]
    * Boolean
    * Null
- * View Helpers
+ * [Validators Validators]
+   * ConfirmField
+ * [ViewHelpers View Helpers]
    * BaseUrl
    * Cycle
    * DefaultValue
