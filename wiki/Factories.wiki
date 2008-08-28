@@ -12,6 +12,9 @@ Rend includes a number of factories for easily creating common objects based on 
  * Zend_Translate
  * Zend_View
 
+== Setup ==
+The Rend factory classes use the configuration file to determine how to load instances of objects. Specifics on expected values can be found in each factories section.
+
 == Usage ==
 Each action helper implements the direct() method, allowing for easy access in controllers. The following code will get you an instance of the object.
 {{{
@@ -24,3 +27,23 @@ $object = Rend_Controller_Front::getInstance()
                                ->getFactoryLoader()
                                ->nameOfFactory;
 }}}
+
+== Zend_Db_Adapter ==
+=== Configuration ===
+|| *Key* || *Descrption* ||
+|| database.adapter || Name of the adapter to use ||
+|| database.host || Hostname of the database server ||
+|| database.username || Username to use when connecting to the database ||
+|| database.password || Password to use when connecting to the database ||
+|| database.dbname || Name of database to connect to || 
+
+=== Example ===
+{{{
+database.adapter = localhost
+database.host = localhost
+database.username = santa
+database.password = claus
+database.dbname = thelist
+}}}
+
+== Zend_Translate ==
