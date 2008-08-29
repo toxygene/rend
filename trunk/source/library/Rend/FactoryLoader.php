@@ -54,16 +54,13 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function getFactory($name)
     {
-        if (!$this->_factories[$name]) {
-            $class = new ReflectionClass($this->load($name));
-            if ($class->hasMethod('__construct')) {
-                $this->_factories[$name] = $class->newInstanceArgs($this->_rendConfig);
-            } else {
-                $this->_factories[$name] = $class->newInstance();
-            }
-        }
+        $class = new ReflectionClass($this->load($name));
 
-        return $this->_factories[$name];
+        if ($class->hasMethod('__construct')) {
+            return $class->newInstanceArgs($this->_rendConfig->$name);
+        } else {
+            return $class->newInstance();
+        }
     }
 
 }
