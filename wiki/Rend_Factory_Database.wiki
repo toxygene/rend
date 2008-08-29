@@ -1,5 +1,8 @@
 #summary Documentation of the Rend_Factory_Database class
 
+= Description =
+This factory class creates an instances of a Zend_Db_Adapter based on information in your configuration file.
+
 = Configuration =
 || *Key* || *Descrption* ||
 || database.adapter || Name of the adapter to use ||
@@ -8,7 +11,7 @@
 || database.password || Password to use when connecting to the database ||
 || database.dbname || Name of database to connect to || 
 
-= Example =
+== Example ==
 {{{
 database.adapter = localhost
 database.host = localhost
@@ -16,3 +19,11 @@ database.username = santa
 database.password = claus
 database.dbname = thelist
 }}}
+
+= Usage =
+{{{
+class MyController extends Rend_Controller_Action {
+    public function myAction() {
+        $database = $this->_factory->database;
+    }
+}
