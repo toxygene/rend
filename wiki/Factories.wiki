@@ -4,7 +4,7 @@
 Rend includes a number of factories for easily creating common objects based on values in the configuration file.
 
  * Zend_Acl
- * Zend_Auth
+ * [Rend_Factory_Auth Zend_Auth]
  * Zend_Auth_Adapter
  * [Rend_Factory_Database Zend_Db_Adapter]
  * Zend_Mail
