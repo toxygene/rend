@@ -1,4 +1,4 @@
-#summary Error handling.
+#summary Documentation of Rend's enhanced error handler.
 #labels Phase-Implementation
 
 = Enhanced Error Handling =
