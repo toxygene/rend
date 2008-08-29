@@ -1,0 +1,18 @@
+#summary Documentation of the Rend_Factory_Database class
+
+= Configuration =
+|| *Key* || *Descrption* ||
+|| database.adapter || Name of the adapter to use ||
+|| database.host || Hostname of the database server ||
+|| database.username || Username to use when connecting to the database ||
+|| database.password || Password to use when connecting to the database ||
+|| database.dbname || Name of database to connect to || 
+
+= Example =
+{{{
+database.adapter = localhost
+database.host = localhost
+database.username = santa
+database.password = claus
+database.dbname = thelist
+}}}
