@@ -7,6 +7,8 @@ Rend includes a number of factories for easily creating common objects based on 
  * [Rend_Factory_Auth Zend_Auth]
  * Zend_Auth_Adapter
  * [Rend_Factory_Database Zend_Db_Adapter]
+ * Zend_Log
+ * Zend_Lucene
  * Zend_Mail
  * Zend_Mail_Transport
  * Zend_Translate
