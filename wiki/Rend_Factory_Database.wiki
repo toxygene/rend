@@ -13,7 +13,7 @@ This factory class creates an instances of a Zend_Db_Adapter based on informatio
 
 == Example ==
 {{{
-database.adapter = localhost
+database.adapter = pdo_mysql
 database.host = localhost
 database.username = santa
 database.password = claus
