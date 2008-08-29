@@ -1,5 +1,5 @@
 #summary Documentation of the Rend_Factory_Database class
-#labels Factories
+#labels Factories,Phase-Implementation
 
 = Description =
 This factory class creates an instances of a Zend_Db_Adapter based on information in your configuration file.
