@@ -1,4 +1,5 @@
 #summary Documentation of the Rend_Factory subclasses.
+#labels Factories
 
 = Factories =
 Rend includes a number of factories for easily creating common objects based on values in the configuration file.
