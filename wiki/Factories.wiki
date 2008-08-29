@@ -13,19 +13,3 @@ Rend includes a number of factories for easily creating common objects based on 
  * Zend_Mail_Transport
  * Zend_Translate
  * Zend_View
-
-== Setup ==
-The Rend factory classes use the configuration file to determine how to load instances of objects. Specifics on expected values can be found in each factories section.
-
-== Usage ==
-Each action helper implements the direct() method, allowing for easy access in controllers. The following code will get you an instance of the object.
-{{{
-$object = $this->_factory->nameOfFactory;
-}}}
-
-Outside of controllers, you can access helpers through the front controller with the following code:
-{{{
-$object = Rend_Controller_Front::getInstance()
-                               ->getFactoryLoader()
-                               ->nameOfFactory;
-}}}
