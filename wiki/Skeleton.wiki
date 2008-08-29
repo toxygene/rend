@@ -5,7 +5,7 @@
 
 Currently, the Zend Framework does not have an automatic tool for setting up a Zend Framework based project. While they are creating tools to solve this problem ([http://framework.zend.com/wiki/display/ZFPROP/Zend_Build+-+Wil+Sinclair Zend_Build]), Rend provides a simple directory structure out of the box.
 
-The structure of the Rend source code files and directories is setup to match the [http://framework.zend.com/wiki/display/ZFPROP/Zend+Framework+Default+Project+Structure+-+Wil+Sinclair new, proposed Zend Controller modular directory structure].
+The structure of the Rend source code files and directories is setup to match the new, [http://framework.zend.com/wiki/display/ZFPROP/Zend+Framework+Default+Project+Structure+-+Wil+Sinclair proposed Zend Controller modular directory structure].
 
  * application
    * apis
