@@ -3,6 +3,9 @@
 = Description =
 This factory simply wraps the singleton method in [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth].
 
+= Configuration =
+This factory has no configuration settings.
+
 = Usage =
 {{{
 class MyController extends Rend_Controller_Action {
