@@ -10,16 +10,9 @@ interface Rend_Factory_Interface
 {
 
     /**
-     * Constructor
-     *
-     * @param   Zend_Config     $config
-     */
-    public function __construct(Zend_Config $config);
-
-    /**
      * Create method for factory
      *
-     * @return  object
+     * @return  mixed
      */
     public function create();
 

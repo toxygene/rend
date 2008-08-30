@@ -13,26 +13,29 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 {
 
     /**
-     * Rend config object
+     * Config object
      * @var     Zend_Config
      */
-    private $_rendConfig;
+    private $_config;
 
     /**
      * Constructor
      *
-     * @param   Zend_Config     $rendConfig
+     * @param   Zend_Config     $config
      */
-    public function __construct(Zend_Config $rendConfig)
+    public function __construct(Zend_Config $config)
     {
-        $this->_rendConfig = $rendConfig;
+        parent::__construct();
 
-        $prefixPaths = array('Rend_Factory', 'Rend/Factory');
-        if (isset($rendConfig->factoryPrefixPaths)) {
-            $prefixPaths += $rendConfig->factoryPrefixPaths->toArray();
+        $this->_config = $config;
+
+        $this->addPrefixPath('Rend_Factory', 'Rend/Factory');
+
+        if (isset($this->_config->prefixPaths)) {
+            foreach ($this->_config->prefixPaths as $prefix => $path) {
+                $this->addPrefixPath($prefix, $path);
+            }
         }
-
-        parent::__construct($prefixPaths);
     }
 
     /**
@@ -43,7 +46,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function __get($name)
     {
-        return $this->getFactory($name);
+        return $this->getFactory($name)->create();
     }
 
     /**
@@ -51,16 +54,18 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      *
      * @param   string  $name
      * @return  Rend_Factory_Interface
+     * @throws  Zend_Loader_PluginLoader_Exception
      */
     public function getFactory($name)
     {
-        $class = new ReflectionClass($this->load($name));
+        $class = new $this->load($name);
 
-        if ($class->hasMethod('__construct')) {
-            return $class->newInstanceArgs($this->_rendConfig->$name);
-        } else {
-            return $class->newInstance();
+        if ($class instanceof Rend_Factory_Configurable_Interface) {
+            $factoryName = $class->getName();
+            $class->setConfig($this->_config->$factoryName);
         }
+
+        return $class;
     }
 
 }

@@ -13,43 +13,19 @@ abstract class Rend_Factory_Abstract implements Rend_Factory_Interface
 {
 
     /**
-     * Rend config
-     * @var     Zend_Config
-     */
-    protected $_config;
-
-    /**
-     * Constructor
-     *
-     * @param   Zend_Config     $config
-     */
-    public function __construct(Zend_Config $config)
-    {
-        $this->_config = $config;
-        $this->_init();
-    }
-
-    /**
      * Get the factory name
      *
      * @return string
      */
     public function getName()
     {
-        $class = new ReflectionClass($this);
+        $classname = get_class($this);
 
-        if (preg_match('/.*_(.*)/', $class->getName(), $matches)) {
+        if (preg_match('/.*_(.*)/', $classname, $matches)) {
             return $matches[1];
-        } else {
-            return $class->getName();
         }
-    }
 
-    /**
-     * Initialize the factory
-     */
-    protected function _init()
-    {
+        return $classname;
     }
 
 }
