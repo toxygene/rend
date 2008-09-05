@@ -32,15 +32,10 @@ class Rend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     public function initView($path = null, $prefix = null, array $options = array())
     {
         if (null === $this->view) {
-            $this->setView($this->_factory->view);
+            $this->setView($this->getFrontController()->getFactoryPluginLoader()->view);
         }
 
         parent::initView($path, $prefix, $options);
-
-        $path = $this->_getModuleDirectory() . '/views';
-
-        $this->view->addHelperPath("{$path}/helpers");
-        $this->view->addFilterPath("{$path}/filters");
     }
 
 }

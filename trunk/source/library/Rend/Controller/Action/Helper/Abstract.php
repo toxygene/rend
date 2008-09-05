@@ -50,7 +50,7 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
         }
 
         $this->_factory = $this->getFrontController()
-                               ->getFactory();
+                               ->getFactoryPluginLoader();
     }
 
     /**
