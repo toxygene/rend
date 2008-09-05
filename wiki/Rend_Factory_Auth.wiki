@@ -8,11 +8,17 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 || *Method* || *Description* ||
 || create() || Get the [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth] singleton instance ||
 
-= Usage =
+= Examples =
+== Basic ==
+Basic usage of the !Rend_Factory_Database is to create an instance of the factory and call it's create() method on demand.
+
 {{{
 class MyController extends Rend_Controller_Action {
+    public function init() {
+        $this->_authFactory = new Rend_Factory_Auth();
+    }
     public function myAction() {
-        $auth = $this->_factory->auth;
+        $auth = $this->authFactory->create();
         if (!$auth->hasIdentity()) {
             die('You must be authenticated before you can access this page');
         }
