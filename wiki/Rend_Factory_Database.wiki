@@ -2,55 +2,58 @@
 #labels Factories,Phase-Implementation
 
 = Description =
-This factory class wraps the construction process for [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapters].
+This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract Factory] for the [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapters].
 
-= Configuration =
-|| *Key* || *Descrption* ||
-|| adapter || Name of the adapter to use ||
-|| params.host || Hostname of the database server ||
-|| params.username || Username to use when connecting to the database ||
-|| params.password || Password to use when connecting to the database ||
-|| params.dbname || Name of database to connect to || 
+= API =
+|| *Method* || *Description* ||
+|| __construct() || A !Zend_Config object or array matching the setter names ||
+|| setAdapter() || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter adapter] ||
+|| setParams() || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter.connecting.parameters parameter] ||
 
 = Examples =
 == Standard ==
-config.ini
-{{{
-database.adapter = pdo_mysql
-database.params.host = localhost
-database.params.username = santa
-database.params.password = claus
-database.params.dbname = thelist
-}}}
+Standard usage of the !Rend_Factory_Database is to create an instance of the factory and call it's create() method on demand.
 
-MyController.php
+!MyController.php
 {{{
 class MyController extends Rend_Controller_Action {
-    public function oneAction() {
-        /** Rend_Factory_Database */
-        require_once 'Rend/Factory/Database.php';
-
-        $factory = new Rend_Factory_Database($this->getConfig()->database);
-        $database = $factory->create();
+    protected $_databaseFactory;
+    public function init() {
+        $this->_dbFactory = new Rend_Factory_Database(array(
+            'adapter' => 'pdo_mysql',
+            'params'  => array(
+                'host'     => 'localhost',
+                'username' => 'test',
+                'password' => 'test',
+                'dbname' => 'database'
+            )
+        );
+    }
+    public function myAction() {
+        $database = $this->_dbFactory->create();
     }
 }
 }}}
 
-== Rend_FactoryLoader ==
-config.ini
-{{{
-factory.database.adapter = pdo_mysql
-factory.database.params.host = localhost
-factory.database.params.username = santa
-factory.database.params.password = claus
-factory.database.params.dbname = thelist
-}}}
+== Custom Factories ==
+You can easily create your own abstract factory for creating [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapters] by extending the Rend_Factory_Database_Interface
 
-MyController.php
+!MyDbFactory.php
+{{{
+class MyDbFactory implements Rend_Factory_Database_Interface {
+    public function create() {
+        // return an instance of your factory
+    }
+}
+}}}
+!MyController.php
 {{{
 class MyController extends Rend_Controller_Action {
-    public function oneAction() {
-        $database = $this->_factory->database;
+    public function init() {
+        $this->_dbFactory = new MyDbFactory();
+    }
+    public function myAction() {
+        $database = $this->_dbFactory->create();
     }
 }
 }}}
