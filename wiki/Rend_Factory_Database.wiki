@@ -57,3 +57,24 @@ class MyController extends Rend_Controller_Action {
     }
 }
 }}}
+
+== Rend_FactoryLoader ==
+The Rend_FactoryLoader uses a number of conventions to make configuration of objects seamless.
+
+config.ini
+{{{
+factories.database.adapter  = pdo_mysql
+factories.database.host     = localhost
+factories.database.username = username
+factories.database.password = password
+factories.database.dbname   = database
+}}}
+
+!MyController.php
+{{{
+class MyController extends Rend_Controller_Action {
+    public function myAction() {
+        $database = $this->_factory->database;
+    }
+}
+}}}
