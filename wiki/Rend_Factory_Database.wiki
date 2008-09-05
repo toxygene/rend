@@ -2,17 +2,19 @@
 #labels Factories,Phase-Implementation
 
 = Description =
-This factory class creates an instances of a Zend_Db_Adapter based on information in your configuration file.
+This factory class wraps the construction process for [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapters].
 
 = Configuration =
 || *Key* || *Descrption* ||
-|| database.adapter || Name of the adapter to use ||
-|| database.params.host || Hostname of the database server ||
-|| database.params.username || Username to use when connecting to the database ||
-|| database.params.password || Password to use when connecting to the database ||
-|| database.params.dbname || Name of database to connect to || 
+|| adapter || Name of the adapter to use ||
+|| params.host || Hostname of the database server ||
+|| params.username || Username to use when connecting to the database ||
+|| params.password || Password to use when connecting to the database ||
+|| params.dbname || Name of database to connect to || 
 
-== Example ==
+= Examples =
+== Standard ==
+config.ini
 {{{
 database.adapter = pdo_mysql
 database.params.host = localhost
@@ -21,10 +23,34 @@ database.params.password = claus
 database.params.dbname = thelist
 }}}
 
-= Usage =
+MyController.php
 {{{
 class MyController extends Rend_Controller_Action {
-    public function myAction() {
+    public function oneAction() {
+        /** Rend_Factory_Database */
+        require_once 'Rend/Factory/Database.php';
+
+        $factory = new Rend_Factory_Database($this->getConfig()->database);
+        $database = $factory->create();
+    }
+}
+}}}
+
+== Rend_FactoryLoader ==
+config.ini
+{{{
+factory.database.adapter = pdo_mysql
+factory.database.params.host = localhost
+factory.database.params.username = santa
+factory.database.params.password = claus
+factory.database.params.dbname = thelist
+}}}
+
+MyController.php
+{{{
+class MyController extends Rend_Controller_Action {
+    public function oneAction() {
         $database = $this->_factory->database;
     }
 }
+}}}
