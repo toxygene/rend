@@ -12,8 +12,8 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 || setParams() || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter.connecting.parameters parameter] ||
 
 = Examples =
-== Standard ==
-Standard usage of the !Rend_Factory_Database is to create an instance of the factory and call it's create() method on demand.
+== Basic ==
+Basic usage of the !Rend_Factory_Database is to create an instance of the factory and call it's create() method on demand.
 
 !MyController.php
 {{{
