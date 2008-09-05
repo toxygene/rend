@@ -3,7 +3,6 @@
 
  # [FrontController Front Controller]
    # Config
-   # Request
  # [ActionHelpers Action Helpers]
    # Acl
    # Auth
@@ -25,6 +24,7 @@
    # Mail Transport
    # Translator
    # View
+ # [Rend_FactoryLoader Factory Loader]
  # [Filters Filters]
    # Boolean
    # Null
