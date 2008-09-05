@@ -2,10 +2,11 @@
 #labels Factories,Phase-Implementation
 
 = Description =
-This factory simply wraps the singleton method in [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth].
+This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract Factory] for the [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth] class.
 
-= Configuration =
-This factory has no configuration settings.
+= API =
+|| *Method* || *Description* ||
+|| create() || Get the Zend_Auth singleton instance ||
 
 = Usage =
 {{{
