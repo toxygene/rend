@@ -2,7 +2,7 @@
 #labels Factories,Phase-Implementation
 
 = Factories =
-Rend includes a number of factories for easily creating common objects based on values in the configuration file.
+Rend includes a number of factory classes to abstract the process of creating concrete objects of specific types. This allows for variation and customization of object creation within a separate class so your code can focus on using the objects instead of littering it with extra scaffolding code.
 
  * Zend_Acl
  * [Rend_Factory_Auth Zend_Auth]
