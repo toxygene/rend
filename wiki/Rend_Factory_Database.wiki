@@ -7,6 +7,7 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 = API =
 || *Method* || *Description* ||
 || __construct() || A !Zend_Config object or array matching the setter names ||
+|| create() || Create an instance of a [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapter] class ||
 || setAdapter() || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter adapter] ||
 || setParams() || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter.connecting.parameters parameter] ||
 
