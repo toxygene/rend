@@ -55,7 +55,7 @@ class Rend_Controller_Action_Helper_SslSelector extends Rend_Controller_Action_H
      * @param   integer     $httpPort
      * @param   integer     $httpsPort
      */
-    public function __construct($httpPort = null, $httpsPort = null)
+    public function __construct($httpPort = self::HTTP_PORT, $httpsPort = self::HTTPS_PORT)
     {
         $this->_httpPort  = $httpPort;
         $this->_httpsPort = $httpsPort;
@@ -68,9 +68,6 @@ class Rend_Controller_Action_Helper_SslSelector extends Rend_Controller_Action_H
      */
     public function getHttpPort()
     {
-        if (!$this->_httpPort) {
-            $this->_httpPort = self::HTTP_PORT;
-        }
         return $this->_httpPort;
     }
 
@@ -81,9 +78,6 @@ class Rend_Controller_Action_Helper_SslSelector extends Rend_Controller_Action_H
      */
     public function getHttpsPort()
     {
-        if (!$this->_httpsPort) {
-            $this->_httpsPort = self::HTTPS_PORT;
-        }
         return $this->_httpsPort;
     }
 
@@ -127,7 +121,7 @@ class Rend_Controller_Action_Helper_SslSelector extends Rend_Controller_Action_H
             $url .= 's';
         }
 
-        $url .= '://' . $request->getServer('SERVER_NAME');
+        $url .= '://' . $request->SERVER_NAME;
 
         if ($ssl && $this->getHttpsPort() != self::HTTPS_PORT) {
             $url .= ':' . $this->getHttpsPort();
@@ -155,7 +149,8 @@ class Rend_Controller_Action_Helper_SslSelector extends Rend_Controller_Action_H
      *
      * @return  boolean
      */
-    private function _isSslRequired() {
+    private function _isSslRequired()
+    {
         $actionName       = $this->_getActionName();
         $actionController = $this->getActionController();
 

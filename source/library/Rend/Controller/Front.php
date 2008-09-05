@@ -191,7 +191,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
             $this->setParam(
                 'config',
                 new Zend_Config_Ini(
-                    "{$this->getParam('path')}/config/config.ini",
+                    "{$this->getParam('path')}/application/config/config.ini",
                     $this->getParam('mode')
                 )
             );
@@ -210,7 +210,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
             $this->setParam(
                 'factoryLoader',
                 new Zend_Loader_PluginLoader(array(
-                    'Rend_Factory' => array('Rend/Factory' => '')
+                    'Rend_Factory' => 'Rend/Factory'
                 ))
             );
         }
@@ -230,9 +230,18 @@ class Rend_Controller_Front extends Zend_Controller_Front
                 new Zend_Loader_PluginLoader()
             );
 
-            foreach ($this->getControllerDirectory() as $controllerDirectory) {
+            $filter = new Zend_Filter_Inflector(
+                ':module_Form',
+                array(
+                    ':module' => array(
+                        new Zend_Filter_Word_UnderscoreToCamelCase()
+                    )
+                )
+            );
+
+            foreach ($this->getControllerDirectory() as $name => $path) {
                 $this->getParam('formLoader')
-                     ->addPrefixPath('Form', "{$controllerDirectory}/../forms");
+                     ->addPrefixPath($filter->filter(array('module' => $name)), "{$path}/../forms");
             }
         }
         return $this->getParam('formLoader');
