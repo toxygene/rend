@@ -45,6 +45,10 @@ class Rend_View_Helper_Truncate
             throw new InvalidArgumentException('Length must be greater than 0');
         }
 
+        if (strlen($string) <= $length) {
+            return $string;
+        }
+
         if ($boundry) {
             $boundryLength = $length;
             while ($string[$boundryLength] != ' ' && $boundryLength > 0) {
