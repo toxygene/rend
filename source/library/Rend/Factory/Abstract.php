@@ -22,6 +22,9 @@ abstract class Rend_Factory_Abstract
             return $matches[1];
         }
 
+        return $classname;
+    }
+
     /**
      *
      */
