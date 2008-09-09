@@ -6,55 +6,70 @@
 /** Rend_Factory_Abstract */
 require_once 'Rend/Factory/Abstract.php';
 
+/** Zend_Mail_Transport_Smtp */
+require_once 'Zend/Mail/Transport/Smtp.php';
+
 /**
  *
  */
-class Rend_Factory_MailTransport extends Rend_Factory_Abstract
+class Rend_Factory_Mail_Transport_Smtp extends Rend_Factory_Abstract
 {
-
-    /**#@+
-     * Adapter name
-     * @var     string
-     */
-    const ADAPTER_SENDMAIL = 'sendmail';
-    const ADAPTER_SMTP     = 'smtp';
-    /**#@-*/
 
     /**
      * Get a mail transport object
      *
-     * @return  Zend_Mail_Transport_Abstract
+     * @return  Zend_Mail_Transport_Smtp
      */
     public function create()
     {
-        switch ($this->_config->mail->transport->adapter) {
-            case self::ADAPTER_SENDMAIL:
-                /** Zend_Mail_Transport_Sendmail */
-                require_once 'Zend/Mail/Transport/Sendmail.php';
-                return new Zend_Mail_Transport_Sendmail(
-                    $this->_config->mail->transport->options
-                );
-            break;
+        return new Zend_Mail_Transport_Smtp(
+            $this->getHost(),
+            $this->getOptions()
+        );
+    }
 
-            case self::ADAPTER_SMTP:
-                /** Zend_Mail_Transport_Smtp */
-                require_once 'Zend/Mail/Transport/Smtp.php';
-                return new Zend_Mail_Transport_Smtp(
-                    $this->_config->mail->transport->host,
-                    $this->_config->mail->transport->options->toArray()
-                );
-            break;
+    /**
+     * Get the host name
+     *
+     * @return  string
+     */
+    public function getHost()
+    {
+        return $this->_host;
+    }
 
-            default:
-                /** Rend_Factory_Exception */
-                require_once 'Rend/Factory/Exception.php';
-                throw new Rend_Factory_Exception(
-                    "Unknown mail transport type '{$this->_config->mail->transport->adapter}'"
-                );
-            break;
-        }
+    /**
+     * Get the options
+     *
+     * @return  array
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
 
-        return $this->_transport;
+    /**
+     * Set the host name
+     * 
+     * @param   string  $host
+     * @return  Zend_Mail_Transport_Smtp
+     */
+    public function setHost($host)
+    {
+        $this->_host = $host;
+        return $this;
+    }
+
+    /**
+     * Set the options
+     *
+     * @param   array   $options
+     * @return  Zend_Mail_Transport_Smtp
+     */
+    public function setOptions(array $options)
+    {
+        $this->_options = $options;
+        return $this;
     }
 
 }
