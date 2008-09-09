@@ -25,11 +25,11 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function __construct(Zend_Config $config)
     {
-        parent::__construct();
+        parent::__construct(array(
+            'Rend_Factory' => 'Rend/Factory'
+        ));
 
         $this->_config = $config;
-
-        $this->addPrefixPath('Rend_Factory', 'Rend/Factory');
 
         if (isset($this->_config->prefixPaths)) {
             foreach ($this->_config->prefixPaths as $prefix => $path) {
@@ -42,11 +42,13 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * Member access overloader
      *
      * @param   string  $name
-     * @return  mixed
+     * @return  Rend_Factory_Interface
+     * @throws  Zend_Loader_PluginLoader_Exception
      */
     public function __get($name)
     {
-        return $this->getFactory($name)->create();
+        return $this->getFactory($name)
+                    ->create();
     }
 
     /**
@@ -59,12 +61,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     public function getFactory($name)
     {
         $class = new $this->load($name);
-
-        if ($class instanceof Rend_Factory_Configurable_Interface) {
-            $factoryName = $class->getName();
-            $class->setConfig($this->_config->$factoryName);
-        }
-
+        $name  = $class->getName();
+        $class->setConfig($this->_config->$name);
         return $class;
     }
 
