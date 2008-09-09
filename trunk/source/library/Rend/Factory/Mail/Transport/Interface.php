@@ -6,7 +6,7 @@
 /**
  *
  */
-interface Rend_Factory_MailTransport_Interface extends Rend_Factory_Interface
+interface Rend_Factory_Mail_Transport_Interface extends Rend_Factory_Interface
 {
 
     /**
