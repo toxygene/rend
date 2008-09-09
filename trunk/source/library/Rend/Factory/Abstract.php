@@ -10,20 +10,6 @@ abstract class Rend_Factory_Abstract
 {
 
     /**
-     * Constructor
-     *
-     * @param   Zend_Config|array   $options
-     */
-    public function __construct($options)
-    {
-        if ($options instanceof Zend_Config) {
-            $this->setConfig($options);
-        } elseif (is_array($options)) {
-            $this->setOptions($options);
-        }
-    }
-
-    /**
      * Get the factory name
      *
      * @return string
