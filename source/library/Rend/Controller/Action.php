@@ -13,6 +13,12 @@ class Rend_Controller_Action extends Zend_Controller_Action
 {
 
     /**
+     * Configuration
+     * @var     Zend_Config
+     */
+    protected $_config;
+
+    /**
      * Factory
      * @var     Rend_Factory
      */
@@ -24,7 +30,12 @@ class Rend_Controller_Action extends Zend_Controller_Action
     public function init()
     {
         parent::init();
-        $this->_factory = new Rend_Factory($this->getInvokeArg('config')->rend);
+
+        $this->_config = $this->getFrontController()
+                              ->getConfig();
+
+        $this->_factory = $this->getFrontController()
+                               ->getFactoryLoader();
     }
 
 }
