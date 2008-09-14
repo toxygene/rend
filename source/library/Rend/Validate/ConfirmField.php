@@ -96,8 +96,6 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
      */
     public function isValid($value, $context = null)
     {
-        $value = $value;
-
         $this->_setValue($value);
 
         if (is_array($context)) {
@@ -113,4 +111,5 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
         $this->_error(self::NOT_MATCH);
         return false;
     }
+
 }
