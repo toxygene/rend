@@ -37,7 +37,10 @@ class Rend_View_Helper_BaseUrl
     {
         /** Rend_Controller_Front */
         require_once 'Rend/Controller/Front.php';
-        return Rend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
+
+        return Rend_Controller_Front::getInstance()
+                                    ->getRequest()
+                                    ->getBaseUrl();
     }
 
 }
