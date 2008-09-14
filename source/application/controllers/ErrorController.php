@@ -7,15 +7,12 @@
  * @subpackage Default
  */
 
-/** Project_Controller_Action */
-require_once 'Project/Controller/Action.php';
-
 /**
  * @category   Rend
  * @package    Controller
  * @subpackage Default
  */
-class ErrorController extends Project_Controller_Action
+class ErrorController extends Zend_Controller_Action
 {
 
     /**
@@ -28,7 +25,7 @@ class ErrorController extends Project_Controller_Action
     {
         $errors = $this->_getParam('error_handler');
 
-        if ($this->_helper->config()->display_errors) {
+        if ($this->getConfig()->displayErrors) {
             $this->view->errors = $errors;
         }
 

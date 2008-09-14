@@ -1,10 +1,10 @@
 [production]
-display_errors = false
+displayErrors = false
 encoding       = UTF-8
 timezone       =
 
 [development : production]
-display_errors = true
+displayErrors = true
 
 [testing : production]
-display_errors = true
+displayErrors = true
