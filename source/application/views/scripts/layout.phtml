@@ -3,17 +3,16 @@ $this->headMeta()
      ->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->getEncoding());
 
 $this->headLink()
-     ->prependStylesheet($this->baseUrl() . '/styles/global.css')
-     ->prependStylesheet($this->baseUrl() . '/styles/base-min.css')
-     ->prependStylesheet($this->baseUrl() . '/styles/reset-fonts-grids.css');
+     ->prependStylesheet('http://yui.yahooapis.com/2.5.2/build/base/base-min.css')
+     ->prependStylesheet('http://yui.yahooapis.com/2.5.2/build/reset-fonts-grids/reset-fonts-grids.css');
 
 $this->headScript()
-     ->prependFile($this->baseUrl() . '/scripts/global.js')
-     ->prependFile($this->baseUrl() . '/scripts/jquery-1.2.3.min.js');
+     ->prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js');
 
 echo $this->doctype('XHTML1_STRICT');
+
+$this->headScript()->captureStart();
 ?>
-<?php $this->headScript()->captureStart(); ?>
 var baseUrl = '<?php echo $this->baseUrl(); ?>';
 <?php $this->headScript()->captureEnd(); ?>
 
