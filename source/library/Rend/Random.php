@@ -11,7 +11,6 @@
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
  * @category    Rend
- * @package     Utilities
  * @copyright   2008 Justin Hendrickson
  * @license     http://rend.superglobals.com/license/new-bsd    New BSD License
  * @link        http://rend.superglboals.com/
@@ -21,12 +20,15 @@
 
 /**
  * @category    Rend
- * @package     Utilities
  */
-class Rend_Utilities
+class Rend_Random
 {
 
-    static public $printableCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]}\|;:\'",<.>/? ';
+    /**
+     * String of printable characters
+     * @var     string
+     */
+    const PRINTABLE_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]}\|;:\'",<.>/? ';
 
     /**
      * Generate a random string of printable characters
@@ -35,12 +37,8 @@ class Rend_Utilities
      * @param  string $characters
      * @return string
      */
-    static public function generateRandomString($length = 8, $characters = null)
+    public function getString($length = 8, $characters = self::PRINTABLE_CHARACTERS)
     {
-        if (!$characters) {
-            $characters = self::$printableCharacters;
-        }
-
         $string = '';
         for($i = 0; $i < $length; ++$i) {
             $string .= $characters[mt_rand(0, strlen($characters) - 1)];
