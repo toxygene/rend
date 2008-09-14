@@ -62,7 +62,10 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     {
         $class = new $this->load($name);
         $name  = $class->getName();
-        $class->setConfig($this->_config->$name);
+
+        $class->setConfig($this->_config->$name)
+              ->setFactoryLoader($this);
+
         return $class;
     }
 
