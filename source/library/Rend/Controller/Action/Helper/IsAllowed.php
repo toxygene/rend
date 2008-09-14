@@ -48,10 +48,40 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_acl;
 
     /**
+     * Deny action
+     * @var     string
+     */
+    private $_denyAction;
+
+    /**
+     * Deny controller
+     * @var     string
+     */
+    private $_denyController;
+
+    /**
+     * Deny module
+     * @var     string
+     */
+    private $_denyModule;
+
+    /**
+     * Deny params
+     * @var     array
+     */
+    private $_denyParams;
+
+    /**
      * Role name
      * @var     string
      */
     private $_role;
+
+    /**
+     * Throw exceptions
+     * @var     boolean
+     */
+    private $_throwExceptions = true;
 
     /**
      * Get the ACL object
@@ -61,7 +91,8 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     public function getAcl()
     {
         if (!$this->_acl) {
-            $this->_acl = $this->_getActionHelper('acl')->getAcl();
+            $this->_acl = $this->_getActionHelper('acl')
+                               ->getAcl();
         }
         return $this->_acl;
     }
@@ -77,6 +108,26 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
+     * Initialize the helper
+     */
+    public function init()
+    {
+        $this->_denyAction = $this->getFrontController()
+                                  ->getDispatcher()
+                                  ->getDefaultAction();
+
+        $this->_denyController = $this->getFrontController()
+                                      ->getDispatcher()
+                                      ->getDefaultControllerName();
+
+        $this->_denyModule = $this->getFrontController()
+                                  ->getDispatcher()
+                                  ->getDefaultModule();
+
+        $this->_denyParams = array();
+    }
+
+    /**
      * Set the ACL
      *
      * @param   Zend_Acl    $acl
@@ -89,6 +140,24 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
+     * Set the deny page
+     *
+     * @param   string  $action
+     * @param   string  $controller
+     * @param   string  $module
+     * @param   array   $params
+     */
+    public function setDenyPage($action, $controller = null, $module = null, $params = null)
+    {
+        $this->_denyAction     = $action;
+        $this->_denyController = $controller;
+        $this->_denyModule     = $module;
+        $this->_denyParams     = $params;
+
+        return $this;
+    }
+
+    /**
      * Set the role name
      *
      * @param   string  $role
@@ -97,6 +166,18 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     public function setRole($role = null)
     {
         $this->_role = $role;
+        return $this;
+    }
+
+    /**
+     * Enable/disable throwing exceptions
+     *
+     * @param   boolean     $flag
+     * @return  Rend_Controller_Action_Helper_IsAllowed
+     */
+    public function setThrowExceptions($flag)
+    {
+        $this->_throwExceptions = (boolean) $flag;
         return $this;
     }
 
@@ -117,12 +198,24 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
         }
 
         if (!$this->getAcl()->isAllowed($this->getRole(), $resource, $permission)) {
-            // redirect?
+            $permission = $permission ? $permission : '*';
 
-#            $permission = $permission ? $permission : '*';
-#            /** Rend_Controller_Action_Exception_Acl */
-#            require_once 'Rend/Controller/Action/Exception/Acl.php';
-#            throw new Rend_Controller_Action_Exception_Acl("Role '{$this->getRole()}' cannot access action '{$this->_getActionName()}' (requires permission '{$permission}' on resource '{$resource}')");
+            if ($this->_throwExceptions) {
+                /** Rend_Controller_Action_Exception_Acl */
+                require_once 'Rend/Controller/Action/Exception/Acl.php';
+                throw new Rend_Controller_Action_Exception_Acl("Role '{$this->getRole()}' cannot access action '{$this->_getActionName()}' (requires permission '{$permission}' on resource '{$resource}')");
+            } else {
+                $this->getRequest()
+                     ->setParam('denyAction', $this->getRequest()->getActionName())
+                     ->setParam('denyController', $this->getRequest()->setControllerName())
+                     ->setParam('denyModule', $this->getRequest()->setModuleName())
+                     ->setParam('denyParams', $this->getRequest()->setParams())
+                     ->setActionName($this->_denyAction)
+                     ->setControllerName($this->_denyController)
+                     ->setModuleName($this->_denyModule)
+                     ->setParams($this->_denyParams)
+                     ->setDispatched(false);
+            }
         }
     }
 
