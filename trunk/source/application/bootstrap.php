@@ -28,12 +28,12 @@ $config = Rend_Controller_Front::getInstance()
 
 // Setup error reporting
 error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', $config->display_errors);
+ini_set('display_errors', $config->displayErrors);
 ini_set('error_log', ROOT_PATH . '/data/logs/phperrors.log');
 ini_set('log_errors', true);
 date_default_timezone_set($config->timezone);
 Rend_Controller_Front::getInstance()
-                     ->throwExceptions($config->display_errors);
+                     ->throwExceptions($config->displayErrors);
 
 try {
     Rend_Controller_Front::getInstance()
