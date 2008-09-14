@@ -25,7 +25,7 @@ class ErrorController extends Zend_Controller_Action
     {
         $errors = $this->_getParam('error_handler');
 
-        if ($this->getConfig()->displayErrors) {
+        if ($this->_config->displayErrors) {
             $this->view->errors = $errors;
         }
 
