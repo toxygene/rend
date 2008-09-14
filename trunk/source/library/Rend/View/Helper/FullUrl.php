@@ -68,7 +68,10 @@ class Rend_View_Helper_FullUrl
     {
         /** Rend_Controller_Front */
         require_once 'Rend/Controller/Front.php';
-        return Rend_Controller_Front::getInstance()->getRequest()->isSsl();
+
+        return Rend_Controller_Front::getInstance()
+                                    ->getRequest()
+                                    ->isSsl();
     }
 
 }
