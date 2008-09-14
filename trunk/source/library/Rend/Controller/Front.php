@@ -35,6 +35,30 @@ class Rend_Controller_Front extends Zend_Controller_Front
 {
 
     /**
+     * Configuration
+     * @var     Zend_Config
+     */
+    protected $_config;
+
+    /**
+     * Factory loader
+     * @var     Rend_FactoryLoader
+     */
+    protected $_factoryLoader;
+
+    /**
+     * Mode
+     * @var     string
+     */
+    protected $_mode;
+
+    /**
+     * Path
+     * @var     string
+     */
+    protected $_path;
+
+    /**
      * Singleton instance
      *
      * @return  Rend_Controller_Front
@@ -187,16 +211,13 @@ class Rend_Controller_Front extends Zend_Controller_Front
      */
     public function getConfig()
     {
-        if (!$this->getParam('config')) {
-            $this->setParam(
-                'config',
-                new Zend_Config_Ini(
-                    "{$this->getParam('path')}/application/config/config.ini",
-                    $this->getParam('mode')
-                )
+        if (!$this->_config) {
+            $this->_config = new Zend_Config_Ini(
+                "{$this->getPath()}/application/config/config.ini",
+                $this->getMode()
             );
         }
-        return $this->getParam('config');
+        return $this->_config;
     }
 
     /**
@@ -206,66 +227,12 @@ class Rend_Controller_Front extends Zend_Controller_Front
      */
     public function getFactoryPluginLoader()
     {
-        if (!$this->getParam('factoryLoader')) {
-            $this->setParam(
-                'factoryLoader',
-                new Zend_Loader_PluginLoader(array(
-                    'Rend_Factory' => 'Rend/Factory'
-                ))
-            );
+        if (!$this->_factoryLoader) {
+            $this->_factoryLoader = new Zend_Loader_PluginLoader(array(
+                'Rend_Factory' => 'Rend/Factory'
+            ));
         }
-        return $this->getParam('factoryLoader');
-    }
-
-    /**
-     * Get the form plugin loader
-     *
-     * @return  Zend_Loader_PluginLoader
-     */
-    public function getFormPluginLoader()
-    {
-        if (!$this->getParam('formLoader')) {
-            $this->setParam(
-                'formLoader',
-                new Zend_Loader_PluginLoader()
-            );
-
-            $filter = new Zend_Filter_Inflector(
-                ':module_Form',
-                array(
-                    ':module' => array(
-                        new Zend_Filter_Word_UnderscoreToCamelCase()
-                    )
-                )
-            );
-
-            foreach ($this->getControllerDirectory() as $name => $path) {
-                $this->getParam('formLoader')
-                     ->addPrefixPath($filter->filter(array('module' => $name)), "{$path}/../forms");
-            }
-        }
-        return $this->getParam('formLoader');
-    }
-
-    /**
-     * Get the model plugin loader
-     *
-     * @return  Zend_Loader_PluginLoader
-     */
-    public function getModelPluginLoader()
-    {
-        if (!$this->getParam('modelLoader')) {
-            $this->setParam(
-                'modelLoader',
-                new Zend_Loader_PluginLoader()
-            );
-
-            foreach ($this->getControllerDirectory() as $controllerDirectory) {
-                $this->getParam('modelLoader')
-                     ->addPrefixPath('', "{$controllerDirectory}/../models");
-            }
-        }
-        return $this->getParam('modelLoader');
+        return $this->_factoryLoader;
     }
 
     /**
@@ -276,7 +243,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
      */
     public function setMode($mode)
     {
-        $this->setParam('mode', $mode);
+        $this->_mode = $mode;
         return $this;
     }
 
@@ -288,7 +255,7 @@ class Rend_Controller_Front extends Zend_Controller_Front
      */
     public function setPath($path)
     {
-        $this->setParam('path', $path);
+        $this->_path = $path;
         return $this;
     }
 
