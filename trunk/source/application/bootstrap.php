@@ -15,6 +15,8 @@ set_include_path(
 require_once 'Zend/Loader.php';
 Zend_Loader::registerAutoload();
 
+Zend_Controller_Action_HelperBroker::addPrefix('Rend_Controller_Action_Helper');
+
 Rend_Controller_Front::getInstance()
                      ->addControllerDirectory(APP_PATH . '/controllers', 'default')
                      ->addModuleDirectory(APP_PATH . '/modules')
@@ -32,8 +34,6 @@ ini_set('log_errors', true);
 date_default_timezone_set($config->timezone);
 Rend_Controller_Front::getInstance()
                      ->throwExceptions($config->display_errors);
-
-Zend_Controller_Action_HelperBroker::addPrefix('Rend_Controller_Action_Helper');
 
 try {
     Rend_Controller_Front::getInstance()
