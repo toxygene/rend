@@ -1,13 +1,3 @@
-<?php
-if($this->errors):
-    $this->headScript()
-         ->appendFile($this->baseUrl() . '/facebox/facebox.js')
-         ->appendFile($this->baseUrl() . '/scripts/debug.js');
-
-    $this->headLink()
-         ->appendStylesheet($this->baseUrl() . '/facebox/facebox.css')
-         ->appendStylesheet($this->baseUrl() . '/styles/debug.css');
-?>
 <div id="debug_summary">
     <h2><?php echo $this->errors->exception->getMessage(); ?></h2>
     <div id="debug_complete">
