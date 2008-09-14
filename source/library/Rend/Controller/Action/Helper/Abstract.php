@@ -102,7 +102,9 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     protected function _getActionName($action = null)
     {
         if (!$action) {
-            $action = $this->getRequest()->getActionName();
+            $action = $this->getRequest()
+                           ->getActionName();
+
             if (!$action) {
                 $action = $this->getFrontController()
                                ->getDispatcher()
