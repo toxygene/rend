@@ -15,11 +15,11 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
     /**
      *
      */
-    public function direct($key)
+    public function direct($messageId, $locale = null)
     {
         return $this->_factory
                     ->translator
-                    ->translate($key);
+                    ->translate($messageId, $locale);
     }
 
 }
