@@ -3,6 +3,9 @@
  *
  */
 
+/** Rend_Factory_Interface */
+require_once 'Rend/Factory/Interface.php';
+
 /**
  *
  */
