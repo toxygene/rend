@@ -115,6 +115,15 @@ class Rend_Factory_View extends Rend_Factory_Abstract implements Rend_Factory_Vi
     /**
      *
      */
+    public function setBasePath($basePath)
+    {
+        $this->_basePath = $basePath;
+        return $this;
+    }
+
+    /**
+     *
+     */
     public function setDoctype($doctype)
     {
         $this->_doctype = $doctype;
@@ -127,6 +136,60 @@ class Rend_Factory_View extends Rend_Factory_Abstract implements Rend_Factory_Vi
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setEscape($escape)
+    {
+        $this->_escape = $escape;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setFilter($filter)
+    {
+        $this->_filter = $filter;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setFilterPath($filterPath)
+    {
+        $this->_filterPath = $filterPath;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setHelperPath($helperPath)
+    {
+        $this->_helperPath = $helperPath;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setScriptPath($scriptPath)
+    {
+        $this->_scriptPath = $scriptPath;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setStrictVars($strictVars)
+    {
+        $this->_strictVars = $strictVars;
         return $this;
     }
 
