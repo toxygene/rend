@@ -15,7 +15,7 @@ require_once 'Zend/Auth/Storage/Session.php';
 /**
  *
  */
-class Rend_Factory_Auth_Storage_Session extends Rend_Factory_Abstract implements Rend_Factory_Auth_Storage_Interface
+class Rend_Factory_AuthStorage_Session extends Rend_Factory_Abstract implements Rend_Factory_AuthStorage_Interface
 {
 
     /**
@@ -33,41 +33,21 @@ class Rend_Factory_Auth_Storage_Session extends Rend_Factory_Abstract implements
     /**
      * Create method for factory
      *
-     * @return  Zend_Auth_Storage_Interface
+     * @return  Zend_Auth_Storage_Session
      */
     public function create()
     {
         return new Zend_Auth_Storage_Session(
-            $this->getNamespace(),
-            $this->getMember()
+            $this->_namespace,
+            $this->_member
         );
-    }
-
-    /**
-     * Get the member name
-     *
-     * @return  string
-     */
-    public function getMember()
-    {
-        return $this->_member;
-    }
-
-    /**
-     * Get the namespace name
-     *
-     * @return  string
-     */
-    public function getNamespace()
-    {
-        return $this->_namespace;
     }
 
     /**
      * Set the member name
      *
      * @param   string  $member
-     * @return  Rend_Factory_Auth_Storage_Session
+     * @return  Rend_Factory_AuthStorage_Session
      */
     public function setMember($member)
     {
@@ -79,7 +59,7 @@ class Rend_Factory_Auth_Storage_Session extends Rend_Factory_Abstract implements
      * Set the namespace name
      *
      * @param   string  $namespace
-     * @return  Rend_Factory_Auth_Storage_Session
+     * @return  Rend_Factory_AuthStorage_Session
      */
     public function setNamespace($namespace)
     {
