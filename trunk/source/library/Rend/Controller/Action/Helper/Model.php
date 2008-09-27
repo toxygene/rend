@@ -22,12 +22,6 @@ class Rend_Controller_Action_Helper_Model extends Rend_Controller_Action_Helper_
     private $_database;
 
     /**
-     * Models
-     * @var     array
-     */
-    private $_models = array();
-
-    /**
      * Constructor
      *
      * @param   Zend_Db_Adapter_Abstract    $database
@@ -38,52 +32,37 @@ class Rend_Controller_Action_Helper_Model extends Rend_Controller_Action_Helper_
     }
 
     /**
+     * Direct method
      *
-     */
-    public function direct($name)
-    {
-        return $this->getModel($name);
-    }
-
-    /**
-     * Get the database object
+     * Get a model by name
      *
-     * @return  Zend_Db_Adapter_Abstract
-     */
-    public function getDatabase()
-    {
-        if (!$this->_database) {
-            $this->_database = $this->_factory->database;
-        }
-        return $this->_database;
-    }
-
-    /**
-     * Get a model
-     *
-     * @param   string  $name
+     * @param   string                      $name
+     * @param   Zend_Db_Adapter_Abstract    $database
      * @return  Zend_Db_Table_Abstract
      */
-    public function getModel($name)
+    public function direct($name, Zend_Db_Adapter_Abstract $database = null)
     {
-        if (!isset($this->_models[$name])) {
-            Zend_Loader::loadClass($name);
-            $this->_models[$name] = new $name($this->getDatabase());
-        }
-        return $this->_models[$name];
+        return $this->getModel($name, $database);
     }
 
     /**
-     * Set a model
+     * Get a model by name
      *
-     * @param   string  $name
-     * @param   mixed   $model
-     * @return  Rend_Controller_Action_Helper_Model
+     * @param   string                      $name
+     * @param   Zend_Db_Adapter_Abstract    $database
+     * @return  Zend_Db_Table_Abstract
      */
-    public function setModel($name, $model)
+    public function getModel($name, Zend_Db_Adapter_Abstract $database = null)
     {
-        $this->_models[$name] = $model;
-        return $this;
+        if (!$database) {
+            $database = $this->_factory->database;
+        }
+
+        Zend_Loader::loadClass($name);
+
+        return $name(array(
+            Zend_Db_Table_Abstract::ADAPTER => $database
+        ));
     }
 
 }
