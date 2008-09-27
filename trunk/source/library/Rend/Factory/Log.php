@@ -15,14 +15,14 @@ require_once 'Zend/Log/Writer/Null.php';
 /**
  *
  */
-class Rend_Factory_Log extends Rend_Factory_Abstract
+class Rend_Factory_Log extends Rend_Factory_Abstract implements Rend_Factory_Log_Interface
 {
 
     /**
-     * Configuration file target
+     * Configuration file
      * @var     string
      */
-    private $_configTarget = ':rendConfigDir/:filename.:suffix';
+    private $_configFile;
 
     /**
      * Get a log object
@@ -32,43 +32,21 @@ class Rend_Factory_Log extends Rend_Factory_Abstract
     public function create()
     {
         $log = new Zend_Log();
-        $log->addWriter(new Zend_Log_Writer_Null());
 
-        $inflector = $this->getRendInflector()
-                          ->setTarget($this->getConfigTarget());
-
-        include $inflector->filter(array(
-            'filename'  => 'log',
-            'suffix'    => 'php'
-        ));
+        include $this->_configFile;
 
         return $log;
     }
 
     /**
-     * Get the config target
+     * Set the config file
      *
-     * @return  string
-     */
-    public function getConfigTarget()
-    {
-        return $this->_configTarget;
-    }
-
-    /**
-     * Set the config target
-     *
-     * The following sources will be applied to the target when filtered:
-     * * configPath: Path to the configuration directory
-     * * filename: Filename for the log configuration file
-     * * suffix: Suffix for the log configuration file
-     *
-     * @param   string  $configTarget
+     * @param   string  $configFile
      * @return  Rend_Factory_Log
      */
-    public function setConfigTarget($configTarget)
+    public function setConfigFile($configFile)
     {
-        $this->_configTarget = $configTarget;
+        $this->_configFile = $configFile;
         return $this;
     }
 

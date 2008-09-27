@@ -25,10 +25,10 @@ class Rend_Factory_Acl extends Rend_Factory_Abstract implements Rend_Factory_Acl
 {
 
     /**
-     * Configuration file target
+     * Configuration file
      * @var     string
      */
-    private $_configTarget = ':rendConfigPath/:filename.:suffix';
+    private $_configFile;
 
     /**
      * Get an ACL object
@@ -39,43 +39,17 @@ class Rend_Factory_Acl extends Rend_Factory_Abstract implements Rend_Factory_Acl
     {
         $acl = new Zend_Acl();
 
-        $inflector = $this->getRendInflector()
-                          ->setTarget($this->getConfigTarget());
-
-        include $inflector->filter(array(
-            'filename'   => 'acl',
-            'suffix'     => 'php'
-        ));
+        include $this->_configFile;
 
         return $acl;
     }
 
     /**
-     * Get the config target
      *
-     * @return  string
      */
-    public function getConfigTarget()
+    public function setConfigFile($configFile)
     {
-        return $this->_configTarget;
-    }
-
-    /**
-     * Set the config target
-     *
-     * The following sources will be applied to the target when filtered:
-     * * rendPath: Path to the Rend directory
-     * * rendConfigPath: Path to the configuration directory
-     * * rendMode: Mode Rend is running in
-     * * filename: Filename for the ACL configuration file
-     * * suffix: Suffix for the ACL configuration file
-     *
-     * @param   string  $configTarget
-     * @return  Rend_Factory_Acl
-     */
-    public function setConfigTarget($configTarget)
-    {
-        $this->_configTarget = $configTarget;
+        $this->_configFile = $configFile;
         return $this;
     }
 

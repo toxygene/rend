@@ -35,29 +35,9 @@ class Rend_Factory_Database extends Rend_Factory_Configurable_Abstract
     public function create()
     {
         return Zend_Db::factory(
-            $this->getAdapter(),
-            $this->getParams()
+            $this->adapter,
+            $this->params
         );
-    }
-
-    /**
-     * Get the database adapter type
-     *
-     * @return  string
-     */
-    public function getAdapter()
-    {
-        return $this->_adapter
-    }
-
-    /**
-     * Get the database parameters
-     *
-     * @return  array
-     */
-    public function getParams()
-    {
-        return $this->_params;
     }
 
     /**
