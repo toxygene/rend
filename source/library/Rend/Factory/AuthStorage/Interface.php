@@ -6,7 +6,7 @@
 /**
  *
  */
-interface Rend_Factory_Auth_Storage_Interface extends Rend_Factory_Interface
+interface Rend_Factory_AuthStorage_Interface extends Rend_Factory_Interface
 {
 
     /**
