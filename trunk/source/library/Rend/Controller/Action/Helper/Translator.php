@@ -3,13 +3,13 @@
  *
  */
 
-/** Rend_Controller_Action_Helper_Abstract */
-require_once 'Rend/Controller/Action/Helper/Abstract.php';
+/** Zend_Controller_Action_Helper_Abstract */
+require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
 /**
  *
  */
-class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_Helper_Abstract implements SplObserver
+class Rend_Controller_Action_Helper_Translator extends Zend_Controller_Action_Helper_Abstract
 {
 
     /**
@@ -17,8 +17,9 @@ class Rend_Controller_Action_Helper_Translator extends Rend_Controller_Action_He
      */
     public function direct($messageId, $locale = null)
     {
-        return $this->_factory
-                    ->translator
+        return $this->getActionController()
+                    ->getFactory('translator')
+                    ->create()
                     ->translate($messageId, $locale);
     }
 

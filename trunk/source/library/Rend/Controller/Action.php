@@ -19,8 +19,8 @@ class Rend_Controller_Action extends Zend_Controller_Action
     protected $_config;
 
     /**
-     * Factory
-     * @var     Rend_Factory
+     * Factory loader
+     * @var     Rend_FactoryLoader
      */
     protected $_factory;
 
@@ -32,10 +32,22 @@ class Rend_Controller_Action extends Zend_Controller_Action
         parent::init();
 
         $this->_config = $this->getFrontController()
-                              ->getConfig();
+                              ->getParam('rendConfig');
 
         $this->_factory = $this->getFrontController()
-                               ->getFactoryLoader();
+                               ->getParam('rendFactoryLoader');
+    }
+
+    /**
+     * Get a factory
+     *
+     * @param   string  $name
+     * @return  Rend_Factory_Interface
+     */
+    public function getFactory($name)
+    {
+        return $this->_factory
+                    ->getFactory($name);
     }
 
 }

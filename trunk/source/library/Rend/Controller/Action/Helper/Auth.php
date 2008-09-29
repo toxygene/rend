@@ -17,8 +17,9 @@ class Rend_Controller_Action_Helper_Auth extends Zend_Controller_Action_Helper_A
      */
     public function direct(Zend_Auth_Adapter_Interface $adapter)
     {
-        return $this->_factory
-                    ->auth
+        return $this->getActionController()
+                    ->getFactory('auth')
+                    ->create()
                     ->authenticate($adapter);
     }
 

@@ -3,33 +3,14 @@
  *
  */
 
-/** Rend_Controller_Action_Helper_Abstract */
-require_once 'Rend/Controller/Action/Helper/Abstract.php';
-
-/** Zend_Loader */
-require_once 'Zend/Loader.php';
+/** Zend_Controller_Action_Helper_Abstract */
+require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
 /**
  *
  */
-class Rend_Controller_Action_Helper_Model extends Rend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_Model extends Zend_Controller_Action_Helper_Abstract
 {
-
-    /**
-     * Database object
-     * @var     Zend_Db_Adapter_Abstract
-     */
-    private $_database;
-
-    /**
-     * Constructor
-     *
-     * @param   Zend_Db_Adapter_Abstract    $database
-     */
-    public function __construct(Zend_Db_Adapter_Abstract $database = null)
-    {
-        $this->_database = $database;
-    }
 
     /**
      * Direct method
@@ -55,8 +36,13 @@ class Rend_Controller_Action_Helper_Model extends Rend_Controller_Action_Helper_
     public function getModel($name, Zend_Db_Adapter_Abstract $database = null)
     {
         if (!$database) {
-            $database = $this->_factory->database;
+            $database = $this->getActionController()
+                             ->getFactory('database')
+                             ->create();
         }
+
+        /** Zend_Loader */
+        require_once 'Zend/Loader.php';
 
         Zend_Loader::loadClass($name);
 

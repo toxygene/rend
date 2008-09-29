@@ -48,28 +48,52 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_acl;
 
     /**
-     * Deny action
+     * Forbidden action
      * @var     string
      */
-    private $_denyAction;
+    private $_forbiddenAction = 'forbidden';
 
     /**
-     * Deny controller
+     * Forbidden controller
      * @var     string
      */
-    private $_denyController;
+    private $_forbiddenController = 'error';
 
     /**
-     * Deny module
+     * Forbidden module
      * @var     string
      */
-    private $_denyModule;
+    private $_forbiddenModule = 'default';
 
     /**
-     * Deny params
+     * Forbidden params
      * @var     array
      */
-    private $_denyParams;
+    private $_forbiddenParams = array();
+
+    /**
+     * Unauthorized action
+     * @var     string
+     */
+    private $_unauthorizedAction = 'unauthorized';
+
+    /**
+     * Unauthorized controller
+     * @var     string
+     */
+    private $_unauthorizedController = 'error';
+
+    /**
+     * Unauthorized module
+     * @var     string
+     */
+    private $_unauthorizedModule = 'default';
+
+    /**
+     * Unauthorized params
+     * @var     array
+     */
+    private $_unauthorizedParams = array();
 
     /**
      * Role name
@@ -78,53 +102,12 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_role;
 
     /**
-     * Throw exceptions
-     * @var     boolean
-     */
-    private $_throwExceptions = true;
-
-    /**
-     * Get the ACL object
      *
-     * @return  Zend_Acl
      */
-    public function getAcl()
+    public function isAllowed($resource, $permission)
     {
-        if (!$this->_acl) {
-            $this->_acl = $this->_getActionHelper('acl')
-                               ->getAcl();
-        }
-        return $this->_acl;
-    }
-
-    /**
-     * Get the role name
-     *
-     * @return  string
-     */
-    public function getRole()
-    {
-        return $this->_role;
-    }
-
-    /**
-     * Initialize the helper
-     */
-    public function init()
-    {
-        $this->_denyAction = $this->getFrontController()
-                                  ->getDispatcher()
-                                  ->getDefaultAction();
-
-        $this->_denyController = $this->getFrontController()
-                                      ->getDispatcher()
-                                      ->getDefaultControllerName();
-
-        $this->_denyModule = $this->getFrontController()
-                                  ->getDispatcher()
-                                  ->getDefaultModule();
-
-        $this->_denyParams = array();
+        return $this->_getAcl()
+                    ->isAllowed($this->_getRole(), $resource, $permission);
     }
 
     /**
@@ -140,20 +123,36 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
-     * Set the deny page
+     * Set the forbidden page
      *
      * @param   string  $action
      * @param   string  $controller
      * @param   string  $module
      * @param   array   $params
      */
-    public function setDenyPage($action, $controller = null, $module = null, $params = null)
+    public function setForbiddenPage($action, $controller = null, $module = null, $params = null)
     {
-        $this->_denyAction     = $action;
-        $this->_denyController = $controller;
-        $this->_denyModule     = $module;
-        $this->_denyParams     = $params;
+        $this->_forbiddenAction     = $action;
+        $this->_forbiddenController = $controller;
+        $this->_forbiddenModule     = $module;
+        $this->_forbiddenParams     = $params;
+        return $this;
+    }
 
+    /**
+     * Set the unauthorized page
+     *
+     * @param   string  $action
+     * @param   string  $controller
+     * @param   string  $module
+     * @param   array   $params
+     */
+    public function setUnauthorizedPage($action, $controller = null, $module = null, $params = null)
+    {
+        $this->_unauthorizedAction     = $action;
+        $this->_unauthorizedController = $controller;
+        $this->_unauthorizedModule     = $module;
+        $this->_unauthorizedParams     = $params;
         return $this;
     }
 
@@ -170,18 +169,6 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
-     * Enable/disable throwing exceptions
-     *
-     * @param   boolean     $flag
-     * @return  Rend_Controller_Action_Helper_IsAllowed
-     */
-    public function setThrowExceptions($flag)
-    {
-        $this->_throwExceptions = (boolean) $flag;
-        return $this;
-    }
-
-    /**
      * Check the Acls for permission to the resource
      *
      * @throws  Rend_Controller_Action_Exception_Acl
@@ -189,35 +176,35 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function preDispatch()
     {
-        list ($resource, $permission) = $this->_getRequiredResourceAndPermission(
-            $this->_getActionName()
-        );
+        list ($resource, $permission) = $this->_getRequiredResourceAndPermission();
 
         if (!$resource) {
             return;
         }
 
-        if (!$this->getAcl()->isAllowed($this->getRole(), $resource, $permission)) {
-            $permission = $permission ? $permission : '*';
+        if (!$this->isAllowed($resource, $permission)) {
+            $this->getRequest()
+                 ->setParam('deniedAction', $this->getRequest()->getActionName())
+                 ->setParam('deniedController', $this->getRequest()->setControllerName())
+                 ->setParam('deniedModule', $this->getRequest()->setModuleName())
+                 ->setParam('deniedParams', $this->getRequest()->setParams())
+                 ->setParam('deniedRole', $this->getRole())
+                 ->setParam('deniedResource', $resource)
+                 ->setParam('deniedPermission', $permission ? $permission : '*default*')
+                 ->setDispatched(false);
 
-            if ($this->_throwExceptions) {
-                /** Rend_Controller_Action_Exception_Acl */
-                require_once 'Rend/Controller/Action/Exception/Acl.php';
-                throw new Rend_Controller_Action_Exception_Acl("Role '{$this->getRole()}' cannot access action '{$this->_getActionName()}' (requires permission '{$permission}' on resource '{$resource}')");
+            if (!$this->_getRole()) {
+                $this->getRequest()
+                     ->setActionName($this->_unauthorizedAction)
+                     ->setControllerName($this->_unauthorizedController)
+                     ->setModuleName($this->_unauthorizedModule)
+                     ->setParams($this->_unauthorizedParams);
             } else {
                 $this->getRequest()
-                     ->setParam('denyAction', $this->getRequest()->getActionName())
-                     ->setParam('denyController', $this->getRequest()->setControllerName())
-                     ->setParam('denyModule', $this->getRequest()->setModuleName())
-                     ->setParam('denyParams', $this->getRequest()->setParams())
-                     ->setParam('role', $this->getRole())
-                     ->setParam('resource', $resource)
-                     ->setParam('permission', $permission)
-                     ->setActionName($this->_denyAction)
-                     ->setControllerName($this->_denyController)
-                     ->setModuleName($this->_denyModule)
-                     ->setParams($this->_denyParams)
-                     ->setDispatched(false);
+                     ->setActionName($this->_forbiddenAction)
+                     ->setControllerName($this->_forbiddenController)
+                     ->setModuleName($this->_forbiddenModule)
+                     ->setParams($this->_forbiddenParams);
             }
         }
     }
@@ -231,7 +218,9 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * @todo    Replace temporary variables with queries
      * @todo    Decompose conditionals
      */
-    private function _getRequiredResourceAndPermission($actionName) {
+    private function _getRequiredResourceAndPermission()
+    {
+        $actionName       = $this->_getActionName();
         $actionController = $this->getActionController();
 
         // Bail out if the controller doesn't have any ACL rules
@@ -269,7 +258,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * @param   array   $results
      * @return  array
      */
-    private function _formatAclResults($results)
+    protected function _formatAclResults($results)
     {
         if (isset($results[1])) {
             return $results;
@@ -279,6 +268,31 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                 null
             );
         }
+    }
+
+    /**
+     * Get the ACL object
+     *
+     * @return  Zend_Acl
+     */
+    protected function _getAcl()
+    {
+        if (!$this->_acl) {
+            $this->_acl = $this->getActionController()
+                               ->getFactory('acl')
+                               ->create();
+        }
+        return $this->_acl;
+    }
+
+    /**
+     * Get the role name
+     *
+     * @return  string
+     */
+    protected function _getRole()
+    {
+        return $this->_role;
     }
 
 }

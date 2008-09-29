@@ -1,42 +1,28 @@
 <?php
-define('ROOT_PATH', dirname(dirname(__FILE__)));
-define('APP_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'application');
+$root = dirname(dirname(__FILE__));
 
 // Setup include path
 set_include_path(
     get_include_path() .
     PATH_SEPARATOR .
-    ROOT_PATH . '/library' .
+    "{$root}/library" .
     PATH_SEPARATOR .
-    APP_PATH
+    "{$root}/application"
 );
 
 /** Zend_Loader */
 require_once 'Zend/Loader.php';
 Zend_Loader::registerAutoload();
 
-Zend_Controller_Action_HelperBroker::addPrefix('Rend_Controller_Action_Helper');
+$setup = new Rend_Controller_Plugin_Bootstrap($root);
 
-Rend_Controller_Front::getInstance()
+Zend_Controller_Front::getInstance()
+                     ->registerPlugin($setup, 0)
                      ->addControllerDirectory(APP_PATH . '/controllers', 'default')
-                     ->addModuleDirectory(APP_PATH . '/modules')
-                     ->setMode($_SERVER['REND_MODE'])
-                     ->setPath(ROOT_PATH);
-
-$config = Rend_Controller_Front::getInstance()
-                               ->getConfig();
-
-// Setup error reporting
-error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', $config->displayErrors);
-ini_set('error_log', ROOT_PATH . '/data/logs/phperrors.log');
-ini_set('log_errors', true);
-date_default_timezone_set($config->timezone);
-Rend_Controller_Front::getInstance()
-                     ->throwExceptions($config->displayErrors);
+                     ->addModuleDirectory(APP_PATH . '/modules');
 
 try {
-    Rend_Controller_Front::getInstance()
+    Zend_Controller_Front::getInstance()
                          ->dispatch();
 } catch (Exception $e) {
 ?>
