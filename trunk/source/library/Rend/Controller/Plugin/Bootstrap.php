@@ -9,7 +9,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
 /**
  *
  */
-class Rend_Controller_Plugin_Bootstrap extends Zend_Controller_Plugin_Abstract
+class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
 {
 
     /**
