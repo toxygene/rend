@@ -40,11 +40,12 @@ class Rend_View_Helper_FullUrl
      */
     public function fullUrl(array $urlOptions = array(), $name = 'default', $reset = false)
     {
-        /** Rend_Controller_Front */
-        require_once 'Rend/Controller/Front.php';
-        $request = Rend_Controller_Front::getInstance()->getRequest();
+        /** Zend_Controller_Front */
+        require_once 'Zend/Controller/Front.php';
+        $request = Zend_Controller_Front::getInstance()
+                                        ->getRequest();
 
-        if ($this->_isHttps()) {
+        if ($request->isSecure()) {
             $url = 'https://';
         } else {
             $url = 'http://';
@@ -52,26 +53,11 @@ class Rend_View_Helper_FullUrl
 
         $url .= $request->SERVER_NAME;
 
-        if (($this->_isHttps() && $request->SERVER_PORT != 443) || (!$this->_isHttps() && $request->SERVER_PORT != 80)) {
+        if (($request->isSecure() && $request->SERVER_PORT != 443) || (!$request->isSecure() && $request->SERVER_PORT != 80)) {
             $url .= ':' . $request->SERVER_PORT;
         }
 
         return $url . $this->getView()->url($urlOptions, $name, $reset);
-    }
-
-    /**
-     * Determine if the request is a SSL request
-     *
-     * @return  boolean
-     */
-    private function _isHttps()
-    {
-        /** Rend_Controller_Front */
-        require_once 'Rend/Controller/Front.php';
-
-        return Rend_Controller_Front::getInstance()
-                                    ->getRequest()
-                                    ->isSsl();
     }
 
 }

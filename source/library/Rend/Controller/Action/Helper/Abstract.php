@@ -19,9 +19,6 @@
  * @version     $Id$
  */
 
-/** Rend_Controller_Action_Helper_Abstract */
-require_once 'Rend/Controller/Action/Helper/Abstract.php';
-
 /** Zend_Controller_Action_HelperBroker */
 require_once 'Zend/Controller/Action/HelperBroker.php';
 
@@ -41,26 +38,11 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
      */
     public function __construct($options = null)
     {
-        if ($options) {
-            if ($options instanceof Zend_Config) {
-                $this->setConfig($options);
-            } elseif (is_array($options)) {
-                $this->setOptions($options);
-            }
+        if ($options instanceof Zend_Config) {
+            $this->setConfig($options);
+        } elseif (is_array($options)) {
+            $this->setOptions($options);
         }
-
-        $this->_factory = $this->getFrontController()
-                               ->getFactoryPluginLoader();
-    }
-
-    /**
-     * Retrieve front controller instance
-     *
-     * @return  Rend_Controller_Front
-     */
-    public function getFrontController()
-    {
-        return Rend_Controller_Front::getInstance();
     }
 
     /**

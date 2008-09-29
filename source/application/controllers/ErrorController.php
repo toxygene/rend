@@ -25,10 +25,6 @@ class ErrorController extends Zend_Controller_Action
     {
         $errors = $this->_getParam('error_handler');
 
-        if ($this->_config->displayErrors) {
-            $this->view->errors = $errors;
-        }
-
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
@@ -39,19 +35,7 @@ class ErrorController extends Zend_Controller_Action
                 $this->_helper
                      ->log($errors->exception->getMessage(), 3);
 
-                switch (get_class($errors->exception)) {
-                    case 'Rend_Controller_Action_Exception_Auth':
-                        $this->_forward('unauthorized');
-                        break;
-
-                    case 'Rend_Controller_Action_Exception_Acl':
-                        $this->_forward('forbidden');
-                        break;
-
-                    default:
-                        $this->_forward('internal-error');
-                        break;
-                }
+                $this->_forward('internal-error');
                 break;
         }
     }

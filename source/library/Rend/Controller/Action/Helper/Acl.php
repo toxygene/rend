@@ -3,13 +3,13 @@
  *
  */
 
-/** Rend_Controller_Action_Helper_Abstract */
-require_once 'Rend/Controller/Action/Helper/Abstract.php';
+/** Zend_Controller_Action_Helper_Abstract */
+require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
 /**
  *
  */
-class Rend_Controller_Action_Helper_Acl extends Rend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_Abstract
 {
 
     /**
@@ -17,8 +17,9 @@ class Rend_Controller_Action_Helper_Acl extends Rend_Controller_Action_Helper_Ab
      */
     public function direct($role, $resource, $permission = null)
     {
-        return $this->_factory
-                    ->acl
+        return $this->getActionController()
+                    ->getFactory('acl')
+                    ->create()
                     ->isAllowed($role, $resource, $permission);
     }
 

@@ -19,14 +19,14 @@
  * @version     $Id$
  */
 
-/** Rend_Controller_Action_Helper_Abstract */
-require_once 'Rend/Controller/Action/Helper/Abstract.php';
+/** Zend_Controller_Action_Helper_Abstract */
+require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
 /**
  * @category    Rend
  * @package     Controller
  */
-class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_LayoutSelector extends Zend_Controller_Action_Helper_Abstract
 {
 
     /**
@@ -36,32 +36,26 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     const WILDCARD = '*';
 
     /**
-     * @var Zend_Layout
+     * Layout object
+     * @var     Zend_Layout
      */
-    private $_layout;
+    protected $_layout;
+
+    /**
+     * Layout parameter
+     * @var     string
+     */
+    protected $_parameter;
 
     /**
      * Constructor
      *
      * @param   Zend_Layout     $layout
      */
-    public function __construct(Zend_Layout $layout = null)
+    public function __construct(Zend_Layout $layout = null, $parameter = 'layout')
     {
-        $this->_layout = $layout;
-    }
-
-    /**
-     * Get the layout object
-     *
-     * @return Zend_Layout
-     */
-    public function getLayout()
-    {
-        if (!$this->_layout) {
-             $this->_layout = $this->_getActionHelper('layout')
-                                   ->getLayoutInstance();
-        }
-        return $this->_layout;
+        $this->_layout    = $layout;
+        $this->_parameter = $parameter;
     }
 
     /**
@@ -77,47 +71,62 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     }
 
     /**
+     * Set the parameter name for the action controller
+     *
+     * @param   string  $parameter
+     * @return  Rend_Controller_Action_Helper_LayoutSelector
+     */
+    public function setParameter($parameter)
+    {
+        $this->_parameter = $parameter;
+        return $this;
+    }
+
+    /**
      * Set the layout based on the requested action
      */
     public function postDispatch()
     {
         if ($this->getRequest()->isDispatched() && $this->getLayout()->isEnabled()) {
-            $filePath = $this->_determineFilePath();
-            if (!$filePath) {
-                return;
-            }
+            $actionController = $this->getActionController();
+            $actionName       = $this->_getActionName();
+            $parameter        = $this->_parameter;
 
-            if (is_array($layout)) {
-                $file   = $layout[0];
-                $module = $layout[1];
-            } else {
-                $file   = $layout;
-                $module = $this->getRequest()->getModuleName();
+            if (isset($actionController->$parameter)) {
+                if (isset($actionController->$parameter[$actionName])) {
+                    $this->_setLayoutScript($actionController->$parameter[$actionName]);
+                } elseif (isset($actionController->$parameter[self::WILDCARD])) {
+                    $this->_setLayoutScript($actionController->$parameter[self::WILDCARD]);
+                }
             }
-
-            $this->getLayout()
-                 ->setLayout($file)
-                 ->setLayoutPath($this->_getModuleDirectory($module) . '/views/scripts');
         }
     }
 
     /**
+     * Get the layout object
      *
+     * @return  Zend_Layout
      */
-    private function _determineFilePath()
+    protected function _getLayout()
     {
-        $actionController = $this->getActionController();
-        $actionName       = $this->_getActionName();
-
-        if (!isset($actionController->layouts)) {
-            return;
-        } elseif (isset($actionController->layouts[$actionName])) {
-            return $actionController->layouts[$actionName];
-        } elseif (isset($actionController->layouts[self::WILDCARD])) {
-            return $actionController->layouts[self::WILDCARD];
-        } else {
-            return;
+        if (!$this->_layout) {
+            $this->_layout = $this->getActionController()
+                                  ->getHelper('Layout');
         }
+        return $this->_layout;
+    }
+
+    /**
+     * Set the layout script
+     *
+     * @param   string  $script
+     * @return  Rend_Controller_Action_Helper_LayoutSelector
+     */
+    protected function _setLayoutScript($script)
+    {
+        $this->_getLayout()
+             ->setLayout($script);
+        return $this;
     }
 
 }

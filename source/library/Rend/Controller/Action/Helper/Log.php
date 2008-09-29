@@ -17,9 +17,10 @@ class Rend_Controller_Action_Helper_Log extends Rend_Controller_Action_Helper_Ab
      */
     public function direct($message, $level)
     {
-        $this->_factory
-             ->log
-             ->log($message, $level);
+        return $this->getActionController()
+                    ->getFactory('log')
+                    ->create()
+                    ->log($message, $level);
     }
 
 }
