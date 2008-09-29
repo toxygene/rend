@@ -14,12 +14,12 @@ set_include_path(
 require_once 'Zend/Loader.php';
 Zend_Loader::registerAutoload();
 
-$setup = new Rend_Controller_Plugin_Bootstrap($root);
+$setup = new Rend_Controller_Plugin_Setup($root);
 
 Zend_Controller_Front::getInstance()
                      ->registerPlugin($setup, 0)
-                     ->addControllerDirectory(APP_PATH . '/controllers', 'default')
-                     ->addModuleDirectory(APP_PATH . '/modules');
+                     ->addControllerDirectory("{$root}/application/controllers", 'default')
+                     ->addModuleDirectory("{$root}/application/modules");
 
 try {
     Zend_Controller_Front::getInstance()
