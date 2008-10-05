@@ -31,11 +31,8 @@ class Rend_Controller_Action extends Zend_Controller_Action
     {
         parent::init();
 
-        $this->_config = $this->getFrontController()
-                              ->getParam('rendConfig');
-
-        $this->_factory = $this->getFrontController()
-                               ->getParam('rendFactoryLoader');
+        $this->_config = $this->getInvokeArg('rendConfig');
+        $this->_factory = $this->getInvokeARg('rendFactoryLoader');
     }
 
     /**
@@ -47,7 +44,7 @@ class Rend_Controller_Action extends Zend_Controller_Action
     public function getFactory($name)
     {
         return $this->_factory
-                    ->getFactory($name);
+                    ->$name;
     }
 
 }

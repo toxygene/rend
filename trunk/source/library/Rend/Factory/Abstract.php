@@ -10,6 +10,11 @@ abstract class Rend_Factory_Abstract
 {
 
     /**
+     *
+     */
+    protected $_factoryLoader;
+
+    /**
      * Get the factory name
      *
      * @return string
@@ -31,6 +36,15 @@ abstract class Rend_Factory_Abstract
     public function setConfig(Zend_Config $config)
     {
         return $this->setOptions($config->toArray());
+    }
+
+    /**
+     *
+     */
+    public function setFactoryLoader(Rend_FactoryLoader $factoryLoader)
+    {
+        $this->_factoryLoader = $factoryLoader;
+        return $this;
     }
 
     /**
