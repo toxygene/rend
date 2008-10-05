@@ -7,12 +7,15 @@
  * @subpackage Default
  */
 
+/** Rend_Controller_Action */
+require_once 'Rend/Controller/Action.php';
+
 /**
  * @category   Rend
  * @package    Controller
  * @subpackage Default
  */
-class ErrorController extends Zend_Controller_Action
+class ErrorController extends Rend_Controller_Action
 {
 
     /**
