@@ -49,8 +49,8 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
-        $this->_setupPhpEnvironment()
-             ->_setupHelperBroker()
+        $this->_setupActionHelperBroker()
+             ->_setupPhpEnvironment()
              ->_setupViewRenderer()
              ->_setupFrontController();
     }
@@ -61,8 +61,11 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected function _getConfig()
     {
         if (!$this->_config) {
+            /** Zend_Config_Ini */
+            require_once 'Zend/Config/Ini.php';
+
             $this->_config = new Zend_Config_Ini(
-                "{$this->_root}/config/config.ini",
+                "{$this->_root}/application/config/config.ini",
                 $this->_mode
             );
         }
@@ -75,13 +78,13 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected function _getFactoryLoader()
     {
         if (!$this->_factoryLoader) {
-            $this->_factoryLoader = new Rend_FactoryLoader(array(
-                'Rend_Factory' => 'Rend/Factory'
-            ));
+            /** Rend_FactoryLoader */
+            require_once 'Rend/FactoryLoader.php';
 
-            foreach ((array) $this->_getConfig()->factoryLoaderPrefixPaths as $prefix => $path) {
-                $this->_factoryLoader->addPrefixPath($prefix, $path);
-            }
+            $this->_factoryLoader = new Rend_FactoryLoader(
+                $this->_getConfig()
+                     ->factories
+            );
         }
         return $this->_factoryLoader;
     }
@@ -91,6 +94,9 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _getFrontController()
     {
+        /** Zend_Controller_Front */
+        require_once 'Zend/Controller/Front.php';
+
         return Zend_Controller_Front::getInstance();
     }
 
@@ -99,7 +105,11 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _setupActionHelperBroker()
     {
+        /** Zend_Controller_Action_HelperBroker */
+        require_once 'Zend/Controller/Action/HelperBroker.php';
+
         Zend_Controller_Action_HelperBroker::addPrefix('Rend_Controller_Action_Helper');
+
         return $this;
     }
 
@@ -108,11 +118,13 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _setupFrontController()
     {
-        $this->getFrontController()
+        $this->_getFrontController()
              ->setParam('rendConfig', $this->_getConfig())
              ->setParam('rendFactoryLoader', $this->_getFactoryLoader())
              ->setParam('rendRoot', $this->_root)
              ->throwExceptions($this->_getConfig()->displayErrors);
+
+        return $this;
     }
 
     /**
@@ -123,10 +135,12 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
         error_reporting(E_ALL | E_STRICT);
 
         ini_set('display_errors', $this->_getConfig()->displayErrors);
-        ini_set('error_log', "{$this->_rootDir}/data/logs/phperrors.log");
+        ini_set('error_log', "{$this->_root}/data/logs/phperrors.log");
         ini_set('log_errors', true);
 
         date_default_timezone_set($this->_getConfig()->timezone);
+
+        return $this;
     }
 
     /**
@@ -134,8 +148,12 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _setupViewRenderer()
     {
+        /** Zend_Controller_Action_HelperBroker */
+        require_once 'Zend/Controller/Action/HelperBroker.php';
+
         Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')
-                                           ->setView($this->_getFactoryLoader()->view);
+                                           ->setView($this->_getFactoryLoader()->view());
+
         return $this;
     }
 

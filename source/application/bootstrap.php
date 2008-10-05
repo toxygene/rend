@@ -14,7 +14,7 @@ set_include_path(
 require_once 'Zend/Loader.php';
 Zend_Loader::registerAutoload();
 
-$setup = new Rend_Controller_Plugin_Setup($root);
+$setup = new Rend_Controller_Plugin_Setup($root, $_SERVER['REND_MODE']);
 
 Zend_Controller_Front::getInstance()
                      ->registerPlugin($setup, 0)
@@ -37,7 +37,7 @@ try {
         <h2>Basic Stack Trace</h2>
         <pre><?php echo $e; ?></pre>
         <h2>Full Stack Trace</h2>
-        <pre><?php var_dump($e); ?></pre>
+        <pre><?php var_dump($e->getTrace()); ?></pre>
     </body>
 </html>
 <?php
