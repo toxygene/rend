@@ -3,13 +3,10 @@
  *
  */
 
-/** Rend_Factory_Interface */
-require_once 'Rend/Factory/Interface.php';
-
 /**
  *
  */
-interface Rend_Factory_Translate_Interface extends Rend_Factory_Interface
+interface Rend_Factory_Translate_Interface
 {
 
     /**
@@ -18,5 +15,12 @@ interface Rend_Factory_Translate_Interface extends Rend_Factory_Interface
      * @return  Zend_Translate_Adapter
      */
     public function create();
+
+    /**
+     * Get the name of the factory
+     *
+     * @return  string
+     */
+    public function getName();
 
 }

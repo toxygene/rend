@@ -6,7 +6,7 @@
 /**
  *
  */
-interface Rend_Factory_MailTransport_Interface extends Rend_Factory_Interface
+interface Rend_Factory_MailTransport_Interface
 {
 
     /**
@@ -15,5 +15,12 @@ interface Rend_Factory_MailTransport_Interface extends Rend_Factory_Interface
      * @return  Zend_Mail_Transport_Abstract
      */
     public function create();
+
+    /**
+     * Get the name of the factory
+     *
+     * @return  string
+     */
+    public function getName();
 
 }
