@@ -39,7 +39,9 @@ class Rend_Factory_Acl extends Rend_Factory_Abstract implements Rend_Factory_Acl
     {
         $acl = new Zend_Acl();
 
-        include $this->_configFile;
+        if ($this->_configFile) {
+            include $this->_configFile;
+        }
 
         return $acl;
     }
