@@ -6,7 +6,7 @@
 /**
  *
  */
-interface Rend_Factory_AclStorage_Interface
+interface Rend_Factory_AuthStorage_Interface
 {
 
     /**

@@ -32,7 +32,7 @@ class Rend_Controller_Action extends Zend_Controller_Action
         parent::init();
 
         $this->_config = $this->getInvokeArg('rendConfig');
-        $this->_factory = $this->getInvokeARg('rendFactoryLoader');
+        $this->_factory = $this->getInvokeArg('rendFactoryLoader');
     }
 
     /**
