@@ -9,10 +9,11 @@ $this->headLink()
 $this->headScript()
      ->prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js');
 
-echo $this->doctype('XHTML1_STRICT');
+echo $this->doctype();
 
 $this->headScript()->captureStart();
 ?>
+var basePath = '<?php echo $this->basePath(); ?>';
 var baseUrl = '<?php echo $this->baseUrl(); ?>';
 <?php $this->headScript()->captureEnd(); ?>
 
