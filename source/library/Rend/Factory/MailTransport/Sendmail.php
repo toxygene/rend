@@ -19,15 +19,31 @@ class Rend_Factory_MailTransport_Sendmail extends Rend_Factory_Abstract implemen
 {
 
     /**
-     * Get a mail transport object
+     * @var     string
+     */
+    protected $_parameters;
+
+    /**
+     * Get a sendmail transport object
      *
      * @return  Zend_Mail_Transport_Sendmail
      */
     public function create()
     {
         return new Zend_Mail_Transport_Sendmail(
-            $this->getParameters()
+            $this->_parameters
         );
+    }
+
+    /**
+     * Set the parameters
+     *
+     * @return  Rend_Factory_MailTransport_Sendmail
+     */
+    public function setParameters($parameters)
+    {
+        $this->setParameters($parameters);
+        return $this;
     }
 
 }

@@ -27,18 +27,17 @@ class Rend_Factory_Translator extends Rend_Factory_Abstract
     public function create()
     {
         return new Zend_Translate(
-            $this->getAdapter()
+            $this->_adapter
         );
     }
 
     /**
-     * Get the translate adapter type
      *
-     * @return  string
      */
-    public function getAdapter()
+    public function setAdapter($adapter)
     {
-        return $this->_adapter;
+        $this->_adapter = $adapter;
+        return $this;
     }
 
 }

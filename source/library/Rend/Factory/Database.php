@@ -6,13 +6,16 @@
 /** Rend_Factory_Abstract */
 require_once 'Rend/Factory/Abstract.php';
 
-/** Rend_Factory_Configurable_Abstract */
-require_once 'Rend/Factory/Configurable/Abstract.php';
+/** Rend_Factory_Database_Interface */
+require_once 'Rend/Factory/Database/Interface.php';
+
+/** Zend_Db */
+require_once 'Zend/Db.php';
 
 /**
  *
  */
-class Rend_Factory_Database extends Rend_Factory_Configurable_Abstract
+class Rend_Factory_Database extends Rend_Factory_Abstract implements Rend_Factory_Database_Interface
 {
 
     /**
@@ -35,8 +38,8 @@ class Rend_Factory_Database extends Rend_Factory_Configurable_Abstract
     public function create()
     {
         return Zend_Db::factory(
-            $this->adapter,
-            $this->params
+            $this->_adapter,
+            $this->_params
         );
     }
 

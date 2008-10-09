@@ -15,21 +15,21 @@ require_once 'Zend/Mail/Transport/Smtp.php';
 /**
  *
  */
-class Rend_Factory_Mail_Transport_Smtp extends Rend_Factory_Abstract implements Rend_Factory_MailTransport_Interface
+class Rend_Factory_MailTransport_Smtp extends Rend_Factory_Abstract implements Rend_Factory_MailTransport_Interface
 {
 
     /**
-     *
+     * @var     string
      */
     protected $_host;
 
     /**
-     *
+     * @var     array
      */
     protected $_options;
 
     /**
-     * Get a mail transport object
+     * Get a SMTP transport object
      *
      * @return  Zend_Mail_Transport_Smtp
      */
@@ -45,7 +45,7 @@ class Rend_Factory_Mail_Transport_Smtp extends Rend_Factory_Abstract implements 
      * Set the host name
      *
      * @param   string  $host
-     * @return  Zend_Mail_Transport_Smtp
+     * @return  Rend_Factory_MailTransport_Smtp
      */
     public function setHost($host)
     {
@@ -57,7 +57,7 @@ class Rend_Factory_Mail_Transport_Smtp extends Rend_Factory_Abstract implements 
      * Set the options
      *
      * @param   array   $options
-     * @return  Zend_Mail_Transport_Smtp
+     * @return  Rend_Factory_MailTransport_Smtp
      */
     public function setOptions(array $options)
     {

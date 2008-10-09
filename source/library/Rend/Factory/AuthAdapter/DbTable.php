@@ -26,7 +26,7 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_Factory_Abstract implements 
     /**
      * @var     string
      */
-    private $_credentialIdentity;
+    private $_credentialTreatment;
 
     /**
      * @var     string
