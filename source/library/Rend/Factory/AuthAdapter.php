@@ -23,7 +23,7 @@ class Rend_Factory_AuthAdapter extends Rend_Factory_Abstract implements Rend_Fac
     /**
      * @var     array
      */
-    protected $_options;
+    protected $_options = array();
 
     /**
      * Get an auth object
@@ -32,10 +32,12 @@ class Rend_Factory_AuthAdapter extends Rend_Factory_Abstract implements Rend_Fac
      */
     public function create()
     {
-        $adapter = 'authAdapter' . ucWords($this->_adapter);
+        $adapter = 'AuthAdapter_' . ucWords($this->_adapter);
 
         return $this->_factoryLoader
-                    ->$adapter();
+                    ->$adapter
+                    ->setOptions($this->_options)
+                    ->create();
     }
 
     /**
@@ -44,6 +46,22 @@ class Rend_Factory_AuthAdapter extends Rend_Factory_Abstract implements Rend_Fac
     public function setAdapter($adapter)
     {
         $this->_adapter = $adapter;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            $method = 'set' . ucFirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            } else {
+                $this->_options[$key] = $value;
+            }
+        }
         return $this;
     }
 

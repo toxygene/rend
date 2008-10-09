@@ -15,7 +15,7 @@ require_once 'Zend/Auth/Adapter/Digest.php';
 /**
  *
  */
-class Rend_Factory_AuthAdapterDigest extends Rend_Factory_Abstract implements Rend_Factory_AuthAdapter_Interface
+class Rend_Factory_AuthAdapter_Digest extends Rend_Factory_Abstract implements Rend_Factory_AuthAdapter_Interface
 {
 
     /**

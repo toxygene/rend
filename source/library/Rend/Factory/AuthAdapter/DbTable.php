@@ -15,7 +15,7 @@ require_once 'Zend/Auth/Adapter/DbTable.php';
 /**
  *
  */
-class Rend_Factory_AuthAdapterDbTable extends Rend_Factory_Abstract implements Rend_Factory_AuthAdapter_Interface
+class Rend_Factory_AuthAdapter_DbTable extends Rend_Factory_Abstract implements Rend_Factory_AuthAdapter_Interface
 {
 
     /**
