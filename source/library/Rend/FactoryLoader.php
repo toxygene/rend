@@ -13,10 +13,16 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 {
 
     /**
+     * Aliases
+     * @var     array
+     */
+    protected $_aliases = array();
+
+    /**
      * Config object
      * @var     Zend_Config
      */
-    private $_config;
+    protected $_config;
 
     /**
      * Constructor
@@ -31,8 +37,16 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 
         $this->_config = $config;
 
-        foreach ((array) $this->_config->prefixPaths as $prefix => $path) {
-            $this->addPrefixPath($prefix, $path);
+        if (isset($this->_config->prefixPaths)) {
+            foreach ($this->_config->prefixPaths as $prefix => $path) {
+                $this->addPrefixPath($prefix, $path);
+            }
+        }
+
+        if (isset($this->_config->aliases)) {
+            foreach ($this->_config->aliases as $alias => $factory) {
+                $this->setAlias($alias, $factory);
+            }
         }
     }
 
@@ -63,6 +77,15 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     }
 
     /**
+     *
+     */
+    public function setAlias($alias, $factory)
+    {
+        $this->_aliases[$alias] = $factory;
+        return $this;
+    }
+
+    /**
      * Get a factory by name
      *
      * @param   string  $name
@@ -71,20 +94,29 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function getFactory($name)
     {
-        $classname = $this->load($name);
-
-        $class = new $classname();
-        $name  = $class->getName();
-
-        $class->setFactoryLoader($this);
-
         $configName = $this->_lcFirst($name);
+        $pluginName = $this->getPluginName($name);
+        $className  = $this->load($pluginName);
+
+        $class = new $className();
+        $class->setFactoryLoader($this);
 
         if ($this->_config->$configName) {
             $class->setConfig($this->_config->$configName);
         }
 
         return $class;
+    }
+
+    /**
+     *
+     */
+    public function getPluginName($name) {
+        if (isset($this->_aliases[$name])) {
+            $name = $this->_aliases[$name];
+        }
+
+        return $this->_lcFirst($name);
     }
 
     /**
