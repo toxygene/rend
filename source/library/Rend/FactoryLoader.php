@@ -101,10 +101,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         }
 
         if (!$this->_factories[$name] instanceof Rend_FactoryLoader_Factory_Interface) {
-            $this->_factories[$name] = $this->_buildFactory(
-                $this->_factories[$name]['type'],
-                $this->_factories[$name]['options']
-            );
+            $this->_factories[$name] = $this->_buildFactory($this->_factories[$name]);
         }
 
         return $this->_factories[$name];
@@ -154,13 +151,15 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * @param   array|Zend_Config   $options
      * @return  Rend_FactoryLoader_Factory_Interface
      */
-    protected function _buildFactory($type, $options)
+    protected function _buildFactory($options)
     {
-        $className = $this->load($type);
+        $className = $this->load($options['type']);
 
         $factory = new $className();
 
-        $factory->setOptions($options);
+        if (isset($options['options'])) {
+            $factory->setOptions($options);
+        }
 
         if ($factory instanceof Rend_FactoryLoader_Factory_Loader_Interface) {
             $factory->setFactoryLoader($this);
