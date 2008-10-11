@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_MailTransport_Interface */
-require_once 'Rend/Factory/MailTransport/Interface.php';
+/** Rend_FactoryLoader_Factory_Loader_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Loader/Abstract.php';
 
 /** Zend_Mail_Transport_Smtp */
 require_once 'Zend/Mail/Transport/Smtp.php';
@@ -15,7 +12,7 @@ require_once 'Zend/Mail/Transport/Smtp.php';
 /**
  *
  */
-class Rend_Factory_MailTransport_Smtp extends Rend_Factory_Abstract implements Rend_Factory_MailTransport_Interface
+class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_Abstract
 {
 
     /**
