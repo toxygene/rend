@@ -13,40 +13,26 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 {
 
     /**
-     * Aliases
-     * @var     array
+     * Factories
+     * @var 	array
      */
-    protected $_aliases = array();
-
-    /**
-     * Config object
-     * @var     Zend_Config
-     */
-    protected $_config;
+    protected $_factories = array();
 
     /**
      * Constructor
      *
-     * @param   Zend_Config     $config
+     * @param 	Zend_Config|array 	$options
      */
-    public function __construct(Zend_Config $config)
+    public function __construct($options)
     {
         parent::__construct(array(
             'Rend_Factory' => 'Rend/Factory'
         ));
 
-        $this->_config = $config;
-
-        if (isset($this->_config->prefixPaths)) {
-            foreach ($this->_config->prefixPaths as $prefix => $path) {
-                $this->addPrefixPath($prefix, $path);
-            }
-        }
-
-        if (isset($this->_config->aliases)) {
-            foreach ($this->_config->aliases as $alias => $factory) {
-                $this->setAlias($alias, $factory);
-            }
+        if ($options instanceof Zend_Config) {
+            $this->setConfig($options);
+        } else {
+            $this->setOptions($options);
         }
     }
 
@@ -79,9 +65,20 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      *
      */
-    public function setAlias($alias, $factory)
+    public function __isset($name)
     {
-        $this->_aliases[$alias] = $factory;
+        return isset($this->_factories[$name]);
+    }
+
+    /**
+     * Add a factory
+     *
+     * @param	string	$name
+     * @param	Rend_Factory_Interface|array 	$factory
+     */
+    public function addFactory($name, $factory)
+    {
+        $this->_factories[$name] = $factory;
         return $this;
     }
 
@@ -94,37 +91,54 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function getFactory($name)
     {
-        $configName = $this->_lcFirst($name);
-        $pluginName = $this->getPluginName($name);
-        $className  = $this->load($pluginName);
-
-        $class = new $className();
-        $class->setFactoryLoader($this);
-
-        if ($this->_config->$configName) {
-            $class->setConfig($this->_config->$configName);
+        if (!isset($this->_factories[$name])) {
+            throw new Rend_FactoryLoader_Exception('no factory with that name found');
         }
 
-        return $class;
+        if (!$this->_factories[$name] instanceof Rend_Factory_Interface) {
+            $className = $this->load($this->_factories[$name]['type']);
+            $this->_factories[$name] = new $className($this->_factories[$name]['options']);
+            $this->_factories[$name]->setFactoryLoader($this);
+        }
+
+        return $this->_factories[$name];
     }
 
     /**
+     * Set options from a Zend_Config object
      *
+     * @param 	Zend_Config 	$config
+     * @return	Rend_FactoryLoader
      */
-    public function getPluginName($name) {
-        if (isset($this->_aliases[$name])) {
-            $name = $this->_aliases[$name];
-        }
-
-        return $this->_lcFirst($name);
-    }
-
-    /**
-     *
-     */
-    private function _lcFirst($string)
+    public function setConfig(Zend_Config $config)
     {
-        return strToLower(substr($string, 0, 1)) . substr($string, 1);
+        return $this->setOptions($config->toArray());
+    }
+
+    /**
+     * Set options from an array
+     *
+     * @param 	array 	$options
+     * @return	Rend_FactoryLoader
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            switch ($key) {
+                case 'prefixPaths':
+                    foreach ($value as $prefix => $path) {
+                        $this->addPrefixPath($prefix, $path);
+                    }
+                break;
+
+                case 'factory':
+                    foreach ($value as $name => $factory) {
+                        $this->addFactory($name, $factory);
+                    }
+                break;
+            }
+        }
+        return $this;
     }
 
 }
