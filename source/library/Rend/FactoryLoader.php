@@ -14,14 +14,14 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 
     /**
      * Factories
-     * @var 	array
+     * @var     array
      */
     protected $_factories = array();
 
     /**
      * Constructor
      *
-     * @param 	Zend_Config|array 	$options
+     * @param     Zend_Config|array     $options
      */
     public function __construct($options)
     {
@@ -63,7 +63,10 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     }
 
     /**
+     * Isset overloader
      *
+     * @param   string  $name
+     * @return  boolean
      */
     public function __isset($name)
     {
@@ -73,8 +76,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Add a factory
      *
-     * @param	string	$name
-     * @param	Rend_Factory_Interface|array 	$factory
+     * @param    string    $name
+     * @param    Rend_Factory_Interface|array     $factory
      */
     public function addFactory($name, $factory)
     {
@@ -92,13 +95,16 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     public function getFactory($name)
     {
         if (!isset($this->_factories[$name])) {
-            throw new Rend_FactoryLoader_Exception('no factory with that name found');
+            throw new Rend_FactoryLoader_Exception(
+                "Could not find a factory named '{$name}'"
+            );
         }
 
-        if (!$this->_factories[$name] instanceof Rend_Factory_Interface) {
-            $className = $this->load($this->_factories[$name]['type']);
-            $this->_factories[$name] = new $className($this->_factories[$name]['options']);
-            $this->_factories[$name]->setFactoryLoader($this);
+        if (!$this->_factories[$name] instanceof Rend_FactoryLoader_Factory_Interface) {
+            $this->_factories[$name] = $this->_buildFactory(
+                $this->_factories[$name]['type'],
+                $this->_factories[$name]['options']
+            );
         }
 
         return $this->_factories[$name];
@@ -107,8 +113,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Set options from a Zend_Config object
      *
-     * @param 	Zend_Config 	$config
-     * @return	Rend_FactoryLoader
+     * @param     Zend_Config     $config
+     * @return    Rend_FactoryLoader
      */
     public function setConfig(Zend_Config $config)
     {
@@ -118,8 +124,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Set options from an array
      *
-     * @param 	array 	$options
-     * @return	Rend_FactoryLoader
+     * @param     array     $options
+     * @return    Rend_FactoryLoader
      */
     public function setOptions(array $options)
     {
@@ -131,7 +137,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
                     }
                 break;
 
-                case 'factory':
+                case 'factories':
                     foreach ($value as $name => $factory) {
                         $this->addFactory($name, $factory);
                     }
@@ -139,6 +145,28 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
             }
         }
         return $this;
+    }
+
+    /**
+     * Construct a factory
+     *
+     * @param   string  $type
+     * @param   array|Zend_Config   $options
+     * @return  Rend_FactoryLoader_Factory_Interface
+     */
+    protected function _buildFactory($type, $options)
+    {
+        $className = $this->load($type);
+
+        $factory = new $className();
+
+        $factory->setOptions($options);
+
+        if ($factory instanceof Rend_FactoryLoader_Factory_Loader_Interface) {
+            $factory->setFactoryLoader($this);
+        }
+
+        return $factory;
     }
 
 }

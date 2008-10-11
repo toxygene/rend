@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_Mail_Interface */
-require_once 'Rend/Factory/Mail/Interface.php';
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Abstract.php';
 
 /** Zend_Mail */
 require_once 'Zend/Mail.php';
@@ -15,7 +12,7 @@ require_once 'Zend/Mail.php';
 /**
  *
  */
-class Rend_Factory_Mail extends Rend_Factory_Abstract implements Rend_Factory_Mail_Interface
+class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
