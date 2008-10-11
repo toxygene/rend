@@ -15,6 +15,6 @@ require_once 'Zend/Loader.php';
 Zend_Loader::registerAutoload();
 
 PHPUnit_Util_Filter::addDirectoryToWhiteList(
-    "{$rendPath}/libraries",
+    "../source/library",
     '.php'
 );
