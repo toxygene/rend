@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_Auth_Storage_Interface */
-require_once 'Rend/Factory/Auth/Storage/Interface.php';
+/** Rend_FactoryLoader_Factory_Loader_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Loader/Abstract.php';
 
 /** Zend_Auth_Storage_Session */
 require_once 'Zend/Auth/Storage/Session.php';
@@ -15,7 +12,7 @@ require_once 'Zend/Auth/Storage/Session.php';
 /**
  *
  */
-class Rend_Factory_AuthStorage_Session extends Rend_Factory_Abstract implements Rend_Factory_AuthStorage_Interface
+class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Loader_Abstract
 {
 
     /**
