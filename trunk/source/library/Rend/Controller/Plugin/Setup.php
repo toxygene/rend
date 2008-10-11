@@ -83,7 +83,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
 
             $this->_factoryLoader = new Rend_FactoryLoader(
                 $this->_getConfig()
-                     ->factories
+                     ->factoryLoader
             );
         }
         return $this->_factoryLoader;
@@ -148,12 +148,13 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _setupViewRenderer()
     {
-        /** Zend_Controller_Action_HelperBroker */
-        require_once 'Zend/Controller/Action/HelperBroker.php';
+        if (isset($this->_getFactoryLoader()->view)) {
+            /** Zend_Controller_Action_HelperBroker */
+            require_once 'Zend/Controller/Action/HelperBroker.php';
 
-        Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')
-                                           ->setView($this->_getFactoryLoader()->view());
-
+            Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')
+                                               ->setView($this->_getFactoryLoader()->view());
+        }
         return $this;
     }
 

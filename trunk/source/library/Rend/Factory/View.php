@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_View_Interface */
-require_once 'Rend/Factory/View/Interface.php';
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Abstract.php';
 
 /** Zend_View */
 require_once 'Zend/View.php';
