@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_AuthStorage_Interface */
-require_once 'Rend/Factory/AuthStorage/Interface.php';
+/** Rend_FactoryLoader_Factory_Loader_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Loader/Abstract.php';
 
 /** Zend_Auth_Storage_NonPersistent */
 require_once 'Zend/Auth/Storage/NonPersistent.php';
@@ -15,7 +12,7 @@ require_once 'Zend/Auth/Storage/NonPersistent.php';
 /**
  *
  */
-class Rend_Factory_AuthStorage_NonPersistent extends Rend_Factory_Abstract implements Rend_Factory_AuthStorage_Interface
+class Rend_Factory_AuthStorage_NonPersistent extends Rend_FactoryLoader_Factory_Loader_Abstract
 {
 
     /**
