@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_Acl_Interface */
-require_once 'Rend/Factory/Acl/Interface.php';
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Abstract.php';
 
 /** Zend_Acl */
 require_once 'Zend/Acl.php';
@@ -21,7 +18,7 @@ require_once 'Zend/Acl/Role.php';
 /**
  *
  */
-class Rend_Factory_Acl extends Rend_Factory_Abstract implements Rend_Factory_Acl_Interface
+class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**

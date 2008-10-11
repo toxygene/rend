@@ -15,7 +15,7 @@ require_once 'Zend/View.php';
 /**
  *
  */
-class Rend_Factory_View extends Rend_Factory_Abstract implements Rend_Factory_View_Interface
+class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**

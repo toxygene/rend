@@ -3,11 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
-
-/** Rend_Factory_Auth_Interface */
-require_once 'Rend/Factory/Auth/Interface.php';
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Abstract.php';
 
 /** Zend_Auth */
 require_once 'Zend/Auth.php';
@@ -15,7 +12,7 @@ require_once 'Zend/Auth.php';
 /**
  *
  */
-class Rend_Factory_Auth extends Rend_Factory_Abstract implements Rend_Factory_Auth_Interface
+class Rend_Factory_Auth extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**

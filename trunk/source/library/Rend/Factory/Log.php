@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_Factory_Abstract */
-require_once 'Rend/Factory/Abstract.php';
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once 'Rend/FactoryLoader/Factory/Abstract.php';
 
 /** Zend_Log */
 require_once 'Zend/Log.php'
@@ -12,7 +12,7 @@ require_once 'Zend/Log.php'
 /**
  *
  */
-class Rend_Factory_Log extends Rend_Factory_Abstract implements Rend_Factory_Log_Interface
+class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
