@@ -65,7 +65,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
             require_once 'Zend/Config/Ini.php';
 
             $this->_config = new Zend_Config_Ini(
-                "{$this->_root}/application/config/config.ini",
+                "{$this->_root}/application/configs/config.ini",
                 $this->_mode
             );
         }
