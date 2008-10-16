@@ -35,9 +35,6 @@ class ErrorController extends Rend_Controller_Action
                 break;
 
             default:
-                $this->_helper
-                     ->log($errors->exception->getMessage(), 3);
-
                 $this->_forward('internal-error');
                 break;
         }
