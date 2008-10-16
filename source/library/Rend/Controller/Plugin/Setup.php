@@ -13,32 +13,27 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
 {
 
     /**
-     *
+     * @var     Zend_Config
      */
     protected $_config;
 
     /**
-     *
+     * @var     Rend_FactoryLoader
      */
     protected $_factoryLoader;
 
     /**
+     * Constructor
      *
+     * @param   array|Zend_Config   $options
      */
-    protected $_mode;
-
-    /**
-     *
-     */
-    protected $_root;
-
-    /**
-     *
-     */
-    public function __construct($root, $mode = null)
+    public function __construct($options)
     {
-        $this->_root = $root;
-        $this->_mode = $mode;
+        if (is_array($options)) {
+            $this->setOptions($options);
+        } elseif ($options instanceof Zend_Config) {
+            $this->setConfig($options);
+        }
     }
 
     /**
@@ -58,6 +53,28 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     /**
      *
      */
+    public function setConfig(Zend_Config $config)
+    {
+        return $this->setOptions($config->toArray());
+    }
+
+    /**
+     *
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            $method = 'set' . ucWords($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     *
+     */
     protected function _getConfig()
     {
         if (!$this->_config) {
@@ -65,8 +82,9 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
             require_once 'Zend/Config/Ini.php';
 
             $this->_config = new Zend_Config_Ini(
-                "{$this->_root}/application/configs/config.ini",
-                $this->_mode
+                "../application/configs/config.ini",
+                $this->_getFrontController()
+                     ->getParam('env')
             );
         }
         return $this->_config;
