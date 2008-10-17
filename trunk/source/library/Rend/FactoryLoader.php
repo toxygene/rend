@@ -19,6 +19,12 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     protected $_factories = array();
 
     /**
+     * Factory type filter
+     * @var     Zend_Filter
+     */
+    protected $_factoryTypeFilter;
+
+    /**
      * Constructor
      *
      * @param     Zend_Config|array     $options
@@ -28,6 +34,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         parent::__construct(array(
             'Rend_Factory' => 'Rend/Factory'
         ));
+
+        $this->_factoryTypeFilter = $this->_buildFactoryTypeFilter();
 
         if ($options instanceof Zend_Config) {
             $this->setConfig($options);
@@ -74,12 +82,12 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     }
 
     /**
-     * Add a factory
+     * Set a factory
      *
      * @param    string    $name
      * @param    Rend_Factory_Interface|array     $factory
      */
-    public function addFactory($name, $factory)
+    public function setFactory($name, $factory)
     {
         $this->_factories[$name] = $factory;
         return $this;
@@ -136,7 +144,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 
                 case 'factories':
                     foreach ($value as $name => $factory) {
-                        $this->addFactory($name, $factory);
+                        $this->setFactory($name, $factory);
                     }
                 break;
             }
@@ -148,24 +156,42 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * Construct a factory
      *
      * @param   string  $type
-     * @param   array|Zend_Config   $options
+     * @param   array|Zend_Config   $config
      * @return  Rend_FactoryLoader_Factory_Interface
      */
-    protected function _buildFactory($options)
+    protected function _buildFactory($config)
     {
-        $className = $this->load($options['type']);
+        $className = $this->load(
+            $this->_factoryTypeFilter->filter(
+                $config['type']
+            )
+        );
 
-        $factory = new $className();
+        $reflection = new ReflectionClass($className);
 
-        if (isset($options['options'])) {
-            $factory->setOptions($options);
+        if (isset($config['options'])) {
+            $factory = $reflection->newInstanceArgs($config['options']);
+        } else {
+            $factory = $reflection->newInstance();
         }
 
-        if ($factory instanceof Rend_FactoryLoader_Factory_Loader_Interface) {
+        if ($factory instanceof Rend_FactoryLoader_Factory_Loadable_Interface) {
             $factory->setFactoryLoader($this);
         }
 
         return $factory;
+    }
+
+    /**
+     *
+     */
+    protected function _buildFactoryTypeFilter()
+    {
+        $filter = new Zend_Filter();
+        $filter->addFilter(new Zend_Filter_Word_SeparatorToSeparator('_', ' '))
+               ->addFilter(new Rend_Filter_UpperCaseWords())
+               ->addFilter(new Zend_Filter_Word_SeparatorToSeparator(' ', '_'));
+        return $filter;
     }
 
 }
