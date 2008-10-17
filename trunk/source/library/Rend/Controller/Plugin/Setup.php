@@ -27,7 +27,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      *
      * @param   array|Zend_Config   $options
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if (is_array($options)) {
             $this->setOptions($options);
