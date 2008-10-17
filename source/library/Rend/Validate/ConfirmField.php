@@ -99,9 +99,7 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
         $this->_setValue($value);
 
         if (is_array($context)) {
-            if (isset($context[$this->_field])
-                && ($value == $context[$this->_field]))
-            {
+            if (isset($context[$this->_field]) && ($value == $context[$this->_field])) {
                 return true;
             }
         } elseif (is_string($context) && ($value == $context)) {
