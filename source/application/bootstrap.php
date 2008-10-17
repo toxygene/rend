@@ -17,5 +17,5 @@ $setup = new Rend_Controller_Plugin_Setup();
 Zend_Controller_Front::getInstance()
                      ->setParam('env', $_SERVER['REND_MODE'])
                      ->registerPlugin($setup, 0)
-                     ->addControllerDirectory("{$root}/application/controllers", 'default')
-                     ->addModuleDirectory("{$root}/application/modules");
+                     ->addControllerDirectory("../application/controllers", 'default')
+                     ->addModuleDirectory("../application/modules");
