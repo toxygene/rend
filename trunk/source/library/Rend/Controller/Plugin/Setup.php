@@ -136,8 +136,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
         $this->_getFrontController()
              ->getDispatcher()
              ->setParam('rendConfig', $this->_getConfig())
-             ->setParam('rendFactoryLoader', $this->_getFactoryLoader())
-             ->setParam('rendRoot', $this->_root);
+             ->setParam('rendFactoryLoader', $this->_getFactoryLoader());
 
         $this->_getFrontController()
              ->throwExceptions($this->_getConfig()->displayErrors);
@@ -153,7 +152,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
         error_reporting(E_ALL | E_STRICT);
 
         ini_set('display_errors', $this->_getConfig()->displayErrors);
-        ini_set('error_log', "{$this->_root}/data/logs/phperrors.log");
+        ini_set('error_log', "../data/logs/phperrors.log");
         ini_set('log_errors', true);
 
         date_default_timezone_set($this->_getConfig()->timezone);
