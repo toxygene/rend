@@ -8,10 +8,10 @@
    # Layout Selector
    # Model
  # [Factories Factories]
-   # Acl
-   # Auth
+   # [Rend_Factory_Acl Acl]
+   # [Rend_Factory_Auth Auth]
    # Auth Adapter
-   # Database
+   # [Rend_Factory_Database Database]
    # Mail
    # Mail Transport
    # Translator
