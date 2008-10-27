@@ -1,0 +1,21 @@
+#summary Documentation of the Rend_Factory_Acl class.
+
+= Description =
+This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract Factory] for the [http://framework.zend.com/manual/en/zend.acl.html Zend_Acl] class.
+
+= API =
+|| *Method* || *Description* ||
+|| create() || Get the [http://framework.zend.com/manual/en/zend.acl.html Zend_Acl] singleton instance ||
+
+= Examples =
+== Basic ==
+Basic usage of the `Rend_Factory_Acl` is to create an instance of the factory and call it's create() method on demand.
+
+{{{
+class MyController extends Rend_Controller_Action {
+    public function init() {
+        $aclFactory = new Rend_Factory_Acl();
+        $this->_acl = $acl->create();
+    }
+}
+}}}
