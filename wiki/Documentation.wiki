@@ -1,8 +1,6 @@
 #summary Rend documentation.
 #labels Featured,Phase-Implementation
 
- # [FrontController Front Controller]
-   # Config
  # [Action_Helpers Action Helpers]
    # [Rend_Controller_Action_Helper_IsAllowed Is Allowed]
    # [Rend_Controller_Action_Helper_LayoutSelector Layout Selector]
