@@ -4,17 +4,9 @@
  # [FrontController Front Controller]
    # Config
  # [ActionHelpers Action Helpers]
-   # Acl
-   # Auth
    # IsAllowed
    # Layout Selector
-   # Locale
-   # Log
-   # MailTransport
    # Model
-   # SSL Selector
-   # Translator
-   # ViewRenderer
  # [Factories Factories]
    # Acl
    # Auth
