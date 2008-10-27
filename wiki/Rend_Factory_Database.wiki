@@ -13,14 +13,14 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 
 = Examples =
 == Basic ==
-Basic usage of the !Rend_Factory_Database is to create an instance of the factory and call it's create() method on demand.
+Basic usage of the !Rend_Factory_Database is to create an instance of the factory and call it's `create()` method on demand.
 
-!MyController.php
+`MyController.php`
 {{{
 class MyController extends Rend_Controller_Action {
-    protected $_databaseFactory;
+    protected $_database;
     public function init() {
-        $this->_dbFactory = new Rend_Factory_Database(array(
+        $factory = new Rend_Factory_Database(array(
             'adapter' => 'pdo_mysql',
             'params'  => array(
                 'host'     => 'localhost',
@@ -29,53 +29,7 @@ class MyController extends Rend_Controller_Action {
                 'dbname' => 'database'
             )
         );
-    }
-    public function myAction() {
-        $database = $this->_dbFactory->create();
-    }
-}
-}}}
-
-== Custom Factories ==
-You can easily create your own abstract factory for creating [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapters] by extending the Rend_Factory_Database_Interface
-
-!MyDbFactory.php
-{{{
-class MyDbFactory implements Rend_Factory_Database_Interface {
-    public function create() {
-        // return an instance of your factory
-    }
-}
-}}}
-!MyController.php
-{{{
-class MyController extends Rend_Controller_Action {
-    public function init() {
-        $this->_dbFactory = new MyDbFactory();
-    }
-    public function myAction() {
-        $database = $this->_dbFactory->create();
-    }
-}
-}}}
-
-== Rend_FactoryLoader ==
-The Rend_FactoryLoader uses a number of conventions to make configuration of objects seamless.
-
-config.ini
-{{{
-factories.database.adapter  = pdo_mysql
-factories.database.host     = localhost
-factories.database.username = username
-factories.database.password = password
-factories.database.dbname   = database
-}}}
-
-!MyController.php
-{{{
-class MyController extends Rend_Controller_Action {
-    public function myAction() {
-        $database = $this->_factory->database;
+        $this->_database = $factory->create();
     }
 }
 }}}
