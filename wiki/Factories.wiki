@@ -4,7 +4,7 @@
 = Factories =
 Rend includes a number of factory classes to abstract the process of creating concrete objects of specific types. This allows for variation and customization of object creation within a separate class so your code can focus on using the objects instead of littering it with extra scaffolding code.
 
- * Zend_Acl
+ * [Rend_Factory_Acl Zend_Acl]
  * [Rend_Factory_Auth Zend_Auth]
  * Zend_Auth_Adapter
  * [Rend_Factory_Database Zend_Db_Adapter]
