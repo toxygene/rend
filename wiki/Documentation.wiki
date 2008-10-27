@@ -4,8 +4,8 @@
  # [FrontController Front Controller]
    # Config
  # [ActionHelpers Action Helpers]
-   # IsAllowed
-   # LayoutSelector
+   # Is Allowed
+   # Layout Selector
    # Model
  # [Factories Factories]
    # [Rend_Factory_Acl Acl]
@@ -21,11 +21,11 @@
    # Boolean
    # Null
  # [Validators Validators]
-   # ConfirmField
+   # Confirm Field
  # [ViewHelpers View Helpers]
-   # BaseUrl
+   # Base Url
    # Cycle
-   # DefaultValue
-   # FullUrl
-   # IsAllowed
+   # Default Value
+   # Full Url
+   # Is Allowed
    # Truncate
