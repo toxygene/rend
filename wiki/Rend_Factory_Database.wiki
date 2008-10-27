@@ -26,7 +26,7 @@ class MyController extends Rend_Controller_Action {
                 'host'     => 'localhost',
                 'username' => 'test',
                 'password' => 'test',
-                'dbname' => 'database'
+                'dbname'   => 'database'
             )
         );
         $this->_database = $factory->create();
