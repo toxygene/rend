@@ -13,7 +13,7 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 
 = Examples =
 == Basic ==
-Basic usage of the !Rend_Factory_Database is to create an instance of the factory and call it's `create()` method on demand.
+Basic usage of the `Rend_Factory_Database` is to create an instance of the factory and call it's `create()` method on demand.
 
 {{{
 class MyController extends Rend_Controller_Action {
