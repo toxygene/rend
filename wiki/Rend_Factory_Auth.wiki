@@ -15,13 +15,8 @@ Basic usage of the !Rend_Factory_Database is to create an instance of the factor
 {{{
 class MyController extends Rend_Controller_Action {
     public function init() {
-        $this->_authFactory = new Rend_Factory_Auth();
-    }
-    public function myAction() {
-        $auth = $this->authFactory->create();
-        if (!$auth->hasIdentity()) {
-            die('You must be authenticated before you can access this page');
-        }
+        $authFactory = new Rend_Factory_Auth();
+        $this->_auth = $authFactory->create();
     }
 }
 }}}
