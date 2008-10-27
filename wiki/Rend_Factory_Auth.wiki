@@ -6,7 +6,7 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 
 = API =
 || *Method* || *Description* ||
-|| create() || Get the [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth] singleton instance ||
+|| `create()` || Get the [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth] singleton instance ||
 
 = Examples =
 == Basic ==
