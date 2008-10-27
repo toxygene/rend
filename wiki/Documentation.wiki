@@ -5,7 +5,7 @@
    # Config
  # [ActionHelpers Action Helpers]
    # IsAllowed
-   # Layout Selector
+   # LayoutSelector
    # Model
  # [Factories Factories]
    # [Rend_Factory_Acl Acl]
