@@ -4,7 +4,7 @@
  */
 
 /** Zend_Controller_Action */
-require_once 'Zend/Controller/Action.php';
+require_once "Zend/Controller/Action.php";
 
 /**
  *
@@ -31,8 +31,8 @@ class Rend_Controller_Action extends Zend_Controller_Action
     {
         parent::init();
 
-        $this->_config = $this->getInvokeArg('rendConfig');
-        $this->_factory = $this->getInvokeArg('rendFactoryLoader');
+        $this->_config  = $this->getInvokeArg("rendConfig");
+        $this->_factory = $this->getInvokeArg("rendFactoryLoader");
     }
 
     /**

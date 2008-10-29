@@ -1,7 +1,7 @@
 <?php
 $bootstrap = true;
 
-include '../application/bootstrap.php';
+include "../application/bootstrap.php";
 
 try {
     Zend_Controller_Front::getInstance()

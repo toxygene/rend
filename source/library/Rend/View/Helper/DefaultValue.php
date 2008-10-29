@@ -19,6 +19,9 @@
  * @version     $Id$
  */
 
+/** Zend_View_Helper_Abstract */
+require_once "Zend/View/Helper/Abstract.php";
+
 /**
  * Default helper
  *
@@ -29,7 +32,7 @@
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_DefaultValue
+class Rend_View_Helper_DefaultValue extends Zend_View_Helper_Abstract
 {
 
     /**
@@ -46,6 +49,19 @@ class Rend_View_Helper_DefaultValue
         }
 
         return $default;
+    }
+
+    /**
+     * Strategy method
+     *
+     * @see     defaultValue()
+     * @param   mixed   $value
+     * @param   mixed   $default
+     * @return  mixed
+     */
+    public function direct($value, $default)
+    {
+        return $this->defaultValue($value, $default);
     }
 
 }

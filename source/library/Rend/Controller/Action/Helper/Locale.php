@@ -1,15 +1,34 @@
 <?php
 /**
+ * Rend
  *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.rendframework.com/license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
+ *
+ * @category    Rend
+ * @package     Controller
+ * @copyright   2008 Justin Hendrickson
+ * @license     http://www.rendframework.com/license.html    New BSD License
+ * @link        http://www.rendframework.com/
+ * @since       1.0.0
+ * @version     $Id$
  */
 
-/** Rend_Controller_Action_Helper_Abstract */
-require_once 'Rend/Controller/Action/Helper/Abstract.php';
+/** Zend_Controller_Action_Helper_Abstract */
+require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
 /**
+ * Locale helper
  *
+ * @category    Rend
+ * @package     Controller
  */
-class Rend_Controller_Action_Helper_Locale extends Rend_Controller_Action_Helper_Abstract implements SplSubject
+class Rend_Controller_Action_Helper_Locale extends Zend_Controller_Action_Helper_Abstract implements SplSubject
 {
 
     /**
@@ -23,18 +42,6 @@ class Rend_Controller_Action_Helper_Locale extends Rend_Controller_Action_Helper
      * @var     array
      */
     private $_observers = array();
-
-    /**
-     * Constructor
-     *
-     * @param   Zend_Locale|string  $locale
-     */
-    public function __construct($locale = null)
-    {
-        if ($locale) {
-            $this->setLocale($locale);
-        }
-    }
 
     /**
      * Attach an observer
@@ -81,7 +88,7 @@ class Rend_Controller_Action_Helper_Locale extends Rend_Controller_Action_Helper
     {
         if (!$this->_locale) {
             /** Zend_Locale */
-            require_once 'Zend/Locale.php';
+            require_once "Zend/Locale.php";
             $this->_locale = new Zend_Locale();
         }
         return $this->_locale;

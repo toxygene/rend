@@ -33,13 +33,13 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * All actions wildcard
      * @var     string
      */
-    const ALL_ACTIONS = '*';
+    const ALL_ACTIONS = "*";
 
     /**
      * Disable ACL wildcard
      * @var     string
      */
-    const DISABLE_ACL = '*';
+    const DISABLE_ACL = "*";
 
     /**
      * ACL object
@@ -51,19 +51,19 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * Forbidden action
      * @var     string
      */
-    private $_forbiddenAction = 'forbidden';
+    private $_forbiddenAction = "forbidden";
 
     /**
      * Forbidden controller
      * @var     string
      */
-    private $_forbiddenController = 'error';
+    private $_forbiddenController = "error";
 
     /**
      * Forbidden module
      * @var     string
      */
-    private $_forbiddenModule = 'default';
+    private $_forbiddenModule = "default";
 
     /**
      * Forbidden params
@@ -75,19 +75,19 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * Unauthorized action
      * @var     string
      */
-    private $_unauthorizedAction = 'unauthorized';
+    private $_unauthorizedAction = "unauthorized";
 
     /**
      * Unauthorized controller
      * @var     string
      */
-    private $_unauthorizedController = 'error';
+    private $_unauthorizedController = "error";
 
     /**
      * Unauthorized module
      * @var     string
      */
-    private $_unauthorizedModule = 'default';
+    private $_unauthorizedModule = "default";
 
     /**
      * Unauthorized params
@@ -102,16 +102,20 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_role;
 
     /**
+     * Check if the current role has permission to the resource
      *
+     * @param   string      $resource
+     * @param   string      $permission
+     * @return  boolean
      */
-    public function isAllowed($resource, $permission)
+    public function isAllowed($resource, $permission = null)
     {
         return $this->_getAcl()
                     ->isAllowed($this->_getRole(), $resource, $permission);
     }
 
     /**
-     * Set the ACL
+     * Set the acl object
      *
      * @param   Zend_Acl    $acl
      * @return  Rend_Controller_Action_Helper_IsAllowed
@@ -184,13 +188,13 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
 
         if (!$this->isAllowed($resource, $permission)) {
             $this->getRequest()
-                 ->setParam('deniedAction', $this->getRequest()->getActionName())
-                 ->setParam('deniedController', $this->getRequest()->setControllerName())
-                 ->setParam('deniedModule', $this->getRequest()->setModuleName())
-                 ->setParam('deniedParams', $this->getRequest()->setParams())
-                 ->setParam('deniedRole', $this->getRole())
-                 ->setParam('deniedResource', $resource)
-                 ->setParam('deniedPermission', $permission ? $permission : '*default*')
+                 ->setParam("deniedAction", $this->getRequest()->getActionName())
+                 ->setParam("deniedController", $this->getRequest()->setControllerName())
+                 ->setParam("deniedModule", $this->getRequest()->setModuleName())
+                 ->setParam("deniedParams", $this->getRequest()->setParams())
+                 ->setParam("deniedRole", $this->getRole())
+                 ->setParam("deniedResource", $resource)
+                 ->setParam("deniedPermission", $permission ? $permission : "*default*")
                  ->setDispatched(false);
 
             if (!$this->_getRole()) {
@@ -268,31 +272,6 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                 null
             );
         }
-    }
-
-    /**
-     * Get the ACL object
-     *
-     * @return  Zend_Acl
-     */
-    protected function _getAcl()
-    {
-        if (!$this->_acl) {
-            $this->_acl = $this->getActionController()
-                               ->getFactory('acl')
-                               ->create();
-        }
-        return $this->_acl;
-    }
-
-    /**
-     * Get the role name
-     *
-     * @return  string
-     */
-    protected function _getRole()
-    {
-        return $this->_role;
     }
 
 }

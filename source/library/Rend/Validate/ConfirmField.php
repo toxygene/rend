@@ -20,7 +20,7 @@
  */
 
 /** Zend_Validate_Abstract */
-require_once 'Zend/Validate/Abstract.php';
+require_once "Zend/Validate/Abstract.php";
 
 /**
  * ConfirmField validation
@@ -37,7 +37,7 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
      * Errors
      * @var     string
      */
-    const NOT_MATCH = 'notMatch';
+    const NOT_MATCH = "notMatch";
     /**#@-*/
 
     /**

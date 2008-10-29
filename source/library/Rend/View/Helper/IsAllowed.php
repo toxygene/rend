@@ -19,8 +19,8 @@
  * @version     $Id$
  */
 
-/** Zend_Controller_Action_HelperBroker */
-require_once 'Zend/Controller/Action/HelperBroker.php';
+/** Zend_View_Helper_Abstract */
+require_once "Zend/View/Helper/Abstract.php";
 
 /**
  * Acls rule checking helper
@@ -28,7 +28,7 @@ require_once 'Zend/Controller/Action/HelperBroker.php';
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_IsAllowed
+class Rend_View_Helper_IsAllowed extends Zend_View_Helper_Abstract
 {
 
     /**
@@ -43,6 +43,17 @@ class Rend_View_Helper_IsAllowed
     {
         return Zend_Controller_Action_HelperBroker::getExistingHelper('isAllowed')
                                                   ->isAllowed($resource, $permission);
+    }
+
+    /**
+     * Strategy method
+     *
+     * @see     isAllowed()
+     * @return  boolean
+     */
+    public function direct($resource, $permission = null)
+    {
+        return $this->isAllowed($resource, $permission);
     }
 
 }

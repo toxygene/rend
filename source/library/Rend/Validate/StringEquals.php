@@ -20,7 +20,7 @@
  */
 
 /** Zend_Validate_Abstract */
-require_once 'Zend/Validate/Abstract.php';
+require_once "Zend/Validate/Abstract.php";
 
 /**
  * StringEquals validation
@@ -39,14 +39,14 @@ class Rend_Validate_StringEquals extends Zend_Validate_Abstract
      * Not equals message key
      * @var     string
      */
-    const NOT_EQUALS = 'stringNotEquals';
+    const NOT_EQUALS = "stringNotEquals";
 
     /**
      * Message templates
      * @var     array
      */
     protected $_messageTemplates = array(
-        self::NOT_EQUALS => 'The values do not match.'
+        self::NOT_EQUALS => "The values do not match."
     );
 
     /**

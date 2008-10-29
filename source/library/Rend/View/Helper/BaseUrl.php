@@ -19,13 +19,16 @@
  * @version     $Id$
  */
 
+/** Zend_View_Helper_Abstract */
+require_once "Zend/View/Helper/Abstract.php";
+
 /**
  * BaseUrl helper
  *
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_BaseUrl
+class Rend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 {
 
     /**
@@ -41,6 +44,17 @@ class Rend_View_Helper_BaseUrl
         return Zend_Controller_Front::getInstance()
                                     ->getRequest()
                                     ->getBaseUrl();
+    }
+
+    /**
+     * Strategy method
+     *
+     * @see     baseUrl()
+     * @return  string
+     */
+    public function direct()
+    {
+        return $this->baseUrl();
     }
 
 }

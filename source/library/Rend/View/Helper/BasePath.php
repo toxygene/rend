@@ -19,13 +19,16 @@
  * @version     $Id$
  */
 
+/** Zend_View_Helper_Abstract */
+require_once "Zend/View/Helper/Abstract.php";
+
 /**
  * BasePath helper
  *
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_BasePath
+class Rend_View_Helper_BasePath extends Zend_View_Helper_Abstract
 {
 
     /**
@@ -41,6 +44,17 @@ class Rend_View_Helper_BasePath
         return Zend_Controller_Front::getInstance()
                                     ->getRequest()
                                     ->getBasePath();
+    }
+
+    /**
+     * Strategy method
+     *
+     * @see     basePath()
+     * @return  string
+     */
+    public function direct()
+    {
+        return $this->basePath();
     }
 
 }
