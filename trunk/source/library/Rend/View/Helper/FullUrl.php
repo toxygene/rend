@@ -19,6 +19,12 @@
  * @version     $Id$
  */
 
+/** Zend_Controller_Front */
+require_once "Zend/Controller/Front.php";
+
+/** Zend_View_Helper_Abstract */
+require_once "Zend/View/Helper/Abstract.php";
+
 /**
  * Url helper
  *
@@ -27,7 +33,7 @@
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_FullUrl
+class Rend_View_Helper_FullUrl extends Zend_View_Helper_Abstract
 {
 
     /**
@@ -38,26 +44,35 @@ class Rend_View_Helper_FullUrl
      * @param   boolean     $reset
      * @return  string
      */
-    public function fullUrl(array $urlOptions = array(), $name = 'default', $reset = false)
+    public function fullUrl(array $urlOptions = array(), $name = "default", $reset = false)
     {
-        /** Zend_Controller_Front */
-        require_once 'Zend/Controller/Front.php';
         $request = Zend_Controller_Front::getInstance()
                                         ->getRequest();
 
         if ($request->isSecure()) {
-            $url = 'https://';
+            $url = "https://";
         } else {
-            $url = 'http://';
+            $url = "http://";
         }
 
         $url .= $request->SERVER_NAME;
 
         if (($request->isSecure() && $request->SERVER_PORT != 443) || (!$request->isSecure() && $request->SERVER_PORT != 80)) {
-            $url .= ':' . $request->SERVER_PORT;
+            $url .= ":{$request->SERVER_PORT}";
         }
 
         return $url . $this->getView()->url($urlOptions, $name, $reset);
+    }
+
+    /**
+     * Strategy method
+     *
+     * @see     fullUrl()
+     * @return  string
+     */
+    public function direct(array $urlOptions = array(), $name = "default", $reset = false)
+    {
+        return $this->fullUrl($urlOptions, $name, $reset);
     }
 
 }

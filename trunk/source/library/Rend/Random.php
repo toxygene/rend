@@ -28,7 +28,7 @@ class Rend_Random
      * String of printable characters
      * @var     string
      */
-    const PRINTABLE_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]}\|;:\'",<.>/? ';
+    const BASIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]}\\|;:'\",<.>/? ";
 
     /**
      * Generate a random string of printable characters
@@ -37,9 +37,9 @@ class Rend_Random
      * @param  string $characters
      * @return string
      */
-    public function getString($length = 8, $characters = self::PRINTABLE_CHARACTERS)
+    public function getString($length = 8, $characters = self::BASIC)
     {
-        $string = '';
+        $string = "";
         for($i = 0; $i < $length; ++$i) {
             $string .= $characters[mt_rand(0, strlen($characters) - 1)];
         }

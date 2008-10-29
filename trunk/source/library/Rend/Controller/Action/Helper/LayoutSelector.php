@@ -16,24 +16,25 @@
  * @package     Controller
  * @copyright   Copyright (c) 2008 Justin Hendrickson (http://www.rendframework.com)
  * @license     http://www.rendframework.com/License New BSD License
+ * @since       1.0.0
  * @version     $Id$
  */
 
-/** Zend_Controller_Action_Helper_Abstract */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
+/** Rend_Controller_Action_Helper_Abstract */
+require_once 'Rend/Controller/Action/Helper/Abstract.php';
 
 /**
  * @category    Rend
  * @package     Controller
  */
-class Rend_Controller_Action_Helper_LayoutSelector extends Zend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Action_Helper_Abstract
 {
 
     /**
      * Wildcard character
      * @var     string
      */
-    const WILDCARD = '*';
+    const WILDCARD = "*";
 
     /**
      * Layout object
@@ -46,17 +47,6 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Zend_Controller_Actio
      * @var     string
      */
     protected $_parameter;
-
-    /**
-     * Constructor
-     *
-     * @param   Zend_Layout     $layout
-     */
-    public function __construct(Zend_Layout $layout = null, $parameter = 'layout')
-    {
-        $this->_layout    = $layout;
-        $this->_parameter = $parameter;
-    }
 
     /**
      * Set the layout object
@@ -103,20 +93,6 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Zend_Controller_Actio
     }
 
     /**
-     * Get the layout object
-     *
-     * @return  Zend_Layout
-     */
-    protected function _getLayout()
-    {
-        if (!$this->_layout) {
-            $this->_layout = $this->getActionController()
-                                  ->getHelper('Layout');
-        }
-        return $this->_layout;
-    }
-
-    /**
      * Set the layout script
      *
      * @param   string  $script
@@ -124,8 +100,9 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Zend_Controller_Actio
      */
     protected function _setLayoutScript($script)
     {
-        $this->_getLayout()
+        $this->_layout
              ->setLayout($script);
+
         return $this;
     }
 

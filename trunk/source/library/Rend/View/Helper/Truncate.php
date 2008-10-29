@@ -19,11 +19,14 @@
  * @version     $Id$
  */
 
+/** Zend_View_Helper_Abstract */
+require_once "Zend/View/Helper/Abstract.php";
+
 /**
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_Truncate
+class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
 {
 
     /**
@@ -61,6 +64,17 @@ class Rend_View_Helper_Truncate
         }
 
         return substr($string, 0, $length) . $end;
+    }
+
+    /**
+     * Strategy method
+     *
+     * @see     truncate()
+     * @return  boolean
+     */
+    public function direct($string, $length, $end = '...', $boundry = false)
+    {
+        return $this->truncate($string, $length, $end, $boundry);
     }
 
 }

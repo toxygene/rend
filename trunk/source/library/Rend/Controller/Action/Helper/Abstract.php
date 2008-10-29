@@ -65,7 +65,7 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = "set" . ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -95,8 +95,8 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
         }
 
         return preg_replace(
-            '/Action$/',
-            '',
+            "#Action$#",
+            "",
             $this->getFrontController()
                  ->getDispatcher()
                  ->formatActionName($action)
@@ -117,8 +117,8 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
         }
 
         return preg_replace(
-            '/(.*)\/.*/',
-            '\\1',
+            "#(.*)\/.*#",
+            "\\1",
             $this->getFrontController()
                  ->getControllerDir($module)
         );

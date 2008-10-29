@@ -8,7 +8,7 @@
  */
 
 /** Rend_Controller_Action */
-require_once 'Rend/Controller/Action.php';
+require_once "Rend/Controller/Action.php";
 
 /**
  * @category   Rend
@@ -26,16 +26,16 @@ class ErrorController extends Rend_Controller_Action
      */
     public function errorAction()
     {
-        $errors = $this->_getParam('error_handler');
+        $errors = $this->_getParam("error_handler");
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                $this->_forward('page-not-found');
+                $this->_forward("page-not-found");
                 break;
 
             default:
-                $this->_forward('internal-error');
+                $this->_forward("internal-error");
                 break;
         }
     }

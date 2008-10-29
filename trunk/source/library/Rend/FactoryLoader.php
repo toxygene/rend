@@ -4,7 +4,7 @@
  */
 
 /** Zend_Loader_PluginLoader */
-require_once 'Zend/Loader/PluginLoader.php';
+require_once "Zend/Loader/PluginLoader.php";
 
 /**
  *
@@ -32,7 +32,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     public function __construct($options)
     {
         parent::__construct(array(
-            'Rend_Factory' => 'Rend/Factory'
+            "Rend_Factory" => "Rend/Factory"
         ));
 
         $this->_factoryTypeFilter = $this->_buildFactoryTypeFilter();
@@ -136,13 +136,13 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     {
         foreach ($options as $key => $value) {
             switch ($key) {
-                case 'prefixPaths':
+                case "prefixPaths":
                     foreach ($value as $prefix => $path) {
                         $this->addPrefixPath($prefix, $path);
                     }
                 break;
 
-                case 'factories':
+                case "factories":
                     foreach ($value as $name => $factory) {
                         $this->setFactory($name, $factory);
                     }
@@ -163,14 +163,14 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     {
         $className = $this->load(
             $this->_factoryTypeFilter->filter(
-                $config['type']
+                $config["type"]
             )
         );
 
         $reflection = new ReflectionClass($className);
 
-        if (isset($config['options'])) {
-            $factory = $reflection->newInstanceArgs($config['options']);
+        if (isset($config["options"])) {
+            $factory = $reflection->newInstanceArgs($config["options"]);
         } else {
             $factory = $reflection->newInstance();
         }
@@ -188,9 +188,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     protected function _buildFactoryTypeFilter()
     {
         $filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_Word_SeparatorToSeparator('_', ' '))
+        $filter->addFilter(new Zend_Filter_Word_SeparatorToSeparator("_", " "))
                ->addFilter(new Rend_Filter_UpperCaseWords())
-               ->addFilter(new Zend_Filter_Word_SeparatorToSeparator(' ', '_'));
+               ->addFilter(new Zend_Filter_Word_SeparatorToSeparator(" ", "_"));
         return $filter;
     }
 
