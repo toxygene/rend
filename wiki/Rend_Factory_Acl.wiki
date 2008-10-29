@@ -7,6 +7,7 @@ This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract
 = API =
 || *Method* || *Description* ||
 || `create()` || Get the [http://framework.zend.com/manual/en/zend.acl.html Zend_Acl] singleton instance ||
+|| `setConfigFile(/* string */ $filename)` || Set the configuration file. This should be a `.php` file that uses `$acl` to setup the roles, resources and rules. ||
 
 = Examples =
 == Basic ==
