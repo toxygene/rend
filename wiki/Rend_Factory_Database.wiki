@@ -2,33 +2,15 @@
 #labels Factories,Phase-Implementation
 
 = Description =
-This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract Factory] for the [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapters].
+This class is the abstract base class for the Rend_Factory_Database_* classes.
 
 = API =
 || *Method* || *Description* ||
-|| `__construct(/* array | Zend_Config */)` || A !Zend_Config object or array matching the setter names ||
-|| `create()` || Create an instance of a [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapter] class ||
-|| `setAdapter(/* string */)` || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter adapter] ||
-|| `setParams(/* array */)` || Any valid !Zend_Db [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter.connecting.parameters parameter] ||
-
-= Examples =
-== Basic ==
-Basic usage of the `Rend_Factory_Database` is to create an instance of the factory and call it's `create()` method on demand.
-
-{{{
-class MyController extends Rend_Controller_Action {
-    protected $_database;
-    public function init() {
-        $factory = new Rend_Factory_Database(array(
-            'adapter' => 'pdo_mysql',
-            'params'  => array(
-                'host'     => 'localhost',
-                'username' => 'test',
-                'password' => 'test',
-                'dbname'   => 'database'
-            )
-        );
-        $this->_database = $factory->create();
-    }
-}
-}}}
+|| `setAutoQuoteIdentifiers(/* boolean */ $autoQuoteIdentifiers) || Sets the auto-quote identifiers flag. ||
+|| `setCaseFolding(/* boolean */ $caseFolding) || Sets the case folding value. ||
+|| `setFetchMode(/* integer */ $fetchMode) || Sets the default fetch mode. ||
+|| `setHost(/* string */ $host) || Sets the host to connect to. ||
+|| `setPassword(/* string */ $password) || Sets the password to use when connecting to the host. ||
+|| `setProfiler($profiler) || ||
+|| `setSchema(/* string */ $schema) || Sets the schema (database name) to use after connecting to the host. ||
+|| `setUsername(/* string */ $username)` || Sets the username to use when connecting to the host. ||
