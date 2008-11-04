@@ -17,6 +17,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo
 
     /**
      *
+     * @return  Zend_Db_Adapter_Pdo_Mysql
      */
     public function create()
     {
