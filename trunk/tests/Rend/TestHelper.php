@@ -1,5 +1,5 @@
 <?php
-$root = dirname(dirname(dirname(__FILE__))) . '/source';
+$root = dirname(dirname(dirname(__FILE__))) . "/source";
 
 // Setup include path
 set_include_path(
@@ -9,10 +9,10 @@ set_include_path(
 );
 
 /** Zend_Loader */
-require_once 'Zend/Loader.php';
+require_once "Zend/Loader.php";
 Zend_Loader::registerAutoload();
 
 PHPUnit_Util_Filter::addDirectoryToWhiteList(
     "{$root}/library",
-    '.php'
+    ".php"
 );

@@ -36,22 +36,22 @@ class Rend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
     public function testCycleReturnsACycleIterator()
     {
         $this->assertType(
-            'Rend_View_Helper_Cycle_Container',
-            $this->_helper->direct(array('one'))
+            "Rend_View_Helper_Cycle_Container",
+            $this->_helper->direct(array("one"))
         );
     }
 
     public function testCycleContainerIteratesInfinitely()
     {
-        $container = $this->_helper->direct(array('one', 'two'));
+        $container = $this->_helper->direct(array("one", "two"));
 
-        $this->assertEquals('one', $container->current());
+        $this->assertEquals("one", $container->current());
         $container->next();
 
-        $this->assertEquals('two', $container->current());
+        $this->assertEquals("two", $container->current());
         $container->next();
 
-        $this->assertEquals('one', $container->current());
+        $this->assertEquals("one", $container->current());
     }
 
 }

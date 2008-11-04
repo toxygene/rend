@@ -16,16 +16,16 @@
  * @license     http://www.rendframework.com/license.html    New BSD License
  * @link        http://www.rendframework.com/
  * @since       1.0.0
- * @version     $Id: Random.php 183 2008-09-14 02:43:07Z justin.hendrickson $
+ * @version     $Id$
  */
 
-/** Rend_FactoryLoader */
-require_once "Rend/FactoryLoader.php";
+/** Rend_Controller_Action_Helper_IsAllowed */
+require_once "Rend/Controller/Action/Helper/IsAllowed.php";
 
 /**
  * @category    Rend
  * @subpackage 	UnitTest
  */
-class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
+class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_TestCase
 {
 }
