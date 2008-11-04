@@ -23,15 +23,16 @@ class Rend_AllTests
 
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite(), $parameters);
+        PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Rend');
 
+        $suite->addTest(Rend_Controller_AllTests::suite());
+        $suite->addTestSuite('Rend_FactoryLoaderTest');
         $suite->addTestSuite('Rend_RandomTest');
-        $suite->addTestSuite('Rend_Controller_ActionTest');
         $suite->addTest(Rend_View_Helper_AllTests::suite());
 
         return $suite;
