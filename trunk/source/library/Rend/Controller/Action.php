@@ -9,42 +9,27 @@ require_once "Zend/Controller/Action.php";
 /**
  *
  */
-class Rend_Controller_Action extends Zend_Controller_Action
+abstract class Rend_Controller_Action extends Zend_Controller_Action
 {
 
     /**
-     * Configuration
-     * @var     Zend_Config
+     * Get the config object
+     *
+     * @return 	Zend_Config
      */
-    protected $_config;
-
-    /**
-     * Factory loader
-     * @var     Rend_FactoryLoader
-     */
-    protected $_factory;
-
-    /**
-     * Initialize the controller
-     */
-    public function init()
+    public function getConfig()
     {
-        parent::init();
-
-        $this->_config  = $this->getInvokeArg("rendConfig");
-        $this->_factory = $this->getInvokeArg("rendFactoryLoader");
+        return $this->getInvokeArg("rendConfig");
     }
 
     /**
-     * Get a factory
+     * Get the factory loader
      *
-     * @param   string  $name
-     * @return  Rend_Factory_Interface
+     * @return  Rend_FactoryLoader
      */
-    public function getFactory($name)
+    public function getFactoryLoader()
     {
-        return $this->_factory
-                    ->$name;
+        return $this->getInvokeArg("rendFactoryLoader");
     }
 
 }
