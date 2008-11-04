@@ -34,12 +34,16 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     /**#@-*/
 
     /**
-     *
+     * Database params
+     * @var     array
      */
     protected $_params = array();
 
     /**
+     * Set the auto quote identifiers flag
      *
+     * @param   boolean $autoQuoteIdentifiers
+     * @return  Rend_Factory_Database
      */
     public function setAutoQuoteIdentifiers($autoQuoteIdentifiers)
     {
@@ -48,7 +52,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the case folding value
      *
+     * @param   integer     $caseFolding
+     * @return  Rend_Factory_Database
      */
     public function setCaseFolding($caseFolding)
     {
@@ -105,7 +112,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the host
      *
+     * @param   string  $host
+     * @return  Rend_Factory_Database
      */
     public function setHost($host)
     {
@@ -114,7 +124,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the password
      *
+     * @param   string  $password
+     * @return  Rend_Factory_Database
      */
     public function setPassword($password)
     {
@@ -123,7 +136,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the profiler
      *
+     * @param   mixed   $profiler
+     * @return  Rend_Factory_Database
      */
     public function setProfiler($profiler)
     {
@@ -132,7 +148,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the schema (aka database name)
      *
+     * @param   string  $schema
+     * @return  Rend_Factory_Database
      */
     public function setSchema($schema)
     {
@@ -141,7 +160,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the username
      *
+     * @param   string  $username
+     * @return  Rend_Factory_Database
      */
     public function setUsername($username)
     {
