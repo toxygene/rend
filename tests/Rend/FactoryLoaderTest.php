@@ -19,39 +19,13 @@
  * @version     $Id: Random.php 183 2008-09-14 02:43:07Z justin.hendrickson $
  */
 
-/** Rend_Random */
-require_once 'Rend/Random.php';
+/** Rend_FactoryLoader */
+require_once 'Rend/FactoryLoader.php';
 
 /**
  * @category    Rend
  * @subpackage 	UnitTest
  */
-class Rend_RandomTest extends PHPUnit_Framework_TestCase
+class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 {
-
-    private $_random;
-
-    public function setUp()
-    {
-        $this->_random = new Rend_Random();
-    }
-
-    public function testStringsOfArbitraryLengthCanBeGenerated()
-    {
-        $this->assertEquals(
-            5,
-            strlen($this->_random->getString(5))
-        );
-    }
-
-    public function testStringsFromArbitraryHaystacksCanBeGenerated()
-    {
-        $random = new Rend_Random();
-
-        $this->assertEquals(
-            'a',
-            $random->getString(1, 'a')
-        );
-    }
-
 }
