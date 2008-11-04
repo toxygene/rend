@@ -23,7 +23,7 @@
  * @category    Rend
  * @package     View
  */
-class Rend_View_Helper_Cycle_Container extends IteratorIterator
+class Rend_View_Helper_Cycle_Container extends InfiniteIterator
 {
 
     /**
