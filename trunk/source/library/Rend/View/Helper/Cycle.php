@@ -47,7 +47,14 @@ class Rend_View_Helper_Cycle extends Zend_View_Helper_Abstract
      */
     public function cycle(array $selections)
     {
-        return new Rend_View_Helper_Cycle_Container(new InfiniteIterator(new ArrayIterator($selections)));
+        $container = new Rend_View_Helper_Cycle_Container(
+            new ArrayIterator(
+                $selections
+            )
+        );
+        $container->rewind();
+
+        return $container;
     }
 
     /**
@@ -56,9 +63,11 @@ class Rend_View_Helper_Cycle extends Zend_View_Helper_Abstract
      * @see     cycle()
      * @return  Rend_View_Helper_Cycle_Container
      */
-    public function direct(array $selections)
+    public function direct()
     {
-        return $this->cycle($selections);
+        return $this->cycle(
+            func_get_arg(0)
+        );
     }
 
 }
