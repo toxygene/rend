@@ -19,6 +19,9 @@
  * @version     $Id$
  */
 
+/** Rend_Controller_Action */
+require_once "Rend/Controller/Action.php";
+
 /**
  * @category    Rend
  * @subpackage 	UnitTest
@@ -41,8 +44,8 @@ class Rend_Controller_ActionTest extends PHPUnit_Framework_TestCase
             new Zend_Controller_Request_HttpTestCase(),
             new Zend_Controller_Response_HttpTestCase(),
             array(
-                'rendConfig'        => $this->_config,
-                'rendFactoryLoader' => $this->_factoryLoader
+                "rendConfig"        => $this->_config,
+                "rendFactoryLoader" => $this->_factoryLoader
             )
         );
     }

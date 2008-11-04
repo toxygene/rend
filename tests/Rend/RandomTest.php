@@ -20,7 +20,7 @@
  */
 
 /** Rend_Random */
-require_once 'Rend/Random.php';
+require_once "Rend/Random.php";
 
 /**
  * @category    Rend
@@ -49,8 +49,8 @@ class Rend_RandomTest extends PHPUnit_Framework_TestCase
         $random = new Rend_Random();
 
         $this->assertEquals(
-            'a',
-            $random->getString(1, 'a')
+            "a",
+            $random->getString(1, "a")
         );
     }
 
