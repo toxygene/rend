@@ -29,7 +29,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      *
      * @param     Zend_Config|array     $options
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         parent::__construct(array(
             "Rend_Factory" => "Rend/Factory"
@@ -39,7 +39,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 
         if ($options instanceof Zend_Config) {
             $this->setConfig($options);
-        } else {
+        } elseif (is_array($options)) {
             $this->setOptions($options);
         }
     }
