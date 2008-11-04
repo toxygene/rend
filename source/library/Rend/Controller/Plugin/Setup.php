@@ -90,7 +90,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucWords($key);
+            $method = 'set' . ucFirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
