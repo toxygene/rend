@@ -103,25 +103,4 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
         );
     }
 
-    /**
-     * Get the path to the views for a module
-     *
-     * @param   string  $module
-     * @return  string
-     */
-    private function _getModuleDirectory($module = null)
-    {
-        if (!$module) {
-            $module = $this->getFrontController()
-                           ->getDefaultModule();
-        }
-
-        return preg_replace(
-            "#(.*)\/.*#",
-            "\\1",
-            $this->getFrontController()
-                 ->getControllerDir($module)
-        );
-    }
-
 }
