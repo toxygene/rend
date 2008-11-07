@@ -189,7 +189,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     {
         $filter = new Zend_Filter();
         $filter->addFilter(new Zend_Filter_Word_SeparatorToSeparator("_", " "))
-               ->addFilter(new Rend_Filter_UpperCaseWords())
+               ->addFilter(new Rend_Filter_WordsToUpper())
                ->addFilter(new Zend_Filter_Word_SeparatorToSeparator(" ", "_"));
         return $filter;
     }

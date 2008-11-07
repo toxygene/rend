@@ -25,7 +25,7 @@ require_once "Zend/Filter/Interface.php";
 /**
  * ucWords filter
  *
- * Filters a value with ucWOrds
+ * Filters a value with ucWords
  *
  * @category    Rend
  * @package     Filter
