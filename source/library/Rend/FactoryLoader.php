@@ -17,13 +17,6 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * @var     array
      */
     protected $_factories = array();
-
-    /**
-     * Factory type filter
-     * @var     Zend_Filter
-     */
-    protected $_factoryTypeFilter;
-
     /**
      * Constructor
      *
@@ -34,8 +27,6 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         parent::__construct(array(
             "Rend_Factory" => "Rend/Factory"
         ));
-
-        $this->_factoryTypeFilter = $this->_buildFactoryTypeFilter();
 
         if ($options instanceof Zend_Config) {
             $this->setConfig($options);
@@ -162,9 +153,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     protected function _buildFactory($config)
     {
         $className = $this->load(
-            $this->_factoryTypeFilter->filter(
-                $config["type"]
-            )
+            ucFirst($config["type"])
         );
 
         $reflection = new ReflectionClass($className);
@@ -180,18 +169,6 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         }
 
         return $factory;
-    }
-
-    /**
-     *
-     */
-    protected function _buildFactoryTypeFilter()
-    {
-        $filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_Word_SeparatorToSeparator("_", " "))
-               ->addFilter(new Rend_Filter_WordsToUpper())
-               ->addFilter(new Zend_Filter_Word_SeparatorToSeparator(" ", "_"));
-        return $filter;
     }
 
 }
