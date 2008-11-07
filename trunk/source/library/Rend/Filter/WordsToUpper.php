@@ -30,7 +30,7 @@ require_once "Zend/Filter/Interface.php";
  * @category    Rend
  * @package     Filter
  */
-class Rend_Filter_UpperCaseWords implements Zend_Filter_Interface
+class Rend_Filter_WordsToUpper implements Zend_Filter_Interface
 {
 
     /**
