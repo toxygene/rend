@@ -3,15 +3,11 @@
  *
  */
 
-/**
- * Test helper
- */
-require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
-
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Rend_View_Helper_AllTests::main");
 }
 
+require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
 require_once "Rend/View/Helper/CycleTest.php";
 
 /**
