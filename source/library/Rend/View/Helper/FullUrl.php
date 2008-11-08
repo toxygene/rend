@@ -68,6 +68,9 @@ class Rend_View_Helper_FullUrl extends Zend_View_Helper_Abstract
      * Strategy method
      *
      * @see     fullUrl()
+     * @param   array       $urlOptions
+     * @param   string      $name
+     * @param   boolean     $reset
      * @return  string
      */
     public function direct(array $urlOptions = array(), $name = "default", $reset = false)

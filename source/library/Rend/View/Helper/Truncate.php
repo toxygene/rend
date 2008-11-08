@@ -70,9 +70,14 @@ class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
      * Strategy method
      *
      * @see     truncate()
-     * @return  boolean
+     * @param   string      $string
+     * @param   integer     $length
+     * @param   string      $end
+     * @param   boolean     $boundry
+     * @return  string
+     * @throws  InvalidArgumentException
      */
-    public function direct($string, $length, $end = '...', $boundry = false)
+    public function direct($string = null, $length = null, $end = '...', $boundry = false)
     {
         return $this->truncate($string, $length, $end, $boundry);
     }

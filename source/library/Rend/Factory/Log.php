@@ -4,10 +4,10 @@
  */
 
 /** Rend_FactoryLoader_Factory_Abstract */
-require_once 'Rend/FactoryLoader/Factory/Abstract.php';
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Log */
-require_once 'Zend/Log.php'
+require_once "Zend/Log.php";
 
 /**
  *
@@ -32,7 +32,7 @@ class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
 
         if (!$this->_configFile) {
             /** Zend_Log_Writer_Null */
-            require_once 'Zend/Log/Writer/Null.php';
+            require_once "Zend/Log/Writer/Null.php";
 
             $log->addWriter(new Zend_Log_Writer_Null());
         } else {

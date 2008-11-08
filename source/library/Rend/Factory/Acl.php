@@ -4,16 +4,16 @@
  */
 
 /** Rend_FactoryLoader_Factory_Abstract */
-require_once 'Rend/FactoryLoader/Factory/Abstract.php';
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Acl */
-require_once 'Zend/Acl.php';
+require_once "Zend/Acl.php";
 
 /** Zend_Acl_Resource */
-require_once 'Zend/Acl/Resource.php';
+require_once "Zend/Acl/Resource.php";
 
 /** Zend_Acl_Role */
-require_once 'Zend/Acl/Role.php';
+require_once "Zend/Acl/Role.php";
 
 /**
  *

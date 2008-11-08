@@ -4,10 +4,10 @@
  */
 
 /** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once 'Rend/FactoryLoader/Factory/Loader/Abstract.php';
+require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
 
 /** Zend_Auth_Adapter_DbTable */
-require_once 'Zend/Auth/Adapter/DbTable.php';
+require_once "Zend/Auth/Adapter/DbTable.php";
 
 /**
  *

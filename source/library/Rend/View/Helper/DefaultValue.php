@@ -25,7 +25,7 @@ require_once "Zend/View/Helper/Abstract.php";
 /**
  * Default helper
  *
- * The default helper is a direct port of Smarty's
+ * The default helper is a port of Smarty's
  * {@link http://smarty.php.net/manual/en/language.modifier.default.php
  * default variable modifier}.
  *
@@ -59,7 +59,7 @@ class Rend_View_Helper_DefaultValue extends Zend_View_Helper_Abstract
      * @param   mixed   $default
      * @return  mixed
      */
-    public function direct($value, $default)
+    public function direct($value = null, $default = null)
     {
         return $this->defaultValue($value, $default);
     }
