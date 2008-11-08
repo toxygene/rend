@@ -15,8 +15,8 @@
  * @copyright   2008 Justin Hendrickson
  * @license     http://www.rendframework.com/license.html    New BSD License
  * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id: Random.php 183 2008-09-14 02:43:07Z justin.hendrickson $
+ * @since       2.0.0
+ * @version     $Id$
  */
 
 /** Rend_Random */
