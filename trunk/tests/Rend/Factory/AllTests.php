@@ -9,6 +9,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
 require_once "Rend/Factory/AclTest.php";
+require_once "Rend/Factory/AuthTest.php";
+require_once "Rend/Factory/LogTest.php";
+require_once "Rend/Factory/MailTest.php";
 
 /**
  *
@@ -28,6 +31,7 @@ class Rend_Factory_AllTests
         $suite->addTestSuite("Rend_Factory_AclTest");
         $suite->addTestSuite("Rend_Factory_AuthTest");
         $suite->addTestSuite("Rend_Factory_LogTest");
+        $suite->addTestSuite("Rend_Factory_MailTest");
 
         return $suite;
     }
