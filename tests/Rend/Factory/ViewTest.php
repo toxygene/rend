@@ -19,13 +19,13 @@
  * @version     $Id$
  */
 
-/** Rend_Factory_Log */
-require_once "Rend/Factory/Log.php";
+/** Rend_Factory_View */
+require_once "Rend/Factory/View.php";
 
 /**
  * @category    Rend
  * @subpackage  UnitTest
  */
-class Rend_Factory_LogTest extends PHPUnit_Framework_TestCase
+class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
 {
 }
