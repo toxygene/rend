@@ -19,13 +19,13 @@
  * @version     $Id$
  */
 
-/** Rend_Factory_Acl */
-require_once "Rend/Factory/Acl.php";
+/** Rend_Factory_Auth */
+require_once "Rend/Factory/Auth.php";
 
 /**
  * @category    Rend
  * @subpackage  UnitTest
  */
-class Rend_Factory_AclTest extends PHPUnit_Framework_TestCase
+class Rend_Factory_AuthTest extends PHPUnit_Framework_TestCase
 {
 }

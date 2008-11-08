@@ -26,6 +26,8 @@ class Rend_Factory_AllTests
         $suite = new PHPUnit_Framework_TestSuite("Rend Factory Tests");
 
         $suite->addTestSuite("Rend_Factory_AclTest");
+        $suite->addTestSuite("Rend_Factory_AuthTest");
+        $suite->addTestSuite("Rend_Factory_LogTest");
 
         return $suite;
     }
