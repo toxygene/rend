@@ -23,6 +23,6 @@
  * @category    Rend
  * @subpackage  UnitTest
  */
-class Rend_Filter_NullTest extends PHPUnit_Framework_TestCase
+class Rend_Factory_AclTest extends PHPUnit_Framework_TestCase
 {
 }
