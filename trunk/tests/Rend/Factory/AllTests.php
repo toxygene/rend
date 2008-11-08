@@ -26,6 +26,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
 require_once "Rend/Factory/AclTest.php";
 require_once "Rend/Factory/AuthTest.php";
+require_once "Rend/Factory/AuthAdapter/AllTests.php";
+require_once "Rend/Factory/AuthStorage/AllTests.php";
+require_once "Rend/Factory/Database/AllTests.php";
 require_once "Rend/Factory/LogTest.php";
 require_once "Rend/Factory/MailTest.php";
 require_once "Rend/Factory/ViewTest.php";
@@ -47,6 +50,9 @@ class Rend_Factory_AllTests
 
         $suite->addTestSuite("Rend_Factory_AclTest");
         $suite->addTestSuite("Rend_Factory_AuthTest");
+        $suite->addTest(Rend_Factory_AuthAdapter_AllTests::suite());
+        $suite->addTest(Rend_Factory_AuthStorage_AllTests::suite());
+        $suite->addTest(Rend_Factory_Database_AllTests::suite());
         $suite->addTestSuite("Rend_Factory_LogTest");
         $suite->addTestSuite("Rend_Factory_MailTest");
         $suite->addTestSuite("Rend_Factory_ViewTest");
