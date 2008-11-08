@@ -4,7 +4,7 @@
  */
 
 /** Rend_Factory_Database */
-require_once 'Rend/Factory/Database.php';
+require_once "Rend/Factory/Database.php";
 
 /**
  *

@@ -4,10 +4,10 @@
  */
 
 /** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once 'Rend/FactoryLoader/Factory/Loader/Abstract.php';
+require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
 
 /** Zend_Mail_Transport_Smtp */
-require_once 'Zend/Mail/Transport/Smtp.php';
+require_once "Zend/Mail/Transport/Smtp.php";
 
 /**
  *

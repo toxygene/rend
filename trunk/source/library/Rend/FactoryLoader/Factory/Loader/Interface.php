@@ -4,7 +4,7 @@
  */
 
 /** Rend_FactoryLoader_Factory_Interface */
-require_once 'Rend/FactoryLoader/Factory/Interface.php';
+require_once "Rend/FactoryLoader/Factory/Interface.php";
 
 /**
  *

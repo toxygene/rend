@@ -4,10 +4,10 @@
  */
 
 /** Rend_FactoryLoader_Factory_Abstract */
-require_once 'Rend/FactoryLoader/Factory/Abstract.php';
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Rend_FactoryLoader_Factory_Loader_Interface */
-require_once 'Rend/FactoryLoader/Factory/Loader/Interface.php';
+require_once "Rend/FactoryLoader/Factory/Loader/Interface.php";
 
 /**
  *

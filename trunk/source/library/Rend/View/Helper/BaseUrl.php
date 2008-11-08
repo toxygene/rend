@@ -39,7 +39,7 @@ class Rend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
     public function baseUrl()
     {
         /** Zend_Controller_Front */
-        require_once 'Zend/Controller/Front.php';
+        require_once "Zend/Controller/Front.php";
 
         return Zend_Controller_Front::getInstance()
                                     ->getRequest()

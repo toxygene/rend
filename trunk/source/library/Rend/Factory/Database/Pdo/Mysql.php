@@ -4,10 +4,10 @@
  */
 
 /** Rend_Factory_Database_Pdo */
-require_once 'Rend/Factory/Database/Pdo.php';
+require_once "Rend/Factory/Database/Pdo.php";
 
 /** Zend_Db_Adapter_Pdo_Mysql */
-require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
+require_once "Zend/Db/Adapter/Pdo/Mysql.php";
 
 /**
  *

@@ -4,10 +4,10 @@
  */
 
 /** Rend_FactoryLoader_Factory_Abstract */
-require_once 'Rend/FactoryLoader/Factory/Abstract.php';
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_View */
-require_once 'Zend/View.php';
+require_once "Zend/View.php";
 
 /**
  *
@@ -68,41 +68,41 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
         $config = array();
 
         if ($this->_basePath) {
-            $config['basePath'] = $this->_basePath;
+            $config["basePath"] = $this->_basePath;
         }
 
         if ($this->_encoding) {
-            $config['encoding'] = $this->_encoding;
+            $config["encoding"] = $this->_encoding;
         }
 
         if ($this->_escape) {
-            $config['escape'] = $this->_escape;
+            $config["escape"] = $this->_escape;
         }
 
         if ($this->_filter) {
-            $config['filter'] = $this->_filter;
+            $config["filter"] = $this->_filter;
         }
 
         if ($this->_filterPath) {
-            $config['filterPath'] = $this->_filterPath;
+            $config["filterPath"] = $this->_filterPath;
         }
 
         if ($this->_helperPath) {
-            $config['helperPath'] = $this->_helperPath;
+            $config["helperPath"] = $this->_helperPath;
         }
 
         if ($this->_scriptPath) {
-            $config['scriptPath'] = $this->_scriptPath;
+            $config["scriptPath"] = $this->_scriptPath;
         }
 
         if ($this->_strictVars) {
-            $config['strictVars'] = $this->_strictVars;
+            $config["strictVars"] = $this->_strictVars;
         }
 
         $view = new Zend_View($config);
 
         if ($this->_doctype) {
-            $view->getHelper('Doctype')
+            $view->getHelper("Doctype")
                  ->setDoctype($this->_doctype);
         }
 

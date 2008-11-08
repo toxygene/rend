@@ -61,12 +61,13 @@ class Rend_View_Helper_Cycle extends Zend_View_Helper_Abstract
      * Strategy method
      *
      * @see     cycle()
+     * @param   array   $selections
      * @return  Rend_View_Helper_Cycle_Container
      */
-    public function direct()
+    public function direct(array $selections = array())
     {
         return $this->cycle(
-            func_get_arg(0)
+            $selections
         );
     }
 

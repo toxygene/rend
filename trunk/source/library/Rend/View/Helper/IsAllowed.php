@@ -49,9 +49,11 @@ class Rend_View_Helper_IsAllowed extends Zend_View_Helper_Abstract
      * Strategy method
      *
      * @see     isAllowed()
+     * @param   string  $resource
+     * @param   string  $permission
      * @return  boolean
      */
-    public function direct($resource, $permission = null)
+    public function direct($resource = null, $permission = null)
     {
         return $this->isAllowed($resource, $permission);
     }
