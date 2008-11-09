@@ -24,7 +24,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 
 require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
+require_once "Rend/View/Helper/BasePathTest.php";
+require_once "Rend/View/Helper/BaseUrlTest.php";
 require_once "Rend/View/Helper/CycleTest.php";
+require_once "Rend/View/Helper/DefaultValueTest.php";
+require_once "Rend/View/Helper/FullUrlTest.php";
+require_once "Rend/View/Helper/IsAllowedTest.php";
+require_once "Rend/View/Helper/TruncateTest.php";
 
 /**
  *
@@ -41,7 +47,13 @@ class Rend_View_Helper_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite("Rend View Helper");
 
+        $suite->addTestSuite("Rend_View_Helper_BasePathTest");
+        $suite->addTestSuite("Rend_View_Helper_BaseUrlTest");
         $suite->addTestSuite("Rend_View_Helper_CycleTest");
+        $suite->addTestSuite("Rend_View_Helper_DefaultValueTest");
+        $suite->addTestSuite("Rend_View_Helper_FullUrlTest");
+        $suite->addTestSuite("Rend_View_Helper_IsAllowedTest");
+        $suite->addTestSuite("Rend_View_Helper_TruncateTest");
 
         return $suite;
     }

@@ -19,43 +19,32 @@
  * @version     $Id$
  */
 
-/** Rend_View_Helper_Cycle */
-require_once "Rend/View/Helper/Cycle.php";
+/** Rend_View_Helper_DefaultValue */
+require_once "Rend/View/Helper/DefaultValue.php";
 
 /**
  * @category    Rend
  * @subpackage 	UnitTest
  */
-class Rend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
+class Rend_View_Helper_DefaultValueTest extends PHPUnit_Framework_TestCase
 {
 
     private $_helper;
 
     public function setUp()
     {
-        $this->_helper = new Rend_View_Helper_Cycle();
+        $this->_helper = new Rend_View_Helper_DefaultValue();
     }
 
-    public function testCycleReturnsACycleIterator()
+    public function testValueReturnedIsBasedOnIfTheInitialValueIsSetOrNot()
     {
-        $this->assertType(
-            "Rend_View_Helper_Cycle_Container",
-            $this->_helper->direct(array("one"))
-        );
+        $this->assertEquals("one", $this->_helper->defaultValue("one", "two"));
+        $this->assertEquals("two", $this->_helper->direct(false, "two"));
     }
 
-    public function testCycleContainerIteratesInfinitely()
+    public function testDirectMethodProxiesToTheDefaultValueMethod()
     {
-        $container = $this->_helper->direct(array("one", "two"));
-
-        $this->assertEquals("one", $container->current());
-        $container->next();
-
-        $this->assertEquals("two", $container->current());
-        $container->next();
-
-        $this->assertEquals("one", $container->getCurrentAndAdvance());
-        $this->assertEquals("two", $container->current());
+        $this->assertEquals("one", $this->_helper->direct("one", "two"));
     }
 
 }
