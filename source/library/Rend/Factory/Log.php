@@ -22,7 +22,7 @@ class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
     private $_configFile;
 
     /**
-     * Get a log object
+     * Create a log object
      *
      * @return  Zend_Log
      */

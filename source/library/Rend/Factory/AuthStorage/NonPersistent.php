@@ -16,7 +16,7 @@ class Rend_Factory_AuthStorage_NonPersistent extends Rend_FactoryLoader_Factory_
 {
 
     /**
-     * Create method for factory
+     * Create a non-persistent storage
      *
      * @return  Zend_Auth_Storage_NonPersistent
      */

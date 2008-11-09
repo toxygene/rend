@@ -17,6 +17,7 @@ class Rend_Factory_Database_Mysqli extends Rend_Factory_Database
 {
 
     /**
+     * Create a Mysqli adapter
      *
      * @return  Zend_Db_Adapter_Mysqli
      */

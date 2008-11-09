@@ -16,26 +16,31 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
 {
 
     /**
+     * Credential column
      * @var     string
      */
     private $_credentialColumn;
 
     /**
+     * Credential treatment
      * @var     string
      */
     private $_credentialTreatment;
 
     /**
+     * Identity column
      * @var     string
      */
     private $_identityColumn;
 
     /**
+     * Database adapter
      * @var     Zend_Db_Adapter_Abstract
      */
     private $_databaseAdapter;
 
     /**
+     * Table name
      * @var     string
      */
     private $_tableName;
@@ -45,15 +50,8 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
      */
     public function create()
     {
-        if ($this->_databaseAdapter) {
-            $databaseAdapter = $this->_databaseAdapter;
-        } else {
-            $databaseAdapter = $this->_factoryLoader
-                                    ->database();
-        }
-
         return new Zend_Auth_Adapter_DbTable(
-            $databaseAdapter,
+            $this->_databaseAdapter,
             $this->_tableName,
             $this->_identityColumn,
             $this->_credentialColumn,
@@ -62,7 +60,10 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     }
 
     /**
+     * Set the credential column
      *
+     * @param   string  $credentialColumn
+     * @return  Rend_Factory_AuthAdapter_DbTable
      */
     public function setCredentialColunn($credentialColumn)
     {
@@ -71,7 +72,10 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     }
 
     /**
+     * Set the credential treatment
      *
+     * @param   string  $credentialTreatment
+     * @return  Rend_Factory_AuthAdapter_DbTable
      */
     public function setCredentialTreatment($credentialTreatment)
     {
@@ -80,7 +84,10 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     }
 
     /**
+     * Set the database adapter
      *
+     * @param   Zend_Db_Adapter_Abstract    $databaseAdapter
+     * @return  Rend_Factory_AuthAdapter_DbTable
      */
     public function setDatabaseAdapter(Zend_Db_Adapter_Abstract $databaseAdapter)
     {
@@ -89,7 +96,10 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     }
 
     /**
+     * Set the identity column
      *
+     * @param   string  $identityColumn
+     * @return  Rend_Factory_AuthAdapter_DbTable
      */
     public function setIdentityColumn($identityColumn)
     {
@@ -98,7 +108,10 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     }
 
     /**
+     * Set the table name
      *
+     * @param   string  $tableName
+     * @return  Rend_Factory_AuthAdapter_DbTable
      */
     public function setTableName($tableName)
     {

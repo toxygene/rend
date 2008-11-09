@@ -16,12 +16,14 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
-     *
+     * Charset
+     * @var     string
      */
     protected $_charset;
 
     /**
-     *
+     * Headers
+     * @var     array
      */
     protected $_headers = array();
 
@@ -46,7 +48,10 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the charset
      *
+     * @param   string  $charset
+     * @return  Rend_Factory_Mail
      */
     public function setCharset($charset)
     {
@@ -55,7 +60,10 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the headers
      *
+     * @param   array   $headers
+     * @return  Rend_Factory_Mail
      */
     public function setHeaders(array $headers)
     {

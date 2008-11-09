@@ -71,6 +71,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
             case self::CASE_FOLDING_UPPER:
                 $this->_params["caseFolding"] = Zend_Db::CASE_UPPER;
             break;
+
+            default:
+                // todo throw invalid value exception
+            break;
         }
         return $this;
     }
@@ -106,6 +110,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
 
             case self::FETCH_MODE_OBJ:
                 $this->_params["fetchMode"] = Zend_Db::FETCH_OBJ;
+            break;
+
+            default:
+                // todo throw invalid value exception
             break;
         }
         return $this;

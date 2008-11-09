@@ -61,7 +61,9 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     protected $_strictVars;
 
     /**
+     * Create a view object
      *
+     * @return  Zend_View
      */
     public function create()
     {
@@ -110,7 +112,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the base path
      *
+     * @param   string  $basePath
+     * @return  Rend_Factory_View
      */
     public function setBasePath($basePath)
     {
@@ -119,6 +124,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the doctype
+     *
+     * @param   string  $doctype
+     * @return  Rend_Factory_View
      *
      */
     public function setDoctype($doctype)
@@ -128,7 +137,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the encoding
      *
+     * @param   string  $encoding
+     * @return  Rend_Factory_View
      */
     public function setEncoding($encoding)
     {
@@ -137,7 +149,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the escape method
      *
+     * @param   mixed   $escape
+     * @return  Rend_Factory_View
      */
     public function setEscape($escape)
     {
@@ -146,7 +161,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the filter
      *
+     * @param   string  $filter
+     * @return  Rend_Factory_View
      */
     public function setFilter($filter)
     {
@@ -155,7 +173,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the filter path
      *
+     * @param   string  $filterPath
+     * @return  Rend_Factory_View
      */
     public function setFilterPath($filterPath)
     {
@@ -164,7 +185,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the helper path
      *
+     * @param   string  $helperPath
+     * @return  Rend_Factory_View
      */
     public function setHelperPath($helperPath)
     {
@@ -173,7 +197,10 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the script path
      *
+     * @param   string  $scriptPath
+     * @return  Rend_Factory_View
      */
     public function setScriptPath($scriptPath)
     {
@@ -182,11 +209,14 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the strict vars flag
      *
+     * @param   boolean     $strictVars\
+     * @return  Rend_Factory_View
      */
     public function setStrictVars($strictVars)
     {
-        $this->_strictVars = $strictVars;
+        $this->_strictVars = (boolean) $strictVars;
         return $this;
     }
 
