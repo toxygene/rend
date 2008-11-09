@@ -16,6 +16,7 @@ class Rend_Factory_MailTransport_Sendmail extends Rend_FactoryLoader_Factory_Loa
 {
 
     /**
+     * Parameters
      * @var     string
      */
     protected $_parameters;

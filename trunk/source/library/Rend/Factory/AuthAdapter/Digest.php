@@ -16,26 +16,32 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
 {
 
     /**
+     * Filename
      * @var     string
      */
     protected $_filename;
 
     /**
+     * Realm
      * @var     string
      */
     protected $_realm;
 
     /**
+     * Username
      * @var     string
      */
     protected $_username;
 
     /**
+     * Password
      * @var     string
      */
     protected $_password;
 
     /**
+     * Create a digest auth adapter
+     *
      * @return  Zend_Auth_Adapter_Digest
      */
     public function create()
@@ -49,7 +55,10 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     }
 
     /**
+     * Set the filename
      *
+     * @param   string  $filename
+     * @return  Rend_Factory_AuthAdapter_Digest
      */
     public function setFilename($filename)
     {
@@ -58,7 +67,10 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     }
 
     /**
+     * Set the password
      *
+     * @param   string  $password
+     * @return  Rend_Factory_AuthAdapter_Digest
      */
     public function setPassword($password)
     {
@@ -67,7 +79,10 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     }
 
     /**
+     * Set the realm
      *
+     * @param   string  $realm
+     * @return  Rend_Factory_AuthAdapter_Digest
      */
     public function setRealm($realm)
     {
@@ -76,7 +91,10 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     }
 
     /**
+     * Set the username
      *
+     * @param   string  $username
+     * @return  Rend_Factory_AuthAdapter_Digest
      */
     public function setUsername($username)
     {

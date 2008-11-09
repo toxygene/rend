@@ -16,11 +16,13 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
 {
 
     /**
+     * Hostname
      * @var     string
      */
     protected $_host;
 
     /**
+     * Options
      * @var     array
      */
     protected $_options;

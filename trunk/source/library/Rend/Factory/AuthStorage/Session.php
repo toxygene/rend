@@ -28,7 +28,7 @@ class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Loader
     protected $_namespace;
 
     /**
-     * Create method for factory
+     * Create a session storage
      *
      * @return  Zend_Auth_Storage_Session
      */
