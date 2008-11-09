@@ -19,43 +19,51 @@
  * @version     $Id$
  */
 
-/** Rend_View_Helper_Cycle */
-require_once "Rend/View/Helper/Cycle.php";
+/** Rend_View_Helper_BaseUrl */
+require_once "Rend/View/Helper/BaseUrl.php";
 
 /**
  * @category    Rend
  * @subpackage 	UnitTest
  */
-class Rend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
+class Rend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_front;
 
     private $_helper;
 
+    private $_request;
+
     public function setUp()
     {
-        $this->_helper = new Rend_View_Helper_Cycle();
+        $this->_front   = Zend_Controller_Front::getInstance();
+        $this->_helper  = new Rend_View_Helper_BaseUrl();
+        $this->_request = new Zend_Controller_Request_HttpTestCase();
+
+        $this->_front->setRequest($this->_request);
     }
 
-    public function testCycleReturnsACycleIterator()
+    public function tearDown()
     {
-        $this->assertType(
-            "Rend_View_Helper_Cycle_Container",
-            $this->_helper->direct(array("one"))
+        $this->_front
+             ->resetInstance();
+    }
+
+    public function testBaseUrlIsFetchedFromRequest()
+    {
+        $this->_request
+             ->setBaseUrl('/test/base/url');
+
+        $this->assertEquals(
+            '/test/base/url',
+            $this->_helper->baseUrl()
         );
-    }
 
-    public function testCycleContainerIteratesInfinitely()
-    {
-        $container = $this->_helper->direct(array("one", "two"));
-
-        $this->assertEquals("one", $container->current());
-        $container->next();
-
-        $this->assertEquals("two", $container->current());
-        $container->next();
-
-        $this->assertEquals("one", $container->getCurrentAndAdvance());
-        $this->assertEquals("two", $container->current());
+        $this->assertEquals(
+            '/test/base/url',
+            $this->_helper->direct()
+        );
     }
 
 }
