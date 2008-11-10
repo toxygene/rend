@@ -6,11 +6,11 @@ This class is the abstract base class for the Rend_Factory_Database_* classes.
 
 = API =
 || *Method* || *Description* ||
-|| `setAutoQuoteIdentifiers(/* boolean */ $autoQuoteIdentifiers) || Sets the auto-quote identifiers flag. ||
-|| `setCaseFolding(/* boolean */ $caseFolding) || Sets the case folding value. ||
-|| `setFetchMode(/* integer */ $fetchMode) || Sets the default fetch mode. ||
-|| `setHost(/* string */ $host) || Sets the host to connect to. ||
-|| `setPassword(/* string */ $password) || Sets the password to use when connecting to the host. ||
-|| `setProfiler($profiler) || ||
-|| `setSchema(/* string */ $schema) || Sets the schema (database name) to use after connecting to the host. ||
+|| `setAutoQuoteIdentifiers(/* boolean */ $autoQuoteIdentifiers)` || Sets the auto-quote identifiers flag. ||
+|| `setCaseFolding(/* boolean */ $caseFolding)` || Sets the case folding value. ||
+|| `setFetchMode(/* integer */ $fetchMode)` || Sets the default fetch mode. ||
+|| `setHost(/* string */ $host)` || Sets the host to connect to. ||
+|| `setPassword(/* string */ $password)` || Sets the password to use when connecting to the host. ||
+|| `setProfiler($profiler)` || ||
+|| `setSchema(/* string */ $schema)` || Sets the schema (database name) to use after connecting to the host. ||
 || `setUsername(/* string */ $username)` || Sets the username to use when connecting to the host. ||
