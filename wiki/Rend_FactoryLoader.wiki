@@ -1,0 +1,14 @@
+#summary Documentation of the Rend_FactoryLoader class
+#labels Phase-Implementation,Type-Factories
+
+= Description =
+This class is specialized plugin loader that can be used to easily create and use factories.
+
+= API =
+|| *Method* || *Description* ||
+|| `getFactory(/* string */ $name)` || Get a factory by name. ||
+
+`Rend_FactoryLoader` also overloads the `__get()` and `__call()` methods:
+
+|| `->name` || Proxies to `getFactory()`. ||
+|| `->name()` || Get a factory by name, call it's `create()` method and return the result. ||
