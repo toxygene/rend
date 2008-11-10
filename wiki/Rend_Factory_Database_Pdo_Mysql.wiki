@@ -1,4 +1,5 @@
 #summary Documentation of the Rend_Factory_Database_Pdo_Mysql class
+#labels Factories,Phase-Implementation
 
 = Description =
 This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract Factory] for the [http://php.net/pdo_mysql pdo_mysql] [http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter Zend_Db_Adapter].
