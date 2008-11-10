@@ -2,7 +2,7 @@
 #labels Factories,Phase-Implementation
 
 = Description =
-This class is the abstract base class for the Rend_Factory_Database_* classes.
+This class is the abstract base class for the `Rend_Factory_Database_*` classes.
 
 = API =
 || *Method* || *Description* ||
