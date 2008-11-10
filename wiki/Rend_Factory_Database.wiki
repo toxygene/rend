@@ -1,5 +1,5 @@
 #summary Documentation of the Rend_Factory_Database class
-#labels Factories,Phase-Implementation
+#labels Type-Factories,Phase-Implementation
 
 = Description =
 This class is the abstract base class for the `Rend_Factory_Database_*` classes.
