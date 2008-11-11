@@ -17,6 +17,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * @var     array
      */
     protected $_factories = array();
+
     /**
      * Constructor
      *
@@ -45,7 +46,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function __call($name, $arguments)
     {
-        return $this->$name
+        return $this->getFactory($name)
                     ->create();
     }
 
@@ -70,6 +71,20 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     public function __isset($name)
     {
         return isset($this->_factories[$name]);
+    }
+
+    /**
+     * Set all the factories
+     *
+     * @param 	Traversable 	$factories
+     * @return	Rend_FactoryLoader
+     */
+    public function setFactories($factories)
+    {
+        foreach ($factories as $name => $config) {
+            $this->setFactory($name, $config);
+        }
+        return $this;
     }
 
     /**
@@ -134,9 +149,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
                 break;
 
                 case "factories":
-                    foreach ($value as $name => $factory) {
-                        $this->setFactory($name, $factory);
-                    }
+                    $this->setFactories($value);
                 break;
             }
         }
