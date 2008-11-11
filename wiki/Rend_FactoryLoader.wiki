@@ -11,4 +11,4 @@ This class is specialized plugin loader that can be used to easily create and us
 `Rend_FactoryLoader` also overloads the `__get()` and `__call()` methods:
 
 || `->name` || Proxies to `getFactory()`. ||
-|| `->name()` || Get a factory by name, call it's `create()` method and return the result. ||
+|| `->name()` || Get a factory by name and returns the result of it's `create()` method. ||
