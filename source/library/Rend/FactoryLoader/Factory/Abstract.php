@@ -12,6 +12,18 @@ require_once "Rend/FactoryLoader/Factory/Interface.php";
 abstract class Rend_FactoryLoader_Factory_Abstract implements Rend_FactoryLoader_Factory_Interface
 {
 
+	/**
+     *
+     */
+ 	public function __construct($config)
+ 	{
+ 		if ($config instanceof Zend_Config) {
+ 			$this->setConfig($config);
+ 		} elseif (is_array($config)) {
+ 			$this->setOptions($config);
+ 		}
+ 	}
+
     /**
      *
      */
