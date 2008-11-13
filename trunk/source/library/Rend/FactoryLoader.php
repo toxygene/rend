@@ -172,7 +172,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         $reflection = new ReflectionClass($className);
 
         if (isset($config["options"])) {
-            $factory = $reflection->newInstanceArgs($config["options"]);
+            $factory = $reflection->newInstanceArgs(array($config["options"]));
         } else {
             $factory = $reflection->newInstance();
         }
