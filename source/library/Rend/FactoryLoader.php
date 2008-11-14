@@ -169,12 +169,10 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
             ucFirst($config["type"])
         );
 
-        $reflection = new ReflectionClass($className);
-
         if (isset($config["options"])) {
-            $factory = $reflection->newInstanceArgs(array($config["options"]));
+            $factory = new $className($config["options"]);
         } else {
-            $factory = $reflection->newInstance();
+            $factory = new $className();
         }
 
         if ($factory instanceof Rend_FactoryLoader_Factory_Loadable_Interface) {
