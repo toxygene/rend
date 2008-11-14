@@ -173,12 +173,14 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected function _setupFrontController()
     {
         $this->_getFrontController()
+             ->setParam("rendConfig", $this->_getConfig())
+             ->setParam("rendFactoryLoader", $this->_getFactoryLoader())
+             ->throwExceptions($this->_getConfig()->displayErrors);
+
+        $this->_getFrontController()
              ->getDispatcher()
              ->setParam("rendConfig", $this->_getConfig())
              ->setParam("rendFactoryLoader", $this->_getFactoryLoader());
-
-        $this->_getFrontController()
-             ->throwExceptions($this->_getConfig()->displayErrors);
 
         return $this;
     }
