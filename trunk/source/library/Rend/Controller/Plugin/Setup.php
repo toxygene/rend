@@ -19,6 +19,9 @@
  * @version     $Id$
  */
 
+/** Zend_Controller_Plugin_Abstract */
+require_once "Zend/Controller/Plugin/Abstract.php";
+
 /**
  * Rend setup plugin
  *
@@ -61,6 +64,9 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected function _getConfig()
     {
         if (!$this->_config) {
+            /** Zend_Config_Ini */
+            require_once "Zend/Config/Ini.php";
+
             $this->_config = new Zend_Config_Ini(
                 "../application/configs/config.ini",
                 $this->_getFrontController()
@@ -80,6 +86,9 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected function _getFactoryLoader()
     {
         if (!$this->_factoryLoader) {
+            /** Rend_FactoryLoader */
+            require_once "Rend/FactoryLoader.php";
+
             $this->_factoryLoader = new Rend_FactoryLoader(
                 $this->_getConfig()
                      ->factoryLoader
@@ -95,6 +104,9 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _getFrontController()
     {
+        /** Zend_Controller_Front */
+        require_once "Zend/Controller/Front.php";
+
         return Zend_Controller_Front::getInstance();
     }
 
@@ -105,6 +117,9 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      */
     protected function _setupActionHelperBroker()
     {
+        /** Zend_Controller_Action_HelperBroker */
+        require_once "Zend/Controller/Action/HelperBroker.php";
+
         Zend_Controller_Action_HelperBroker::addPrefix("Rend_Controller_Action_Helper");
 
         return $this;
