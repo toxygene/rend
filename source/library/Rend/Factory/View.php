@@ -75,7 +75,11 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
         if ($this->_filterPaths) {
             foreach ($this->_filterPaths as $filterPath) {
                 if (is_array($filterPath)) {
-                    $view->addFilterPath($filterPath['path'], $filterPath['prefix']);
+                    if (isset($filterPath["prefix"])) {
+                        $view->addFilterPath($filterPath["path"], $filterPath["prefix"]);
+                    } else {
+                        $view->addFilterPath($filterPath["path"]);
+                    }
                 } else {
                     $view->addFilterPath($filterPath);
                 }
@@ -85,9 +89,13 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
         if ($this->_helperPaths) {
             foreach ($this->_helperPaths as $helperPath) {
                 if (is_array($helperPath)) {
-                    $view->addHelperPath($helperPath['path'], $helperPath['prefix']);
+                    if (isset($helperPath["prefix"])) {
+                        $view->addFilterPath($helperPath["path"], $helperPath["prefix"]);
+                    } else {
+                        $view->addFilterPath($helperPath["path"]);
+                    }
                 } else {
-                    $view->addHelperPath($helperPath);
+                    $view->addFilterPath($helperPath);
                 }
             }
         }
