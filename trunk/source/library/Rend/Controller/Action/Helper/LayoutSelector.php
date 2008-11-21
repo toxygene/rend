@@ -77,16 +77,20 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
      */
     public function postDispatch()
     {
-        if ($this->getRequest()->isDispatched() && $this->getLayout()->isEnabled()) {
+        if (!$this->_layout) {
+            throw new Zend_Controller_Action_Exception("You must provide a layout object before use");
+        }
+
+        if ($this->getRequest()->isDispatched() && $this->_layout->isEnabled()) {
             $actionController = $this->getActionController();
             $actionName       = $this->_getActionName();
             $parameter        = $this->_parameter;
 
             if (isset($actionController->$parameter)) {
-                if (isset($actionController->$parameter[$actionName])) {
-                    $this->_setLayoutScript($actionController->$parameter[$actionName]);
-                } elseif (isset($actionController->$parameter[self::WILDCARD])) {
-                    $this->_setLayoutScript($actionController->$parameter[self::WILDCARD]);
+                if (isset($actionController->{$parameter}[$actionName])) {
+                    $this->_setLayoutScript($actionController->{$parameter}[$actionName]);
+                } elseif (isset($actionController->{$parameter}[self::WILDCARD])) {
+                    $this->_setLayoutScript($actionController->{$parameter}[self::WILDCARD]);
                 }
             }
         }
@@ -98,7 +102,7 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
      * @param   string  $script
      * @return  Rend_Controller_Action_Helper_LayoutSelector
      */
-    protected function _setLayoutScript($script)
+    private function _setLayoutScript($script)
     {
         $this->_layout
              ->setLayout($script);
