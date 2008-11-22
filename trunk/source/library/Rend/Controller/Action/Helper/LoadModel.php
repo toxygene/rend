@@ -72,7 +72,7 @@ class Rend_Controller_Action_Helper_LoadModel extends Zend_Controller_Action_Hel
 
         Zend_Loader::loadClass($name);
 
-        return $name(array(
+        return new $name(array(
             Zend_Db_Table_Abstract::ADAPTER => $this->_database
         ));
     }
