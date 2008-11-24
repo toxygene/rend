@@ -59,6 +59,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
         $this->_environment = $environment;
 
         $this->_setupActionHelperBroker()
+             ->_setupLayout()
              ->_setupPhpEnvironment()
              ->_setupFrontController();
 
@@ -157,6 +158,18 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
              ->getDispatcher()
              ->setParam("rendConfig", $this->_getConfig())
              ->setParam("rendFactoryLoader", $this->_getFactoryLoader());
+
+        return $this;
+    }
+
+    /**
+     * Setup Zend_Layout
+     *
+     * @return Rend_Controller_Plugin_Setup
+     */
+    private function _setupLayout()
+    {
+        Zend_Layout::startMvc("../application/layouts");
 
         return $this;
     }
