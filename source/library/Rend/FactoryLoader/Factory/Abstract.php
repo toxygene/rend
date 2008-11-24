@@ -15,7 +15,7 @@ abstract class Rend_FactoryLoader_Factory_Abstract implements Rend_FactoryLoader
 	/**
      *
      */
- 	public function __construct($config)
+ 	public function __construct($config = null)
  	{
  		if ($config instanceof Zend_Config) {
  			$this->setConfig($config);
