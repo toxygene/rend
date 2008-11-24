@@ -38,7 +38,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected $_config;
 
     /**
-     * Environment mode
+     * Environment
      * @var string
      */
     protected $_environment;
