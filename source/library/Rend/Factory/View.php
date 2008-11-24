@@ -90,12 +90,12 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
             foreach ($this->_helperPaths as $helperPath) {
                 if (is_array($helperPath)) {
                     if (isset($helperPath["prefix"])) {
-                        $view->addFilterPath($helperPath["path"], $helperPath["prefix"]);
+                        $view->addHelperPath($helperPath["path"], $helperPath["prefix"]);
                     } else {
-                        $view->addFilterPath($helperPath["path"]);
+                        $view->addHelperPath($helperPath["path"]);
                     }
                 } else {
-                    $view->addFilterPath($helperPath);
+                    $view->addHelperPath($helperPath);
                 }
             }
         }
