@@ -13,11 +13,10 @@ if (isset($bootstrap) && $bootstrap) {
 }
 
 Zend_Controller_Front::getInstance()
-                     ->setParam("env", $_SERVER["REND_MODE"])
                      ->addControllerDirectory("../application/controllers", "default")
                      ->addModuleDirectory("../application/modules");
 
-$setup = new Rend_Controller_Plugin_Setup();
+$setup = new Rend_Controller_Plugin_Setup($_SERVER["REND_MODE"]);
 
 Zend_Controller_Front::getInstance()
                      ->registerPlugin($setup, 0);
