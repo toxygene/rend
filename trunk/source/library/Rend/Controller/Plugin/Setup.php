@@ -38,22 +38,31 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     protected $_config;
 
     /**
+     * Environment mode
+     * @var string
+     */
+    protected $_environment;
+
+    /**
      * Factory loader object
      * @var     Rend_FactoryLoader
      */
     protected $_factoryLoader;
 
     /**
-     * Called before Zend_Controller_Front begins evaluating the
-     * request against its routes.
+     * Constructor
      *
-     * @param   Zend_Controller_Request_Abstract    $request
+     * @param string $environment
      */
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    public function __construct($environment)
     {
+        $this->_environment = $environment;
+
         $this->_setupActionHelperBroker()
              ->_setupPhpEnvironment()
              ->_setupFrontController();
+
+        $this->_init();
     }
 
     /**
@@ -69,8 +78,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
 
             $this->_config = new Zend_Config_Ini(
                 "../application/configs/config.ini",
-                $this->_getFrontController()
-                     ->getParam("env")
+                $this->_environment
             );
         }
         return $this->_config;
@@ -111,11 +119,19 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
     }
 
     /**
+     * Overloadable method called at the end of __construct()
+     *
+     * @see __construct
+     */
+    protected function _init()
+    {}
+
+    /**
      * Setup the action helper broker
      *
      * @return  Rend_Controller_Plugin_Setup
      */
-    protected function _setupActionHelperBroker()
+    private function _setupActionHelperBroker()
     {
         /** Zend_Controller_Action_HelperBroker */
         require_once "Zend/Controller/Action/HelperBroker.php";
@@ -130,7 +146,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      *
      * @return  Rend_Controller_Plugin_Setup
      */
-    protected function _setupFrontController()
+    private function _setupFrontController()
     {
         $this->_getFrontController()
              ->setParam("rendConfig", $this->_getConfig())
@@ -150,7 +166,7 @@ class Rend_Controller_Plugin_Setup extends Zend_Controller_Plugin_Abstract
      *
      * @return  Rend_Controller_Plugin_Setup
      */
-    protected function _setupPhpEnvironment()
+    private function _setupPhpEnvironment()
     {
         error_reporting(E_ALL | E_STRICT);
 
