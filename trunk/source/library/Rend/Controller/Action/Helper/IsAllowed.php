@@ -72,6 +72,18 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_forbiddenParams = array();
 
     /**
+     * Role name
+     * @var     string
+     */
+    private $_role;
+
+    /**
+     * Throw exceptions flag
+     * @var boolean
+     */
+    private $_throwExceptions = false;
+
+    /**
      * Unauthorized action
      * @var     string
      */
@@ -96,12 +108,6 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     private $_unauthorizedParams = array();
 
     /**
-     * Role name
-     * @var     string
-     */
-    private $_role;
-
-    /**
      * Check if the current role has permission to the resource
      *
      * @param   string      $resource
@@ -111,7 +117,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     public function isAllowed($resource, $permission = null)
     {
         return $this->_getAcl()
-                    ->isAllowed($this->_getRole(), $resource, $permission);
+                    ->isAllowed($this->_role, $resource, $permission);
     }
 
     /**
@@ -144,6 +150,30 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
+     * Set the role name
+     *
+     * @param   string  $role
+     * @return  Rend_Controller_Action_Helper_IsAllowed
+     */
+    public function setRole($role = null)
+    {
+        $this->_role = $role;
+        return $this;
+    }
+
+    /**
+     * Set the throw exceptions flag
+     *
+     * @param boolean $throwExceptions
+     * @return Rend_Controller_Action_Helper_IsAllowed
+     */
+    public function setThrowExceptions($throwExceptions)
+    {
+        $this->_throwExceptions = (boolean) $throwExceptions;
+        return $this;
+    }
+
+    /**
      * Set the unauthorized page
      *
      * @param   string  $action
@@ -157,18 +187,6 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
         $this->_unauthorizedController = $controller;
         $this->_unauthorizedModule     = $module;
         $this->_unauthorizedParams     = $params;
-        return $this;
-    }
-
-    /**
-     * Set the role name
-     *
-     * @param   string  $role
-     * @return  Rend_Controller_Action_Helper_IsAllowed
-     */
-    public function setRole($role = null)
-    {
-        $this->_role = $role;
         return $this;
     }
 
@@ -187,29 +205,66 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
         }
 
         if (!$this->isAllowed($resource, $permission)) {
+            $perm = $permission ? $permission : "*default*";
+
             $this->getRequest()
                  ->setParam("deniedAction", $this->getRequest()->getActionName())
                  ->setParam("deniedController", $this->getRequest()->setControllerName())
                  ->setParam("deniedModule", $this->getRequest()->setModuleName())
                  ->setParam("deniedParams", $this->getRequest()->setParams())
-                 ->setParam("deniedRole", $this->getRole())
+                 ->setParam("deniedRole", $this->_role)
                  ->setParam("deniedResource", $resource)
-                 ->setParam("deniedPermission", $permission ? $permission : "*default*")
+                 ->setParam("deniedPermission", $perm)
                  ->setDispatched(false);
 
-            if (!$this->_getRole()) {
-                $this->getRequest()
-                     ->setActionName($this->_unauthorizedAction)
-                     ->setControllerName($this->_unauthorizedController)
-                     ->setModuleName($this->_unauthorizedModule)
-                     ->setParams($this->_unauthorizedParams);
+            if ($this->_throwExceptions) {
+                throw new Zend_Controller_Action_Exception("Permission '{$perm}' denied on resource '{$resource}' for role '{$this->_role}'");
             } else {
-                $this->getRequest()
-                     ->setActionName($this->_forbiddenAction)
-                     ->setControllerName($this->_forbiddenController)
-                     ->setModuleName($this->_forbiddenModule)
-                     ->setParams($this->_forbiddenParams);
+                if (!$this->_role) {
+                    $this->getRequest()
+                         ->setActionName($this->_unauthorizedAction)
+                         ->setControllerName($this->_unauthorizedController)
+                         ->setModuleName($this->_unauthorizedModule)
+                         ->setParams($this->_unauthorizedParams);
+                } else {
+                    $this->getRequest()
+                         ->setActionName($this->_forbiddenAction)
+                         ->setControllerName($this->_forbiddenController)
+                         ->setModuleName($this->_forbiddenModule)
+                         ->setParams($this->_forbiddenParams);
+                }
             }
+        }
+    }
+
+    /**
+     * Get the ACL object
+     *
+     * @return Zend_Acl
+     */
+    protected function _getAcl()
+    {
+        if (!$this->_acl) {
+            throw new Zend_Controller_Action_Exception("You must set an ACL object before using this helper");
+        }
+        return $this->_acl;
+    }
+
+    /**
+     * Format the Acl results consistently
+     *
+     * @param   array   $results
+     * @return  array
+     */
+    protected function _formatAclResults($results)
+    {
+        if (isset($results[1])) {
+            return $results;
+        } else {
+            return array(
+                $results[0],
+                null
+            );
         }
     }
 
@@ -253,24 +308,6 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
             }
 
             return $this->_formatAclResults($acls[self::ALL_ACTIONS]);
-        }
-    }
-
-    /**
-     * Format the Acl results consistently
-     *
-     * @param   array   $results
-     * @return  array
-     */
-    protected function _formatAclResults($results)
-    {
-        if (isset($results[1])) {
-            return $results;
-        } else {
-            return array(
-                $results[0],
-                null
-            );
         }
     }
 
