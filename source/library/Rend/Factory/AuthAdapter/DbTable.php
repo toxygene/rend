@@ -65,7 +65,7 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
      * @param   string  $credentialColumn
      * @return  Rend_Factory_AuthAdapter_DbTable
      */
-    public function setCredentialColunn($credentialColumn)
+    public function setCredentialColumn($credentialColumn)
     {
         $this->_credentialColumn = $credentialColumn;
         return $this;
