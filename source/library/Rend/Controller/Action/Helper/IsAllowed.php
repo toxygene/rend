@@ -209,9 +209,9 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
 
             $this->getRequest()
                  ->setParam("deniedAction", $this->getRequest()->getActionName())
-                 ->setParam("deniedController", $this->getRequest()->setControllerName())
-                 ->setParam("deniedModule", $this->getRequest()->setModuleName())
-                 ->setParam("deniedParams", $this->getRequest()->setParams())
+                 ->setParam("deniedController", $this->getRequest()->getControllerName())
+                 ->setParam("deniedModule", $this->getRequest()->getModuleName())
+                 ->setParam("deniedParams", $this->getRequest()->getParams())
                  ->setParam("deniedRole", $this->_role)
                  ->setParam("deniedResource", $resource)
                  ->setParam("deniedPermission", $perm)
