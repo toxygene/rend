@@ -21,10 +21,10 @@ class UserController extends Zend_Controller_Action
 {
     public function viewAction()
     {
-        $user = $this->_helper
-                     ->model('Users')
-                     ->find($this->_getParam('id'))
-                     ->current();
+        $users = new Users();
+
+        $user = $users->find($this->_getParam("id"))
+                      ->current();
 
         if (!$user) {
             /** Zend_Controller_Action_Exception */
