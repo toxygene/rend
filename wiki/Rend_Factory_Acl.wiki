@@ -16,7 +16,9 @@ Basic usage of the `Rend_Factory_Acl` is to create an instance of the factory an
 {{{
 class MyController extends Rend_Controller_Action {
     public function init() {
-        $aclFactory = new Rend_Factory_Acl();
+        $aclFactory = new Rend_Factory_Acl(array(
+            "configFile" => "../application/config/acl.php"
+        ));
         $this->_acl = $aclFactory->create();
     }
 }
