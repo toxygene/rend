@@ -12,7 +12,7 @@ interface Rend_FactoryLoader_Factory_Interface
     /**
      *
      */
-    public function create();
+    public function __construct($config = null);
 
     /**
      *

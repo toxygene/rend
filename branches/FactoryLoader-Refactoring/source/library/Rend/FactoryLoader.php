@@ -148,8 +148,11 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
                     }
                 break;
 
-                case "factories":
-                    $this->setFactories($value);
+                default:
+                    $method = "set" . ucFirst($key);
+                    if (method_exists($this, $method)) {
+                        $this->$method($value);
+                    }
                 break;
             }
         }
@@ -170,13 +173,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         );
 
         if (isset($config["options"])) {
-            $factory = new $className($config["options"]);
-        } else {
             $factory = new $className();
-        }
-
-        if ($factory instanceof Rend_FactoryLoader_Factory_Loadable_Interface) {
-            $factory->setFactoryLoader($this);
+        } else {
+            $factory = new $className($config["options"]);
         }
 
         return $factory;
