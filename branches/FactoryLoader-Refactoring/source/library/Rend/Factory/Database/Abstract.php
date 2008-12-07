@@ -34,10 +34,12 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**#@-*/
 
     /**
-     * Database params
+     * Database options
      * @var     array
      */
-    protected $_params = array();
+    protected $_options = array(
+        "driverOptions" => array()
+    );
 
     /**
      * Statement class
@@ -53,7 +55,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setAutoQuoteIdentifiers($autoQuoteIdentifiers)
     {
-        $this->_params["autoQuoteIdentifiers"] = (boolean) $autoQuoteIdentifiers;
+        $this->_options["autoQuoteIdentifiers"] = (boolean) $autoQuoteIdentifiers;
         return $this;
     }
 
@@ -67,15 +69,15 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     {
         switch ($caseFolding) {
             case self::CASE_FOLDING_NATURAL:
-                $this->_params["caseFolding"] = Zend_Db::CASE_NATURAL;
+                $this->_options["caseFolding"] = Zend_Db::CASE_NATURAL;
             break;
 
             case self::CASE_FOLDING_LOWER:
-                $this->_params["caseFolding"] = Zend_Db::CASE_LOWER;
+                $this->_options["caseFolding"] = Zend_Db::CASE_LOWER;
             break;
 
             case self::CASE_FOLDING_UPPER:
-                $this->_params["caseFolding"] = Zend_Db::CASE_UPPER;
+                $this->_options["caseFolding"] = Zend_Db::CASE_UPPER;
             break;
 
             default:
@@ -98,27 +100,27 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     {
         switch ($fetchMode) {
             case self::FETCH_MODE_LAZY:
-                $this->_params["fetchMode"] = Zend_Db::FETCH_LAZY;
+                $this->_options["fetchMode"] = Zend_Db::FETCH_LAZY;
             break;
 
             case self::FETCH_MODE_ASSOC:
-                $this->_params["fetchMode"] = Zend_Db::FETCH_ASSOC;
+                $this->_options["fetchMode"] = Zend_Db::FETCH_ASSOC;
             break;
 
             case self::FETCH_MODE_NUM:
-                $this->_params["fetchMode"] = Zend_Db::FETCH_NUM;
+                $this->_options["fetchMode"] = Zend_Db::FETCH_NUM;
             break;
 
             case self::FETCH_MODE_BOTH:
-                $this->_params["fetchMode"] = Zend_Db::FETCH_BOTH;
+                $this->_options["fetchMode"] = Zend_Db::FETCH_BOTH;
             break;
 
             case self::FETCH_MODE_NAMED:
-                $this->_params["fetchMode"] = Zend_Db::FETCH_NAMED;
+                $this->_options["fetchMode"] = Zend_Db::FETCH_NAMED;
             break;
 
             case self::FETCH_MODE_OBJ:
-                $this->_params["fetchMode"] = Zend_Db::FETCH_OBJ;
+                $this->_options["fetchMode"] = Zend_Db::FETCH_OBJ;
             break;
 
             default:
@@ -139,7 +141,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setHost($host)
     {
-        $this->_params["host"] = $host;
+        $this->_options["host"] = $host;
         return $this;
     }
 
@@ -151,7 +153,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setPassword($password)
     {
-        $this->_params["password"] = $password;
+        $this->_options["password"] = $password;
         return $this;
     }
 
@@ -163,7 +165,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setPersistent($persistent)
     {
-        $this->_params["persistent"] = $persistent;
+        $this->_options["persistent"] = $persistent;
         return $this;
     }
 
@@ -175,7 +177,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setPort($port)
     {
-        $this->_params["port"] = $port;
+        $this->_options["port"] = $port;
         return $this;
     }
 
@@ -187,7 +189,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setProfiler($profiler)
     {
-        $this->_params["profiler"] = $profiler;
+        $this->_options["profiler"] = $profiler;
         return $this;
     }
 
@@ -199,7 +201,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setProtocol($protocol)
     {
-        $this->_params["protocol"] = $protocol;
+        $this->_options["protocol"] = $protocol;
         return $this;
     }
 
@@ -211,7 +213,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setSchema($schema)
     {
-        $this->_params["dbname"] = $schema;
+        $this->_options["dbname"] = $schema;
         return $this;
     }
 
@@ -235,7 +237,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
      */
     public function setUsername($username)
     {
-        $this->_params["username"] = $username;
+        $this->_options["username"] = $username;
         return $this;
     }
 
