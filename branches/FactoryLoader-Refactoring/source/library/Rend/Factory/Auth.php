@@ -18,7 +18,7 @@ class Rend_Factory_Auth extends Rend_FactoryLoader_Factory_Abstract
     /**
      * Create an auth object
      *
-     * @return  Zend_Auth
+     * @return Zend_Auth
      */
     public function create()
     {

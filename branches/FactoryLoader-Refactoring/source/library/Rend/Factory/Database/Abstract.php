@@ -14,7 +14,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
 
     /**#@+
      * Case folding constant
-     * @var     string
+     * @var string
      */
     const CASE_FOLDING_NATURAL = "natural";
     const CASE_FOLDING_LOWER   = "lower";
@@ -23,7 +23,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
 
     /**#@+
      * Fetch mode constant
-     * @var     string
+     * @var string
      */
     const FETCH_MODE_LAZY  = "lazy";
     const FETCH_MODE_ASSOC = "assoc";
@@ -35,7 +35,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
 
     /**
      * Database options
-     * @var     array
+     * @var array
      */
     protected $_options = array(
         "driverOptions" => array()
@@ -50,8 +50,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the auto quote identifiers flag
      *
-     * @param   boolean $autoQuoteIdentifiers
-     * @return  Rend_Factory_Database_Abstract
+     * @param boolean $autoQuoteIdentifiers
+     * @return Rend_Factory_Database_Abstract
      */
     public function setAutoQuoteIdentifiers($autoQuoteIdentifiers)
     {
@@ -62,8 +62,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the case folding value
      *
-     * @param   integer     $caseFolding
-     * @return  Rend_Factory_Database_Abstract
+     * @param integer $caseFolding
+     * @return Rend_Factory_Database_Abstract
      */
     public function setCaseFolding($caseFolding)
     {
@@ -93,8 +93,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the fetch mode
      *
-     * @param   string  $fetchMode
-     * @return  Rend_Factory_Database_Abstract_Pdo
+     * @param string $fetchMode
+     * @return Rend_Factory_Database_Abstract_Pdo
      */
     public function setFetchMode($fetchMode)
     {
@@ -136,8 +136,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the host
      *
-     * @param   string  $host
-     * @return  Rend_Factory_Database_Abstract
+     * @param string $host
+     * @return Rend_Factory_Database_Abstract
      */
     public function setHost($host)
     {
@@ -148,8 +148,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the password
      *
-     * @param   string  $password
-     * @return  Rend_Factory_Database_Abstract
+     * @param string $password
+     * @return Rend_Factory_Database_Abstract
      */
     public function setPassword($password)
     {
@@ -184,8 +184,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the profiler
      *
-     * @param   mixed   $profiler
-     * @return  Rend_Factory_Database_Abstract
+     * @param mixed $profiler
+     * @return Rend_Factory_Database_Abstract
      */
     public function setProfiler($profiler)
     {
@@ -208,8 +208,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the schema (aka database name)
      *
-     * @param   string  $schema
-     * @return  Rend_Factory_Database_Abstract
+     * @param string $schema
+     * @return Rend_Factory_Database_Abstract
      */
     public function setSchema($schema)
     {
@@ -232,8 +232,8 @@ abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory
     /**
      * Set the username
      *
-     * @param   string  $username
-     * @return  Rend_Factory_Database_Abstract
+     * @param string $username
+     * @return Rend_Factory_Database_Abstract
      */
     public function setUsername($username)
     {

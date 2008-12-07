@@ -17,20 +17,20 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
 
     /**
      * Hostname
-     * @var     string
+     * @var string
      */
     protected $_host;
 
     /**
      * Options
-     * @var     array
+     * @var array
      */
     protected $_options;
 
     /**
      * Get a SMTP transport object
      *
-     * @return  Zend_Mail_Transport_Smtp
+     * @return Zend_Mail_Transport_Smtp
      */
     public function create()
     {
@@ -43,8 +43,8 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
     /**
      * Set the host name
      *
-     * @param   string  $host
-     * @return  Rend_Factory_MailTransport_Smtp
+     * @param string $host
+     * @return Rend_Factory_MailTransport_Smtp
      */
     public function setHost($host)
     {
@@ -55,8 +55,8 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
     /**
      * Set the options
      *
-     * @param   array   $options
-     * @return  Rend_Factory_MailTransport_Smtp
+     * @param array $options
+     * @return Rend_Factory_MailTransport_Smtp
      */
     public function setOptions(array $options)
     {

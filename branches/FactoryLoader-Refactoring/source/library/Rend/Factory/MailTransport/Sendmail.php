@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Mail_Transport_Sendmail */
 require_once "Zend/Mail/Transport/Sendmail.php";
@@ -12,19 +12,19 @@ require_once "Zend/Mail/Transport/Sendmail.php";
 /**
  *
  */
-class Rend_Factory_MailTransport_Sendmail extends Rend_FactoryLoader_Factory_Loader_Abstract
+class Rend_Factory_MailTransport_Sendmail extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
      * Parameters
-     * @var     string
+     * @var string
      */
     protected $_parameters;
 
     /**
      * Get a sendmail transport object
      *
-     * @return  Zend_Mail_Transport_Sendmail
+     * @return Zend_Mail_Transport_Sendmail
      */
     public function create()
     {
@@ -36,7 +36,7 @@ class Rend_Factory_MailTransport_Sendmail extends Rend_FactoryLoader_Factory_Loa
     /**
      * Set the parameters
      *
-     * @return  Rend_Factory_MailTransport_Sendmail
+     * @return Rend_Factory_MailTransport_Sendmail
      */
     public function setParameters($parameters)
     {

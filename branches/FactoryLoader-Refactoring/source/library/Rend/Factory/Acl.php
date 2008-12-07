@@ -23,14 +23,14 @@ class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
 
     /**
      * Configuration file
-     * @var     string
+     * @var string
      */
     private $_configFile;
 
     /**
      * Create an ACL object
      *
-     * @return  Zend_Acl
+     * @return Zend_Acl
      */
     public function create()
     {
@@ -46,8 +46,8 @@ class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
     /**
      * Set the configuration file
      *
-     * @param   string  $configFile
-     * @return  Rend_Factory_Acl
+     * @param string $configFile
+     * @return Rend_Factory_Acl
      */
     public function setConfigFile($configFile)
     {
