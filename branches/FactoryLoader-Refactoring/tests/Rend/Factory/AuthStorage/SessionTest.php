@@ -10,21 +10,21 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @subpackage 	UnitTest
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       2.0.0
- * @version     $Id$
+ * @category Rend
+ * @subpackage UnitTest
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 2.0.0
+ * @version $Id$
  */
 
 /** Rend_Factory_AuthStorage_Session */
 require_once "Rend/Factory/AuthStorage/Session.php";
 
 /**
- * @category    Rend
- * @subpackage  UnitTest
+ * @category Rend
+ * @subpackage UnitTest
  */
 class Rend_Factory_AuthStorage_SessionTest extends PHPUnit_Framework_TestCase
 {
