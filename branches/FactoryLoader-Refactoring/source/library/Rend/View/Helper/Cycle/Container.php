@@ -10,18 +10,18 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     View
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package View
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /**
- * @category    Rend
- * @package     View
+ * @category Rend
+ * @package View
  */
 class Rend_View_Helper_Cycle_Container extends InfiniteIterator
 {
@@ -29,7 +29,7 @@ class Rend_View_Helper_Cycle_Container extends InfiniteIterator
     /**
      * Get the current value and advance afterwards
      *
-     * @return  mixed
+     * @return mixed
      */
     public function getCurrentAndAdvance()
     {

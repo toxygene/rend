@@ -10,13 +10,13 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     View
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package View
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /** Zend_View_Helper_Abstract */
@@ -33,8 +33,8 @@ require_once 'Rend/View/Helper/Cycle/Container.php';
  * custom function}. It allows for iteration over a set of values each time
  * it's called. The most common implementation is zebra striping of rows.
  *
- * @category    Rend
- * @package     View
+ * @category Rend
+ * @package View
  */
 class Rend_View_Helper_Cycle extends Zend_View_Helper_Abstract
 {
@@ -42,8 +42,8 @@ class Rend_View_Helper_Cycle extends Zend_View_Helper_Abstract
     /**
      * Cycle helper
      *
-     * @param   array       $selections
-     * @return  Rend_View_Helper_Cycle_Container
+     * @param array $selections
+     * @return Rend_View_Helper_Cycle_Container
      */
     public function cycle(array $selections)
     {
@@ -60,9 +60,9 @@ class Rend_View_Helper_Cycle extends Zend_View_Helper_Abstract
     /**
      * Strategy method
      *
-     * @see     cycle()
-     * @param   array   $selections
-     * @return  Rend_View_Helper_Cycle_Container
+     * @see cycle()
+     * @param array $selections
+     * @return Rend_View_Helper_Cycle_Container
      */
     public function direct(array $selections = array())
     {

@@ -10,7 +10,9 @@ interface Rend_FactoryLoader_Factory_Interface
 {
 
     /**
+     * Constructor
      *
+     * @param Zend_Config|array $config
      */
     public function __construct($config = null);
 

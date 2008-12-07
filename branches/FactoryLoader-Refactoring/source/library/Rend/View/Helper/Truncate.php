@@ -10,21 +10,21 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     View
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package View
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /** Zend_View_Helper_Abstract */
 require_once "Zend/View/Helper/Abstract.php";
 
 /**
- * @category    Rend
- * @package     View
+ * @category Rend
+ * @package View
  */
 class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
 {
@@ -35,12 +35,12 @@ class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
      * Additional features include setting an ending string and attempting to
      * only truncate on word boundaries.
      *
-     * @param   string      $string
-     * @param   integer     $length
-     * @param   string      $end
-     * @param   boolean     $boundry
-     * @return  string
-     * @throws  InvalidArgumentException
+     * @param string $string
+     * @param integer $length
+     * @param string $end
+     * @param boolean $boundry
+     * @return string
+     * @throws InvalidArgumentException
      */
     public function truncate($string, $length, $end = '...', $boundry = false)
     {
@@ -69,13 +69,13 @@ class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
     /**
      * Strategy method
      *
-     * @see     truncate()
-     * @param   string      $string
-     * @param   integer     $length
-     * @param   string      $end
-     * @param   boolean     $boundry
-     * @return  string
-     * @throws  InvalidArgumentException
+     * @see truncate()
+     * @param string $string
+     * @param integer $length
+     * @param string $end
+     * @param boolean $boundry
+     * @return string
+     * @throws InvalidArgumentException
      */
     public function direct($string = null, $length = null, $end = '...', $boundry = false)
     {

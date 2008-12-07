@@ -36,6 +36,13 @@ class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
 
             $log->addWriter(new Zend_Log_Writer_Null());
         } else {
+            if (!file_exists($this->_configFile)) {
+                /** Rend_Factory_Log_Exception */
+                require_once "Rend/Factory/Log/Exception.php";
+
+                throw new Rend_Factory_Log_Exception("Could not load config file '{$this->_configFile}'");
+            }
+
             include $this->_configFile;
         }
 

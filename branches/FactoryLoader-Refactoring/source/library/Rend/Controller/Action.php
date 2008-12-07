@@ -15,7 +15,7 @@ abstract class Rend_Controller_Action extends Zend_Controller_Action
     /**
      * Get the config object
      *
-     * @return 	Zend_Config
+     * @return Zend_Config
      */
     public function getConfig()
     {
@@ -25,7 +25,7 @@ abstract class Rend_Controller_Action extends Zend_Controller_Action
     /**
      * Get the factory loader
      *
-     * @return  Rend_FactoryLoader
+     * @return Rend_FactoryLoader
      */
     public function getFactoryLoader()
     {

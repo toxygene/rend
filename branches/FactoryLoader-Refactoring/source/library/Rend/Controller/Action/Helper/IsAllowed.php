@@ -10,70 +10,70 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     Controller
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package Controller
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /** Rend_Controller_Action_Helper_Abstract */
 require_once 'Rend/Controller/Action/Helper/Abstract.php';
 
 /**
- * @category    Rend
- * @package     Controller
+ * @category Rend
+ * @package Controller
  */
 class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Helper_Abstract
 {
 
     /**
      * All actions wildcard
-     * @var     string
+     * @var string
      */
     const ALL_ACTIONS = "*";
 
     /**
      * Disable ACL wildcard
-     * @var     string
+     * @var string
      */
     const DISABLE_ACL = "*";
 
     /**
      * ACL object
-     * @var     Zend_Acl
+     * @var Zend_Acl
      */
     private $_acl;
 
     /**
      * Forbidden action
-     * @var     string
+     * @var string
      */
     private $_forbiddenAction = "forbidden";
 
     /**
      * Forbidden controller
-     * @var     string
+     * @var string
      */
     private $_forbiddenController = "error";
 
     /**
      * Forbidden module
-     * @var     string
+     * @var string
      */
     private $_forbiddenModule = "default";
 
     /**
      * Forbidden params
-     * @var     array
+     * @var array
      */
     private $_forbiddenParams = array();
 
     /**
      * Role name
-     * @var     string
+     * @var string
      */
     private $_role;
 
@@ -85,34 +85,34 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
 
     /**
      * Unauthorized action
-     * @var     string
+     * @var string
      */
     private $_unauthorizedAction = "unauthorized";
 
     /**
      * Unauthorized controller
-     * @var     string
+     * @var string
      */
     private $_unauthorizedController = "error";
 
     /**
      * Unauthorized module
-     * @var     string
+     * @var string
      */
     private $_unauthorizedModule = "default";
 
     /**
      * Unauthorized params
-     * @var     array
+     * @var array
      */
     private $_unauthorizedParams = array();
 
     /**
      * Check if the current role has permission to the resource
      *
-     * @param   string      $resource
-     * @param   string      $permission
-     * @return  boolean
+     * @param string $resource
+     * @param string $permission
+     * @return boolean
      */
     public function isAllowed($resource, $permission = null)
     {
@@ -123,8 +123,8 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Set the acl object
      *
-     * @param   Zend_Acl    $acl
-     * @return  Rend_Controller_Action_Helper_IsAllowed
+     * @param Zend_Acl $acl
+     * @return Rend_Controller_Action_Helper_IsAllowed
      */
     public function setAcl(Zend_Acl $acl)
     {
@@ -135,10 +135,11 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Set the forbidden page
      *
-     * @param   string  $action
-     * @param   string  $controller
-     * @param   string  $module
-     * @param   array   $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     * @param array $params
+     * @return Rend_Controller_Action_Helper_IsAllowed
      */
     public function setForbiddenPage($action, $controller = null, $module = null, $params = null)
     {
@@ -152,8 +153,8 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Set the role name
      *
-     * @param   string  $role
-     * @return  Rend_Controller_Action_Helper_IsAllowed
+     * @param string $role
+     * @return Rend_Controller_Action_Helper_IsAllowed
      */
     public function setRole($role = null)
     {
@@ -176,10 +177,11 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Set the unauthorized page
      *
-     * @param   string  $action
-     * @param   string  $controller
-     * @param   string  $module
-     * @param   array   $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     * @param array $params
+     * @return Rend_Controller_Action_Helper_IsAllowed
      */
     public function setUnauthorizedPage($action, $controller = null, $module = null, $params = null)
     {
@@ -193,8 +195,8 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Check the Acls for permission to the resource
      *
-     * @throws  Rend_Controller_Action_Exception_Acl
-     * @throws  Rend_Controller_Action_Exception_Auth
+     * @throws Rend_Controller_Action_Exception_Acl
+     * @throws Rend_Controller_Action_Exception_Auth
      */
     public function preDispatch()
     {
@@ -253,8 +255,8 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Format the Acl results consistently
      *
-     * @param   array   $results
-     * @return  array
+     * @param array $results
+     * @return array
      */
     protected function _formatAclResults($results)
     {
@@ -272,10 +274,10 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * Determine the resource and permission required to access the requested
      * action
      *
-     * @param   string  $actionName
-     * @return  array
-     * @todo    Replace temporary variables with queries
-     * @todo    Decompose conditionals
+     * @param string  $actionName
+     * @return array
+     * @todo Replace temporary variables with queries
+     * @todo Decompose conditionals
      */
     private function _getRequiredResourceAndPermission()
     {
