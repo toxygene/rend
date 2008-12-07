@@ -28,4 +28,32 @@ require_once "Rend/Factory/Auth.php";
  */
 class Rend_Factory_AuthTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * Auth factory
+     * @var Rend_Factory_Auth
+     */
+    private $_factory;
+
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_Auth();
+    }
+
+    public function testCreateReturnsAuthObject()
+    {
+        $this->assertType(
+            "Zend_Auth",
+            $this->_factory->create()
+        );
+    }
+
+    public function testCreateReturnsAuthInstance()
+    {
+        $this->assertSame(
+            Zend_Auth::getInstance(),
+            $this->_factory->create()
+        );
+    }
+
 }

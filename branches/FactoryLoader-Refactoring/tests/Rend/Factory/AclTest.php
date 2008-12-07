@@ -28,4 +28,32 @@ require_once "Rend/Factory/Acl.php";
  */
 class Rend_Factory_AclTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var Rend_Factory_Acl
+     */
+    private $_factory;
+
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_Acl();
+    }
+
+    public function testCreateReturnsAclObject()
+    {
+        $this->assertType(
+            "Zend_Acl",
+            $this->_factory->create()
+        );
+    }
+
+    public function testTest()
+    {
+        $this->setExpectedException("Rend_Factory_Acl_Exception");
+
+        $this->_factory
+             ->setConfigFile("non-existant.php")
+             ->create();
+    }
+
 }
