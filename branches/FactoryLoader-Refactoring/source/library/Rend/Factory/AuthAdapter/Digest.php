@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Auth_Adapter_Digest */
 require_once "Zend/Auth/Adapter/Digest.php";
@@ -12,7 +12,7 @@ require_once "Zend/Auth/Adapter/Digest.php";
 /**
  *
  */
-class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_Abstract
+class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
