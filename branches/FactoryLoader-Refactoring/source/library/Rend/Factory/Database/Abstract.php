@@ -9,7 +9,7 @@ require_once "Rend/FactoryLoader/Factory/Abstract.php";
 /**
  *
  */
-abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
+abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**#@+
@@ -40,10 +40,16 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     protected $_params = array();
 
     /**
+     * Statement class
+     * @var string
+     */
+    protected $_statementClass;
+
+    /**
      * Set the auto quote identifiers flag
      *
      * @param   boolean $autoQuoteIdentifiers
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setAutoQuoteIdentifiers($autoQuoteIdentifiers)
     {
@@ -55,7 +61,7 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
      * Set the case folding value
      *
      * @param   integer     $caseFolding
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setCaseFolding($caseFolding)
     {
@@ -73,7 +79,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
             break;
 
             default:
-                // todo throw invalid value exception
+                /** Rend_Factory_Database_Exception */
+                require_once "Rend/Factory/Database/Exception.php";
+
+                throw new Rend_Factory_Database_Exception("Case folding '{$caseFolding}' is unsupported or unknown");
             break;
         }
         return $this;
@@ -83,7 +92,7 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
      * Set the fetch mode
      *
      * @param   string  $fetchMode
-     * @return  Rend_Factory_Database_Pdo
+     * @return  Rend_Factory_Database_Abstract_Pdo
      */
     public function setFetchMode($fetchMode)
     {
@@ -113,7 +122,10 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
             break;
 
             default:
-                // todo throw invalid value exception
+                /** Rend_Factory_Database_Exception */
+                require_once "Rend/Factory/Database/Exception.php";
+
+                throw new Rend_Factory_Database_Exception("Fetch mode '{$fetchMode}' is unsupported or unknown");
             break;
         }
         return $this;
@@ -123,7 +135,7 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
      * Set the host
      *
      * @param   string  $host
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setHost($host)
     {
@@ -135,7 +147,7 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
      * Set the password
      *
      * @param   string  $password
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setPassword($password)
     {
@@ -144,10 +156,34 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the persistent flag
+     *
+     * @param boolean $persistent
+     * @return Rend_Factory_Database_Abstract
+     */
+    public function setPersistent($persistent)
+    {
+        $this->_params["persistent"] = $persistent;
+        return $this;
+    }
+
+    /**
+     * Set the port
+     *
+     * @param integer $port
+     * @return Rend_Factory_Database_Abstract
+     */
+    public function setPort($port)
+    {
+        $this->_params["port"] = $port;
+        return $this;
+    }
+
+    /**
      * Set the profiler
      *
      * @param   mixed   $profiler
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setProfiler($profiler)
     {
@@ -156,10 +192,22 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the protocol
+     *
+     * @param string $protocol
+     * @return Rend_Factory_Database_Abstract
+     */
+    public function setProtocol($protocol)
+    {
+        $this->_params["protocol"] = $protocol;
+        return $this;
+    }
+
+    /**
      * Set the schema (aka database name)
      *
      * @param   string  $schema
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setSchema($schema)
     {
@@ -168,10 +216,22 @@ abstract class Rend_Factory_Database extends Rend_FactoryLoader_Factory_Abstract
     }
 
     /**
+     * Set the statement class
+     *
+     * @param string $statementClass
+     * @return Rend_Factory_Database_Abstract
+     */
+    public function setStatementClass($statementClass)
+    {
+        $this->_statementClass = $statementClass;
+        return $this;
+    }
+
+    /**
      * Set the username
      *
      * @param   string  $username
-     * @return  Rend_Factory_Database
+     * @return  Rend_Factory_Database_Abstract
      */
     public function setUsername($username)
     {

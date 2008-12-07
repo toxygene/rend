@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_Factory_Database */
-require_once "Rend/Factory/Database.php";
+/** Rend_Factory_Database_Abstract */
+require_once "Rend/Factory/Database/Abstract.php";
 
 /** Zend_Db_Adapter_Mysqli */
 require_once "Zend/Db/Adapter/Mysqli.php";
@@ -13,7 +13,7 @@ require_once "Zend/Db/Adapter/Mysqli.php";
 /**
  *
  */
-class Rend_Factory_Database_Mysqli extends Rend_Factory_Database
+class Rend_Factory_Database_Mysqli extends Rend_Factory_Database_Abstract
 {
 
     /**
@@ -23,7 +23,13 @@ class Rend_Factory_Database_Mysqli extends Rend_Factory_Database
      */
     public function create()
     {
-        return new Zend_Db_Adapter_Mysqli($this->_params);
+        $database = new Zend_Db_Adapter_Mysqli($this->_params);
+
+        if ($this->_statementClass) {
+            $database->setStatementClass($this->_statementClass);
+        }
+
+        return $database;
     }
 
 }
