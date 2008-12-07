@@ -31,13 +31,19 @@ class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
      * Create an ACL object
      *
      * @return Zend_Acl
+     * @throws Rend_Factory_Acl_Exception
      */
     public function create()
     {
         $acl = new Zend_Acl();
 
         if ($this->_configFile) {
-            include $this->_configFile;
+            if (!file_exists($this->_configFile)) {
+                /** Rend_Factory_Acl_Exception */
+                require_once "Rend/Factory/Acl/Exception.php";
+
+                throw new Rend_Factory_Acl_Exception("Could not load config file '{$this->_configFile}'");
+            }
         }
 
         return $acl;
