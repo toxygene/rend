@@ -13,7 +13,9 @@ abstract class Rend_FactoryLoader_Factory_Abstract implements Rend_FactoryLoader
 {
 
     /**
+     * Constructor
      *
+     * @param Zend_Config|array $config
      */
     public function __construct($config = null)
      {
@@ -25,7 +27,10 @@ abstract class Rend_FactoryLoader_Factory_Abstract implements Rend_FactoryLoader
      }
 
     /**
+     * Set options with a Zend_Config object
      *
+     * @param Zend_Config $config
+     * @return Rend_FactoryLoader_Factory_Abstract
      */
     public function setConfig(Zend_Config $config)
     {
@@ -33,7 +38,10 @@ abstract class Rend_FactoryLoader_Factory_Abstract implements Rend_FactoryLoader
     }
 
     /**
+     * Set options with an array
      *
+     * @param array $options
+     * @return Rend_FactoryLoader_Factory_Abstract
      */
     public function setOptions(array $options)
     {
