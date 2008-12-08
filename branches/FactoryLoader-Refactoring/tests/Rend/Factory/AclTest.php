@@ -47,7 +47,7 @@ class Rend_Factory_AclTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testTest()
+    public function testNonexistantConfigFileThrowsException()
     {
         $this->setExpectedException("Rend_Factory_Acl_Exception");
 
