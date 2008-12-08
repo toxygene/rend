@@ -4,7 +4,7 @@ if (isset($bootstrap) && $bootstrap) {
     set_include_path(
         get_include_path() .
         PATH_SEPARATOR .
-        "../library"
+        realpath(dirname(__FILE__) . '/../library')
     );
 
     /** Zend_Loader */
