@@ -19,10 +19,27 @@
  * @version $Id$
  */
 
+/** Rend_Filter_Boolean */
+require_once "Rend/Filter/Boolean.php";
+
 /**
  * @category Rend
  * @subpackage UnitTest
  */
 class Rend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_filter;
+
+    public function setUp()
+    {
+        $this->_filter = new Rend_Filter_Boolean();
+    }
+
+    public function testFiltersVariablesToBoolean()
+    {
+        $this->assertTrue($this->_filter->filter(1));
+        $this->assertFalse($this->_filter->filter(0));
+    }
+
 }

@@ -19,10 +19,36 @@
  * @version $Id$
  */
 
+/** Rend_Filter_Null */
+require_once "Rend/Filter/Null.php";
+
 /**
  * @category    Rend
  * @subpackage  UnitTest
  */
 class Rend_Filter_NullTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_filter;
+
+    public function setUp()
+    {
+        $this->_filter = new Rend_Filter_Null();
+    }
+
+    public function testFiltersNullValuesToNull()
+    {
+        $this->assertNull($this->_filter->filter(""));
+        $this->assertNull($this->_filter->filter(0));
+        $this->assertNull($this->_filter->filter(false));
+        $this->assertNull($this->_filter->filter(null));
+    }
+
+    public function testDoesNotFilterNonNullValues()
+    {
+        $this->assertNotNull($this->_filter->filter("test"));
+        $this->assertNotNull($this->_filter->filter(1));
+        $this->assertNotNull($this->_filter->filter(true));
+    }
+
 }

@@ -19,10 +19,29 @@
  * @version $Id$
  */
 
+/** Rend_Filter_WordsToUpper */
+require_once "Rend/Filter/WordsToUpper.php";
+
 /**
  * @category Rend
  * @subpackage UnitTest
  */
 class Rend_Filter_WordsToUpperTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_filter;
+
+    public function setUp()
+    {
+        $this->_filter = new Rend_Filter_WordsToUpper();
+    }
+
+    public function testWordsAreConvertedToUpperCase()
+    {
+        $this->assertEquals(
+            "One Two Three",
+            $this->_filter->filter("one two three")
+        );
+    }
+
 }
