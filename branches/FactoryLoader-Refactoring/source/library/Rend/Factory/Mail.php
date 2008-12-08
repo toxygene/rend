@@ -22,6 +22,12 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     protected $_charset;
 
     /**
+     * Date
+     * @var Zend_Date|integer|string
+     */
+    protected $_date;
+
+    /**
      * From
      * @var array|string
      */
@@ -32,6 +38,12 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
      * @var array
      */
     protected $_headers = array();
+
+    /**
+     * Return path
+     * @var string
+     */
+    protected $_returnPath;
 
     /**
      * Create a new Zend_Mail object
@@ -46,6 +58,10 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
             $mail = new Zend_Mail();
         }
 
+        if ($this->_date) {
+            $mail->setDate($this->_date);
+        }
+
         if ($this->_from) {
             if (is_array($this->_from)) {
                 $mail->setFrom($this->_from["email"], $this->_from["name"]);
@@ -56,6 +72,10 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
 
         foreach ($this->_headers as $name => $value) {
             $mail->addHeader($name, $value);
+        }
+
+        if ($this->_returnPath) {
+            $mail->setReturnPath($this->_returnPath);
         }
 
         return $mail;
@@ -70,6 +90,18 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     public function setCharset($charset)
     {
         $this->_charset = $charset;
+        return $this;
+    }
+
+    /**
+     * Set the date
+     *
+     * @param Zend_Date|integer|string $date
+     * @return Rend_Factory_Mail
+     */
+    public function setDate($date)
+    {
+        $this->_date = $date;
         return $this;
     }
 
@@ -94,6 +126,18 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     public function setHeaders(array $headers)
     {
         $this->_headers = $headers;
+        return $this;
+    }
+
+    /**
+     * Set the return path
+     *
+     * @param string $returnPath
+     * @return Rend_Factory_Mail
+     */
+    public function setReturnPath($returnPath)
+    {
+        $this->_returnPath = $returnPath;
         return $this;
     }
 

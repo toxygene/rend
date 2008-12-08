@@ -102,4 +102,16 @@ class Rend_Factory_MailTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testReturnPathIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setReturnPath("jhendric@rendframework.com")
+                     ->create();
+
+        $this->assertEquals(
+            "jhendric@rendframework.com",
+            $mail->getReturnPath()
+        );
+    }
+
 }
