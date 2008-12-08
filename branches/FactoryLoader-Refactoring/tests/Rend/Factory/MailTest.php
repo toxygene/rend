@@ -28,4 +28,78 @@ require_once "Rend/Factory/Mail.php";
  */
 class Rend_Factory_MailTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factory;
+
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_Mail();
+    }
+
+    public function testCreateReturnsMailObject()
+    {
+        $this->assertType(
+            "Zend_Mail",
+            $this->_factory
+                 ->create()
+        );
+    }
+
+    public function testCharsetIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setCharset("UTF-8")
+                     ->create();
+
+        $this->assertEquals(
+            "UTF-8",
+            $mail->getCharset()
+        );
+    }
+
+    public function testFromAddressIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setFrom("jhendric@rendframework.com")
+                     ->create();
+
+        $this->assertEquals(
+            "jhendric@rendframework.com",
+            $mail->getFrom()
+        );
+    }
+
+    public function testFromAddressAndNameIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setFrom(array("email" => "jhendric@rendframework.com", "name" => "Justin Hendrickson"))
+                     ->create();
+
+        $this->assertEquals(
+            "jhendric@rendframework.com",
+            $mail->getFrom()
+        );
+
+        $headers = $mail->getHeaders();
+
+        $this->assertEquals(
+            "Justin Hendrickson <jhendric@rendframework.com>",
+            $headers["From"][0]
+        );
+    }
+
+    public function testHeadersAreConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setHeaders(array("X-Test" => "asdf"))
+                     ->create();
+
+        $headers = $mail->getHeaders();
+
+        $this->assertEquals(
+            "asdf",
+            $headers["X-Test"][0]
+        );
+    }
+
 }

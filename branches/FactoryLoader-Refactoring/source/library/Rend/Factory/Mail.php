@@ -94,7 +94,7 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     public function setHeaders(array $headers)
     {
         $this->_headers = $headers;
-        return $this->_headers;
+        return $this;
     }
 
 }
