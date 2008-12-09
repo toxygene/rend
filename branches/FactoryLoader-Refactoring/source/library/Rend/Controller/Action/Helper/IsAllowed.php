@@ -113,6 +113,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * @param string $resource
      * @param string $permission
      * @return boolean
+     * @throws Zend_Controller_Action_Exception
      */
     public function isAllowed($resource, $permission = null)
     {
@@ -197,6 +198,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      *
      * @throws Rend_Controller_Action_Exception_Acl
      * @throws Rend_Controller_Action_Exception_Auth
+     * @throws Zend_Controller_Action_Exception
      */
     public function preDispatch()
     {
@@ -243,11 +245,22 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      * Get the ACL object
      *
      * @return Zend_Acl
+     * @throws Zend_Controller_Action_Exception
      */
     protected function _getAcl()
     {
         if (!$this->_acl) {
-            throw new Zend_Controller_Action_Exception("You must set an ACL object before using this helper");
+            if (!$this->_getFactoryLoader() ||
+                !isset($this->_getFactoryLoader()->acl) ||
+                !$this->_getFactoryLoader()->acl instanceof Rend_Factory_Acl_Interface) {
+                /** Zend_Controller_Action_Exception */
+                require_once "Zend/Controller/Action/Exception.php";
+
+                throw new Zend_Controller_Action_Exception("Could not load an ACL object");
+            }
+
+            $this->_acl = $this->_getFactoryLoader()
+                               ->acl();
         }
         return $this->_acl;
     }

@@ -103,4 +103,15 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
         );
     }
 
+    /**
+     * Get the factory loader
+     *
+     * @return Rend_FactoryLoader
+     */
+    protected function _getFactoryLoader()
+    {
+        return $this->getActionController()
+                    ->getInvokeArg("rendFactoryLoader");
+    }
+
 }
