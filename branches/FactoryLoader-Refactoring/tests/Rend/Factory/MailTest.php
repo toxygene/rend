@@ -36,6 +36,30 @@ class Rend_Factory_MailTest extends PHPUnit_Framework_TestCase
         $this->_factory = new Rend_Factory_Mail();
     }
 
+    public function testCcIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setCcs(array("cc1@example.org", "cc2@example.org"))
+                     ->create();
+
+        $this->assertEquals(
+            array("cc1@example.org", "cc2@example.org"),
+            $mail->getRecipients()
+        );
+    }
+
+    public function testBccIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setBccs(array("bcc1@example.org", "bcc2@example.org"))
+                     ->create();
+
+        $this->assertEquals(
+            array("bcc1@example.org", "bcc2@example.org"),
+            $mail->getRecipients()
+        );
+    }
+
     public function testCreateReturnsMailObject()
     {
         $this->assertType(
@@ -111,6 +135,49 @@ class Rend_Factory_MailTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             "jhendric@rendframework.com",
             $mail->getReturnPath()
+        );
+    }
+
+    public function testSubjectIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setSubject("subject")
+                     ->create();
+
+        $this->assertEquals(
+            "subject",
+            $mail->getSubject()
+        );
+    }
+
+    public function testToIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setTos(array("to1@example.org", "to2@example.org"))
+                     ->create();
+
+        $this->assertEquals(
+            array("to1@example.org", "to2@example.org"),
+            $mail->getRecipients()
+        );
+    }
+
+    public function testToAndNameIsConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setTos(array(array("email" => "to@example.org", "name" => "To!")))
+                     ->create();
+
+        $this->assertEquals(
+            array("to@example.org"),
+            $mail->getRecipients()
+        );
+
+        $headers = $mail->getHeaders();
+
+        $this->assertEquals(
+            "To! <to@example.org>",
+            $headers["To"][0]
         );
     }
 
