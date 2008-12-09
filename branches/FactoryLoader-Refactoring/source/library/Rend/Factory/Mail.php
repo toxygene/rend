@@ -6,14 +6,23 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Mail */
-require_once "Zend/Mail.php";
-
 /**
  *
  */
 class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
 {
+
+    /**
+     * BCCs
+     * @var array
+     */
+    protected $_bccs;
+
+    /**
+	 * CCs
+	 * @var array
+	 */
+    protected $_ccs;
 
     /**
      * Charset
@@ -46,16 +55,47 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     protected $_returnPath;
 
     /**
+     * Subject
+     * @var string
+     */
+    protected $_subject;
+
+    /**
+     * Tos
+     * @var array
+     */
+    protected $_tos;
+
+    /**
      * Create a new Zend_Mail object
      *
      * @return Zend_Factory_Mail
      */
     public function create()
     {
+        /** Zend_Mail */
+        require_once "Zend/Mail.php";
+
         if ($this->_charset) {
             $mail = new Zend_Mail($this->_charset);
         } else {
             $mail = new Zend_Mail();
+        }
+
+        if ($this->_bccs) {
+            foreach ($this->_bccs as $bcc) {
+                $mail->addBcc($bcc);
+            }
+        }
+
+        if ($this->_ccs) {
+            foreach ($this->_ccs as $cc) {
+                if (is_array($cc)) {
+                    $mail->addCc($cc["email"], $cc["name"]);
+                } else {
+                    $mail->addCc($cc);
+                }
+            }
         }
 
         if ($this->_date) {
@@ -78,7 +118,45 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
             $mail->setReturnPath($this->_returnPath);
         }
 
+        if ($this->_subject) {
+            $mail->setSubject($this->_subject);
+        }
+
+        if ($this->_tos) {
+            foreach ($this->_tos as $to) {
+                if (is_array($to)) {
+                    $mail->addTo($to["email"], $to["name"]);
+                } else {
+                    $mail->addTo($to);
+                }
+            }
+        }
+
         return $mail;
+    }
+
+    /**
+     * Set the CCs
+     *
+     * @param array $ccs
+     * @return Rend_Factory_Mail
+     */
+    public function setCcs(array $ccs)
+    {
+        $this->_ccs = $ccs;
+        return $this;
+    }
+
+    /**
+     * Set the BCCs
+     *
+     * @param array $bccs
+     * @return Rend_Factory_Mail
+     */
+    public function setBccs(array $bccs)
+    {
+        $this->_bccs = $bccs;
+        return $this;
     }
 
     /**
@@ -138,6 +216,30 @@ class Rend_Factory_Mail extends Rend_FactoryLoader_Factory_Abstract
     public function setReturnPath($returnPath)
     {
         $this->_returnPath = $returnPath;
+        return $this;
+    }
+
+    /**
+     * Set the subject
+     *
+     * @param string $subject
+     * @return Rend_Factory_Mail
+     */
+    public function setSubject($subject)
+    {
+        $this->_subject = $subject;
+        return $this;
+    }
+
+    /**
+     * Set the tos
+     *
+     * @param array $tos
+     * @return Rend_Factory_Mail
+     */
+    public function setTos(array $tos)
+    {
+        $this->_tos = $tos;
         return $this;
     }
 
