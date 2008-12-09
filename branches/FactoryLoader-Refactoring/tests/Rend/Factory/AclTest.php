@@ -41,10 +41,18 @@ class Rend_Factory_AclTest extends PHPUnit_Framework_TestCase
 
     public function testCreateReturnsAclObject()
     {
+    	$acl = $this->_factory
+    	            ->setConfigFile(dirname(__FILE__) . "/_files/acl.php")
+    	            ->create();
+    	
         $this->assertType(
             "Zend_Acl",
-            $this->_factory->create()
+            $acl
         );
+
+        $this->assertTrue($acl->hasRole("role1"));
+        $this->assertTrue($acl->has("resource"));
+       	$this->assertTrue($acl->isAllowed("role1", "resource", "privilege"));
     }
 
     public function testNonexistantConfigFileThrowsException()
