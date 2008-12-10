@@ -19,7 +19,7 @@ class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
      * Configuration file
      * @var string
      */
-    private $_configFile;
+    private $_configFile = "../application/configs/log.php";
 
     /**
      * Create a log object
@@ -28,23 +28,16 @@ class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
      */
     public function create()
     {
+        if (!file_exists($this->_configFile)) {
+            /** Rend_Factory_Log_Exception */
+            require_once "Rend/Factory/Log/Exception.php";
+
+            throw new Rend_Factory_Log_Exception("Could not load config file '{$this->_configFile}'");
+        }
+
         $log = new Zend_Log();
 
-        if (!$this->_configFile) {
-            /** Zend_Log_Writer_Null */
-            require_once "Zend/Log/Writer/Null.php";
-
-            $log->addWriter(new Zend_Log_Writer_Null());
-        } else {
-            if (!file_exists($this->_configFile)) {
-                /** Rend_Factory_Log_Exception */
-                require_once "Rend/Factory/Log/Exception.php";
-
-                throw new Rend_Factory_Log_Exception("Could not load config file '{$this->_configFile}'");
-            }
-
-            include $this->_configFile;
-        }
+        include $this->_configFile;
 
         return $log;
     }
