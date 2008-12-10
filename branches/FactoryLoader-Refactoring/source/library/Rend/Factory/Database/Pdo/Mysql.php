@@ -13,6 +13,12 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
 {
 
     /**
+     * Charset
+     * @var string
+     */
+    protected $_charset;
+
+    /**
      * Create a Mysql Pdo adapter
      *
      * @return Zend_Db_Adapter_Pdo_Mysql
@@ -28,6 +34,10 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
             $database->setStatementClass($this->_statementClass);
         }
 
+        if ($this->_charset) {
+            $database->query("SET NAMES ?", $this->_charset);
+        }
+
         return $database;
     }
 
@@ -40,6 +50,18 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
     public function setAllowLocalInfile($allowLocalInfile)
     {
         $this->_options["driverOptions"][PDO::MYSQL_ATTR_LOCAL_INFILE] = $allowLocalInfile;
+        return $this;
+    }
+
+    /**
+     * Set the charset
+     *
+     * @param string $charset
+     * @return Rend_Factory_Database_Pdo_Mysql
+     */
+    public function setCharset($charset)
+    {
+        $this->_charset = $charset;
         return $this;
     }
 

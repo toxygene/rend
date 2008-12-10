@@ -17,6 +17,12 @@ class Rend_Factory_Database_Mysqli extends Rend_Factory_Database_Abstract
 {
 
     /**
+     * Charset
+     * @var string
+     */
+    protected $_charset;
+
+    /**
      * Create a Mysqli adapter
      *
      * @return Zend_Db_Adapter_Mysqli
@@ -29,7 +35,24 @@ class Rend_Factory_Database_Mysqli extends Rend_Factory_Database_Abstract
             $database->setStatementClass($this->_statementClass);
         }
 
+        if ($this->_charset) {
+            $database->getConnection()
+                     ->set_charset($this->_charset);
+        }
+
         return $database;
+    }
+
+    /**
+     * Set the charset
+     *
+     * @param string $charset
+     * @return Rend_Factory_Database_Pdo_Mysql
+     */
+    public function setCharset($charset)
+    {
+        $this->_charset = $charset;
+        return $this;
     }
 
 }
