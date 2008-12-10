@@ -66,6 +66,11 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
     {
         $view = new Zend_View();
 
+        $view->addHelperPath(
+            "Rend/View/Helper",
+            "Rend_View_Helper"
+        );
+
         if ($this->_doctype) {
             $view->getHelper("Doctype")
                  ->setDoctype($this->_doctype);
