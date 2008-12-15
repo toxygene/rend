@@ -1,5 +1,5 @@
 #summary Documentation of the Rend_Factory_Auth class.
-#labels Type-Factories,Phase-Implementation
+#labels Type-Factories,Phase-Implementation,Release-2.0
 
 = Description =
 This class is an [http://en.wikipedia.org/wiki/Abstract_factory_pattern Abstract Factory] for the [http://framework.zend.com/manual/en/zend.auth.html Zend_Auth] class.
