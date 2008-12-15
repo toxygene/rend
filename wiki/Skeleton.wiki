@@ -1,5 +1,5 @@
 #summary Description of the Zend Framework skeleton in Rend.
-#labels Phase-Implementation
+#labels Phase-Implementation,Release-2.0
 
 = Zend Framework Skeleton =
 
