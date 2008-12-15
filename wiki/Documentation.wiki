@@ -6,6 +6,8 @@
    # [Rend_Controller_Action_Helper_IsAllowed Is Allowed]
    # [Rend_Controller_Action_Helper_LayoutSelector Layout Selector]
    # [Rend_Controller_Action_Helper_Model Model]
+ # Controller Plugins
+   # [Rend_Controller_Plugin_Setup Setup]
  # [Factories Factories]
    # [Rend_Factory_Acl Acl]
    # [Rend_Factory_Auth Auth]
