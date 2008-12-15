@@ -1,5 +1,5 @@
 #summary Rend documentation.
-#labels Featured,Phase-Implementation
+#labels Featured,Phase-Implementation,Release-2.0
 
 = Components =
  # [Action_Helpers Action Helpers]
