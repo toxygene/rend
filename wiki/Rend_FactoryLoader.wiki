@@ -12,3 +12,17 @@ This class is specialized plugin loader that can be used to easily create and us
 
 || `->name` || Proxies to `getFactory()`. ||
 || `->name()` || Get a factory by name and returns the result of it's `create()` method. ||
+
+= Integration with Rend =
+By following a couple of conventions, the `Rend_FactoryLoader` can be automatically configured from your `config.ini` file.
+
+{{{
+factoryLoader.prefixPath.Pre_fix = Pre/Fix
+factoryLoader.factories.database.type = Database_Pdo_Mysql
+factoryLoader.factories.database.options.host = localhost
+factoryLoader.factories.database.options.username = user
+factoryLoader.factories.database.options.password = pass
+factoryLoader.factories.database.options.schema = db
+factoryLoader.factories.someName.type = View
+factoryLoader.factories.someName.options.encoding = UTF-8
+}}}
