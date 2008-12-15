@@ -1,5 +1,5 @@
 #summary Documentation of the Rend_FactoryLoader class
-#labels Phase-Implementation,Type-Factories
+#labels Phase-Implementation,Type-Factories,Release-2.0
 
 = Description =
 This class is specialized plugin loader that can be used to easily create and use factories.
