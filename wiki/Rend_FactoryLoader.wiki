@@ -14,7 +14,7 @@ This class is specialized plugin loader that can be used to easily create and us
 || `->name()` || Get a factory by name and returns the result of it's `create()` method. ||
 
 = Integration with Rend =
-By following a couple of conventions, the `Rend_FactoryLoader` can be automatically configured from your `config.ini` file.
+If you use [Rend_Controller_Plugin_Setup Rend_Controller_Plugin_Setup], the `Rend_FactoryLoader` will automatically be created and setup with information from your configuration file.
 
 {{{
 factoryLoader.prefixPath.Pre_fix = Pre/Fix
