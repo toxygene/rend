@@ -1,5 +1,5 @@
 #summary Documentation of Rend's enhanced error handler.
-#labels Phase-Implementation
+#labels Phase-Implementation,Release-1.0
 
 = Enhanced Error Handling =
 
