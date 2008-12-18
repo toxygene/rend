@@ -61,7 +61,7 @@ class Rend_View_Helper_FullUrl extends Zend_View_Helper_Abstract
             $url .= ":{$request->SERVER_PORT}";
         }
 
-        return $url . $this->getView()->url($urlOptions, $name, $reset);
+        return $url . $this->view>url($urlOptions, $name, $reset);
     }
 
     /**
