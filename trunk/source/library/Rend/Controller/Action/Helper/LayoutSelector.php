@@ -12,47 +12,47 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     Controller
- * @copyright   Copyright (c) 2008 Justin Hendrickson (http://www.rendframework.com)
- * @license     http://www.rendframework.com/License New BSD License
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package Controller
+ * @copyright Copyright (c) 2008 Justin Hendrickson (http://www.rendframework.com)
+ * @license http://www.rendframework.com/License New BSD License
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /** Rend_Controller_Action_Helper_Abstract */
 require_once 'Rend/Controller/Action/Helper/Abstract.php';
 
 /**
- * @category    Rend
- * @package     Controller
+ * @category Rend
+ * @package Controller
  */
 class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Action_Helper_Abstract
 {
 
     /**
      * Wildcard character
-     * @var     string
+     * @var string
      */
     const WILDCARD = "*";
 
     /**
      * Layout object
-     * @var     Zend_Layout
+     * @var Zend_Layout
      */
     protected $_layout;
 
     /**
      * Layout parameter
-     * @var     string
+     * @var string
      */
     protected $_parameter;
 
     /**
      * Set the layout object
      *
-     * @param   Zend_Layout     $layout
-     * @return  Rend_Controller_Action_Helper_LayoutSelector
+     * @param Zend_Layout $layout
+     * @return Rend_Controller_Action_Helper_LayoutSelector
      */
     public function setLayout(Zend_Layout $layout)
     {
@@ -63,8 +63,8 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     /**
      * Set the parameter name for the action controller
      *
-     * @param   string  $parameter
-     * @return  Rend_Controller_Action_Helper_LayoutSelector
+     * @param string $parameter
+     * @return Rend_Controller_Action_Helper_LayoutSelector
      */
     public function setParameter($parameter)
     {
@@ -99,8 +99,8 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     /**
      * Set the layout script
      *
-     * @param   string  $script
-     * @return  Rend_Controller_Action_Helper_LayoutSelector
+     * @param string $script
+     * @return Rend_Controller_Action_Helper_LayoutSelector
      */
     private function _setLayoutScript($script)
     {

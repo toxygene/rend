@@ -10,19 +10,38 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @subpackage 	UnitTest
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @subpackage UnitTest
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
+/** Rend_Filter_WordsToUpper */
+require_once "Rend/Filter/WordsToUpper.php";
+
 /**
- * @category    Rend
- * @subpackage  UnitTest
+ * @category Rend
+ * @subpackage UnitTest
  */
 class Rend_Filter_WordsToUpperTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_filter;
+
+    public function setUp()
+    {
+        $this->_filter = new Rend_Filter_WordsToUpper();
+    }
+
+    public function testWordsAreConvertedToUpperCase()
+    {
+        $this->assertEquals(
+            "One Two Three",
+            $this->_filter->filter("one two three")
+        );
+    }
+
 }
