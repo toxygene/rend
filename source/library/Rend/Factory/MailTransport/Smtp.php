@@ -16,35 +16,70 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
 {
 
     /**
+     * Connection
+     * @var Zend_Mail_Protocol_Abstract
+     */
+    protected $_connection;
+
+    /**
      * Hostname
-     * @var     string
+     * @var string
      */
     protected $_host;
 
     /**
-     * Options
-     * @var     array
+     * SMTP options
+     * @var array
      */
     protected $_options;
 
     /**
      * Get a SMTP transport object
      *
-     * @return  Zend_Mail_Transport_Smtp
+     * @return Zend_Mail_Transport_Smtp
      */
     public function create()
     {
-        return new Zend_Mail_Transport_Smtp(
+        $smtp = new Zend_Mail_Transport_Smtp(
             $this->_host,
             $this->_options
         );
+
+        if ($this->_connection) {
+            $smtp->setConnection($this->_connection);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the auth type
+     *
+     * @param string $auth
+     */
+    public function setAuth($auth)
+    {
+        $this->_options["auth"] = $auth;
+        return $this;
+    }
+
+    /**
+     * Set the connection
+     *
+     * @param Zend_Mail_Protocol_Abstract $connection
+     * @return Rend_Factory_MailTransport_Smtp
+     */
+    public function setConnection(Zend_Mail_Protocol_Abstract $connection)
+    {
+        $this->_connection = $connection;
+        return $this;
     }
 
     /**
      * Set the host name
      *
-     * @param   string  $host
-     * @return  Rend_Factory_MailTransport_Smtp
+     * @param string $host
+     * @return Rend_Factory_MailTransport_Smtp
      */
     public function setHost($host)
     {
@@ -53,14 +88,50 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
     }
 
     /**
-     * Set the options
+     * Set the name
      *
-     * @param   array   $options
-     * @return  Rend_Factory_MailTransport_Smtp
+     * @param string $name
+     * @return Rend_Factory_MailTransport_Smtp
      */
-    public function setOptions(array $options)
+    public function setName($name)
     {
-        $this->_options = $options;
+        $this->_options["name"] = $name;
+        return $this;
+    }
+
+    /**
+     * Set the password
+     *
+     * @param string $password
+     * @return Rend_Factory_MailTransport_Smtp
+     */
+    public function setPassword($password)
+    {
+        $this->_options["password"] = $password;
+        return $this;
+    }
+
+    /**
+     * Set the port
+     *
+     * @param integer $port
+     * @return Rend_Factory_MailTransport_Smtp
+     */
+    public function setPort($port)
+    {
+        $this->_options["port"] = $port;
+        return $this;
+    }
+
+    /**
+     * Set the username
+     *
+     *  @param string $username
+     *  @return Rend_Factory_MailTransport_Smtp
+     */
+    public function setUsername($username)
+    {
+        $this->_options["username"] = $username;
         return $this;
     }
 

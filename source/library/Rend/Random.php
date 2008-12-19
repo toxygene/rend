@@ -10,31 +10,31 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /**
- * @category    Rend
+ * @category Rend
  */
 class Rend_Random
 {
 
     /**
      * String of printable characters
-     * @var     string
+     * @var string
      */
     const BASIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]}\\|;:'\",<.>/? ";
 
     /**
      * Generate a random string of printable characters
      *
-     * @param  integer $length Length of the returned string
-     * @param  string $characters
+     * @param integer $length Length of the returned string
+     * @param string $characters
      * @return string
      */
     public function getString($length = 8, $characters = self::BASIC)

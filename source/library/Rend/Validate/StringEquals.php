@@ -10,13 +10,13 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     Validate
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package Validate
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /** Zend_Validate_Abstract */
@@ -28,22 +28,22 @@ require_once "Zend/Validate/Abstract.php";
  * Compares two supplied strings for equality
  *
  * @deprecated
- * @category    Rend
- * @package     Validate
- * @see         Rend_Validate_ConfirmField
+ * @category Rend
+ * @package Validate
+ * @see Rend_Validate_ConfirmField
  */
 class Rend_Validate_StringEquals extends Zend_Validate_Abstract
 {
 
     /**
      * Not equals message key
-     * @var     string
+     * @var string
      */
     const NOT_EQUALS = "stringNotEquals";
 
     /**
      * Message templates
-     * @var     array
+     * @var array
      */
     protected $_messageTemplates = array(
         self::NOT_EQUALS => "The values do not match."
@@ -52,8 +52,8 @@ class Rend_Validate_StringEquals extends Zend_Validate_Abstract
     /**
      * Check if the values are equal
      *
-     * @param   array       $value
-     * @return  boolean
+     * @param array $value
+     * @return boolean
      */
     public function isValid($value)
     {

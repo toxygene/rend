@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Auth_Adapter_Digest */
 require_once "Zend/Auth/Adapter/Digest.php";
@@ -12,37 +12,37 @@ require_once "Zend/Auth/Adapter/Digest.php";
 /**
  *
  */
-class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_Abstract
+class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
      * Filename
-     * @var     string
+     * @var string
      */
     protected $_filename;
 
     /**
      * Realm
-     * @var     string
+     * @var string
      */
     protected $_realm;
 
     /**
      * Username
-     * @var     string
+     * @var string
      */
     protected $_username;
 
     /**
      * Password
-     * @var     string
+     * @var string
      */
     protected $_password;
 
     /**
      * Create a digest auth adapter
      *
-     * @return  Zend_Auth_Adapter_Digest
+     * @return Zend_Auth_Adapter_Digest
      */
     public function create()
     {
@@ -57,8 +57,8 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     /**
      * Set the filename
      *
-     * @param   string  $filename
-     * @return  Rend_Factory_AuthAdapter_Digest
+     * @param string $filename
+     * @return Rend_Factory_AuthAdapter_Digest
      */
     public function setFilename($filename)
     {
@@ -69,8 +69,8 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     /**
      * Set the password
      *
-     * @param   string  $password
-     * @return  Rend_Factory_AuthAdapter_Digest
+     * @param string $password
+     * @return Rend_Factory_AuthAdapter_Digest
      */
     public function setPassword($password)
     {
@@ -81,8 +81,8 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     /**
      * Set the realm
      *
-     * @param   string  $realm
-     * @return  Rend_Factory_AuthAdapter_Digest
+     * @param string $realm
+     * @return Rend_Factory_AuthAdapter_Digest
      */
     public function setRealm($realm)
     {
@@ -93,8 +93,8 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Loader_
     /**
      * Set the username
      *
-     * @param   string  $username
-     * @return  Rend_Factory_AuthAdapter_Digest
+     * @param string $username
+     * @return Rend_Factory_AuthAdapter_Digest
      */
     public function setUsername($username)
     {

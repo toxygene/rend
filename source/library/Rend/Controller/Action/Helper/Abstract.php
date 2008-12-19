@@ -10,13 +10,13 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     Controller
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @package Controller
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 /** Zend_Controller_Action_HelperBroker */
@@ -25,8 +25,8 @@ require_once 'Zend/Controller/Action/HelperBroker.php';
 /**
  * Extended helper abstract
  *
- * @category    Rend
- * @package     Controller
+ * @category Rend
+ * @package Controller
  */
 abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Action_Helper_Abstract
 {
@@ -34,7 +34,7 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     /**
      * Constructor
      *
-     * @param   array|Zend_Config   $options
+     * @param array|Zend_Config $options
      */
     public function __construct($options = null)
     {
@@ -48,8 +48,8 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     /**
      * Set the options from a Zend_Config object
      *
-     * @param   Zend_Config     $config
-     * @return  Rend_Controller_Action_Helper_Abstract
+     * @param Zend_Config $config
+     * @return Rend_Controller_Action_Helper_Abstract
      */
     public function setConfig(Zend_Config $config)
     {
@@ -59,8 +59,8 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     /**
      * Set the options from an array
      *
-     * @param   array   $options
-     * @Return  Rend_Controller_Action_Helper_Abstract
+     * @param array $options
+     * @Return Rend_Controller_Action_Helper_Abstract
      */
     public function setOptions(array $options)
     {
@@ -78,8 +78,8 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
      *
      * Note: the 'Action' suffix is removed.
      *
-     * @param   string  $action
-     * @return  string
+     * @param string $action
+     * @return string
      */
     protected function _getActionName($action = null)
     {
@@ -101,6 +101,17 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
                  ->getDispatcher()
                  ->formatActionName($action)
         );
+    }
+
+    /**
+     * Get the factory loader
+     *
+     * @return Rend_FactoryLoader
+     */
+    protected function _getFactoryLoader()
+    {
+        return $this->getActionController()
+                    ->getInvokeArg("rendFactoryLoader");
     }
 
 }

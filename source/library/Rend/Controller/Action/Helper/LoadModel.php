@@ -10,30 +10,30 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @package     Controller
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       2.0.0
- * @version     $Id$
+ * @category Rend
+ * @package Controller
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 2.0.0
+ * @version $Id$
  */
 
-/** Zend_Controller_Action_Helper_Abstract */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
+/** Rend_Controller_Action_Helper_Abstract */
+require_once 'Rend/Controller/Action/Helper/Abstract.php';
 
 /**
  * Model loading helper
  *
- * @category    Rend
- * @package     Controller
+ * @category Rend
+ * @package Controller
  */
-class Rend_Controller_Action_Helper_LoadModel extends Zend_Controller_Action_Helper_Abstract
+class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Helper_Abstract
 {
 
     /**
      * Database object
-     * @var     Zend_Db_Table_Abstract
+     * @var Zend_Db_Adapter_Abstract
      */
     protected $_database;
 
@@ -42,11 +42,11 @@ class Rend_Controller_Action_Helper_LoadModel extends Zend_Controller_Action_Hel
      *
      * Load a model by name
      *
-     * @param   string                      $name
-     * @param   Zend_Db_Adapter_Abstract    $database
-     * @return  Zend_Db_Table_Abstract
+     * @param string $name
+     * @param Zend_Db_Adapter_Abstract $database
+     * @return Zend_Db_Table_Abstract
      */
-    public function direct($name)
+    public function direct($name, Zend_Db_Adapter_Abstract $database = null)
     {
         return $this->getModel($name);
     }
@@ -54,15 +54,14 @@ class Rend_Controller_Action_Helper_LoadModel extends Zend_Controller_Action_Hel
     /**
      * Load a model by name
      *
-     * @param   string                      $name
-     * @return  Zend_Db_Table_Abstract
+     * @param string $name
+     * @param Zend_Db_Adapter_Abstract $database
+     * @return Zend_Db_Table_Abstract
      */
-    public function getModel($name)
+    public function getModel($name, Zend_Db_Adapter_Abstract $database = null)
     {
-        if (!$this->_database) {
-            /** Zend_Controller_Action_Exception */
-            require_once 'Zend/Controller/Action/Exception.php';
-            throw new Zend_Controller_Action_Exception("You provide a database object before use");
+        if (!$database) {
+            $database = $this->_getDatabase();
         }
 
         // TODO determine loader directories?
@@ -73,20 +72,41 @@ class Rend_Controller_Action_Helper_LoadModel extends Zend_Controller_Action_Hel
         Zend_Loader::loadClass($name);
 
         return new $name(array(
-            Zend_Db_Table_Abstract::ADAPTER => $this->_database
+            Zend_Db_Table_Abstract::ADAPTER => $database
         ));
     }
 
     /**
      * Set the database object
      *
-     * @param   Zend_Db_Table_Abstract  $database
-     * @return  Rend_Controller_Action_Helper_LoadModel
+     * @param Zend_Db_Table_Abstract $database
+     * @return Rend_Controller_Action_Helper_LoadModel
      */
     public function setDatabase(Zend_Db_Adapter_Abstract $database)
     {
         $this->_database = $database;
         return $this;
+    }
+
+    /**
+     * Get the database object
+     *
+     * @return Zend_Db_Adapter_Abstract
+     * @throws Zend_Controller_Action_Exception
+     */
+    protected function _getDatabase()
+    {
+        if (!$this->_database) {
+            if (!$this->_getFactoryLoader() ||
+                !isset($this->_getFactoryLoader()->database) ||
+                !$this->_getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
+                /** Zend_Controller_Action_Exception */
+                require_once 'Zend/Controller/Action/Exception.php';
+
+                throw new Zend_Controller_Action_Exception("Could not load an database object");
+            }
+        }
+        return $this->_database;
     }
 
 }

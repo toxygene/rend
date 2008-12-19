@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Auth_Adapter_DbTable */
 require_once "Zend/Auth/Adapter/DbTable.php";
@@ -12,41 +12,43 @@ require_once "Zend/Auth/Adapter/DbTable.php";
 /**
  *
  */
-class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader_Abstract
+class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
      * Credential column
-     * @var     string
+     * @var string
      */
     private $_credentialColumn;
 
     /**
      * Credential treatment
-     * @var     string
+     * @var string
      */
     private $_credentialTreatment;
 
     /**
      * Identity column
-     * @var     string
+     * @var string
      */
     private $_identityColumn;
 
     /**
      * Database adapter
-     * @var     Zend_Db_Adapter_Abstract
+     * @var Zend_Db_Adapter_Abstract
      */
     private $_databaseAdapter;
 
     /**
      * Table name
-     * @var     string
+     * @var string
      */
     private $_tableName;
 
     /**
-     * @return  Zend_Auth_Adapter_DbTable
+     * Create an DbTable auth adapter
+     *
+     * @return Zend_Auth_Adapter_DbTable
      */
     public function create()
     {
@@ -62,8 +64,8 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the credential column
      *
-     * @param   string  $credentialColumn
-     * @return  Rend_Factory_AuthAdapter_DbTable
+     * @param string $credentialColumn
+     * @return Rend_Factory_AuthAdapter_DbTable
      */
     public function setCredentialColumn($credentialColumn)
     {
@@ -74,8 +76,8 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the credential treatment
      *
-     * @param   string  $credentialTreatment
-     * @return  Rend_Factory_AuthAdapter_DbTable
+     * @param string $credentialTreatment
+     * @return Rend_Factory_AuthAdapter_DbTable
      */
     public function setCredentialTreatment($credentialTreatment)
     {
@@ -86,8 +88,8 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the database adapter
      *
-     * @param   Zend_Db_Adapter_Abstract    $databaseAdapter
-     * @return  Rend_Factory_AuthAdapter_DbTable
+     * @param Zend_Db_Adapter_Abstract $databaseAdapter
+     * @return Rend_Factory_AuthAdapter_DbTable
      */
     public function setDatabaseAdapter(Zend_Db_Adapter_Abstract $databaseAdapter)
     {
@@ -98,8 +100,8 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the identity column
      *
-     * @param   string  $identityColumn
-     * @return  Rend_Factory_AuthAdapter_DbTable
+     * @param string $identityColumn
+     * @return Rend_Factory_AuthAdapter_DbTable
      */
     public function setIdentityColumn($identityColumn)
     {
@@ -110,8 +112,8 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the table name
      *
-     * @param   string  $tableName
-     * @return  Rend_Factory_AuthAdapter_DbTable
+     * @param string $tableName
+     * @return Rend_Factory_AuthAdapter_DbTable
      */
     public function setTableName($tableName)
     {

@@ -14,14 +14,14 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
 
     /**
      * Factories
-     * @var     array
+     * @var array
      */
     protected $_factories = array();
 
     /**
      * Constructor
      *
-     * @param     Zend_Config|array     $options
+     * @param Zend_Config|array $options
      */
     public function __construct($options = null)
     {
@@ -39,10 +39,10 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Method overloader
      *
-     * @param   string  $name
-     * @param   array   $arguments
-     * @return  mixed
-     * @throws  Zend_Loader_PluginLoader_Exception
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     * @throws Zend_Loader_PluginLoader_Exception
      */
     public function __call($name, $arguments)
     {
@@ -53,9 +53,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Member access overloader
      *
-     * @param   string  $name
-     * @return  Rend_Factory_Interface
-     * @throws  Zend_Loader_PluginLoader_Exception
+     * @param string $name
+     * @return Rend_Factory_Interface
+     * @throws Zend_Loader_PluginLoader_Exception
      */
     public function __get($name)
     {
@@ -65,8 +65,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Isset overloader
      *
-     * @param   string  $name
-     * @return  boolean
+     * @param string $name
+     * @return boolean
      */
     public function __isset($name)
     {
@@ -76,8 +76,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Set all the factories
      *
-     * @param 	Traversable 	$factories
-     * @return	Rend_FactoryLoader
+     * @param Traversable $factories
+     * @return Rend_FactoryLoader
      */
     public function setFactories($factories)
     {
@@ -90,8 +90,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Set a factory
      *
-     * @param    string    $name
-     * @param    Rend_Factory_Interface|array     $factory
+     * @param string $name
+     * @param Rend_Factory_Interface|array $factory
      */
     public function setFactory($name, $factory)
     {
@@ -102,9 +102,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Get a factory by name
      *
-     * @param   string  $name
-     * @return  Rend_Factory_Interface
-     * @throws  Zend_Loader_PluginLoader_Exception
+     * @param string $name
+     * @return Rend_Factory_Interface
+     * @throws Zend_Loader_PluginLoader_Exception
      */
     public function getFactory($name)
     {
@@ -124,8 +124,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Set options from a Zend_Config object
      *
-     * @param     Zend_Config     $config
-     * @return    Rend_FactoryLoader
+     * @param Zend_Config $config
+     * @return Rend_FactoryLoader
      */
     public function setConfig(Zend_Config $config)
     {
@@ -135,8 +135,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Set options from an array
      *
-     * @param     array     $options
-     * @return    Rend_FactoryLoader
+     * @param array $options
+     * @return Rend_FactoryLoader
      */
     public function setOptions(array $options)
     {
@@ -148,8 +148,11 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
                     }
                 break;
 
-                case "factories":
-                    $this->setFactories($value);
+                default:
+                    $method = "set" . ucFirst($key);
+                    if (method_exists($this, $method)) {
+                        $this->$method($value);
+                    }
                 break;
             }
         }
@@ -159,9 +162,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Construct a factory
      *
-     * @param   string  $type
-     * @param   array|Zend_Config   $config
-     * @return  Rend_FactoryLoader_Factory_Interface
+     * @param string $type
+     * @param array|Zend_Config $config
+     * @return Rend_FactoryLoader_Factory_Interface
      */
     protected function _buildFactory($config)
     {
@@ -170,13 +173,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         );
 
         if (isset($config["options"])) {
-            $factory = new $className($config["options"]);
-        } else {
             $factory = new $className();
-        }
-
-        if ($factory instanceof Rend_FactoryLoader_Factory_Loadable_Interface) {
-            $factory->setFactoryLoader($this);
+        } else {
+            $factory = new $className($config["options"]);
         }
 
         return $factory;

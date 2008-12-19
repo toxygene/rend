@@ -2,8 +2,8 @@
 /**
  * Rend
  *
- * @category   Rend
- * @package    Controller
+ * @category Rend
+ * @package Controller
  * @subpackage Default
  */
 
@@ -11,8 +11,8 @@
 require_once "Rend/Controller/Action.php";
 
 /**
- * @category   Rend
- * @package    Controller
+ * @category Rend
+ * @package Controller
  * @subpackage Default
  */
 class ErrorController extends Rend_Controller_Action

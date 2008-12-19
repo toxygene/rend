@@ -1,7 +1,8 @@
 [production]
 displayErrors = false
-encoding       = UTF-8
-timezone       =
+timezone      =
+
+view.options.encoding = UTF-8
 
 [development : production]
 displayErrors = true

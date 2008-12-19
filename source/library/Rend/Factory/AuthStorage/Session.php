@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
 /** Zend_Auth_Storage_Session */
 require_once "Zend/Auth/Storage/Session.php";
@@ -12,25 +12,25 @@ require_once "Zend/Auth/Storage/Session.php";
 /**
  *
  */
-class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Loader_Abstract
+class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Abstract
 {
 
     /**
      * Member name
-     * @var     string
+     * @var string
      */
     protected $_member;
 
     /**
      * Namespace name
-     * @var     string
+     * @var string
      */
     protected $_namespace;
 
     /**
      * Create a session storage
      *
-     * @return  Zend_Auth_Storage_Session
+     * @return Zend_Auth_Storage_Session
      */
     public function create()
     {
@@ -43,8 +43,8 @@ class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the member name
      *
-     * @param   string  $member
-     * @return  Rend_Factory_AuthStorage_Session
+     * @param string $member
+     * @return Rend_Factory_AuthStorage_Session
      */
     public function setMember($member)
     {
@@ -55,8 +55,8 @@ class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Loader
     /**
      * Set the namespace name
      *
-     * @param   string  $namespace
-     * @return  Rend_Factory_AuthStorage_Session
+     * @param string $namespace
+     * @return Rend_Factory_AuthStorage_Session
      */
     public function setNamespace($namespace)
     {

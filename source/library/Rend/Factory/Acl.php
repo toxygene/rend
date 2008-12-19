@@ -6,15 +6,6 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Acl */
-require_once "Zend/Acl.php";
-
-/** Zend_Acl_Resource */
-require_once "Zend/Acl/Resource.php";
-
-/** Zend_Acl_Role */
-require_once "Zend/Acl/Role.php";
-
 /**
  *
  */
@@ -23,22 +14,37 @@ class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
 
     /**
      * Configuration file
-     * @var     string
+     * @var string
      */
-    private $_configFile;
+    private $_configFile = "../application/configs/acl.php";
 
     /**
      * Create an ACL object
      *
-     * @return  Zend_Acl
+     * @return Zend_Acl
+     * @throws Rend_Factory_Acl_Exception
      */
     public function create()
     {
-        $acl = new Zend_Acl();
+        if (!file_exists($this->_configFile)) {
+            /** Rend_Factory_Acl_Exception */
+            require_once "Rend/Factory/Acl/Exception.php";
 
-        if ($this->_configFile) {
-            include $this->_configFile;
+            throw new Rend_Factory_Acl_Exception("Could not load config file '{$this->_configFile}'");
         }
+
+		/** Zend_Acl */
+		require_once "Zend/Acl.php";
+
+		/** Zend_Acl_Resource */
+		require_once "Zend/Acl/Resource.php";
+
+		/** Zend_Acl_Role */
+		require_once "Zend/Acl/Role.php";
+
+		$acl = new Zend_Acl();
+
+		include $this->_configFile;
 
         return $acl;
     }
@@ -46,8 +52,8 @@ class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
     /**
      * Set the configuration file
      *
-     * @param   string  $configFile
-     * @return  Rend_Factory_Acl
+     * @param string $configFile
+     * @return Rend_Factory_Acl
      */
     public function setConfigFile($configFile)
     {

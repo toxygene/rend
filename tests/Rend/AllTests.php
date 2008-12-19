@@ -10,13 +10,13 @@
  * obtain it through the world-wide-web, please send an email
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
- * @category    Rend
- * @subpackage 	UnitTest
- * @copyright   2008 Justin Hendrickson
- * @license     http://www.rendframework.com/license.html    New BSD License
- * @link        http://www.rendframework.com/
- * @since       1.0.0
- * @version     $Id$
+ * @category Rend
+ * @subpackage UnitTest
+ * @copyright 2008 Justin Hendrickson
+ * @license http://www.rendframework.com/license.html    New BSD License
+ * @link http://www.rendframework.com/
+ * @since 1.0.0
+ * @version $Id$
  */
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
@@ -26,6 +26,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 require_once dirname(__FILE__) . "/TestHelper.php";
 require_once "Rend/RandomTest.php";
 require_once "Rend/Factory/AllTests.php";
+require_once "Rend/Filter/AllTests.php";
 require_once "Rend/View/Helper/AllTests.php";
 
 /**
@@ -46,6 +47,7 @@ class Rend_AllTests
         $suite->addTest(Rend_Controller_AllTests::suite());
         $suite->addTest(Rend_Factory_AllTests::suite());
         $suite->addTestSuite("Rend_FactoryLoaderTest");
+        $suite->addTestSuite(Rend_Filter_AllTests::suite());
         $suite->addTestSuite("Rend_RandomTest");
         $suite->addTest(Rend_View_Helper_AllTests::suite());
 
