@@ -45,9 +45,10 @@ class Rend_Factory_LogTest extends PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testCreateWithoutConfigFileReturnsANullWriter()
+    public function testConfigurationFileSetsUpTheLog()
     {
         $log = $this->_factory
+                    ->setConfigFile("./_files/log-config.php")
                     ->create();
 
         $this->assertAttributeContainsOnly(
