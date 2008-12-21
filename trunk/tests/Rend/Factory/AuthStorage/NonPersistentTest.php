@@ -28,4 +28,21 @@ require_once "Rend/Factory/AuthStorage/NonPersistent.php";
  */
 class Rend_Factory_AuthStorage_NonPersistentTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factory;
+
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_AuthStorage_NonPersistent();
+    }
+
+    public function testCreateReturnsANonPersistentAuthStorageObject()
+    {
+        $this->assertType(
+            "Zend_Auth_Storage_NonPersistent",
+            $this->_factory
+                 ->create()
+        );
+    }
+
 }

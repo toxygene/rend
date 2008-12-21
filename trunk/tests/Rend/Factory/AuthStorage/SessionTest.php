@@ -28,4 +28,45 @@ require_once "Rend/Factory/AuthStorage/Session.php";
  */
 class Rend_Factory_AuthStorage_SessionTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factory;
+
+    protected function setUp()
+    {
+        $this->_factory = new Rend_Factory_AuthStorage_Session();
+    }
+
+    public function testMemberIsConfigurable()
+    {
+        $storage = $this->_factory
+                        ->setMember("test")
+                        ->create();
+
+        $this->assertEquals(
+            "test",
+            $storage->getMember()
+        );
+    }
+
+    public function testNamespaceIsConfigurable()
+    {
+        $storage = $this->_factory
+                        ->setNamespace("test")
+                        ->create();
+
+        $this->assertEquals(
+            "test",
+            $storage->getNamespace()
+        );
+    }
+
+    public function testCreateReturnsASessionAuthStorageObject()
+    {
+        $this->assertType(
+            "Zend_Auth_Storage_Session",
+            $this->_factory
+                 ->create()
+        ); 
+    }
+
 }

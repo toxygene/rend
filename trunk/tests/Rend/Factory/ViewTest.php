@@ -28,4 +28,59 @@ require_once "Rend/Factory/View.php";
  */
 class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factory;
+
+    protected function setUp()
+    {
+        $this->_factory = new Rend_Factory_View();
+    }
+
+    public function testCreateReturnsAViewObject()
+    {
+        $this->assertType(
+            "Zend_View",
+            $this->_factory
+                 ->create()
+        );
+    }
+
+    public function testDoctypeIsConfigurable()
+    {
+        $view = $this->_factory
+                     ->setDoctype("XHTML1_STRICT")
+                     ->create();
+
+        $this->assertEquals(
+            "XHTML1_STRICT",
+            $view->getHelper("Doctype")
+                 ->getDoctype()
+        );
+    }
+
+    public function testEncodingIsConfigurable()
+    {
+        $view = $this->_factory
+                     ->setEncoding("UTF-8")
+                     ->create();
+
+        $this->assertEquals(
+            "UTF-8",
+            $view->getEncoding()
+        );
+    }
+
+    public function testEscapeIsConfigurable()
+    {
+        $view = $this->_factory
+                     ->setEscape("htmlentities")
+                     ->create();
+
+        $this->assertAttributeEquals(
+            "htmlentities",
+            "_escape:private",
+            $view
+        );
+    }
+
 }
