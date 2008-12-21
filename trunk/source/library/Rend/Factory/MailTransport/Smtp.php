@@ -3,16 +3,16 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Loader_Abstract */
-require_once "Rend/FactoryLoader/Factory/Loader/Abstract.php";
+/** Rend_FactoryLoader_Factory_Abstract */
+require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Mail_Transport_Smtp */
-require_once "Zend/Mail/Transport/Smtp.php";
+/** Rend_Factory_MailTransport_Interface */
+require_once "Rend/Factory/MailTransport/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_Abstract
+class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_MailTransport_Interface
 {
 
     /**
@@ -40,6 +40,9 @@ class Rend_Factory_MailTransport_Smtp extends Rend_FactoryLoader_Factory_Loader_
      */
     public function create()
     {
+        /** Zend_Mail_Transport_Smtp */
+        require_once "Zend/Mail/Transport/Smtp.php";
+
         $smtp = new Zend_Mail_Transport_Smtp(
             $this->_host,
             $this->_options

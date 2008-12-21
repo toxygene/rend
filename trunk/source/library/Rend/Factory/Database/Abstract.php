@@ -6,10 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
+/** Rend_Factory_Database_Interface */
+require_once "Rend/Factory/Database/Interface.php";
+
 /**
  *
  */
-abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory_Abstract
+abstract class Rend_Factory_Database_Abstract extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_Database_Interface
 {
 
     /**#@+

@@ -6,13 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Auth_Adapter_DbTable */
-require_once "Zend/Auth/Adapter/DbTable.php";
+/** Rend_Factory_AuthAdapter_Interface */
+require_once "Rend/Factory/AuthAdapter/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_AuthAdapter_Interface
 {
 
     /**
@@ -52,6 +52,9 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_FactoryLoader_Factory_Abstra
      */
     public function create()
     {
+        /** Zend_Auth_Adapter_DbTable */
+        require_once "Zend/Auth/Adapter/DbTable.php";
+
         return new Zend_Auth_Adapter_DbTable(
             $this->_databaseAdapter,
             $this->_tableName,

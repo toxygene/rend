@@ -6,13 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Auth_Storage_Session */
-require_once "Zend/Auth/Storage/Session.php";
+/** Rend_Factory_AuthStorage_Interface */
+require_once "Rend/Factory/AuthStorage/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_AuthStorage_Interface
 {
 
     /**
@@ -34,6 +34,9 @@ class Rend_Factory_AuthStorage_Session extends Rend_FactoryLoader_Factory_Abstra
      */
     public function create()
     {
+        /** Zend_Auth_Storage_Session */
+        require_once "Zend/Auth/Storage/Session.php";
+
         return new Zend_Auth_Storage_Session(
             $this->_namespace,
             $this->_member

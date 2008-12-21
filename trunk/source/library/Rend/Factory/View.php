@@ -6,13 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_View */
-require_once "Zend/View.php";
+/** Rend_Factory_View_Interface */
+require_once "Rend/Factory/View/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_View_Interface
 {
 
     /**
@@ -64,6 +64,9 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract
      */
     public function create()
     {
+        /** Zend_View */
+        require_once "Zend/View.php";
+
         $view = new Zend_View();
 
         $view->addHelperPath(
