@@ -122,7 +122,7 @@ class Rend_Factory_View extends Rend_FactoryLoader_Factory_Abstract implements R
         }
 
         if ($this->_strictVars) {
-            $view->setStrictVars($this->_strictVars);
+            $view->strictVars($this->_strictVars);
         }
 
         return $view;
