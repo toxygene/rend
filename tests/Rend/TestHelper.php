@@ -14,6 +14,8 @@ set_include_path(
 require_once "Zend/Loader.php";
 Zend_Loader::registerAutoload();
 
+Zend_Session::start();
+
 PHPUnit_Util_Filter::addDirectoryToWhiteList(
     "{$root}/library/Rend",
     ".php"
