@@ -48,6 +48,18 @@ class Rend_Factory_MailTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCcEmailAndNameAreConfigurable()
+    {
+        $mail = $this->_factory
+                     ->setCcs(array(array("email" => "cc1@example.org", "name" => "Test")))
+                     ->create();
+
+        $this->assertEquals(
+            array("cc1@example.org"),
+            $mail->getRecipients()
+        );
+    }
+
     public function testBccIsConfigurable()
     {
         $mail = $this->_factory
@@ -57,6 +69,19 @@ class Rend_Factory_MailTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             array("bcc1@example.org", "bcc2@example.org"),
             $mail->getRecipients()
+        );
+    }
+
+    public function testDateIsConfigurable()
+    {
+
+        $mail = $this->_factory
+                     ->setDate("Wed, 01 Jan 1992 00:00:00 -0600")
+                     ->create();
+
+        $this->assertEquals(
+            "Wed, 01 Jan 1992 00:00:00 -0600",
+            $mail->getDate()
         );
     }
 

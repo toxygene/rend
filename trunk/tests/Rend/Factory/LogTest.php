@@ -58,4 +58,15 @@ class Rend_Factory_LogTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     *
+     */
+    public function testNonexistantConfigFileThrowsAnException()
+    {
+        $this->setExpectedException("Rend_Factory_Log_Exception");
+
+        $log = $this->_factory
+                    ->create();
+    }
+
 }
