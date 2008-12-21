@@ -6,13 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Auth_Storage_NonPersistent */
-require_once "Zend/Auth/Storage/NonPersistent.php";
+/** Rend_Factory_AuthStorage_Interface */
+require_once "Rend/Factory/AuthStorage/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_AuthStorage_NonPersistent extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_AuthStorage_NonPersistent extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_AuthStorage_Interface
 {
 
     /**
@@ -22,6 +22,9 @@ class Rend_Factory_AuthStorage_NonPersistent extends Rend_FactoryLoader_Factory_
      */
     public function create()
     {
+        /** Zend_Auth_Storage_NonPersistent */
+        require_once "Zend/Auth/Storage/NonPersistent.php";
+
         return new Zend_Auth_Storage_NonPersistent();
     }
 

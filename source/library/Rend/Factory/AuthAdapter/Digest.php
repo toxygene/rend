@@ -6,13 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Auth_Adapter_Digest */
-require_once "Zend/Auth/Adapter/Digest.php";
+/** Rend_Factory_AuthAdapter_Interface */
+require_once "Rend/Factory/AuthAdapter/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_AuthAdapter_Interface
 {
 
     /**
@@ -46,6 +46,9 @@ class Rend_Factory_AuthAdapter_Digest extends Rend_FactoryLoader_Factory_Abstrac
      */
     public function create()
     {
+        /** Zend_Auth_Adapter_Digest */
+        require_once "Zend/Auth/Adapter/Digest.php";
+
         return new Zend_Auth_Adapter_Digest(
             $this->_filename,
             $this->_realm,

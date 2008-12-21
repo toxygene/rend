@@ -6,13 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
-/** Zend_Log */
-require_once "Zend/Log.php";
+/** Rend_Factory_Log_Interface */
+require_once "Rend/Factory/Log/Interface.php";
 
 /**
  *
  */
-class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_Log_Interface
 {
 
     /**
@@ -34,6 +34,9 @@ class Rend_Factory_Log extends Rend_FactoryLoader_Factory_Abstract
 
             throw new Rend_Factory_Log_Exception("Could not load config file '{$this->_configFile}'");
         }
+
+        /** Zend_Log */
+        require_once "Zend/Log.php";
 
         $log = new Zend_Log();
 

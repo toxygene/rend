@@ -6,10 +6,13 @@
 /** Rend_FactoryLoader_Factory_Abstract */
 require_once "Rend/FactoryLoader/Factory/Abstract.php";
 
+/** Rend_Factory_Acl_Interface */
+require_once "Rend/Factory/Acl/Interface.php";
+
 /**
  *
  */
-class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract
+class Rend_Factory_Acl extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_Acl_Interface
 {
 
     /**
