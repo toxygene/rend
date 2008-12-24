@@ -85,17 +85,46 @@ $this->markTestSkipped("ReflectionError prevents this from running correctly");
 
     public function testFilterPathsAreConfigurable()
     {
-$this->markTestSkipped("Not complete");
         $view = $this->_factory
+                     ->setFilterPaths(array("One", array("prefix" => "Two", "path" => "Two")))
                      ->create();
+
+        $this->assertEquals(
+            array(
+                "Zend_View_Filter_" => array(
+                    "Zend/View/Filter/",
+                    "One/"
+                ),
+                "Two_" => array(
+                    "Two/"
+                )
+            ),
+            $view->getFilterPaths()
+        );
     }
 
 
     public function testHelperPathsAreConfigurable()
     {
-$this->markTestSkipped("Not complete");
         $view = $this->_factory
+                     ->setHelperPaths(array("One", array("prefix" => "Two", "path" => "Two")))
                      ->create();
+
+        $this->assertEquals(
+             array(
+                "Zend_View_Helper_" => array(
+                    "Zend/View/Helper/",
+                    "One/"
+                ),
+                "Rend_View_Helper_" => array(
+                    "Rend/View/Helper/"
+                ),
+                "Two_" => array(
+                    "Two/"
+                )
+            ),
+            $view->getHelperPaths()
+        ); 
     }
 
 
