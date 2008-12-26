@@ -22,10 +22,60 @@
 /** Rend_FactoryLoader */
 require_once "Rend/FactoryLoader.php";
 
+/** Zend_Config */
+require_once "Zend/Config.php";
+
 /**
  * @category Rend
  * @subpackage UnitTest
  */
 class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factoryLoader;
+
+    protected function setUp()
+    {
+        $this->_factoryLoader = new Rend_FactoryLoader();
+    }
+
+    public function testPrefixPathsAreCustomizable()
+    {
+        $config = new Zend_Config(array(
+            "prefixPaths" => array("Test" => "Test"),
+            "factories"   => array(
+            )
+        ));
+
+        $factoryLoader = new Rend_FactoryLoader($config);
+
+        $this->assertEquals(
+            array("Test/"),
+            $factoryLoader->getPaths("Test")
+        );
+
+        $factoryLoader = new Rend_FactoryLoader($config->toArray());
+
+        $this->assertEquals(
+            array("Test/"),
+            $factoryLoader->getPaths("Test")
+        );
+    }
+
+    public function testFactoriesCanBeManuallyAdded()
+    {
+        $factory = $this->getMock("Rend_FactoryLoader_Factory_Interface");
+
+        $factoryLoader = new Rend_FactoryLoader(array(
+            "factories" => array(
+                "test" => $factory
+            )
+        ));
+
+        $this->assertSame(
+            $factory,
+            $factoryLoader->getFactory("test")
+        );
+    }
+
 }

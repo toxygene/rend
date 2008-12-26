@@ -37,6 +37,12 @@ class Rend_View_Helper_FullUrl extends Zend_View_Helper_Abstract
 {
 
     /**
+     * Request object
+     * @var Zend_Controller_Request_Abstract
+     */
+    private $_request;
+
+    /**
      * Determine the full URL based on the the url options
      *
      * @param array $urlOptions
@@ -46,22 +52,10 @@ class Rend_View_Helper_FullUrl extends Zend_View_Helper_Abstract
      */
     public function fullUrl(array $urlOptions = array(), $name = "default", $reset = false)
     {
-        $request = Zend_Controller_Front::getInstance()
-                                        ->getRequest();
+        $request = $this->_getRequest();
 
-        if ($request->isSecure()) {
-            $url = "https://";
-        } else {
-            $url = "http://";
-        }
-
-        $url .= $request->SERVER_NAME;
-
-        if (($request->isSecure() && $request->SERVER_PORT != 443) || (!$request->isSecure() && $request->SERVER_PORT != 80)) {
-            $url .= ":{$request->SERVER_PORT}";
-        }
-
-        return $url . $this->view>url($urlOptions, $name, $reset);
+        return $this->_getRequest()->getHttpHost() .
+               $this->view->url($urlOptions, $name, $reset);
     }
 
     /**
@@ -76,6 +70,35 @@ class Rend_View_Helper_FullUrl extends Zend_View_Helper_Abstract
     public function direct(array $urlOptions = array(), $name = "default", $reset = false)
     {
         return $this->fullUrl($urlOptions, $name, $reset);
+    }
+
+    /**
+     * Set the request
+     *
+     * @param Zend_Controller_Request_Http $request
+     * @return Rend_View_Helper_FullUrl
+     */
+    public function setRequest(Zend_Controller_Request_Http $request)
+    {
+        $this->_request = $request;
+        return $this;
+    }
+
+    /**
+     * Get the request object
+     *
+     * @return Zend_Controller_Request_Http
+     */
+    protected function _getRequest()
+    {
+        if (!$this->_request) {
+            /** Zend_Controller_Front */
+            require_once "Zend/Controller/Front.php";
+
+            $this->_request = Zend_Controller_Front::getInstance()
+                                                   ->getRequest();
+        }
+        return $this->_request;
     }
 
 }

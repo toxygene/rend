@@ -13,7 +13,8 @@ class Rend_Controller_Router_QueryString extends Zend_Controller_Router_Abstract
 {
 
     /**
-     *
+     * Values
+     * @var array
      */
     private $_values = array();
 
