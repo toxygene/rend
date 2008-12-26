@@ -42,6 +42,18 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     const DISABLE_ACL = "*";
 
     /**
+     * Forbidden error code
+     * @var integer
+     */
+    const FORBIDDEN = 401;
+
+    /**
+     * Unauthorized error code
+     * @var integer
+     */
+    const UNAUTHORIZED = 403;
+
+    /**
      * ACL object
      * @var Zend_Acl
      */
@@ -222,7 +234,10 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                  ->setDispatched(false);
 
             if ($this->_throwExceptions) {
-                throw new Zend_Controller_Action_Exception("Permission '{$perm}' denied on resource '{$resource}' for role '{$this->_role}'");
+                throw new Zend_Controller_Action_Exception(
+                	"Permission '{$perm}' denied on resource '{$resource}' for role '{$this->_role}'",
+                    $permission ? self::UNAUTHORIZED : self::FORBIDDEN
+                );
             } else {
                 if (!$this->_role) {
                     $this->getRequest()

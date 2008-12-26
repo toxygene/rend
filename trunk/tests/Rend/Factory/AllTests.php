@@ -31,6 +31,7 @@ require_once "Rend/Factory/AuthStorage/AllTests.php";
 require_once "Rend/Factory/Database/AllTests.php";
 require_once "Rend/Factory/LogTest.php";
 require_once "Rend/Factory/MailTest.php";
+require_once "Rend/Factory/MailTransport/AllTests.php";
 require_once "Rend/Factory/ViewTest.php";
 
 /**
@@ -55,6 +56,7 @@ class Rend_Factory_AllTests
         $suite->addTest(Rend_Factory_Database_AllTests::suite());
         $suite->addTestSuite("Rend_Factory_LogTest");
         $suite->addTestSuite("Rend_Factory_MailTest");
+        $suite->addTest(Rend_Factory_MailTransport_AllTests::suite());
         $suite->addTestSuite("Rend_Factory_ViewTest");
 
         return $suite;

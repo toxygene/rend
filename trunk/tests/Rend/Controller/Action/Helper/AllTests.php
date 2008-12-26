@@ -43,9 +43,9 @@ class Rend_Controller_Action_Helper_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite("Rend Controller Action Helper Tests");
 
-        $suite->addTestSuite("Rend_Controller_Action_Helper_IsAllowed");
-        $suite->addTestSuite("Rend_Controller_Action_Helper_LayoutSelector");
-        $suite->addTestSuite("Rend_Controller_Action_Helper_LoadModel");
+        $suite->addTestSuite("Rend_Controller_Action_Helper_IsAllowedTest");
+        $suite->addTestSuite("Rend_Controller_Action_Helper_LayoutSelectorTest");
+        $suite->addTestSuite("Rend_Controller_Action_Helper_LoadModelTest");
 
         return $suite;
     }

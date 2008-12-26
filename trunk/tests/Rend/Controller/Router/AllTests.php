@@ -20,18 +20,16 @@
  */
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Rend_Controller_AllTests::main");
+    define("PHPUnit_MAIN_METHOD", "Rend_Controller_Router_AllTests::main");
 }
 
-require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
-require_once "Rend/Controller/ActionTest.php";
-require_once "Rend/Controller/Action/Helper/AllTests.php";
-require_once "Rend/Controller/Router/AllTests.php";
+require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
+require_once "Rend/Controller/Router/QueryStringTest.php";
 
 /**
  *
  */
-class Rend_Controller_AllTests
+class Rend_Controller_Router_AllTests
 {
 
     public static function main()
@@ -41,16 +39,14 @@ class Rend_Controller_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite("Rend Controller Tests");
+        $suite = new PHPUnit_Framework_TestSuite("Rend Controller Router Tests");
 
-        $suite->addTestSuite("Rend_Controller_ActionTest");
-        $suite->addTest(Rend_Controller_Action_Helper_AllTests::suite());
-        $suite->addTest(Rend_Controller_Router_AllTests::suite());
+        $suite->addTestSuite("Rend_Controller_Router_QueryStringTest");
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == "Rend_Controller_AllTests::main") {
-    Rend_Controller_AllTests::main();
+if (PHPUnit_MAIN_METHOD == "Rend_Controller_Router_AllTests::main") {
+    Rend_Controller_Router_AllTests::main();
 }
