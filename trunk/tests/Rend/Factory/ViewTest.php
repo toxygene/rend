@@ -72,7 +72,6 @@ class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
 
     public function testEscapeIsConfigurable()
     {
-$this->markTestSkipped("ReflectionError prevents this from running correctly");
         $view = $this->_factory
                      ->setEscape("htmlentities")
                      ->create();
@@ -142,7 +141,6 @@ $this->markTestSkipped("ReflectionError prevents this from running correctly");
 
     public function testStrictVarsIsConfigurable()
     {
-$this->markTestSkipped("ReflectionError prevents this from running correctly");
         $view = $this->_factory
                      ->setStrictVars(true)
                      ->create();
