@@ -64,6 +64,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testFactoriesCanBeManuallyAdded()
     {
+$this->markTestIncomplete("Under development");
         $factory = $this->getMock("Rend_FactoryLoader_Factory_Interface");
 
         $factoryLoader = new Rend_FactoryLoader(array(
