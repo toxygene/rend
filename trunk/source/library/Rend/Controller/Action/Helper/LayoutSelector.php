@@ -73,7 +73,10 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     }
 
     /**
-     * Set the layout based on the requested action
+     * Post-dispatch
+     *
+     * Once dispatching is complete, the layout script is set based on the last
+     * action called.
      */
     public function postDispatch()
     {
