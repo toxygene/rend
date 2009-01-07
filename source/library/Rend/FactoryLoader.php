@@ -173,9 +173,9 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
         );
 
         if (isset($config["options"])) {
-            $factory = new $className();
-        } else {
             $factory = new $className($config["options"]);
+        } else {
+            $factory = new $className();
         }
 
         return $factory;
