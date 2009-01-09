@@ -64,8 +64,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testFactoriesCanBeManuallyAdded()
     {
-$this->markTestIncomplete("Under development");
-        $factory = $this->getMock("Rend_FactoryLoader_Factory_Interface");
+        $factory = $this->getMock("Rend_FactoryLoader_Factory_Abstract");
 
         $factoryLoader = new Rend_FactoryLoader(array(
             "factories" => array(
@@ -75,6 +74,30 @@ $this->markTestIncomplete("Under development");
 
         $this->assertSame(
             $factory,
+            $factoryLoader->getFactory("test")
+        );
+    }
+
+    public function testFactoriesCanBeBuiltFromArrayDefinitions()
+    {
+        $factory = $this->getMock(
+            "Rend_FactoryLoader_Factory_Abstract",
+            array(),
+            array(),
+            "Test_Factory_Test"
+        );
+
+        $factoryLoader = new Rend_FactoryLoader(array(
+            "prefixPaths" => array("Test_Factory" => "Test/Factory"),
+        	"factories" => array(
+                "test" => array(
+                    "type" => "Test"
+                )
+            )
+        ));
+
+        $this->assertType(
+            "Test_Factory_Test",
             $factoryLoader->getFactory("test")
         );
     }
