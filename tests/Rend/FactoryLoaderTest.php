@@ -84,22 +84,113 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
             "Rend_FactoryLoader_Factory_Abstract",
             array(),
             array(),
-            "Test_Factory_Test"
+            "Test_Factory_TestOne"
         );
 
         $factoryLoader = new Rend_FactoryLoader(array(
             "prefixPaths" => array("Test_Factory" => "Test/Factory"),
         	"factories" => array(
                 "test" => array(
-                    "type" => "Test"
+                    "type" => "TestOne"
                 )
             )
         ));
 
         $this->assertType(
-            "Test_Factory_Test",
+            "Test_Factory_TestOne",
             $factoryLoader->getFactory("test")
         );
+    }
+
+    public function testFactoriesCanBeSetAndFetchedFromTheMagicMethods()
+    {
+        $factory = $this->getMock(
+            "Rend_FactoryLoader_Factory_Abstract",
+            array(),
+            array(),
+            "Test_Factory_TestTwo"
+        );
+
+        $factoryLoader = new Rend_FactoryLoader(array(
+            "prefixPaths" => array("Test_Factory" => "Test/Factory")
+        ));
+
+        $factoryLoader->test = $factory;
+
+        $this->assertTrue(
+            isset($factoryLoader->test)
+        );
+
+        $this->assertEquals(
+            $factory,
+            $factoryLoader->test
+        );
+    }
+
+    public function testObjectsCanBeLoadedDirectlyFromTheirFactories()
+    {
+        $mock = $this->getMock(
+            "Rend_FactoryLoader_Factory_Abstract",
+            array("create"),
+            array(),
+            "Test_Factory_TestThree"
+        );
+
+        $mock->expects($this->once())
+             ->method("create")
+             ->will($this->returnValue("test"));
+
+        $factoryLoader = new Rend_FactoryLoader(array(
+            "factories" => array(
+                "test" => $mock
+            )
+        ));
+
+        $factoryLoader->test();
+    }
+
+    public function testFactoriesCanBeCreatedWithOptions()
+    {
+        $factoryLoader = new Rend_FactoryLoader(array(
+        	"factories" => array(
+                "test" => array(
+                    "type" => "TestFour",
+                    "options" => array(
+                        "test" => "test"
+                    )
+                )
+            ),
+            "prefixPaths" => array("Test_Factory" => "Test/Factory")
+        ));
+
+        $this->assertEquals(
+            "test",
+            $factoryLoader->test()
+        );
+    }
+
+    public function testGettingANonExistantFactoryThrowsAnException()
+    {
+        $this->setExpectedException("Rend_FactoryLoader_Exception");
+        $factoryLoader = new Rend_FactoryLoader();
+        $factoryLoader->getFactory("test");
+    }
+
+}
+
+class Test_Factory_TestFour extends Rend_FactoryLoader_Factory_Abstract
+{
+
+    public $test;
+
+    public function create()
+    {
+        return $this->test;
+    }
+
+    public function setTest($test)
+    {
+        $this->test = $test;
     }
 
 }
