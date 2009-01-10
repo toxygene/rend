@@ -74,6 +74,17 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     }
 
     /**
+     * Member assignment overloader
+     *
+     * @param string $name
+     * @param ? $value
+     */
+    public function __set($name, $value)
+    {
+        $this->setFactory($name, $value);
+    }
+
+    /**
      * Set all the factories
      *
      * @param Traversable $factories
