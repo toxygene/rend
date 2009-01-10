@@ -25,6 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
 require_once 'Rend/Validate/ConfirmFieldTest.php';
+require_once 'Rend/Validate/StringEqualsTest.php';
 
 /**
  *
@@ -42,6 +43,7 @@ class Rend_Validate_AllTests
         $suite = new PHPUnit_Framework_TestSuite("Rend Validate Tests");
 
         $suite->addTestSuite("Rend_Validate_ConfirmFieldTest");
+        $suite->addTestSuite("Rend_Validate_StringEqualsTest");
 
         return $suite;
     }

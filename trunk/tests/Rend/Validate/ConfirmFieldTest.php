@@ -29,15 +29,48 @@ require_once "Rend/Validate/ConfirmField.php";
 class Rend_Validate_ConfirmFieldTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testFieldCanBeSet()
+    public function testConfirmationFieldCanBeSet()
     {
-        $this->_validate = new Rend_Validate_ConfirmField();
+        $validate = new Rend_Validate_ConfirmField();
 
-        $this->_validate->setField("test");
+        $validate->setField("test");
 
         $this->assertEquals(
             "test",
-            $this->_validate->getField()
+            $validate->getField()
+        );
+    }
+
+    public function testAValidCanBeComparedAgainstAContextArray()
+    {
+        $validate = new Rend_Validate_ConfirmField("test");
+
+        $this->assertTrue(
+            $validate->isValid(
+            	"test",
+                array("test" => "test")
+            )
+        );
+    }
+
+    public function testAValidCanBeComparedAgainstAContextString()
+    {
+        $validate = new Rend_Validate_ConfirmField("test");
+
+        $this->assertTrue(
+            $validate->isValid(
+            	"test",
+                "test"
+            )
+        );
+    }
+
+    public function testNonMatchingDataIsNotValid()
+    {
+        $validate = new Rend_Validate_ConfirmField();
+
+        $this->assertFalse(
+            $validate->isValid("test", "asdf")
         );
     }
 
