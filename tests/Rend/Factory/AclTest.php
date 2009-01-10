@@ -44,7 +44,7 @@ class Rend_Factory_AclTest extends PHPUnit_Framework_TestCase
     	$acl = $this->_factory
     	            ->setConfigFile(dirname(__FILE__) . "/_files/acl.php")
     	            ->create();
-    	
+
         $this->assertType(
             "Zend_Acl",
             $acl
