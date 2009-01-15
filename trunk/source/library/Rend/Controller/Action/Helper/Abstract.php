@@ -32,6 +32,12 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
 {
 
     /**
+     * Factory loader
+     * @var Zend_FactoryLoader
+     */
+    protected $_factoryLoader;
+
+    /**
      * Constructor
      *
      * @param array|Zend_Config $options
@@ -46,6 +52,20 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     }
 
     /**
+     * Get the factory loader
+     *
+     * @return Rend_FactoryLoader
+     */
+    public function getFactoryLoader()
+    {
+        if (!$this->_factoryLoader) {
+            $this->_factoryLoader = $this->getActionController()
+                                         ->getFactoryLoader();
+        }
+        return $this->_factoryLoader;
+    }
+
+    /**
      * Set the options from a Zend_Config object
      *
      * @param Zend_Config $config
@@ -57,10 +77,22 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     }
 
     /**
+     * Set the factory loader
+     *
+     * @param Rend_FactoryLoader $factoryLoader
+     * @return Rend_Controller_Action_Helper
+     */
+    public function setFactoryLoader(Rend_FactoryLoader $factoryLoader)
+    {
+        $this->_factoryLoader = $factoryLoader;
+        return $this;
+    }
+
+    /**
      * Set the options from an array
      *
      * @param array $options
-     * @Return Rend_Controller_Action_Helper_Abstract
+     * @return Rend_Controller_Action_Helper_Abstract
      */
     public function setOptions(array $options)
     {
@@ -71,47 +103,6 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
             }
         }
         return $this;
-    }
-
-    /**
-     * Get the formatted name of the requested action from the dispatcher
-     *
-     * Note: the 'Action' suffix is removed.
-     *
-     * @param string $action
-     * @return string
-     */
-    protected function _getActionName($action = null)
-    {
-        if (!$action) {
-            $action = $this->getRequest()
-                           ->getActionName();
-
-            if (!$action) {
-                $action = $this->getFrontController()
-                               ->getDispatcher()
-                               ->getDefaultAction();
-            }
-        }
-
-        return preg_replace(
-            "#Action$#",
-            "",
-            $this->getFrontController()
-                 ->getDispatcher()
-                 ->formatActionName($action)
-        );
-    }
-
-    /**
-     * Get the factory loader
-     *
-     * @return Rend_FactoryLoader
-     */
-    protected function _getFactoryLoader()
-    {
-        return $this->getActionController()
-                    ->getInvokeArg("rendFactoryLoader");
     }
 
 }
