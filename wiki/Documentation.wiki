@@ -13,6 +13,7 @@
    # [Rend_Factory_Auth Auth]
    # Auth Adapter
    # [Rend_Factory_Database Database]
+     # [Rend_Factory_Database_Pdo_Mysql Pdo_Mysql]
    # Mail
    # [Rend_Factory_MailTransport Mail Transport]
    # [Rend_Factory_Translate Translate]
