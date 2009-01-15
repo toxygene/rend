@@ -306,8 +306,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                  ->setParam("deniedParams", $this->getRequest()->getParams())
                  ->setParam("deniedRole", $this->_role)
                  ->setParam("deniedResource", $resource)
-                 ->setParam("deniedPermission", $perm)
-                 ->setDispatched(false);
+                 ->setParam("deniedPermission", $perm);
 
             if ($this->_throwExceptions) {
                 throw new Zend_Controller_Action_Exception(
@@ -320,13 +319,15 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                          ->setActionName($this->_unauthorizedAction)
                          ->setControllerName($this->_unauthorizedController)
                          ->setModuleName($this->_unauthorizedModule)
-                         ->setParams($this->_unauthorizedParams);
+                         ->setParams($this->_unauthorizedParams)
+                         ->setDispatched(false);
                 } else {
                     $this->getRequest()
                          ->setActionName($this->_forbiddenAction)
                          ->setControllerName($this->_forbiddenController)
                          ->setModuleName($this->_forbiddenModule)
-                         ->setParams($this->_forbiddenParams);
+                         ->setParams($this->_forbiddenParams)
+                         ->setDispatched(false);
                 }
             }
         }
