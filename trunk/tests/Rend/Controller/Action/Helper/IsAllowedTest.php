@@ -42,6 +42,9 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
 
     public function setUp()
     {
+        $actionController = $this->getMock("Zend_Controller_Action", array(), array(), '', false);
+        $actionController->setRequest($this->getMock("Zend_Controller_Request_Abstract", array(), array(), '', false));
+
         $acl = new Zend_Acl();
 
         $acl->add(new Zend_Acl_Resource("apple"))
@@ -54,7 +57,8 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
             ->allow("mike", "apple", "touch");
 
         $this->_helper = new Rend_Controller_Action_Helper_IsAllowed(array(
-            "acl" => $acl
+            "acl"              => $acl,
+            "actionController" => $actionController
         ));
     }
 
@@ -69,6 +73,104 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $this->assertFalse(
             $this->_helper
                  ->isAllowed("pear", "eat")
+        );
+    }
+
+    /**
+     *
+     */
+    public function testRulesCanBeManuallySet()
+    {
+        $this->_helper->addRules(array(
+            "one" => array("apple", "eat"),
+            "two" => array("pear"),
+            array(
+                "action"     => "three",
+                "resource"   => "apple",
+                "permission" => "discard"
+            ),
+            "four" => array(),
+            array(
+                "five",
+                "pear",
+                "discard"
+            )
+        ));
+
+        $this->assertEquals(
+            array(
+                "one"   => array("apple", "eat"),
+                "two"   => array("pear", ""),
+                "three" => array("apple", "discard"),
+                "five"  => array("pear", "discard")
+            ),
+            $this->_helper->getRules()
+        );
+    }
+
+    /**
+     *
+     */
+    public function testRuleCanBeCleared()
+    {
+        $this->_helper->clearRules();
+
+        $this->assertEquals(
+            array(),
+            $this->_helper->getRules()
+        );
+    }
+
+    /**
+     *
+     */
+    public function testRulesCanBeChecked()
+    {
+        $this->_helper->addRules(array(
+            "one" => array("apple", "eat")
+        ));
+
+        $this->assertTrue($this->_helper->hasRule("one"));
+        $this->assertFalse($this->_helper->hasRule("two"));
+    }
+
+    /**
+     *
+     */
+    public function testRulesCanBeRemoved()
+    {
+        $this->_helper->addRules(array(
+            "one" => array("apple", "eat")
+        ));
+
+        $this->assertTrue($this->_helper->hasRule("one"));
+
+        $this->_helper->removeRule("one");
+
+        $this->assertFalse($this->_helper->hasRule("one"));
+    }
+
+    /**
+     *
+     */
+    public function testRulesCanBeFetched()
+    {
+        $this->_helper->addRules(array(
+            "one" => array("apple", "eat"),
+            "two" => "*",
+        	"*"   => "*"
+        ));
+
+        $this->assertEquals(
+            array("apple", "eat"),
+            $this->_helper->getRule("one")
+        );
+
+        $this->assertNull($this->_helper->getRule("two"));
+
+        $this->assertEquals(
+            array("pear", ""),
+            $this->_helper->getRule("three")
         );
     }
 

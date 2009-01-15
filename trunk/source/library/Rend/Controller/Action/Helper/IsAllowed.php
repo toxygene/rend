@@ -170,17 +170,27 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                         case 0:
                             continue;
                         case (1 <= $argc):
-                            $action = array_shift($spec);
+                            if (!$action) {
+                                $action = array_shift($spec);
+                            } else {
+                                $resource = array_shift($spec);
+                            }
                         case (2 <= $argc):
-                            $resource = array_shift($spec);
+                            if (!$resource) {
+                                $resource = array_shift($spec);
+                            } else {
+                                $permission = array_shift($spec);
+                            }
                         case (3 <= $argc):
-                            $permission = array_shift($spec);
+                            if (!$permission) {
+                                $permission = array_shift($spec);
+                            }
                         default:
                             $this->addRule($action, $resource, $permission);
                     }
                 }
             } else {
-                $this->addRule($rules["action"], $rules["resource"], $rules["permission"]);
+                $this->addRule($action, $spec);
             }
         }
 
@@ -215,14 +225,14 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                 return;
             }
 
-            return $this->_formatAclResults($rules[$action]);
+            return $this->_formatRuleResults($rules[$action]);
         } else {
             // Bail out if all actions rules are disabled
             if ($rules[self::WILDCARD] == self::WILDCARD) {
                 return;
             }
 
-            return $this->_formatAclResults($rules[self::WILDCARD]);
+            return $this->_formatRuleResults($rules[self::WILDCARD]);
         }
     }
 
