@@ -24,6 +24,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . "/TestHelper.php";
+require_once "Rend/Controller/Action/Helper/AbstractTest.php";
 require_once "Rend/Controller/Action/Helper/IsAllowedTest.php";
 require_once "Rend/Controller/Action/Helper/LayoutSelectorTest.php";
 require_once "Rend/Controller/Action/Helper/LoadModelTest.php";
@@ -43,6 +44,7 @@ class Rend_Controller_Action_Helper_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite("Rend Controller Action Helper Tests");
 
+        $suite->addTestSuite("Rend_Controller_Action_Helper_AbstractTest");
         $suite->addTestSuite("Rend_Controller_Action_Helper_IsAllowedTest");
         $suite->addTestSuite("Rend_Controller_Action_Helper_LayoutSelectorTest");
         $suite->addTestSuite("Rend_Controller_Action_Helper_LoadModelTest");
