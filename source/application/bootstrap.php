@@ -67,7 +67,9 @@ $factoryLoader = new Rend_FactoryLoader(
 /** Zend_Layout */
 require_once "Zend/Layout.php";
 
-Zend_Layout::startMvc("../application/layouts");
+Zend_Layout::startMvc(array(
+    "viewBasePath" => "../application/layouts"
+));
 
 $front->setParam("rendConfig", $config)
       ->setParam("rendFactoryLoader", $factoryLoader)
