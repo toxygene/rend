@@ -72,7 +72,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     protected $_forbiddenModule = "default";
 
     /**
-     * Forbidden params
+     * Forbidden parameters
      * @var array
      */
     protected $_forbiddenParameters = array();
@@ -114,10 +114,10 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     protected $_unauthorizedModule = "default";
 
     /**
-     * Unauthorized params
+     * Unauthorized parameters
      * @var array
      */
-    protected $_unauthorizedParams = array();
+    protected $_unauthorizedParameters = array();
 
     /**
      * Add a rule
@@ -135,7 +135,11 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
             $actionController->{$this->_ruleKey} = array();
         }
 
-        $actionController->{$this->_ruleKey}[$action] = array($resource, $permission);
+        if ($permission) {
+            $actionController->{$this->_ruleKey}[$action] = array($resource, $permission);
+        } else {
+            $actionController->{$this->_ruleKey}[$action] = $resource;
+        }
 
         return $this;
     }
@@ -299,11 +303,16 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
         if (!$this->isAllowed($resource, $permission)) {
             $perm = $permission ? $permission : "*default*";
 
+            $deniedParams = $this->getRequest()->getParams();
+            unset($deniedParams[$this->getRequest()->getActionName()]);
+            unset($deniedParams[$this->getRequest()->getControllerName()]);
+            unset($deniedParams[$this->getRequest()->getModuleName()]);
+
             $this->getRequest()
                  ->setParam("deniedAction", $this->getRequest()->getActionName())
                  ->setParam("deniedController", $this->getRequest()->getControllerName())
                  ->setParam("deniedModule", $this->getRequest()->getModuleName())
-                 ->setParam("deniedParams", $this->getRequest()->getParams())
+                 ->setParam("deniedParams", $params)
                  ->setParam("deniedRole", $this->_role)
                  ->setParam("deniedResource", $resource)
                  ->setParam("deniedPermission", $perm);
@@ -319,14 +328,14 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                          ->setActionName($this->_unauthorizedAction)
                          ->setControllerName($this->_unauthorizedController)
                          ->setModuleName($this->_unauthorizedModule)
-                         ->setParams($this->_unauthorizedParams)
+                         ->setParams($this->_unauthorizedParameters)
                          ->setDispatched(false);
                 } else {
                     $this->getRequest()
                          ->setActionName($this->_forbiddenAction)
                          ->setControllerName($this->_forbiddenController)
                          ->setModuleName($this->_forbiddenModule)
-                         ->setParams($this->_forbiddenParams)
+                         ->setParams($this->_forbiddenParameters)
                          ->setDispatched(false);
                 }
             }
