@@ -42,9 +42,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
 
     public function setUp()
     {
-        $actionController = $this->getMock("Zend_Controller_Action", array(), array(), '', false);
-        $actionController->setRequest($this->getMock("Zend_Controller_Request_Abstract", array(), array(), '', false));
-
         $acl = new Zend_Acl();
 
         $acl->add(new Zend_Acl_Resource("apple"))
@@ -55,6 +52,11 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $acl->allow("john", "apple", "eat")
             ->allow("john", "pear")
             ->allow("mike", "apple", "touch");
+
+        $actionController = new IsAllowed_Zend_Controller_Action(
+            new Zend_Controller_Request_Simple(),
+            new Zend_Controller_Response_Cli()
+        );
 
         $this->_helper = new Rend_Controller_Action_Helper_IsAllowed(array(
             "acl"              => $acl,
@@ -81,7 +83,7 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
      */
     public function testRulesCanBeManuallySet()
     {
-        $this->_helper->addRules(array(
+        $this->_helper->setRules(array(
             "one" => array("apple", "eat"),
             "two" => array("pear"),
             array(
@@ -100,7 +102,7 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $this->assertEquals(
             array(
                 "one"   => array("apple", "eat"),
-                "two"   => array("pear", ""),
+                "two"   => "pear",
                 "three" => array("apple", "discard"),
                 "five"  => array("pear", "discard")
             ),
@@ -167,11 +169,98 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
 
         $this->assertNull($this->_helper->getRule("two"));
+        $this->assertNull($this->_helper->getRule("three"));
+    }
+
+    /**
+     *
+     */
+    public function testUnauthorizedErrorRedirectsToUnauthorizedPage()
+    {
+        $this->_helper
+             ->getActionController()
+             ->getRequest()
+             ->setActionName("one");
+
+        $this->_helper
+             ->addRule("one", "apple", "eat")
+             ->preDispatch();
 
         $this->assertEquals(
-            array("pear", ""),
-            $this->_helper->getRule("three")
+            array(
+                "deniedAction"     => "one",
+                "deniedResource"   => "apple",
+                "deniedPermission" => "eat"
+            ),
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getParams()
         );
     }
 
+    /**
+     *
+     */
+    public function testForbiddenErrorRedirectToFirbiddenPage()
+    {
+        $this->_helper
+             ->getActionController()
+             ->getRequest()
+             ->setActionName("one");
+
+        $this->_helper
+             ->setRole("mike")
+             ->addRule("one", "apple", "eat")
+             ->preDispatch();
+
+        $this->assertEquals(
+            array(
+                "deniedAction"     => "one",
+                "deniedResource"   => "apple",
+                "deniedPermission" => "eat",
+                "deniedRole"       => "mike"
+            ),
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getParams()
+        );
+    }
+
+    /**
+     *
+     */
+    public function testExceptionsCanBeThrown()
+    {
+        $this->setExpectedException("Zend_Controller_Action_Exception");
+
+        $this->_helper
+             ->getActionController()
+             ->getRequest()
+             ->setActionName("one");
+
+        $this->_helper
+             ->setThrowExceptions(true)
+             ->addRule("one", "apple", "eat")
+             ->preDispatch();
+    }
+
+    /**
+     *
+     */
+    public function testAccessIsAllowedIfThereIsNoRule()
+    {
+        $this->_helper
+             ->setThrowExceptions(true)
+             ->preDispatch();
+    }
+
+}
+
+/**
+ *
+ */
+class IsAllowed_Zend_Controller_Action extends Zend_Controller_Action
+{
 }
