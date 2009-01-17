@@ -6,13 +6,13 @@
 /**
  *
  */
-interface Rend_FactoryLoader_Factory_Interface
+interface Rend_Base_Interface
 {
 
     /**
      * Constructor
      *
-     * @param Zend_Config|array $config
+     * @param array|Zend_Config $config
      */
     public function __construct($config = null);
 
@@ -25,5 +25,10 @@ interface Rend_FactoryLoader_Factory_Interface
      *
      */
     public function setOptions(array $options);
+
+    /**
+     *
+     */
+    protected function _init();
 
 }

@@ -3,8 +3,8 @@
  *
  */
 
-/** Rend_FactoryLoader_Factory_Abstract */
-require_once "Rend/FactoryLoader/Factory/Abstract.php";
+/** Rend_Base_Abstract */
+require_once "Rend/Base/Abstract.php";
 
 /** Rend_Factory_MailTransport_Interface */
 require_once "Rend/Factory/MailTransport/Interface.php";
@@ -12,7 +12,7 @@ require_once "Rend/Factory/MailTransport/Interface.php";
 /**
  *
  */
-class Rend_Factory_MailTransport_Sendmail extends Rend_FactoryLoader_Factory_Abstract implements Rend_Factory_MailTransport_Interface
+class Rend_Factory_MailTransport_Sendmail extends Rend_Base_Abstract implements Rend_Factory_MailTransport_Interface
 {
 
     /**
