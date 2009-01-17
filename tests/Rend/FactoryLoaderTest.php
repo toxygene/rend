@@ -64,7 +64,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testFactoriesCanBeManuallyAdded()
     {
-        $factory = $this->getMock("Rend_FactoryLoader_Factory_Abstract");
+        $factory = $this->getMock("Rend_Factory_Interface");
 
         $factoryLoader = new Rend_FactoryLoader(array(
             "factories" => array(
@@ -81,7 +81,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
     public function testFactoriesCanBeBuiltFromArrayDefinitions()
     {
         $factory = $this->getMock(
-            "Rend_FactoryLoader_Factory_Abstract",
+            "Rend_Factory_Interface",
             array(),
             array(),
             "Test_Factory_TestOne"
@@ -105,7 +105,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
     public function testFactoriesCanBeSetAndFetchedFromTheMagicMethods()
     {
         $factory = $this->getMock(
-            "Rend_FactoryLoader_Factory_Abstract",
+            "Rend_Factory_Interface",
             array(),
             array(),
             "Test_Factory_TestTwo"
@@ -130,7 +130,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
     public function testObjectsCanBeLoadedDirectlyFromTheirFactories()
     {
         $mock = $this->getMock(
-            "Rend_FactoryLoader_Factory_Abstract",
+            "Rend_Factory_Interface",
             array("create"),
             array(),
             "Test_Factory_TestThree"
@@ -178,7 +178,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 
 }
 
-class Test_Factory_TestFour extends Rend_FactoryLoader_Factory_Abstract
+class Test_Factory_TestFour implements Rend_Factory_Interface
 {
 
     public $test;
