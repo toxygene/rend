@@ -3,10 +3,13 @@
  *
  */
 
+/** Rend_Factory_Interface */
+require_once "Rend/Factory/Interface.php";
+
 /**
  *
  */
-interface Rend_Factory_AuthAdapter_Interface
+interface Rend_Factory_AuthAdapter_Interface extends Rend_Factory_Interface
 {
 
     /**

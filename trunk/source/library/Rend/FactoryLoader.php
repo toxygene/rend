@@ -77,11 +77,96 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * Member assignment overloader
      *
      * @param string $name
-     * @param ? $value
+     * @param mixed $value
      */
     public function __set($name, $value)
     {
-        $this->setFactory($name, $value);
+        $this->addFactory($name, $value);
+    }
+
+    /**
+     * Member unset overloader
+     *
+     * @param string $name
+     */
+    public function __unset($name)
+    {
+        $this->removeFactory($name);
+    }
+
+    /**
+     * Add a factory
+     *
+     * @param string $name
+     * @param object|array|Zend_Config $factory
+     * @return Rend_FactoryLoader
+     */
+    public function addFactory($name, $factory)
+    {
+        $this->_factories[$name] = $factory;
+        return $this;
+    }
+
+    /**
+     * Add factories
+     *
+     * @param Traversable $factories
+     * @return Rend_FactoryLoader
+     */
+    public function addFactories($factories)
+    {
+        foreach ($factories as $name => $factory) {
+            $this->addFactory($name, $factory);
+        }
+        return $this;
+    }
+
+    /**
+     * Clear all the factories
+     *
+     * @return Rend_FactoryLoader
+     */
+    public function clearFactories()
+    {
+        $this->_factories = array();
+        return $this;
+    }
+
+    /**
+     * Get a factory by name
+     *
+     * @param string $name
+     * @return object
+     * @throws Rend_Factory_Exception
+     * @throws Zend_Loader_PluginLoader_Exception
+     */
+    public function getFactory($name)
+    {
+        if (!isset($this->_factories[$name])) {
+            /** Rend_Factory_Exception */
+            require_once "Rend/Factory/Exception.php";
+            throw new Rend_FactoryLoader_Exception(
+                "Could not find a factory named '{$name}'"
+            );
+        }
+
+        if (!$this->_factories[$name] instanceof Rend_Factory_Interface) {
+            $this->_factories[$name] = $this->_buildFactory($this->_factories[$name]);
+        }
+
+        return $this->_factories[$name];
+    }
+
+    /**
+     * Remove a factory
+     *
+     * @param string $name
+     * @return Rend_FactoryLoader
+     */
+    public function removeFactory($name)
+    {
+        unset($this->_factories[$name]);
+        return $this;
     }
 
     /**
@@ -92,44 +177,8 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      */
     public function setFactories($factories)
     {
-        foreach ($factories as $name => $config) {
-            $this->setFactory($name, $config);
-        }
-        return $this;
-    }
-
-    /**
-     * Set a factory
-     *
-     * @param string $name
-     * @param Rend_Factory_Interface|array $factory
-     */
-    public function setFactory($name, $factory)
-    {
-        $this->_factories[$name] = $factory;
-        return $this;
-    }
-
-    /**
-     * Get a factory by name
-     *
-     * @param string $name
-     * @return Rend_Factory_Interface
-     * @throws Zend_Loader_PluginLoader_Exception
-     */
-    public function getFactory($name)
-    {
-        if (!isset($this->_factories[$name])) {
-            throw new Rend_FactoryLoader_Exception(
-                "Could not find a factory named '{$name}'"
-            );
-        }
-
-        if (!$this->_factories[$name] instanceof Rend_FactoryLoader_Factory_Interface) {
-            $this->_factories[$name] = $this->_buildFactory($this->_factories[$name]);
-        }
-
-        return $this->_factories[$name];
+        return $this->clearFactories()
+                    ->addFactories($factories);
     }
 
     /**
@@ -175,7 +224,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      *
      * @param string $type
      * @param array|Zend_Config $config
-     * @return Rend_FactoryLoader_Factory_Interface
+     * @return object
      */
     protected function _buildFactory($config)
     {
@@ -183,10 +232,14 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
             ucFirst($config["type"])
         );
 
-        if (isset($config["options"])) {
-            $factory = new $className($config["options"]);
-        } else {
-            $factory = new $className();
+        $factory = new $className();
+
+        if (isset($config["options"]) && $factory instanceof Rend_Base_Interface) {
+            if ($config["options"] instanceof Zend_Config) {
+                $factory->setConfig($config["options"]);
+            } elseif (is_array($config["options"])) {
+                $factory->setOptions($config["options"]);
+            }
         }
 
         return $factory;
