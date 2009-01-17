@@ -178,7 +178,7 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
 
 }
 
-class Test_Factory_TestFour implements Rend_Factory_Interface
+class Test_Factory_TestFour extends Rend_Base_Abstract implements Rend_Factory_Interface
 {
 
     public $test;
