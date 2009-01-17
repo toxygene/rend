@@ -13,7 +13,24 @@ abstract class Rend_Base_Abstract implements Rend_Base_Interface
 {
 
     /**
+     * Constructor
      *
+     * @param array|Zend_Config $config
+     */
+    public function __construct($config = null)
+    {
+        if ($config instanceof Zend_Config) {
+            $this->setConfig($config);
+        } elseif (is_array($config)) {
+            $this->setOptions($config);
+        }
+    }
+
+    /**
+     * Set the options from a Zend_Config object
+     *
+     * @param Zend_Config $config
+     * @return Rend_Controller_Action_Helper_Abstract
      */
     public function setConfig(Zend_Config $config)
     {
@@ -21,7 +38,10 @@ abstract class Rend_Base_Abstract implements Rend_Base_Interface
     }
 
     /**
+     * Set the options from an array
      *
+     * @param array $options
+     * @return Rend_Controller_Action_Helper_Abstract
      */
     public function setOptions(array $options)
     {
