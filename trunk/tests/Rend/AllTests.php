@@ -26,6 +26,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 require_once dirname(__FILE__) . "/TestHelper.php";
 require_once "Rend/RandomTest.php";
 require_once "Rend/Factory/AllTests.php";
+require_once "Rend/FactoryLoaderTest.php";
 require_once "Rend/Filter/AllTests.php";
 require_once "Rend/Validate/AllTests.php";
 require_once "Rend/View/Helper/AllTests.php";
