@@ -36,7 +36,7 @@ if (isset($bootstrap)) {
 require_once "Rend/FactoryLoader.php";
 
 $factoryLoader = new Rend_FactoryLoader(
-    $config
+    $config->factoryLoader
 );
 
 $frontController->setParam("rendConfig", $config)
