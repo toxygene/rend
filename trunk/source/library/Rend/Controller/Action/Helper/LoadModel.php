@@ -97,9 +97,9 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
     protected function _getDatabase()
     {
         if (!$this->_database) {
-            if (!$this->_getFactoryLoader() ||
-                !isset($this->_getFactoryLoader()->database) ||
-                !$this->_getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
+            if (!$this->getFactoryLoader() ||
+                !isset($this->getFactoryLoader()->database) ||
+                !$this->getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
                 /** Zend_Controller_Action_Exception */
                 require_once 'Zend/Controller/Action/Exception.php';
 
