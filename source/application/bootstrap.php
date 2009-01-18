@@ -24,12 +24,12 @@ date_default_timezone_set($config->timezone);
 /** Zend_Controller_Front */
 require_once "Zend/Controller/Front.php";
 
-$front = Zend_Controller_Front::getInstance();
+$frontController = Zend_Controller_Front::getInstance();
 
 if (isset($bootstrap)) {
     ini_set("display_errors", $config->displayErrors);
     ini_set('display_startup_errors', $config->displayErrors);
-    $front->throwExceptions($config->displayErrors);
+    $frontController->throwExceptions($config->displayErrors);
 }
 
 /** Rend_FactoryLoader */
@@ -39,14 +39,14 @@ $factoryLoader = new Rend_FactoryLoader(
     $config
 );
 
-$front->setParam("rendConfig", $config)
+$frontController->setParam("rendConfig", $config)
       ->setParam("rendFactoryLoader", $factoryLoader);
 
-$front->getDispatcher()
+$frontController->getDispatcher()
       ->setParam("rendConfig", $config)
       ->setParam("rendFactoryLoader", $factoryLoader);
 
-$front->addControllerDirectory("../application/controllers", "default")
+$frontController->addControllerDirectory("../application/controllers", "default")
       ->addModuleDirectory("../application/modules");
 
 /** Zend_Controller_Action_HelperBroker */
