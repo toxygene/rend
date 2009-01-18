@@ -40,14 +40,18 @@ $factoryLoader = new Rend_FactoryLoader(
 );
 
 $frontController->setParam("rendConfig", $config)
-      ->setParam("rendFactoryLoader", $factoryLoader);
+                ->setParam("rendFactoryLoader", $factoryLoader)
+                ->addControllerDirectory("../application/controllers", "default")
+                ->addModuleDirectory("../application/modules");
 
 $frontController->getDispatcher()
-      ->setParam("rendConfig", $config)
-      ->setParam("rendFactoryLoader", $factoryLoader);
+                ->setParam("rendConfig", $config)
+                ->setParam("rendFactoryLoader", $factoryLoader);
 
-$frontController->addControllerDirectory("../application/controllers", "default")
-      ->addModuleDirectory("../application/modules");
+if (isset($config->routes)) {
+    $frontController->getRouter()
+                    ->addConfig($config->routes);
+}
 
 /** Zend_Controller_Action_HelperBroker */
 require_once "Zend/Controller/Action/HelperBroker.php";
