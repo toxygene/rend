@@ -230,7 +230,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
             }
 
             return $this->_formatRuleResults($rules[$action]);
-        } else {
+        } elseif (isset($rules[self::WILDCARD])) {
             // Bail out if all actions rules are disabled
             if ($rules[self::WILDCARD] == self::WILDCARD) {
                 return;
@@ -238,6 +238,8 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
 
             return $this->_formatRuleResults($rules[self::WILDCARD]);
         }
+
+       return;
     }
 
     /**
@@ -541,16 +543,16 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     protected function _getAcl()
     {
         if (!$this->_acl) {
-            if (!$this->_getFactoryLoader() ||
-                !isset($this->_getFactoryLoader()->acl) ||
-                !$this->_getFactoryLoader()->acl instanceof Rend_Factory_Acl_Interface) {
+            if (!$this->getFactoryLoader() ||
+                !isset($this->getFactoryLoader()->acl) ||
+                !$this->getFactoryLoader()->acl instanceof Rend_Factory_Acl_Interface) {
                 /** Zend_Controller_Action_Exception */
                 require_once "Zend/Controller/Action/Exception.php";
 
                 throw new Zend_Controller_Action_Exception("Could not load an ACL object");
             }
 
-            $this->_acl = $this->_getFactoryLoader()
+            $this->_acl = $this->getFactoryLoader()
                                ->acl();
         }
         return $this->_acl;
