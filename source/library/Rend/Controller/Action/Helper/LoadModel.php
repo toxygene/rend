@@ -105,6 +105,7 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
 
                 throw new Zend_Controller_Action_Exception("Could not load an database object");
             }
+            $this->_database = $this->getFactoryLoader()->database();
         }
         return $this->_database;
     }
