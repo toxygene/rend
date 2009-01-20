@@ -11,6 +11,7 @@
  * to justin.hendrickson+rend@gmail.com so I can send you a copy immediately.
  *
  * @category Rend
+ * @package Random
  * @copyright 2008 Justin Hendrickson
  * @license http://www.rendframework.com/license.html    New BSD License
  * @link http://www.rendframework.com/
@@ -20,6 +21,7 @@
 
 /**
  * @category Rend
+ * @package Random
  */
 class Rend_Random
 {
