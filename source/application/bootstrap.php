@@ -60,13 +60,13 @@ Zend_Controller_Action_HelperBroker::addPrefix(
     "Rend_Controller_Action_Helper"
 );
 
-/** Rend_Factory_View */
-require_once "Rend/Factory/View.php";
+if (isset($factoryLoader->view) && $factoryLoader->view instanceof Rend_Factory_View_Interface) {
+    $viewFactory = $factoryLoader->view;
+} else {
+    /** Rend_Factory_View */
+    require_once "Rend/Factory/View.php";
 
-$viewFactory = new Rend_Factory_View();
-
-if (isset($config->view)) {
-    $viewFactory->setConfig($config->view);
+    $viewFactory = new Rend_Factory_View();
 }
 
 /** Zend_Controller_Action_Helper_ViewRenderer */
