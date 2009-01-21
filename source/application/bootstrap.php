@@ -19,8 +19,6 @@ $config = new Zend_Config_Ini(
     $_SERVER["REND_MODE"]
 );
 
-date_default_timezone_set($config->timezone);
-
 /** Zend_Controller_Front */
 require_once "Zend/Controller/Front.php";
 
@@ -31,6 +29,8 @@ if (isset($bootstrap)) {
     ini_set('display_startup_errors', $config->displayErrors);
     $frontController->throwExceptions($config->displayErrors);
 }
+
+date_default_timezone_set($config->timezone);
 
 /** Rend_FactoryLoader */
 require_once "Rend/FactoryLoader.php";
