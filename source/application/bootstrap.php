@@ -60,21 +60,23 @@ Zend_Controller_Action_HelperBroker::addPrefix(
     "Rend_Controller_Action_Helper"
 );
 
+/** Rend_Factory_View */
+require_once "Rend/Factory/View.php";
+
+$viewFactory = new Rend_Factory_View();
+
 if (isset($config->view)) {
-    /** Rend_Factory_View */
-    require_once "Rend/Factory/View.php";
-
-    $viewFactory = new Rend_Factory_View($config->view);
-
-    /** Zend_Controller_Action_Helper_ViewRenderer */
-    require_once "Zend/Controller/Action/Helper/ViewRenderer.php";
-
-    Zend_Controller_Action_HelperBroker::addHelper(
-        new Zend_Controller_Action_Helper_ViewRenderer(
-            $viewFactory->create()
-        )
-    );
+    $viewFactory->setConfig($config->view);
 }
+
+/** Zend_Controller_Action_Helper_ViewRenderer */
+require_once "Zend/Controller/Action/Helper/ViewRenderer.php";
+
+Zend_Controller_Action_HelperBroker::addHelper(
+    new Zend_Controller_Action_Helper_ViewRenderer(
+        $viewFactory->create()
+    )
+);
 
 /** Zend_Layout */
 require_once "Zend/Layout.php";
