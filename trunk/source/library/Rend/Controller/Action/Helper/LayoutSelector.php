@@ -86,7 +86,7 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
 
         if ($this->getRequest()->isDispatched() && $this->_layout->isEnabled()) {
             $actionController = $this->getActionController();
-            $actionName       = $this->_getActionName();
+            $actionName       = $this->_getCurrentActionName();
             $parameter        = $this->_parameter;
 
             if (isset($actionController->$parameter)) {
