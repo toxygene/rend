@@ -106,7 +106,7 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     }
 
     /**
-     * Get the action name of the current action from the dispatcher
+     * Get the current action name
      *
      * @return string
      */
