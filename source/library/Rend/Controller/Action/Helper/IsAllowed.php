@@ -294,8 +294,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     public function preDispatch()
     {
         list ($resource, $permission) = $this->getRule(
-            $this->getRequest()
-                 ->getActionName()
+            $this->_getCurrentActionName()
         );
 
         if (!$resource) {
