@@ -208,7 +208,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function clearRules()
     {
-        $this->getActionController->{$this->_ruleKey} = array();
+        $this->getActionController()->{$this->_ruleKey} = array();
 
         return $this;
     }
@@ -313,7 +313,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                  ->setParam("deniedAction", $this->getRequest()->getActionName())
                  ->setParam("deniedController", $this->getRequest()->getControllerName())
                  ->setParam("deniedModule", $this->getRequest()->getModuleName())
-                 ->setParam("deniedParams", $params)
+                 ->setParam("deniedParameters", $deniedParams)
                  ->setParam("deniedRole", $this->_role)
                  ->setParam("deniedResource", $resource)
                  ->setParam("deniedPermission", $perm);

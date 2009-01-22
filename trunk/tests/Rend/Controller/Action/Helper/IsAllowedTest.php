@@ -190,7 +190,8 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
             array(
                 "deniedAction"     => "one",
                 "deniedResource"   => "apple",
-                "deniedPermission" => "eat"
+                "deniedPermission" => "eat",
+                "deniedParameters" => array()
             ),
             $this->_helper
                  ->getActionController()
@@ -217,6 +218,7 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $this->assertEquals(
             array(
                 "deniedAction"     => "one",
+                "deniedParameters" => array(),
                 "deniedResource"   => "apple",
                 "deniedPermission" => "eat",
                 "deniedRole"       => "mike"
