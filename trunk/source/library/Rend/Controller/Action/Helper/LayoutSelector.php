@@ -46,7 +46,67 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
      * Layout parameter
      * @var string
      */
-    protected $_parameter;
+    protected $_layoutKey = "layout";
+
+    /**
+     * Add a layout
+     *
+     * @param string $action
+     * @param string $script
+     * @return Rend_Controller_Action_Helper_LayoutSelector
+     */
+    public function addLayout($action, $script)
+    {
+        $this->getActionController()->{$this->_layoutKey}[$action] = $script;
+        return $this;
+    }
+
+    /**
+     * Add layouts
+     *
+     * @param array $layouts
+     * @return Rend_Controller_Action_Helper_LayoutSelector
+     */
+    public function addLayouts(array $layouts)
+    {
+        foreach ($layouts as $layout) {
+            $this->addLayout();
+        }
+        return $this;
+    }
+
+    /**
+     * Clear the layouts
+     *
+     * @return Rend_Controller_Action_Helper_LayoutSelector
+     */
+    public function clearLayouts()
+    {
+        $this->getActionController()->{$this->_layoutKey} = array();
+        return $this;
+    }
+
+    /**
+     * Post-dispatch
+     *
+     * Once dispatching is complete, the layout script is set based on the last
+     * action called.
+     */
+    public function postDispatch()
+    {
+        if ($this->getRequest()->isDispatched() && $this->_getLayout()->isEnabled()) {
+            $actionController = $this->getActionController();
+            $actionName       = $this->_getCurrentActionName();
+
+            if (isset($actionController->{$this->_layoutKey})) {
+                if (isset($actionController->{$this->_layoutKey}[$actionName])) {
+                    $this->_setLayoutScript($actionController->{$this->_layoutKey}[$actionName]);
+                } elseif (isset($actionController->{$this->_layoutKey}[self::WILDCARD])) {
+                    $this->_setLayoutScript($actionController->{$this->_layoutKey}[self::WILDCARD]);
+                }
+            }
+        }
+    }
 
     /**
      * Set the layout object
@@ -61,42 +121,51 @@ class Rend_Controller_Action_Helper_LayoutSelector extends Rend_Controller_Actio
     }
 
     /**
-     * Set the parameter name for the action controller
+     * Set the layout key for the action controller
      *
-     * @param string $parameter
+     * @param string $layoutKey
      * @return Rend_Controller_Action_Helper_LayoutSelector
      */
-    public function setParameter($parameter)
+    public function setLayoutKey($layoutKey)
     {
-        $this->_parameter = $parameter;
+        $this->_layoutKey = $layoutKey;
         return $this;
     }
 
     /**
-     * Post-dispatch
+     * Set the layouts
      *
-     * Once dispatching is complete, the layout script is set based on the last
-     * action called.
+     * @param array $layouts
+     * @return Rend_COntroller_Action_Helper_LayoutSelector
      */
-    public function postDispatch()
+    public function setLayouts(array $layouts)
+    {
+        return $this->clearLayouts()
+                    ->addLayouts($layouts);
+    }
+
+    /**
+     * Get the layout
+     *
+     * @return Zend_Layout
+     */
+    private function _getLayout()
     {
         if (!$this->_layout) {
-            throw new Zend_Controller_Action_Exception("You must provide a layout object before use");
-        }
+            $layoutHelper = $this->getActionController()
+                                 ->getHelper("layout");
 
-        if ($this->getRequest()->isDispatched() && $this->_layout->isEnabled()) {
-            $actionController = $this->getActionController();
-            $actionName       = $this->_getCurrentActionName();
-            $parameter        = $this->_parameter;
+            if (!$layoutHelper) {
+                /** Zend_Controller_Action_Exception */
+                require_once "Zend/Controller/Action/Exception.php";
 
-            if (isset($actionController->$parameter)) {
-                if (isset($actionController->{$parameter}[$actionName])) {
-                    $this->_setLayoutScript($actionController->{$parameter}[$actionName]);
-                } elseif (isset($actionController->{$parameter}[self::WILDCARD])) {
-                    $this->_setLayoutScript($actionController->{$parameter}[self::WILDCARD]);
-                }
+                throw new Zend_Controller_Action_Exception("Could not load a layout object");
             }
+
+            $this->_layout = $layoutHelper->getLayoutInstance();
         }
+
+        return $this->_layout;
     }
 
     /**
