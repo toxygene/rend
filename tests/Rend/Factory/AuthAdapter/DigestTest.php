@@ -28,4 +28,78 @@ require_once "Rend/Factory/AuthAdapter/Digest.php";
  */
 class Rend_Factory_AuthAdapter_DigestTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var Rend_Factory_Log
+     */
+    private $_factory;
+
+    /**
+     *
+     */
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_AuthAdapter_Digest();
+    }
+
+    /**
+     *
+     */
+    public function testFilenameIsConfigurable()
+    {
+        $adapter = $this->_factory
+                        ->setFilename("filename")
+                        ->create();
+
+        $this->assertEquals(
+            "filename",
+            $adapter->getFilename()
+        );
+    }
+
+    /**
+     *
+     */
+    public function testPasswordIsConfigurable()
+    {
+        $adapter = $this->_factory
+                        ->setPassword("password")
+                        ->create();
+
+        $this->assertEquals(
+            "password",
+            $adapter->getPassword()
+        );
+    }
+
+    /**
+     *
+     */
+    public function testRealmIsConfigurable()
+    {
+        $adapter = $this->_factory
+                        ->setRealm("realm")
+                        ->create();
+
+        $this->assertEquals(
+            "realm",
+            $adapter->getRealm()
+        );
+    }
+
+    /**
+     *
+     */
+    public function testUsernameIsConfigurable()
+    {
+        $adapter = $this->_factory
+                        ->setUsername("username")
+                        ->create();
+
+        $this->assertEquals(
+            "username",
+            $adapter->getUsername()
+        );
+    }
+
 }
