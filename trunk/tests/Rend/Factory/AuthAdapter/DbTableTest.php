@@ -28,4 +28,18 @@ require_once "Rend/Factory/AuthAdapter/DbTable.php";
  */
 class Rend_Factory_AuthAdapter_DbTableTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var Rend_Factory_AuthAdapter_DbTable
+     */
+    private $_factory;
+
+    /**
+     *
+     */
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_AuthAdapter_DbTable();
+    }
+
 }
