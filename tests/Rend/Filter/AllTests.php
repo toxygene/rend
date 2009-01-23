@@ -51,6 +51,6 @@ class Rend_Filter_AllTests
     }
 }
 
-if (PHPUnit_MAIN_METHOD == "Rend_AllTests::main") {
+if (PHPUnit_MAIN_METHOD == "Rend_Filter_AllTests::main") {
     Rend_Filter_AllTests::main();
 }
