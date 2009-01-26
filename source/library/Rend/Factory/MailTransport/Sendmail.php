@@ -56,11 +56,12 @@ class Rend_Factory_MailTransport_Sendmail extends Rend_Base_Abstract implements 
     /**
      * Set the parameters
      *
+     * @param string $parameters
      * @return Rend_Factory_MailTransport_Sendmail
      */
     public function setParameters($parameters)
     {
-        $this->setParameters($parameters);
+        $this->_parameters = $parameters;
         return $this;
     }
 

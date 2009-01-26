@@ -176,6 +176,23 @@ class Rend_FactoryLoaderTest extends PHPUnit_Framework_TestCase
         $factoryLoader->getFactory("test");
     }
 
+    public function testFactoriesCanBeRemoved()
+    {
+        $this->setExpectedException("Rend_FactoryLoader_Exception");
+
+        $factory = $this->getMock("Rend_Factory_Interface");
+
+        $factoryLoader = new Rend_FactoryLoader(array(
+            "factories" => array(
+                "test" => $factory
+            )
+        ));
+
+        unset($factoryLoader->test);
+
+        $factoryLoader->test;
+    }
+
 }
 
 class Test_Factory_TestFour extends Rend_Base_Abstract implements Rend_Factory_Interface

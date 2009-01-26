@@ -28,4 +28,35 @@ require_once "Rend/Factory/MailTransport/Smtp.php";
  */
 class Rend_Factory_MailTransport_SmtpTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factory;
+
+    public function testAuthCanBeConfigured()
+    {
+    }
+
+    public function testConnectionCanBeConfigured()
+    {
+    }
+
+    public function testHostCanBeConfigured()
+    {
+    }
+
+    public function testNameCanBeConfigured()
+    {
+    }
+
+    public function testPasswordCanBeConfigured()
+    {
+    }
+
+    public function testPortCanBeConfigured()
+    {
+    }
+
+    public function testUsernameCanBeConfigured()
+    {
+    }
+
 }
