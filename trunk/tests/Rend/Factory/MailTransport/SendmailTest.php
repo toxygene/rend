@@ -28,4 +28,24 @@ require_once "Rend/Factory/MailTransport/Sendmail.php";
  */
 class Rend_Factory_MailTransport_SendmailTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_factory;
+
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_MailTransport_Sendmail();
+    }
+
+    public function testParametersAreSettable()
+    {
+        $mailTransport = $this->_factory
+                              ->setParameters("--test")
+                              ->create();
+
+        $this->assertEquals(
+            "--test",
+            $mailTransport->parameters
+        );
+    }
+
 }

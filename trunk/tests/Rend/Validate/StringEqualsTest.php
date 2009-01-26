@@ -28,4 +28,17 @@ require_once "Rend/Validate/StringEquals.php";
  */
 class Rend_Validate_StringEqualsTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     *
+     */
+    public function testTwoStringsCanBeCompared()
+    {
+        $validator = new Rend_Validate_StringEquals();
+        $this->assertTrue($validator->isValid(array("one", "one")));
+
+        $validator = new Rend_Validate_StringEquals();
+        $this->assertFalse($validator->isValid(array("one", "two")));
+    }
+
 }
