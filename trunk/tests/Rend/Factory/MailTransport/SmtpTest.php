@@ -31,8 +31,23 @@ class Rend_Factory_MailTransport_SmtpTest extends PHPUnit_Framework_TestCase
 
     private $_factory;
 
+    public function setUp()
+    {
+        $this->_factory = new Rend_Factory_MailTransport_Smtp();
+    }
+
     public function testAuthCanBeConfigured()
     {
+        $transport = $this->_factory
+                          ->setHost('127.0.0.1')
+                          ->setAuth('login')
+                          ->create();
+
+        $this->assertAttributeContains(
+            "login",
+            "_options",
+            $transport
+        );
     }
 
     public function testConnectionCanBeConfigured()
@@ -41,6 +56,15 @@ class Rend_Factory_MailTransport_SmtpTest extends PHPUnit_Framework_TestCase
 
     public function testHostCanBeConfigured()
     {
+        $transport = $this->_factory
+                          ->setHost('127.0.0.1')
+                          ->setAuth('login')
+                          ->create();
+
+        $this->assertEquals(
+            "127.0.0.1",
+            $this->readAttribute($transport, "_host")
+        );
     }
 
     public function testNameCanBeConfigured()
