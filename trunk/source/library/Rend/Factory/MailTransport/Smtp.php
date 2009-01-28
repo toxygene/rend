@@ -69,7 +69,7 @@ class Rend_Factory_MailTransport_Smtp extends Rend_Base_Abstract implements Rend
             $smtp->setConnection($this->_connection);
         }
 
-        return $this;
+        return $smtp;
     }
 
     /**
