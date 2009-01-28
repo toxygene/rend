@@ -49,6 +49,6 @@ class Rend_Validate_AllTests
     }
 }
 
-if (PHPUnit_MAIN_METHOD == "Rend_AllTests::main") {
+if (PHPUnit_MAIN_METHOD == "Rend_Validate_AllTests::main") {
     Rend_Validate_AllTests::main();
 }
