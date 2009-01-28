@@ -76,9 +76,10 @@ class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
                      ->setEscape("htmlentities")
                      ->create();
 
-        $this->assertEquals(
+        $this->assertAttributeEquals(
             "htmlentities",
-            $this->readAttribute($view, "_escape")
+            "_escape",
+            $view
         );
     }
 
@@ -145,8 +146,10 @@ class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
                      ->setStrictVars(true)
                      ->create();
 
-        $this->assertTrue(
-            $this->readAttribute($view, "_strictVars")
+        $this->assertAttributeEquals(
+            true,
+            "_strictVars",
+            $view
         );
     }
 
