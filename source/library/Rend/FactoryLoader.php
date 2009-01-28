@@ -239,24 +239,23 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     /**
      * Construct a factory
      *
-     * @param string $type
      * @param array|Zend_Config $config
      * @return object
      */
     protected function _buildFactory($config)
     {
+        if (is_array($config)) {
+            $config = new ArrayObject($config, ArrayObject::ARRAY_AS_PROPS);
+        }
+
         $className = $this->load(
-            ucFirst($config["type"])
+            ucFirst($config->type)
         );
 
-        $factory = new $className();
-
-        if (isset($config["options"]) && $factory instanceof Rend_Base_Interface) {
-            if ($config["options"] instanceof Zend_Config) {
-                $factory->setConfig($config["options"]);
-            } elseif (is_array($config["options"])) {
-                $factory->setOptions($config["options"]);
-            }
+        if (isset($config->options)) {
+            $factory = new $className($config->options);
+        } else {
+            $factory = new $className();
         }
 
         return $factory;
