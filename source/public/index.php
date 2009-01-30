@@ -1,9 +1,9 @@
 <?php
 $bootstrap = true;
 
-include "../application/bootstrap.php";
-
 try {
+    include "../application/bootstrap.php";
+
     Zend_Controller_Front::getInstance()
                          ->dispatch();
 } catch (Exception $e) {
