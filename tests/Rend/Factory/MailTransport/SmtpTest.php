@@ -84,14 +84,44 @@ class Rend_Factory_MailTransport_SmtpTest extends PHPUnit_Framework_TestCase
 
     public function testPasswordCanBeConfigured()
     {
+        $transport = $this->_factory
+                          ->setHost('127.0.0.1')
+                          ->setPassword('test')
+                          ->create();
+
+        $this->assertAttributeEquals(
+            array("password" => "test"),
+            "_config",
+            $transport
+        );
     }
 
     public function testPortCanBeConfigured()
     {
+        $transport = $this->_factory
+                          ->setHost('127.0.0.1')
+                          ->setPort(123)
+                          ->create();
+
+        $this->assertAttributeEquals(
+            123,
+            "_port",
+            $transport
+        );
     }
 
     public function testUsernameCanBeConfigured()
     {
+        $transport = $this->_factory
+                          ->setHost('127.0.0.1')
+                          ->setUsername('test')
+                          ->create();
+
+        $this->assertAttributeEquals(
+            array("username" => "test"),
+            "_config",
+            $transport
+        );
     }
 
 }
