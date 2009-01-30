@@ -66,7 +66,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setAllowLocalInfile($allowLocalInfile)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_LOCAL_INFILE] = $allowLocalInfile;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_LOCAL_INFILE] = $allowLocalInfile;
         return $this;
     }
 
@@ -90,7 +90,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setInitCommand($initCommand)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_INIT_COMMAND] = $initCommand;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_INIT_COMMAND] = $initCommand;
         return $this;
     }
 
@@ -102,7 +102,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setMaximumBufferSize($maximumBufferSize)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_MAX_BUFFER_SIZE] = $maximumBufferSize;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_MAX_BUFFER_SIZE] = $maximumBufferSize;
         return $this;
     }
 
@@ -114,7 +114,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setReadDefaultFile($readDefaultFile)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_READ_DEFAULT_FILE] = $readDefaultFile;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_READ_DEFAULT_FILE] = $readDefaultFile;
         return $this;
     }
 
@@ -126,7 +126,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setReadDefaultGroup($readDefaultGroup)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_READ_DEFAULT_GROUP] = $readDefaultGroup;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_READ_DEFAULT_GROUP] = $readDefaultGroup;
         return $this;
     }
 
@@ -150,7 +150,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setUseBufferedQueries($useBufferedQueries)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = $useBufferedQueries;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = $useBufferedQueries;
         return $this;
     }
 
@@ -162,7 +162,7 @@ class Rend_Factory_Database_Pdo_Mysql extends Rend_Factory_Database_Pdo_Abstract
      */
     public function setUseDirectQueries($useDirectQueries)
     {
-        $this->_options["driverOptions"][PDO::MYSQL_ATTR_DIRECT_QUERY] = $useDirectQueries;
+        $this->_options["driver_options"][PDO::MYSQL_ATTR_DIRECT_QUERY] = $useDirectQueries;
         return $this;
     }
 

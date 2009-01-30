@@ -45,7 +45,7 @@ class Rend_Factory_Database_Mysqli extends Rend_Factory_Database_Abstract
      */
     public function create()
     {
-        $database = new Zend_Db_Adapter_Mysqli($this->_params);
+        $database = new Zend_Db_Adapter_Mysqli($this->_options);
 
         if ($this->_statementClass) {
             $database->setStatementClass($this->_statementClass);
