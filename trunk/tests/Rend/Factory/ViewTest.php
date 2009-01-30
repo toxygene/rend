@@ -86,14 +86,15 @@ class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
     public function testFilterPathsAreConfigurable()
     {
         $view = $this->_factory
-                     ->setFilterPaths(array("One", array("prefix" => "Two", "path" => "Two")))
+                     ->setFilterPaths(array("One", array("prefix" => "Two", "path" => "Two"), array("path" => "Three")))
                      ->create();
 
         $this->assertEquals(
             array(
                 "Zend_View_Filter_" => array(
                     "Zend/View/Filter/",
-                    "One/"
+                    "One/",
+                    "Three/"
                 ),
                 "Two_" => array(
                     "Two/"
@@ -107,14 +108,15 @@ class Rend_Factory_ViewTest extends PHPUnit_Framework_TestCase
     public function testHelperPathsAreConfigurable()
     {
         $view = $this->_factory
-                     ->setHelperPaths(array("One", array("prefix" => "Two", "path" => "Two")))
+                     ->setHelperPaths(array("One", array("prefix" => "Two", "path" => "Two"), array("path" => "Three")))
                      ->create();
 
         $this->assertEquals(
              array(
                 "Zend_View_Helper_" => array(
                     "Zend/View/Helper/",
-                    "One/"
+                    "One/",
+                    "Three/"
                 ),
                 "Rend_View_Helper_" => array(
                     "Rend/View/Helper/"
