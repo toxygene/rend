@@ -58,7 +58,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_Base_Abstract impleme
      * @var array
      */
     protected $_options = array(
-        "driverOptions" => array()
+        "driver_options" => array()
     );
 
     /**
@@ -210,18 +210,6 @@ abstract class Rend_Factory_Database_Abstract extends Rend_Base_Abstract impleme
     public function setProfiler($profiler)
     {
         $this->_options["profiler"] = $profiler;
-        return $this;
-    }
-
-    /**
-     * Set the protocol
-     *
-     * @param string $protocol
-     * @return Rend_Factory_Database_Abstract
-     */
-    public function setProtocol($protocol)
-    {
-        $this->_options["protocol"] = $protocol;
         return $this;
     }
 
