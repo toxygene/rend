@@ -1,5 +1,26 @@
 <?php
+/**
+ * Custom error handler
+ *
+ * Converts errors to ErrorExceptions
+ *
+ * @param integer $errno
+ * @param string $errstr
+ * @param string $errfile
+ * @param string $errline
+ * @return boolean
+ */
+function rendErrorHandler($errno, $errstr, $errfile, $errline)
+{
+    if (error_reporting() & $errno) {
+        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+        return true;
+    }
+}
+
 if (isset($bootstrap) && $bootstrap) {
+    set_error_handler('rendErrorHandler'); 
+
     error_reporting(E_ALL | E_STRICT);
     ini_set("error_log", "../data/logs/phperrors.log");
     ini_set("log_errors", true);
