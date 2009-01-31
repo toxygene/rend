@@ -22,10 +22,36 @@
 /** Rend_Controller_Action_Helper_Abstract */
 require_once "Rend/Controller/Action/Helper/Abstract.php";
 
+/** Rend_FactoryLoader */
+require_once "Rend/FactoryLoader.php";
+
 /**
  * @category Rend
  * @subpackage UnitTest
  */
 class Rend_Controller_Action_Helper_AbstractTest extends PHPUnit_Framework_TestCase
 {
+
+    private $_helper;
+
+    public function setUp()
+    {
+        $this->_helper = $this->getMock(
+            "Rend_Controller_Action_Helper_Abstract",
+            null
+        );
+    }
+
+    public function testFactoryLoaderCanBeManuallyOverriden()
+    {
+        $factoryLoader = new Rend_FactoryLoader();
+
+        $this->_helper->setFactoryLoader($factoryLoader);
+
+        $this->assertSame(
+            $factoryLoader,
+            $this->_helper->getFactoryLoader()
+        );
+    }
+
 }
