@@ -273,13 +273,11 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function getRules()
     {
-        $actionController = $this->getActionController();
-
-        if (isset($actionController->{$this->_ruleKey})) {
-            return $actionController->{$this->_ruleKey};
-        } else {
+        if (!isset($this->getActionController()->{$this->_ruleKey})) {
             return array();
         }
+
+        return $this->getActionController()->{$this->_ruleKey};
     }
 
     /**
