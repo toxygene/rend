@@ -214,6 +214,30 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
+     * Get the ACL object
+     *
+     * @return Zend_Acl
+     * @throws Zend_Controller_Action_Exception
+     */
+    public function getAcl()
+    {
+        if (!$this->_acl) {
+            if (!$this->getFactoryLoader() ||
+                !isset($this->getFactoryLoader()->acl) ||
+                !$this->getFactoryLoader()->acl instanceof Rend_Factory_Acl_Interface) {
+                /** Zend_Controller_Action_Exception */
+                require_once "Zend/Controller/Action/Exception.php";
+
+                throw new Zend_Controller_Action_Exception("Could not load an ACL object");
+            }
+
+            $this->_acl = $this->getFactoryLoader()
+                               ->acl();
+        }
+        return $this->_acl;
+    }
+
+    /**
      * Get a rule
      *
      * @param string $action
@@ -280,7 +304,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function isAllowed($resource, $permission = null)
     {
-        return $this->_getAcl()
+        return $this->getAcl()
                     ->isAllowed($this->_role, $resource, $permission);
     }
 
@@ -533,30 +557,6 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
                 null
             );
         }
-    }
-
-    /**
-     * Get the ACL object
-     *
-     * @return Zend_Acl
-     * @throws Zend_Controller_Action_Exception
-     */
-    protected function _getAcl()
-    {
-        if (!$this->_acl) {
-            if (!$this->getFactoryLoader() ||
-                !isset($this->getFactoryLoader()->acl) ||
-                !$this->getFactoryLoader()->acl instanceof Rend_Factory_Acl_Interface) {
-                /** Zend_Controller_Action_Exception */
-                require_once "Zend/Controller/Action/Exception.php";
-
-                throw new Zend_Controller_Action_Exception("Could not load an ACL object");
-            }
-
-            $this->_acl = $this->getFactoryLoader()
-                               ->acl();
-        }
-        return $this->_acl;
     }
 
 }

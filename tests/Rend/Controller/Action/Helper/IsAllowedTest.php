@@ -19,6 +19,9 @@
  * @version $Id$
  */
 
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . "/TestHelper.php";
+
 /** Rend_Controller_Action_Helper_IsAllowed */
 require_once "Rend/Controller/Action/Helper/IsAllowed.php";
 
@@ -40,7 +43,7 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
 
     private $_helper;
 
-    public function setUp()
+    private function _getAcl()
     {
         $acl = new Zend_Acl();
 
@@ -53,13 +56,18 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
             ->allow("john", "pear")
             ->allow("mike", "apple", "touch");
 
+        return $acl;
+    }
+
+    public function setUp()
+    {
         $actionController = new IsAllowed_Zend_Controller_Action(
             new Zend_Controller_Request_Simple(),
             new Zend_Controller_Response_Cli()
         );
 
         $this->_helper = new Rend_Controller_Action_Helper_IsAllowed(array(
-            "acl"              => $acl,
+            "acl"              => $this->_getAcl(),
             "actionController" => $actionController
         ));
     }
@@ -78,9 +86,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
     }
 
-    /**
-     *
-     */
     public function testRulesCanBeManuallySet()
     {
         $this->_helper->setRules(array(
@@ -110,9 +115,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
     }
 
-    /**
-     *
-     */
     public function testRuleCanBeCleared()
     {
         $this->_helper->clearRules();
@@ -123,9 +125,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
     }
 
-    /**
-     *
-     */
     public function testRulesCanBeChecked()
     {
         $this->_helper->addRules(array(
@@ -136,9 +135,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $this->assertFalse($this->_helper->hasRule("two"));
     }
 
-    /**
-     *
-     */
     public function testRulesCanBeRemoved()
     {
         $this->_helper->addRules(array(
@@ -152,9 +148,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $this->assertFalse($this->_helper->hasRule("one"));
     }
 
-    /**
-     *
-     */
     public function testRulesCanBeFetched()
     {
         $this->_helper->addRules(array(
@@ -172,9 +165,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         $this->assertNull($this->_helper->getRule("three"));
     }
 
-    /**
-     *
-     */
     public function testUnauthorizedErrorRedirectsToUnauthorizedPage()
     {
         $this->_helper
@@ -200,9 +190,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
     }
 
-    /**
-     *
-     */
     public function testForbiddenErrorRedirectToFirbiddenPage()
     {
         $this->_helper
@@ -230,9 +217,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
     }
 
-    /**
-     *
-     */
     public function testExceptionsCanBeThrown()
     {
         $this->setExpectedException("Zend_Controller_Action_Exception");
@@ -248,9 +232,6 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
              ->preDispatch();
     }
 
-    /**
-     *
-     */
     public function testAccessIsAllowedIfThereIsNoRule()
     {
         $this->_helper
@@ -258,11 +239,87 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
              ->preDispatch();
     }
 
+    public function testAclsCanBeManuallyOverridden()
+    {
+        $acl = new Zend_Acl();
+
+        $this->_helper->setAcl($acl);
+
+        $this->assertAttributeSame(
+            $acl,
+            "_acl",
+            $this->_helper
+        );
+    }
+
+    public function testAclsAreLazyLoadedFromTheFactoryLoader()
+    {
+        $acl = $this->_getAcl();
+
+        $helper = new Rend_Controller_Action_Helper_IsAllowed();
+        $helper->setFactoryLoader(new Rend_FactoryLoader(array(
+            "factories" => array(
+                "acl" => new RCAHIA_Test_Factory($acl)
+            )
+        )));
+
+        $this->assertSame(
+            $acl,
+            $helper->getAcl()
+        );
+    }
+
+    public function testAnExceptionIsThrownWhenTheAclCannotBeLazyLoadedFromTheFactoryLoader()
+    {
+        $this->setExpectedException("Zend_Controller_Action_Exception");
+
+        $helper = new Rend_Controller_Action_Helper_IsAllowed();
+        $helper->setFactoryLoader(new Rend_FactoryLoader(array(
+            "factories" => array(
+                "acl" => new RCAHIA_Test_NonAcl_Factory()
+            )
+        )));
+
+        $helper->getAcl();
+    }
+
+    public function testRuleKeyCanBeChanged()
+    {
+        $this->_helper
+             ->setRuleKey("asdf")
+             ->addRule("one", "two");
+
+        $actionController = $this->_helper
+                                 ->getActionController();
+
+        $this->assertTrue(
+            isset($actionController->asdf)
+        );
+    }
+
 }
 
-/**
- *
- */
 class IsAllowed_Zend_Controller_Action extends Zend_Controller_Action
+{
+}
+
+class RCAHIA_Test_Factory implements Rend_Factory_Acl_Interface
+{
+
+    private $_object;
+
+    public function __construct($object)
+    {
+        $this->_object = $object;
+    }
+
+    public function create()
+    {
+        return $this->_object;
+    }
+
+}
+
+class RCAHIA_Test_NonAcl_Factory implements Rend_Factory_Interface
 {
 }

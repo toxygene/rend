@@ -19,6 +19,9 @@
  * @version $Id$
  */
 
+/** TestHelper */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . "/TestHelper.php";
+
 /** Rend_Controller_Action_Helper_Abstract */
 require_once "Rend/Controller/Action/Helper/Abstract.php";
 
@@ -54,4 +57,60 @@ class Rend_Controller_Action_Helper_AbstractTest extends PHPUnit_Framework_TestC
         );
     }
 
+    public function testFactoryLoaderIsLazyLoadedFromTheFrontController()
+    {
+        $factoryLoader = new Rend_FactoryLoader();
+
+        $this->_helper->setActionController(new RCAHA_Test_Controller(
+            new Zend_Controller_Request_Simple(),
+            new Zend_Controller_Response_Cli(),
+            array("rendFactoryLoader" => $factoryLoader)
+        ));
+
+        $this->assertSame(
+            $factoryLoader,
+            $this->_helper->getFactoryLoader()
+        );
+    }
+
+    public function testConfigurationCanBeDoneWithAZendConfigObject()
+    {
+        $test = new RCAHA_Test_Helper(new Zend_Config(array(
+            "test" => "test"
+        )));
+
+        $this->assertEquals(
+            "test",
+            $test->test
+        );
+    }
+
+    public function testConfigurationCanBeDoneWithAnArray()
+    {
+        $test = new RCAHA_Test_Helper(array(
+            "test" => "test"
+        ));
+
+        $this->assertEquals(
+            "test",
+            $test->test
+        );
+    }
+
+}
+
+class RCAHA_Test_Helper extends Rend_Controller_Action_Helper_Abstract
+{
+
+    public $test;
+
+    public function setTest($test)
+    {
+        $this->test = $test;
+    }
+
+}
+
+class RCAHA_Test_Controller extends Rend_Controller_Action
+{
 }
