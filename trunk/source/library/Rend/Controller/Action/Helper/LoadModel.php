@@ -52,6 +52,28 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
     }
 
     /**
+     * Get the database object
+     *
+     * @return Zend_Db_Adapter_Abstract
+     * @throws Zend_Controller_Action_Exception
+     */
+    public function getDatabase()
+    {
+        if (!$this->_database) {
+            if (!$this->getFactoryLoader() ||
+                !isset($this->getFactoryLoader()->database) ||
+                !$this->getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
+                /** Zend_Controller_Action_Exception */
+                require_once 'Zend/Controller/Action/Exception.php';
+
+                throw new Zend_Controller_Action_Exception("Could not load an database object");
+            }
+            $this->_database = $this->getFactoryLoader()->database();
+        }
+        return $this->_database;
+    }
+
+    /**
      * Load a model by name
      *
      * @param string $name
@@ -61,7 +83,7 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
     public function getModel($name, Zend_Db_Adapter_Abstract $database = null)
     {
         if (!$database) {
-            $database = $this->_getDatabase();
+            $database = $this->getDatabase();
         }
 
         // TODO determine loader directories?
@@ -86,28 +108,6 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
     {
         $this->_database = $database;
         return $this;
-    }
-
-    /**
-     * Get the database object
-     *
-     * @return Zend_Db_Adapter_Abstract
-     * @throws Zend_Controller_Action_Exception
-     */
-    protected function _getDatabase()
-    {
-        if (!$this->_database) {
-            if (!$this->getFactoryLoader() ||
-                !isset($this->getFactoryLoader()->database) ||
-                !$this->getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
-                /** Zend_Controller_Action_Exception */
-                require_once 'Zend/Controller/Action/Exception.php';
-
-                throw new Zend_Controller_Action_Exception("Could not load an database object");
-            }
-            $this->_database = $this->getFactoryLoader()->database();
-        }
-        return $this->_database;
     }
 
 }
