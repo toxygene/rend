@@ -48,7 +48,7 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
      */
     public function direct($name, Zend_Db_Adapter_Abstract $database = null)
     {
-        return $this->getModel($name);
+        return $this->getModel($name, $database);
     }
 
     /**
