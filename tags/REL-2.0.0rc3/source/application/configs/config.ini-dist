@@ -1,0 +1,11 @@
+[production]
+displayErrors = false
+timezone      =
+
+view.options.encoding = UTF-8
+
+[development : production]
+displayErrors = true
+
+[testing : production]
+displayErrors = true
