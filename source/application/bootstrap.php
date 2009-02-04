@@ -19,7 +19,7 @@ function rendErrorHandler($errno, $errstr, $errfile, $errline)
 }
 
 if (isset($bootstrap) && $bootstrap) {
-    set_error_handler('rendErrorHandler'); 
+    set_error_handler("rendErrorHandler"); 
 
     error_reporting(E_ALL | E_STRICT);
     ini_set("error_log", "../data/logs/phperrors.log");
@@ -47,7 +47,7 @@ $frontController = Zend_Controller_Front::getInstance();
 
 if (isset($bootstrap)) {
     ini_set("display_errors", $config->displayErrors);
-    ini_set('display_startup_errors', $config->displayErrors);
+    ini_set("display_startup_errors", $config->displayErrors);
     $frontController->throwExceptions($config->displayErrors);
 }
 
