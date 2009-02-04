@@ -40,8 +40,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     {
         $database = $this->_factory
                          ->setAutoQuoteIdentifiers(true)
-                         ->setCaseFolding("lower")
-                         ->setFetchMode("assoc")
                          ->setHost("test1")
                          ->setPort(2)
                          ->setPassword("test3")
@@ -55,8 +53,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
             array(
                 "driver_options" => array(),
                 "autoQuoteIdentifiers" => true,
-                "caseFolding" => Zend_Db::CASE_LOWER,
-                "fetchMode" => Zend_Db::FETCH_ASSOC,
                 "host" => "test1",
                 "port" => 2,
                 "password" => "test3",
@@ -64,12 +60,172 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
                 "dbname" => "test4",
                 "username" => "test7",
                 "options" => array(
-                    "caseFolding" => 0,
-                    "autoQuoteIdentifiers" => true
+                    "autoQuoteIdentifiers" => true,
+                    "caseFolding" => 0
                 )
             ),
             $database->getConfig()
         );
+    }
+
+    public function testCaseFoldingCanBeSetToNatural()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setCaseFolding("natural")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::CASE_NATURAL,
+            $config["caseFolding"]
+        );
+    }
+
+    public function testCaseFoldingCanBeSetToUpper()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setCaseFolding("upper")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::CASE_UPPER,
+            $config["caseFolding"]
+        );
+    }
+
+    public function testCaseFoldingCanBeSetToLower()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setCaseFolding("lower")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::CASE_LOWER,
+            $config["caseFolding"]
+        );
+    }
+
+    public function testInvalidCaseFoldingThrowsAnException()
+    {
+        $this->setExpectedException("Rend_Factory_Database_Exception");
+
+        $config = $this->_factory
+                       ->setCaseFolding("asdf");
+    }
+
+    public function testFetchModeCanBeSetToLazy()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setFetchMode("lazy")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::FETCH_LAZY,
+            $config["fetchMode"]
+        );
+    }
+
+    public function testFetchModeCanBeSetToAssoc()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setFetchMode("assoc")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::FETCH_ASSOC,
+            $config["fetchMode"]
+        );
+    }
+
+    public function testFetchModeCanBeSetToNum()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setFetchMode("num")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::FETCH_NUM,
+            $config["fetchMode"]
+        );
+    }
+
+    public function testFetchModeCanBeSetToBoth()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setFetchMode("both")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::FETCH_BOTH,
+            $config["fetchMode"]
+        );
+    }
+
+    public function testFetchModeCanBeSetToNamed()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setFetchMode("named")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::FETCH_NAMED,
+            $config["fetchMode"]
+        );
+    }
+
+    public function testFetchModeCanBeSetToObj()
+    {
+        $config = $this->_factory
+                       ->setSchema("test")
+                       ->setPassword("test")
+                       ->setUsername("test")
+                       ->setFetchMode("obj")
+                       ->create()
+                       ->getConfig();
+
+        $this->assertEquals(
+            Zend_Db::FETCH_OBJ,
+            $config["fetchMode"]
+        );
+    }
+
+    public function testInvalidFetchModeThrowsAnException()
+    {
+        $this->setExpectedException("Rend_Factory_Database_Exception");
+
+        $config = $this->_factory
+                       ->setFetchMode("asdf");
     }
 
 }
