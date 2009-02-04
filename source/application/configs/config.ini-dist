@@ -2,7 +2,7 @@
 displayErrors = false
 timezone      =
 
-view.options.encoding = UTF-8
+factoryLoader.factories.view.type = View
 
 [development : production]
 displayErrors = true
