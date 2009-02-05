@@ -30,6 +30,38 @@ class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
 {
 
     /**
+     * Iconv encoding
+     * @var string
+     */
+    protected $_encoding;
+
+    /**
+     * Set the Iconv encoding
+     *
+     * @param string $encoding
+     * @return Rend_View_Helper_Truncate
+     * @throws Zend_View_Exception
+     */
+    public function setEncoding($encoding = null)
+    {
+        if ($encoding !== null) {
+            $orig   = iconv_get_encoding('internal_encoding');
+            $result = iconv_set_encoding('internal_encoding', $encoding);
+            if (!$result) {
+                /** Zend_View_Exception */
+                require_once 'Zend/View/Exception.php';
+
+                throw new Zend_View_Exception('Given encoding not supported on this OS!');
+            }
+
+            iconv_set_encoding('internal_encoding', $orig);
+        }
+
+        $this->_encoding = $encoding;
+        return $this;
+    }
+
+    /**
      * Trucate a string
      *
      * Additional features include setting an ending string and attempting to
@@ -48,7 +80,7 @@ class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
             throw new InvalidArgumentException('Length must be greater than 0');
         }
 
-        if (strlen($string) <= $length) {
+        if (iconv_strlen($string, $this->_encoding) <= $length) {
             return $string;
         }
 
@@ -63,7 +95,7 @@ class Rend_View_Helper_Truncate extends Zend_View_Helper_Abstract
             }
         }
 
-        return substr($string, 0, $length) . $end;
+        return iconv_substr($string, 0, $length, $this->_encoding) . $end;
     }
 
     /**
