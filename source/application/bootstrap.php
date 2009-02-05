@@ -25,7 +25,17 @@ if (isset($bootstrap) && $bootstrap) {
     ini_set("error_log", "../data/logs/phperrors.log");
     ini_set("log_errors", true);
 
-    set_include_path(realPath("../library"));
+    $paths = array();
+    $paths[] = realPath("../library");
+    $paths[] = realPath("../application/models");
+    foreach (glob("../application/modules/*/models") as $path) {
+        $paths[] = realPath($path);
+    }
+
+    set_include_path(implode(
+        PATH_SEPARATOR,
+        $paths
+    ));
 
     /** Zend_Loader */
     require_once "Zend/Loader.php";
