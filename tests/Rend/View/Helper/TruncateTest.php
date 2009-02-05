@@ -71,4 +71,14 @@ class Rend_View_Helper_TruncateTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testMultibyteStringsCanBeTruncated()
+    {
+        $this->assertEquals(
+            "éíÑÍ",
+            $this->_helper
+                 ->setEncoding("UTF-8")
+                 ->direct("éíÑÍÉáÍÍéíÑÍÉáÍÍéáÍÍéíÑÍÉ", 4, "")
+        );
+    }
+
 }
