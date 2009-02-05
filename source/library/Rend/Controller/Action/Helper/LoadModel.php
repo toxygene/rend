@@ -48,7 +48,10 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
      */
     public function direct($name, Zend_Db_Adapter_Abstract $database = null)
     {
-        return $this->getModel($name, $database);
+        return $this->getModel(
+            $name,
+            $database
+        );
     }
 
     /**
@@ -86,15 +89,8 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
             $database = $this->getDatabase();
         }
 
-        // TODO determine loader directories?
-
-        /** Zend_Loader */
-        require_once "Zend/Loader.php";
-
-        Zend_Loader::loadClass($name);
-
         return new $name(array(
-            Zend_Db_Table_Abstract::ADAPTER => $database
+            Zend_Db_Table_Abstract::ADAPTER => $database,
         ));
     }
 
