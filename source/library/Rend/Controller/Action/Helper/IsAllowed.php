@@ -542,16 +542,23 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Format the rule results consistently
      *
-     * @param array $results
+     * @param array|string $results
      * @return array
      */
     protected function _formatRuleResults($results)
     {
-        if (isset($results[1])) {
-            return $results;
+        if (is_array($results)) {
+            if (isset($results[1])) {
+                return $results;
+            } else {
+                return array(
+                    $results[0],
+                    null
+                );
+            }
         } else {
             return array(
-                $results[0],
+                $results,
                 null
             );
         }
