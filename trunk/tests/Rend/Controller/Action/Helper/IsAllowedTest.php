@@ -297,6 +297,23 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
         );
     }
 
+    /**
+     * @see http://code.google.com/p/rend/issues/detail?id=28
+     */
+    public function testDispatchingToAnActionWithARuleThatOnlyRequiresAResourceWorks()
+    {
+        $this->_helper
+             ->getActionController()
+             ->getRequest()
+             ->setActionName("one");
+
+        $this->_helper
+             ->addRule("one", "apple")
+             ->preDispatch();
+
+        $this->assertFalse($this->_helper->getActionController()->getRequest()->isDispatched());
+    }
+
 }
 
 class IsAllowed_Zend_Controller_Action extends Zend_Controller_Action
