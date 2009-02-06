@@ -52,6 +52,16 @@ class Rend_Factory_MailTransport_SmtpTest extends PHPUnit_Framework_TestCase
 
     public function testConnectionCanBeConfigured()
     {
+        $connection = new Zend_Mail_Protocol_Smtp();
+
+        $transport = $this->_factory
+                          ->setConnection($connection)
+                          ->create();
+
+        $this->assertSame(
+            $connection,
+            $transport->getConnection()
+        );
     }
 
     public function testHostCanBeConfigured()
