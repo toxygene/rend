@@ -228,4 +228,22 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
                        ->setFetchMode("asdf");
     }
 
+    public function testCharsetCanBeConfigured()
+    {
+        $this->markTestSkipped("Cannot run test without database to connect to");
+
+        $database = $this->_factory
+                         ->setSchema("test")
+                         ->setPassword("test")
+                         ->setUsername("test")
+                         ->setFetchMode("obj")
+                         ->setCharset("UTF-8")
+                         ->create();
+
+        $this->assertEquals(
+            "UTF-8",
+            $database->getConnection()->get_charset()
+        );
+    }
+
 }
