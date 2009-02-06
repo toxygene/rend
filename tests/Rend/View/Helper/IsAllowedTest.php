@@ -28,4 +28,59 @@ require_once "Rend/View/Helper/IsAllowed.php";
  */
 class Rend_View_Helper_IsAllowedTest extends PHPUnit_Framework_TestCase
 {
+
+    private function _getIsAllowedHelper()
+    {
+        $acl = new Zend_Acl();
+
+        $acl->add(new Zend_Acl_Resource("apple"))
+            ->add(new Zend_Acl_Resource("pear"))
+            ->addRole(new Zend_Acl_Role("john"))
+            ->addRole(new Zend_Acl_Role("mike"));
+
+        $acl->allow("john", "apple", "eat")
+            ->allow("john", "pear")
+            ->allow("mike", "apple", "touch");
+
+
+        $actionController = new IsAllowed_Zend_Controller_Action(
+            new Zend_Controller_Request_Simple(),
+            new Zend_Controller_Response_Cli()
+        );
+
+        $isAllowedHelper = new Rend_Controller_Action_Helper_IsAllowed(array(
+            "acl"              => $acl,
+            "actionController" => $actionController
+        ));
+
+        return $isAllowedHelper;
+    }
+
+    public function testAclsCanBeChecked()
+    {
+        $isAllowedHelper = $this->_getIsAllowedHelper()
+                                ->setRole('mike');
+
+        Zend_Controller_Action_HelperBroker::addHelper($isAllowedHelper);
+
+        $helper = new Rend_View_Helper_IsAllowed();
+
+        $this->assertFalse($helper->direct("apple", "eat"));
+        $this->assertTrue($helper->direct("apple", "touch"));
+    }
+
+    public function testIsAllowedHelperIsLazyLoadedFromTheHelperBroker()
+    {
+        $isAllowedHelper = $this->_getIsAllowedHelper()
+                                ->setRole('mike');
+
+        $helper = new Rend_View_Helper_IsAllowed();
+        $helper->setIsAllowedHelper($isAllowedHelper);
+
+        $this->assertSame(
+            $isAllowedHelper,
+            $helper->getIsAllowedHelper()
+        );
+    }
+
 }

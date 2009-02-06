@@ -32,18 +32,10 @@ class Rend_View_Helper_IsAllowed extends Zend_View_Helper_Abstract
 {
 
     /**
-     * Check the ACLs to see if the currently logged in user has permission to
-     * access the requested resource
-     *
-     * @param string $resource
-     * @param string $permission
-     * @return boolean
+     * IsAllowed action helper
+     * @var Rend_Controller_Action_Helper_IsAllowed
      */
-    public function isAllowed($resource, $permission = null)
-    {
-        return Zend_Controller_Action_HelperBroker::getExistingHelper('isAllowed')
-                                                  ->isAllowed($resource, $permission);
-    }
+    private $_isAllowedHelper;
 
     /**
      * Strategy method
@@ -56,6 +48,50 @@ class Rend_View_Helper_IsAllowed extends Zend_View_Helper_Abstract
     public function direct($resource = null, $permission = null)
     {
         return $this->isAllowed($resource, $permission);
+    }
+
+    /**
+     * Get the IsAllowed helper
+     *
+     * @return Rend_Controller_Action_Helper_IsAllowed
+     * @throws Zend_Controller_Action_Exception
+     */
+    public function getIsAllowedHelper()
+    {
+        if (!$this->_isAllowedHelper) {
+            /** Zend_Controller_Action_HelperBroker */
+            require_once "Zend/Controller/Action/HelperBroker.php";
+
+            $this->_isAllowedHelper = Zend_Controller_Action_HelperBroker::getExistingHelper("isAllowed");
+        }
+
+        return $this->_isAllowedHelper;
+    }
+
+    /**
+     * Check the ACLs to see if the currently logged in user has permission to
+     * access the requested resource
+     *
+     * @param string $resource
+     * @param string $permission
+     * @return boolean
+     */
+    public function isAllowed($resource, $permission = null)
+    {
+        return $this->getIsAllowedHelper()
+                    ->isAllowed($resource, $permission);
+    }
+
+    /**
+     * Set the IsAllowed helper
+     *
+     * @param Rend_Controller_Action_Helper_IsAllowed $isAllowedHelper
+     * @return Rend_View_Helper_IsAllowed
+     */
+    public function setIsAllowedHelper(Rend_Controller_Action_Helper_IsAllowed $isAllowedHelper)
+    {
+        $this->_isAllowedHelper = $isAllowedHelper;
+        return $this;
     }
 
 }
