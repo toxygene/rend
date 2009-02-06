@@ -48,7 +48,7 @@ class Rend_Factory_MailTransport_Smtp extends Rend_Base_Abstract implements Rend
      * SMTP options
      * @var array
      */
-    protected $_options;
+    protected $_options = array();
 
     /**
      * Get a SMTP transport object
