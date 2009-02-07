@@ -23,7 +23,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Rend_Filter_AllTests::main");
 }
 
-require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
+require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
 require_once 'Rend/Filter/BooleanTest.php';
 require_once 'Rend/Filter/NullTest.php';
 require_once 'Rend/Filter/WordsToUpperTest.php';

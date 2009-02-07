@@ -23,7 +23,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Rend_Validate_AllTests::main");
 }
 
-require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
+require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
 require_once 'Rend/Validate/ConfirmFieldTest.php';
 require_once 'Rend/Validate/StringEqualsTest.php';
 
