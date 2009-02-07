@@ -23,7 +23,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Rend_Base_AllTests::main");
 }
 
-require_once dirname(dirname(__FILE__)) . "/TestHelper.php";
+require_once dirname(dirname(dirname(__FILE__))) . "/TestHelper.php";
 require_once 'Rend/Base/AbstractTest.php';
 
 /**

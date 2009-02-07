@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("America/Chicago");
 
-$root = dirname(dirname(dirname(__FILE__))) . "/source";
+$root = dirname(dirname(__FILE__)) . "/source";
 
 // Setup include path
 set_include_path(
@@ -20,3 +20,5 @@ PHPUnit_Util_Filter::addDirectoryToWhiteList(
     "{$root}/library/Rend",
     ".php"
 );
+
+require_once "TestConfiguration.php";

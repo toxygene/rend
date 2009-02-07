@@ -20,7 +20,7 @@
  */
 
 /** TestHelper */
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . "/TestHelper.php";
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . "/TestHelper.php";
 
 /** Rend_Controller_Action_Helper_Abstract */
 require_once "Rend/Controller/Action/Helper/Abstract.php";
