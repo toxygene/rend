@@ -33,7 +33,9 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->markTestSkipped();
+        if (!TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED) {
+            $this->markTestSkipped("PDO MYSQL adapter not enabled");
+        }
 
         $this->_factory = new Rend_Factory_Database_Pdo_Mysql();
 
