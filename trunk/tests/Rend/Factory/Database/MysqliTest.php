@@ -34,6 +34,13 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_factory = new Rend_Factory_Database_Mysqli();
+
+        $this->_factory
+             ->setHost(TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME)
+             ->setSchema(TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE)
+             ->setPassword(TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD)
+             ->setPort(TESTS_ZEND_DB_ADAPTER_MYSQL_PORT)
+             ->setUsername(TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME);
     }
 
     public function testAdapterCanBeConfigured()
@@ -71,9 +78,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testCaseFoldingCanBeSetToNatural()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setCaseFolding("natural")
                        ->create()
                        ->getConfig();
@@ -87,9 +91,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testCaseFoldingCanBeSetToUpper()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setCaseFolding("upper")
                        ->create()
                        ->getConfig();
@@ -103,9 +104,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testCaseFoldingCanBeSetToLower()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setCaseFolding("lower")
                        ->create()
                        ->getConfig();
@@ -127,9 +125,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testFetchModeCanBeSetToLazy()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setFetchMode("lazy")
                        ->create()
                        ->getConfig();
@@ -143,9 +138,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testFetchModeCanBeSetToAssoc()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setFetchMode("assoc")
                        ->create()
                        ->getConfig();
@@ -159,9 +151,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testFetchModeCanBeSetToNum()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setFetchMode("num")
                        ->create()
                        ->getConfig();
@@ -175,9 +164,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testFetchModeCanBeSetToBoth()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setFetchMode("both")
                        ->create()
                        ->getConfig();
@@ -191,9 +177,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testFetchModeCanBeSetToNamed()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setFetchMode("named")
                        ->create()
                        ->getConfig();
@@ -207,9 +190,6 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
     public function testFetchModeCanBeSetToObj()
     {
         $config = $this->_factory
-                       ->setSchema("test")
-                       ->setPassword("test")
-                       ->setUsername("test")
                        ->setFetchMode("obj")
                        ->create()
                        ->getConfig();
@@ -230,13 +210,11 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
 
     public function testCharsetCanBeConfigured()
     {
-        $this->markTestSkipped("Cannot run test without database to connect to");
+        if (!TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED) {
+            $this->markTestSkipped("MYSQLI adapter not enabled");
+        }
 
         $database = $this->_factory
-                         ->setSchema("test")
-                         ->setPassword("test")
-                         ->setUsername("test")
-                         ->setFetchMode("obj")
                          ->setCharset("UTF-8")
                          ->create();
 
