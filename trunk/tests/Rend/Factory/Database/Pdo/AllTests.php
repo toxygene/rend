@@ -25,6 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . "/TestHelper.php";
 require_once "Rend/Factory/Database/Pdo/MysqlTest.php";
+require_once "Rend/Factory/Database/Pdo/OciTest.php";
 
 /**
  *
@@ -41,6 +42,7 @@ class Rend_Factory_Database_Pdo_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite("Rend Factory Database Pdo Tests");
 
+        $suite->addTestSuite("Rend_Factory_Database_Pdo_OciTest");
         $suite->addTestSuite("Rend_Factory_Database_Pdo_MysqlTest");
 
         return $suite;
