@@ -49,15 +49,11 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
 
     public function testAllowLocalInfileIsConfigurable()
     {
+        $this->markTestIncomplete();
+
         $database = $this->_factory
                          ->setAllowLocalInfile(true)
                          ->create();
-
-        $this->assertEquals(
-            true,
-            $database->getConnection()
-                     ->getAttribute(PDO::MYSQL_ATTR_LOCAL_INFILE)
-        );
     }
 
     public function testCharsetIsConfigurable()
@@ -77,13 +73,14 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
     public function testInitCommandIsConfigurable()
     {
         $database = $this->_factory
-                         ->setInitCommand("test")
+                         ->setInitCommand("SET NAMES 'utf8'")
                          ->create();
 
+        $charset = $database->fetchRow("SHOW VARIABLES LIKE 'character_set_connection'");
+
         $this->assertEquals(
-            "test",
-            $database->getConnection()
-                     ->getAttribute(PDO::MYSQL_ATTR_INIT_COMMAND)
+            "utf8",
+            $charset["Value"]
         );
     }
 
@@ -102,37 +99,33 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
 
     public function testReadDefaultFileIsConfigurable()
     {
-        $database = $this->_factory
-                         ->setReadDefaultFile('asdf')
-                         ->create();
+        $this->markTestIncomplete();
 
-        $this->assertEquals(
-            'asdf',
-            $database->getConnection()
-                     ->getAttribute(PDO::MYSQL_ATTR_READ_DEFAULT_FILE)
-        );
+        $database = $this->_factory
+                         ->setReadDefaultFile("???")
+                         ->create();
     }
 
     public function testReadDefaultGroupIsConfigurable()
     {
-        $database = $this->_factory
-                         ->setReadDefaultGroup('asdf')
-                         ->create();
+        $this->markTestIncomplete();
 
-        $this->assertEquals(
-            'asdf',
-            $database->getConnection()
-                     ->getAttribute(PDO::MYSQL_ATTR_READ_DEFAULT_GROUP)
-        );
+        $database = $this->_factory
+                         ->setReadDefaultGroup("???")
+                         ->create();
     }
 
     public function testUnixSocketIsConfigurable()
     {
-        $database = $this->_factory
-                         ->setUnixSocket('asdf')
-                         ->create();
+        if (!TESTS_ZEND_DB_ADAPTER_MYSQL_SOCKET) {
+            $this->markTestIncomplete();
+        }
 
         $this->markTestIncomplete();
+
+        $database = $this->_factory
+                         ->setUnixSocket(TESTS_ZEND_DB_ADAPTER_MYSQL_SOCKET)
+                         ->create();
     }
 
     public function testUseBufferedQueriesIsConfigurable()
@@ -141,7 +134,11 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
                          ->setUseBufferedQueries(true)
                          ->create();
 
-        $this->markTestIncomplete();
+        $this->assertEquals(
+            1,
+            $database->getConnection()
+                     ->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY)
+        );
     }
 
     public function testUseDirectQueriesIsConfigurable()
@@ -150,7 +147,11 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
                          ->setUseDirectQueries(true)
                          ->create();
 
-        $this->markTestIncomplete();
+        $this->assertEquals(
+            1,
+            $database->getConnection()
+                     ->getAttribute(PDO::MYSQL_ATTR_DIRECT_QUERY)
+        );
     }
 
 }
