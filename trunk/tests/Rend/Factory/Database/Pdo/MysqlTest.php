@@ -40,9 +40,11 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
         $this->_factory = new Rend_Factory_Database_Pdo_Mysql();
 
         $this->_factory
-             ->setPassword('password')
-             ->setSchema('test')
-             ->setUsername('username');
+             ->setHost(TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME)
+             ->setSchema(TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE)
+             ->setPassword(TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD)
+             ->setPort(TESTS_ZEND_DB_ADAPTER_MYSQL_PORT)
+             ->setUsername(TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME);
     }
 
     public function testAllowLocalInfileIsConfigurable()
@@ -58,14 +60,28 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCharsetIsConfigurable()
+    {
+        $database = $this->_factory
+                         ->setCharset("utf8")
+                         ->create();
+
+        $charset = $database->fetchRow("SHOW VARIABLES LIKE 'character_set_connection'");
+
+        $this->assertEquals(
+            "utf8",
+            $charset["Value"]
+        );
+    }
+
     public function testInitCommandIsConfigurable()
     {
         $database = $this->_factory
-                         ->setInitCommand('test')
+                         ->setInitCommand("test")
                          ->create();
 
         $this->assertEquals(
-            'test',
+            "test",
             $database->getConnection()
                      ->getAttribute(PDO::MYSQL_ATTR_INIT_COMMAND)
         );
@@ -87,7 +103,7 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
     public function testReadDefaultFileIsConfigurable()
     {
         $database = $this->_factory
-                         ->setDefaultReadFile('asdf')
+                         ->setReadDefaultFile('asdf')
                          ->create();
 
         $this->assertEquals(
@@ -100,7 +116,7 @@ class Rend_Factory_Database_Pdo_MysqlTest extends PHPUnit_Framework_TestCase
     public function testReadDefaultGroupIsConfigurable()
     {
         $database = $this->_factory
-                         ->setDefaultReadGroup('asdf')
+                         ->setReadDefaultGroup('asdf')
                          ->create();
 
         $this->assertEquals(
