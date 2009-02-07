@@ -188,9 +188,78 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
                  ->getRequest()
                  ->getParams()
         );
+
+        $this->assertEquals(
+            "unauthorized",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getActionName()
+        );
+
+        $this->assertEquals(
+            "error",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getControllerName()
+        );
+
+        $this->assertEquals(
+            "default",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getModuleName()
+        );
     }
 
-    public function testForbiddenErrorRedirectToFirbiddenPage()
+    public function testUnauthorizedPageRedirectionCanBeConfigured()
+    {
+        $this->_helper
+             ->getActionController()
+             ->getRequest()
+             ->setActionName("one");
+
+        $this->_helper
+             ->addRule("one", "apple", "eat")
+             ->setUnauthorizedAction("unauthorizedAction")
+             ->setUnauthorizedController("unauthorizedController")
+             ->setUnauthorizedModule("unauthorizedModule")
+             ->setUnauthorizedParameters(array("one" => "two"))
+             ->preDispatch();
+
+        $this->assertEquals(
+            "unauthorizedAction",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getActionName()
+        );
+
+        $this->assertEquals(
+            "unauthorizedController",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getControllerName()
+        );
+
+        $this->assertEquals(
+            "unauthorizedModule",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getModuleName()
+        );
+
+        $this->assertEquals(
+            "two",
+            $this->_helper->getActionController()->getRequest()->getParam("one")
+        );
+    }
+
+    public function testForbiddenErrorRedirectToForbiddenPage()
     {
         $this->_helper
              ->getActionController()
@@ -214,6 +283,76 @@ class Rend_Controller_Action_Helper_IsAllowedTest extends PHPUnit_Framework_Test
                  ->getActionController()
                  ->getRequest()
                  ->getParams()
+        );
+
+        $this->assertEquals(
+            "forbidden",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getActionName()
+        );
+
+        $this->assertEquals(
+            "error",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getControllerName()
+        );
+
+        $this->assertEquals(
+            "default",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getModuleName()
+        );
+    }
+
+    public function testForbiddenPageRedirectionCanBeConfigured()
+    {
+        $this->_helper
+             ->getActionController()
+             ->getRequest()
+             ->setActionName("one");
+
+        $this->_helper
+             ->setRole("mike")
+             ->addRule("one", "apple", "eat")
+             ->setForbiddenAction("forbiddenAction")
+             ->setForbiddenController("forbiddenController")
+             ->setForbiddenModule("forbiddenModule")
+             ->setForbiddenParameters(array("one" => "two"))
+             ->preDispatch();
+
+        $this->assertEquals(
+            "forbiddenAction",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getActionName()
+        );
+
+        $this->assertEquals(
+            "forbiddenController",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getControllerName()
+        );
+
+        $this->assertEquals(
+            "forbiddenModule",
+            $this->_helper
+                 ->getActionController()
+                 ->getRequest()
+                 ->getModuleName()
+        );
+
+        $this->assertEquals(
+            "two",
+            $this->_helper->getActionController()->getRequest()->getParam("one")
         );
     }
 
