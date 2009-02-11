@@ -1,0 +1,12 @@
+<sect1 id="rend.factory.acl.introduction">
+    <title>Rend_Factory_Acl</title>
+
+    <para>
+        <code>Rend_Factory_Acl</code> is a factory for creating ACL objects
+        from a PHP file. 
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->
