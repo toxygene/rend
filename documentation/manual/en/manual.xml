@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+    <bookinfo>
+        <title>Programmer's Reference Guide</title>
+        <subtitle>Rend</subtitle>
+        <edition>Programmer's Reference Guide for Rend</edition>
+        <copyright>
+            <year>2008</year>
+            <holder>Justin Hendrickson</holder>
+        </copyright>
+    </bookinfo>
+
+    <chapter id="rend.factory">
+        <title>Rend Factory</title>
+        <xi:include href="module_specs/Rend_Factory-Basics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        <xi:include href="module_specs/Rend_Factory-Standard.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        <xi:include href="module_specs/Rend_Factory-Custom.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    </chapter>
+</book>
+<!--
+vim:se ts=4 sw=4 et:
+-->
