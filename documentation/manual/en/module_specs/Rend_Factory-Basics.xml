@@ -1,0 +1,14 @@
+<sect1 id="rend.factory.basics">
+    <title>Rend_Factory Basics</title>
+
+    <para>
+        The <code>Rend_Factory</code> classes are implementations of the
+        Abstract Factory design pattern. They encapsulate the logic required
+        to construct and configure an object into a class and make it simple
+        to switch around concrete classes without modifing the their
+        implementation.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->
