@@ -3,11 +3,26 @@
 
     <para>
         The <code>Rend_Factory</code> classes are implementations of the
-        Abstract Factory design pattern. They encapsulate the logic required
-        to construct and configure an object into a class and make it simple
-        to switch around concrete classes without modifing the their
-        implementation.
+        <ulink url="http://en.wikipedia.org/wiki/Abstract_factory_pattern">
+        Abstract Factory</ulink> design pattern. They encapsulate the
+        construction and configuration logic of an object and make it simple to
+        switch around concrete classes without modifying their implementation.
     </para>
+
+    <example id="zend.factory.basics.example-1">
+        <title>Creating a custom <code>Zend_Factory</code></title>
+
+        <programlisting role="php"><![CDATA[
+class My_Factory_Something implements Rend_Factory_Interface
+{
+    public function create()
+    {
+        return new Something();
+    }
+}
+]]>
+        </programlisting>
+    </example>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:
