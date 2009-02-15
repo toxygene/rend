@@ -30,7 +30,7 @@
         <title>Auth Storage</title>
 
         <sect3 id="rend.factory.standard.authStorage.nonPersistent">
-            <title>Non Persistent</title>
+            <title>Non-Persistent</title>
         </sect3>
 
         <sect3 id="rend.factory.standard.authStorage.session">
