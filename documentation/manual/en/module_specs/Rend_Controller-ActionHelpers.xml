@@ -1,0 +1,9 @@
+<sect1 id="rend.controller.actionHeleprs" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Action Helpers</title>
+    <xi:include href="Rend_Controller-ActionHelpers_IsAllowed.xml"/>
+    <xi:include href="Rend_Controller-ActionHelpers_LayoutSelector.xml"/>
+    <xi:include href="Rend_Controller-ActionHelpers_LoadModel.xml"/>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->
