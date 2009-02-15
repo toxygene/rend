@@ -13,10 +13,15 @@
     </bookinfo>
 
     <chapter id="rend.factory">
-        <title>Rend Factory</title>
+        <title>Rend_Factory</title>
         <xi:include href="module_specs/Rend_Factory-Basics.xml"/>
         <xi:include href="module_specs/Rend_Factory-Standard.xml"/>
         <xi:include href="module_specs/Rend_Factory-Custom.xml"/>
+    </chapter>
+
+    <chapter id="rend.factoryLoader">
+        <title>Rend_FactoryLoader</title>
+        <xi:include href="module_specs/Rend_FactoryLoader.xml"/>
     </chapter>
 </book>
 <!--
