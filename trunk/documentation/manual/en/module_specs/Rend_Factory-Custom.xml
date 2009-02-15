@@ -1,8 +1,8 @@
 <sect1 id="rend.factory.custom">
     <title>Custom Factories</title>
 
-    <example id="zend.factory.custom.example-1">
-        <title>Creating a custom <code>Zend_Factory</code></title>
+    <example id="rend.factory.custom.example-1">
+        <title>Creating a custom <code>Rend_Factory</code></title>
 
         <programlisting role="php"><![CDATA[
 class My_Factory_Something implements Rend_Factory_Interface
