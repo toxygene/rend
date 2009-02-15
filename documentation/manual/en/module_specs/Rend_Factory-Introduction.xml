@@ -1,5 +1,5 @@
-<sect1 id="rend.factory.basics">
-    <title>Basics</title>
+<sect1 id="rend.factory.introduction">
+    <title>Introduction</title>
 
     <para>
         The <code>Rend_Factory</code> classes are implementations of the
