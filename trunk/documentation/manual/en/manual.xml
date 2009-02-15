@@ -12,6 +12,13 @@
         </copyright>
     </bookinfo>
 
+    <chapter id="rend.controller">
+        <title>Rend_Controller</title>
+        <xi:include href="module_specs/Rend_Controller-Intro.xml"/>
+        <xi:include href="module_specs/Rend_Controller-ActionController.xml"/>
+        <xi:include href="module_specs/Rend_Controller-ActionHelpers.xml"/>
+    </chapter>
+
     <chapter id="rend.factory">
         <title>Rend_Factory</title>
         <xi:include href="module_specs/Rend_Factory-Basics.xml"/>
