@@ -2,13 +2,6 @@
 $this->headMeta()
      ->appendHttpEquiv("Content-Type", "text/html; charset={$this->getEncoding()}");
 
-$this->headLink()
-     ->prependStylesheet("http://yui.yahooapis.com/2.5.2/build/base/base-min.css")
-     ->prependStylesheet("http://yui.yahooapis.com/2.5.2/build/reset-fonts-grids/reset-fonts-grids.css");
-
-$this->headScript()
-     ->prependFile("http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js");
-
 echo $this->doctype();
 
 $this->headScript()->captureStart();
