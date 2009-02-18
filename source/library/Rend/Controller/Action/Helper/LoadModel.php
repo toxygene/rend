@@ -62,18 +62,17 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
      */
     public function getDatabase()
     {
-        if (!$this->_database) {
-            if (!$this->getFactoryLoader() ||
-                !isset($this->getFactoryLoader()->database) ||
-                !$this->getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
-                /** Zend_Controller_Action_Exception */
-                require_once 'Zend/Controller/Action/Exception.php';
-
-                throw new Zend_Controller_Action_Exception("Could not load an database object");
-            }
-            $this->_database = $this->getFactoryLoader()->database();
+        if ($this->_database) {
+            return $this->_database;
         }
-        return $this->_database;
+
+        if ($this->getFactoryLoader() &&
+            isset($this->getFactoryLoader()->database) &&
+            $this->getFactoryLoader->database instanceof Rend_Factory_Database_Interface) {
+            return $this->getFactoryLoader->database();
+        }
+
+        return null;
     }
 
     /**
@@ -89,9 +88,13 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
             $database = $this->getDatabase();
         }
 
-        return new $name(array(
-            Zend_Db_Table_Abstract::ADAPTER => $database,
-        ));
+        $config = array();
+
+        if ($database) {
+            $config[Zend_Db_Table_Abstract::ADAPTER] = $database;
+        }
+
+        return new $name($config);
     }
 
     /**
