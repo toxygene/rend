@@ -68,8 +68,8 @@ class Rend_Controller_Action_Helper_LoadModel extends Rend_Controller_Action_Hel
 
         if ($this->getFactoryLoader() &&
             isset($this->getFactoryLoader()->database) &&
-            $this->getFactoryLoader->database instanceof Rend_Factory_Database_Interface) {
-            return $this->getFactoryLoader->database();
+            $this->getFactoryLoader()->database instanceof Rend_Factory_Database_Interface) {
+            return $this->getFactoryLoader()->database();
         }
 
         return null;
