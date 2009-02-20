@@ -54,6 +54,12 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     protected $_acl;
 
     /**
+     * Enabled flag
+     * @var string
+     */
+    protected $_enabled = true;
+
+    /**
      * Forbidden action
      * @var string
      */
@@ -221,7 +227,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function direct($resource, $permission = null)
     {
-        if (!$this->isAllowed($resource, $permission)) {
+        if ($this->_enabled && !$this->isAllowed($resource, $permission)) {
             $this->_dispatchFailedQuery($resource, $permission);
         }
     }
@@ -328,18 +334,20 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
      */
     public function preDispatch()
     {
-        list ($resource, $permission) = $this->_formatRuleResults(
-            $this->getRule(
-                $this->_getCurrentActionName()
-            )
-        );
+        if ($this->_enabled) {
+            list ($resource, $permission) = $this->_formatRuleResults(
+                $this->getRule(
+                    $this->_getCurrentActionName()
+                )
+            );
 
-        if (!$resource) {
-            return;
-        }
+            if (!$resource) {
+                return;
+            }
 
-        if (!$this->isAllowed($resource, $permission)) {
-            $this->_dispatchFailedQuery($resource, $permission);
+            if (!$this->isAllowed($resource, $permission)) {
+                $this->_dispatchFailedQuery($resource, $permission);
+            }
         }
     }
 
@@ -368,6 +376,18 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     public function setAcl(Zend_Acl $acl)
     {
         $this->_acl = $acl;
+        return $this;
+    }
+
+    /**
+     * Set the enabled flag
+     *
+     * @param boolean $enabled
+     * @return Rend_Controller_Action_Helper_IsAllowed
+     */
+    public function setEnabled($enabled)
+    {
+        $this->_enabled = $enabled;
         return $this;
     }
 
