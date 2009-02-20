@@ -63,6 +63,12 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
     protected $_helperPaths;
 
     /**
+     * Disable LFI protection flag
+     * @var boolean
+     */
+    protected $_disableLfiProtection;
+
+    /**
      * Script paths
      * @var array
      */
@@ -142,6 +148,10 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
             $view->strictVars($this->_strictVars);
         }
 
+        if ($this->_disableLfiProtection) {
+            $view->setLfiProtectionOn(false);
+        }
+
         return $view;
     }
 
@@ -202,6 +212,18 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
     public function setHelperPaths($helperPaths)
     {
         $this->_helperPaths = $helperPaths;
+        return $this;
+    }
+
+    /**
+     * Set the LFI protection flag
+     *
+     * @param boolean $disableLfiProtection
+     * @return Rend_Factory_View
+     */
+    public function setDisableLfiProtection($disableLfiProtection)
+    {
+        $this->_disableLfiProtection = $disableLfiProtection;
         return $this;
     }
 
