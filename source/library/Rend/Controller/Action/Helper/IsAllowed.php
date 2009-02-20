@@ -214,6 +214,19 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     }
 
     /**
+     * @param string $resource
+     * @param string $permission
+     * @return boolean
+     * @throws Zend_Controller_Action_Exception
+     */
+    public function direct($resource, $permission = null)
+    {
+        if (!$this->isAllowed($resource, $permission)) {
+            $this->_dispatchFailedQuery($resource, $permission);
+        }
+    }
+
+    /**
      * Get the ACL object
      *
      * @return Zend_Acl
@@ -326,44 +339,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
         }
 
         if (!$this->isAllowed($resource, $permission)) {
-            $perm = $permission ? $permission : "*default*";
-
-            $deniedParams = $this->getRequest()->getParams();
-            unset($deniedParams[$this->getRequest()->getActionName()]);
-            unset($deniedParams[$this->getRequest()->getControllerName()]);
-            unset($deniedParams[$this->getRequest()->getModuleName()]);
-
-            $this->getRequest()
-                 ->setParam("deniedAction", $this->getRequest()->getActionName())
-                 ->setParam("deniedController", $this->getRequest()->getControllerName())
-                 ->setParam("deniedModule", $this->getRequest()->getModuleName())
-                 ->setParam("deniedParameters", $deniedParams)
-                 ->setParam("deniedRole", $this->_role)
-                 ->setParam("deniedResource", $resource)
-                 ->setParam("deniedPermission", $perm);
-
-            if ($this->_throwExceptions) {
-                throw new Zend_Controller_Action_Exception(
-                    "Permission '{$perm}' denied on resource '{$resource}' for role '{$this->_role}'",
-                    $permission ? self::UNAUTHORIZED : self::FORBIDDEN
-                );
-            } else {
-                if (!$this->_role) {
-                    $this->getRequest()
-                         ->setActionName($this->_unauthorizedAction)
-                         ->setControllerName($this->_unauthorizedController)
-                         ->setModuleName($this->_unauthorizedModule)
-                         ->setParams($this->_unauthorizedParameters)
-                         ->setDispatched(false);
-                } else {
-                    $this->getRequest()
-                         ->setActionName($this->_forbiddenAction)
-                         ->setControllerName($this->_forbiddenController)
-                         ->setModuleName($this->_forbiddenModule)
-                         ->setParams($this->_forbiddenParameters)
-                         ->setDispatched(false);
-                }
-            }
+            $this->_dispatchFailedQuery($resource, $permission);
         }
     }
 
@@ -536,6 +512,53 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     public function setUnauthorizedParameters(array $parameters)
     {
         $this->_unauthorizedParameters = $parameters;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    protected function _dispatchFailedQuery($resource, $permission = null)
+    {
+        $perm = $permission ? $permission : "*default*";
+
+        $deniedParams = $this->getRequest()->getParams();
+        unset($deniedParams[$this->getRequest()->getActionName()]);
+        unset($deniedParams[$this->getRequest()->getControllerName()]);
+        unset($deniedParams[$this->getRequest()->getModuleName()]);
+
+        $this->getRequest()
+             ->setParam("deniedAction", $this->getRequest()->getActionName())
+             ->setParam("deniedController", $this->getRequest()->getControllerName())
+             ->setParam("deniedModule", $this->getRequest()->getModuleName())
+             ->setParam("deniedParameters", $deniedParams)
+             ->setParam("deniedRole", $this->_role)
+             ->setParam("deniedResource", $resource)
+             ->setParam("deniedPermission", $perm);
+
+        if ($this->_throwExceptions) {
+            throw new Zend_Controller_Action_Exception(
+                "Permission '{$perm}' denied on resource '{$resource}' for role '{$this->_role}'",
+                $permission ? self::UNAUTHORIZED : self::FORBIDDEN
+            );
+        } else {
+            if (!$this->_role) {
+                $this->getRequest()
+                     ->setActionName($this->_unauthorizedAction)
+                     ->setControllerName($this->_unauthorizedController)
+                     ->setModuleName($this->_unauthorizedModule)
+                     ->setParams($this->_unauthorizedParameters)
+                     ->setDispatched(false);
+            } else {
+                $this->getRequest()
+                     ->setActionName($this->_forbiddenAction)
+                     ->setControllerName($this->_forbiddenController)
+                     ->setModuleName($this->_forbiddenModule)
+                     ->setParams($this->_forbiddenParameters)
+                     ->setDispatched(false);
+            }
+        }
+
         return $this;
     }
 
