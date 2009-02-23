@@ -40,13 +40,13 @@ class Rend_Controller_ActionTest extends PHPUnit_Framework_TestCase
         $this->_config        = new Zend_Config(array());
         $this->_factoryLoader = new Rend_FactoryLoader();
 
+        Zend_Controller_Front::getInstance()
+                             ->setParam("rendConfig", $this->_config)
+                             ->setParam("rendFactoryLoader", $this->_factoryLoader);
+
         $this->_action = new Mock_Rend_Controller_Action(
             new Zend_Controller_Request_HttpTestCase(),
-            new Zend_Controller_Response_HttpTestCase(),
-            array(
-                "rendConfig"        => $this->_config,
-                "rendFactoryLoader" => $this->_factoryLoader
-            )
+            new Zend_Controller_Response_HttpTestCase()
         );
     }
 

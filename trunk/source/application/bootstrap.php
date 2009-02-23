@@ -75,10 +75,6 @@ $frontController->setParam("rendConfig", $config)
                 ->addControllerDirectory("../application/controllers", "default")
                 ->addModuleDirectory("../application/modules");
 
-$frontController->getDispatcher()
-                ->setParam("rendConfig", $config)
-                ->setParam("rendFactoryLoader", $factoryLoader);
-
 if (isset($config->routes)) {
     $frontController->getRouter()
                     ->addConfig($config->routes);

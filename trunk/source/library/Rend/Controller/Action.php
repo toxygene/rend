@@ -23,6 +23,7 @@
 require_once "Zend/Controller/Action.php";
 
 /**
+ * @deprecated
  * @category Rend
  * @package Controller
  */
@@ -36,7 +37,8 @@ abstract class Rend_Controller_Action extends Zend_Controller_Action
      */
     public function getConfig()
     {
-        return $this->getInvokeArg("rendConfig");
+        return $this->_helper
+                    ->config();
     }
 
     /**
@@ -46,7 +48,8 @@ abstract class Rend_Controller_Action extends Zend_Controller_Action
      */
     public function getFactoryLoader()
     {
-        return $this->getInvokeArg("rendFactoryLoader");
+        return $this->_helper
+                    ->factoryLoader();
     }
 
 }

@@ -21,4 +21,8 @@ PHPUnit_Util_Filter::addDirectoryToWhiteList(
     ".php"
 );
 
+Zend_Controller_Action_HelperBroker::addPrefix(
+    "Rend_Controller_Action_Helper"
+);
+
 require_once "TestConfiguration.php";
