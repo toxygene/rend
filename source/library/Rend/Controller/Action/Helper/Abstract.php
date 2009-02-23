@@ -60,6 +60,7 @@ abstract class Rend_Controller_Action_Helper_Abstract extends Zend_Controller_Ac
     {
         if (!$this->_factoryLoader) {
             $this->_factoryLoader = $this->getActionController()
+                                         ->getHelper("factoryLoader")
                                          ->getFactoryLoader();
         }
         return $this->_factoryLoader;
