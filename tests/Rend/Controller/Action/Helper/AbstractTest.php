@@ -45,6 +45,12 @@ class Rend_Controller_Action_Helper_AbstractTest extends PHPUnit_Framework_TestC
         );
     }
 
+    public function tearDown()
+    {
+        Zend_Controller_Front::getInstance()
+                             ->resetInstance();
+    }
+
     public function testFactoryLoaderCanBeManuallyOverriden()
     {
         $factoryLoader = new Rend_FactoryLoader();
@@ -61,10 +67,12 @@ class Rend_Controller_Action_Helper_AbstractTest extends PHPUnit_Framework_TestC
     {
         $factoryLoader = new Rend_FactoryLoader();
 
+        Zend_Controller_Front::getInstance()
+                             ->setParam("rendFactoryLoader", $factoryLoader);
+
         $this->_helper->setActionController(new RCAHA_Test_Controller(
             new Zend_Controller_Request_Simple(),
-            new Zend_Controller_Response_Cli(),
-            array("rendFactoryLoader" => $factoryLoader)
+            new Zend_Controller_Response_Cli()
         ));
 
         $this->assertSame(
