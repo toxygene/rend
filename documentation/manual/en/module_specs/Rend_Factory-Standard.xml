@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <sect1 id="rend.factory.standard">
     <title>Standard Elements</title>
 
@@ -7,50 +10,101 @@
     </para>
 
     <sect2 id="rend.factory.standard.acl">
-        <title>Acl</title>
-    </sect2>
-
-    <sect2 id="rend.factory.standard.auth">
-        <title>Auth</title>
+        <title>ACL</title>
+        
+        <para>
+        	This factory builds <code>Zend_Acl</code> object. It simply	takes
+        	in a configuration file that builds the object.
+        </para>
     </sect2>
 
     <sect2 id="rend.factory.standard.authAdapter">
-        <title>Auth Adapter</title>
+        <title>Authentication Adapter</title>
+        
+        <para>
+        	These factories build <code>Zend_Auth_Adapter_Interface</code>
+        	objects.
+        </para>
 
         <sect3 id="rend.factory.standard.authAdapter.dbTable">
-            <title>Db Table</title>
+            <title>Database Table</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Auth_Adapter_DbTable</code>
+            	object.
+            </para>
         </sect3>
 
         <sect3 id="rend.factory.standard.authAdapter.digest">
             <title>Digest</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Auth_Adapter_Digest</code>
+            	object.
+            </para>
         </sect3>
     </sect2>
 
     <sect2 id="rend.factory.standard.authStorage">
-        <title>Auth Storage</title>
+        <title>Authentication Storage</title>
+
+		<para>
+			These factories build <code>Zend_Auth_Storage_Interface</code>
+			objects.
+		</para>
 
         <sect3 id="rend.factory.standard.authStorage.nonPersistent">
             <title>Non-Persistent</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Auth_Storage_NonPersistent</code>
+            	object.
+            </para>
         </sect3>
 
         <sect3 id="rend.factory.standard.authStorage.session">
             <title>Session</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Auth_Storage_Session</code>
+            	object.
+           	</para>
         </sect3>
     </sect2>
 
     <sect2 id="rend.factory.standard.database">
         <title>Database</title>
 
+		<para>
+			These factories build <code>Zend_Db_Adapter_Abstract</code>
+			objects.
+		</para>
+
         <sect3 id="rend.factory.standard.database.mysqli">
             <title>Mysqli</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Db_Adapter_Mysqli</code>
+            	object.
+            </para>
         </sect3>
 
         <sect3 id="rend.factory.standard.database.oci">
             <title>Oci</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Db_Adapter_Oci</code>
+            	object.
+            </para>
         </sect3>
 
         <sect3 id="rend.factory.standard.database.pdo_mysql">
             <title>Pdo_Mysql</title>
+            
+            <para>
+            	This factory builds a <code>Zend_Db_Adapter_Pdo_Mysql</code>
+            	object.
+            </para>
         </sect3>
     </sect2>
 
