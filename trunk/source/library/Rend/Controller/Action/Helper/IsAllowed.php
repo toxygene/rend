@@ -85,7 +85,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
 
     /**
      * Role name
-     * @var string
+     * @var string|Zend_Acl_Role_Interface
      */
     protected $_role;
 
@@ -167,12 +167,14 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
             if (is_array($spec)) {
                 $resource   = null;
                 $permission = null;
+
                 if (isset($spec["action"])) {
                     $action   = $spec["action"];
                     $resource = $spec["resource"];
                     if (isset($spec["permission"])) {
                         $permission = $spec["permission"];
                     }
+
                     $this->addRule($action, $resource, $permission);
                 } else {
                     $argc = count($spec);
@@ -442,7 +444,7 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Set the role name
      *
-     * @param string $role
+     * @param string|Zend_Acl_Role_Interface $role
      * @return Rend_Controller_Action_Helper_IsAllowed
      */
     public function setRole($role = null)
