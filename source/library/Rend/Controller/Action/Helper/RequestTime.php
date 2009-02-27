@@ -16,7 +16,7 @@
  * @license http://www.rendframework.com/license.html    New BSD License
  * @link http://www.rendframework.com/
  * @since 2.0.0
- * @version $Id: LoadModel.php 495 2009-02-19 20:59:58Z justin.hendrickson $
+ * @version $Id$
  */
 
 /** Rend_Controller_Action_Helper_Abstract */
