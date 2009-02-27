@@ -20,9 +20,7 @@ try {
         <h2>Basic Stack Trace</h2>
         <pre><?php echo $e; ?></pre>
         <h2>Full Stack Trace</h2>
-        <?php if (!extension_loaded('xdebug')): ?><pre><?php endif; ?>
-        <?php var_dump($e->getTrace()); ?>
-        <?php if (!extension_loaded('xdebug')): ?></pre><?php endif; ?>
+        <?php if (!extension_loaded('xdebug')): ?><pre><?php endif; ?><?php var_dump($e->getTrace()); ?><?php if (!extension_loaded('xdebug')): ?></pre><?php endif; ?>
     </body>
 </html>
 <?php
