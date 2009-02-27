@@ -16,7 +16,7 @@
  * @license http://www.rendframework.com/license.html New BSD License
  * @link http://www.rendframework.com/
  * @since 2.0.0
- * @version $Id: FactoryLoader.php 424 2009-01-20 04:05:15Z justin.hendrickson $
+ * @version $Id$
  */
 
 /**
