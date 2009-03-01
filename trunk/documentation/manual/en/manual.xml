@@ -14,8 +14,6 @@
 
     <chapter id="rend.controller">
         <title>Rend_Controller</title>
-        <xi:include href="module_specs/Rend_Controller-Introduction.xml"/>
-        <xi:include href="module_specs/Rend_Controller-ActionController.xml"/>
         <xi:include href="module_specs/Rend_Controller-ActionHelpers.xml"/>
     </chapter>
 
@@ -24,6 +22,7 @@
         <xi:include href="module_specs/Rend_Factory-Introduction.xml"/>
         <xi:include href="module_specs/Rend_Factory-Standard.xml"/>
         <xi:include href="module_specs/Rend_Factory-Custom.xml"/>
+        <xi:include href="module_specs/Rend_FactoryLoader.xml"/>
     </chapter>
 
     <chapter id="rend.factoryLoader">
