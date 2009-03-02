@@ -34,23 +34,31 @@ class Rend_Controller_Action_Helper_RequestTime extends Zend_Controller_Action_H
     /**
      * Proxies to getRequestTime
      *
-     * @return Zend_Date
+     * @return string $format
+     * @return string|Zend_Date
      */
-    public function direct()
+    public function direct($format = null)
     {
-        return $this->getRequestTime();
+        return $this->fetch($format);
     }
 
     /**
      * Get the current request time
      *
-     * @return Zend_Date
+     * @return string $format
+     * @return string|Zend_Date
      */
-    public function getRequestTime()
+    public function fetch($format = null)
     {
-        return new Zend_Date(
+        $date = new Zend_Date(
             $this->getRequest()->REQUEST_TIME
         );
+
+        if ($format) {
+            return $date->toString($format);
+        } else {
+            return $date;
+        }
     }
 
 }
