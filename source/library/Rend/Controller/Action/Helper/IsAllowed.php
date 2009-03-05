@@ -316,15 +316,26 @@ class Rend_Controller_Action_Helper_IsAllowed extends Rend_Controller_Action_Hel
     /**
      * Check if the current role has permission to the resource
      *
-     * @param string $resource
-     * @param string $permission
+     * @param array|string|Zend_Acl_Resource $resources
+     * @param array|string $permission
      * @return boolean
      * @throws Zend_Controller_Action_Exception
      */
-    public function isAllowed($resource, $permission = null)
+    public function isAllowed($resources, $permission = null)
     {
-        return $this->getAcl()
-                    ->isAllowed($this->_role, $resource, $permission);
+        if (!is_array($resources) && !$resources instanceof Traversable) {
+            $resources = array($resources);
+        }
+
+        $acl = $this->getAcl();
+
+        foreach ($resources as $resource) {
+            if (!$acl->isAllowed($this->_role, $resource, $permission)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
