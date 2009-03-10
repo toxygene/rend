@@ -245,7 +245,10 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
     protected function _buildFactory($config)
     {
         if (is_array($config)) {
-            $config = new ArrayObject($config, ArrayObject::ARRAY_AS_PROPS);
+            /** Zend_Config */
+            require_once "Zend/Config.php";
+
+            $config = new Zend_Config($config);
         }
 
         $className = $this->load(
