@@ -215,11 +215,11 @@ class Rend_Factory_Database_MysqliTest extends PHPUnit_Framework_TestCase
         }
 
         $database = $this->_factory
-                         ->setCharset("UTF-8")
+                         ->setCharset("utf8")
                          ->create();
 
         $this->assertEquals(
-            "UTF-8",
+            "utf8",
             $database->getConnection()
                      ->get_charset()         
                      ->charset
