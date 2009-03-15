@@ -36,7 +36,7 @@ class Rend_Factory_Acl extends Rend_Base_Abstract implements Rend_Factory_Acl_In
      * Configuration file
      * @var string
      */
-    private $_configFile = "../application/configs/acl.php";
+    protected $_configFile = "../application/configs/acl.php";
 
     /**
      * Create an ACL object
