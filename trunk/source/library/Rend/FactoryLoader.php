@@ -155,7 +155,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * Get a factory by name
      *
      * @param string $name
-     * @return object
+     * @return Rend_Factory_Interface
      * @throws Rend_Factory_Exception
      * @throws Zend_Loader_PluginLoader_Exception
      */
@@ -242,7 +242,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * Construct a factory
      *
      * @param array|Zend_Config $config
-     * @return Zend_Factory_Interface
+     * @return Rend_Factory_Interface
      */
     protected function _buildFactory($config)
     {
