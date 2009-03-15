@@ -20,6 +20,8 @@
  */
 
 /**
+ * Base interface for classes
+ *
  * @category Rend
  * @package Base
  */
@@ -27,12 +29,18 @@ interface Rend_Base_Interface
 {
 
     /**
+     * Set the options from a Zend_Config object
      *
+     * @param Zend_Config $config
+     * @return Rend_Base_Interface
      */
     public function setConfig(Zend_Config $config);
 
     /**
+     * Set the options from an array
      *
+     * @param array $options
+     * @return Rend_Base_Interface
      */
     public function setOptions(array $options);
 
