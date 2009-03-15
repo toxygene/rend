@@ -32,12 +32,6 @@ class Rend_Controller_Action_Helper_Config extends Zend_Controller_Action_Helper
 {
 
     /**
-     * Config object
-     * @var Zend_Config
-     */
-    private $_config;
-
-    /**
      * Proxies to getConfig()
      *
      * @return Zend_Config
@@ -60,18 +54,6 @@ class Rend_Controller_Action_Helper_Config extends Zend_Controller_Action_Helper
         }
 
         return $this->_config;
-    }
-
-    /**
-     * Set the config
-     *
-     * @param Zend_Config $config
-     * @return Rend_Controller_Action_Helper_Config
-     */
-    public function setConfig(Zend_Config $config)
-    {
-        $this->_config = $config;
-        return $this;
     }
 
 }
