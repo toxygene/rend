@@ -42,6 +42,7 @@ class Rend_Controller_Router_QueryString extends Zend_Controller_Router_Abstract
      * @param string $name (ignored)
      * @param boolean $reset
      * @param boolean $encode (ignored)
+     * @return string
      */
     public function assemble($userParams, $name = null, $reset = false, $encode = true)
     {
