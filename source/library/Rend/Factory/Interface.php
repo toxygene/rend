@@ -20,7 +20,7 @@
  */
 
 /**
- * Marker interface
+ * Marker interface for factories
  *
  * @category Rend
  * @package Factory

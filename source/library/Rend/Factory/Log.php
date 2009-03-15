@@ -26,6 +26,8 @@ require_once "Rend/Base/Abstract.php";
 require_once "Rend/Factory/Log/Interface.php";
 
 /**
+ * Factory for building log objects
+ *
  * @category Rend
  * @package Factory
  */
