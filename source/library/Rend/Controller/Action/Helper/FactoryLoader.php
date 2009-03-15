@@ -32,12 +32,6 @@ class Rend_Controller_Action_Helper_FactoryLoader extends Zend_Controller_Action
 {
 
     /**
-     * Factory loader
-     * @var Rend_FactoryLoader
-     */
-    private $_factoryLoader;
-
-    /**
      * Proxies to getFactoryLoader()
      *
      * @return Rend_FactoryLoader
@@ -54,20 +48,8 @@ class Rend_Controller_Action_Helper_FactoryLoader extends Zend_Controller_Action
      */
     public function getFactoryLoader()
     {
-	return Zend_Controller_Front::getInstance()
+        return Zend_Controller_Front::getInstance()
                                     ->getParam("rendFactoryLoader");
-    }
-
-    /**
-     * Set the factory loader
-     *
-     * @param Rend_FactoryLoader $factoryLoader
-     * @return Rend_Controller_Action_Helper_FactoryLoader
-     */
-    public function setFactoryLoader(Rend_FactoryLoader $factoryLoader)
-    {
-        $this->_factoryLoader = $factoryLoader;
-        return $this;
     }
 
 }

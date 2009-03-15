@@ -51,7 +51,8 @@ class Rend_Controller_Action_Helper_RequestTime extends Zend_Controller_Action_H
     public function fetch($format = null)
     {
         $date = new Zend_Date(
-            $this->getRequest()->REQUEST_TIME
+            $this->getRequest()
+                 ->REQUEST_TIME
         );
 
         if ($format) {
