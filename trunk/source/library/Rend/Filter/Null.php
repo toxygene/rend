@@ -37,7 +37,7 @@ class Rend_Filter_Null implements Zend_Filter_Interface
      * Filter a value
      *
      * @param mixed $value
-     * @return boolean
+     * @return string
      */
     public function filter($value)
     {

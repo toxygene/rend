@@ -89,7 +89,7 @@ class Rend_Factory_Mail extends Rend_Base_Abstract implements Rend_Factory_Mail_
     /**
      * Create a new Zend_Mail object
      *
-     * @return Zend_Factory_Mail
+     * @return Zend_Mail
      */
     public function create()
     {
