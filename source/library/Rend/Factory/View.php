@@ -194,8 +194,8 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
     /**
      * Set the filter paths
      *
-     * @param	array 	$filterPaths
-     * @return	Rend_Filter_View
+     * @param array $filterPaths
+     * @return Rend_Factory_View
      */
     public function setFilterPaths($filterPaths)
     {

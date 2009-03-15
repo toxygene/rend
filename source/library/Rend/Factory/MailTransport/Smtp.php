@@ -76,6 +76,7 @@ class Rend_Factory_MailTransport_Smtp extends Rend_Base_Abstract implements Rend
      * Set the auth type
      *
      * @param string $auth
+     * @return Rend_Factory_MailTransport_Smtp
      */
     public function setAuth($auth)
     {

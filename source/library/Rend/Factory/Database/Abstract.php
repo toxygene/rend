@@ -114,7 +114,7 @@ abstract class Rend_Factory_Database_Abstract extends Rend_Base_Abstract impleme
      * Set the fetch mode
      *
      * @param string $fetchMode
-     * @return Rend_Factory_Database_Abstract_Pdo
+     * @return Rend_Factory_Database_Abstract
      */
     public function setFetchMode($fetchMode)
     {
