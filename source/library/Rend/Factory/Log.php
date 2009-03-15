@@ -38,7 +38,7 @@ class Rend_Factory_Log extends Rend_Base_Abstract implements Rend_Factory_Log_In
      * Configuration file
      * @var string
      */
-    private $_configFile = "../application/configs/log.php";
+    protected $_configFile = "../application/configs/log.php";
 
     /**
      * Create a log object

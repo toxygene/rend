@@ -36,31 +36,31 @@ class Rend_Factory_AuthAdapter_DbTable extends Rend_Base_Abstract implements Ren
      * Credential column
      * @var string
      */
-    private $_credentialColumn;
+    protected $_credentialColumn;
 
     /**
      * Credential treatment
      * @var string
      */
-    private $_credentialTreatment;
+    protected $_credentialTreatment;
 
     /**
      * Identity column
      * @var string
      */
-    private $_identityColumn;
+    protected $_identityColumn;
 
     /**
      * Database adapter
      * @var Zend_Db_Adapter_Abstract
      */
-    private $_databaseAdapter;
+    protected $_databaseAdapter;
 
     /**
      * Table name
      * @var string
      */
-    private $_tableName;
+    protected $_tableName;
 
     /**
      * Create an DbTable auth adapter
