@@ -23,6 +23,8 @@
 require_once "Zend/Loader/PluginLoader.php";
 
 /**
+ * Plugin loader for factories
+ *
  * @category Rend
  * @package Factory
  */
@@ -240,7 +242,7 @@ class Rend_FactoryLoader extends Zend_Loader_PluginLoader
      * Construct a factory
      *
      * @param array|Zend_Config $config
-     * @return object
+     * @return Zend_Factory_Interface
      */
     protected function _buildFactory($config)
     {
