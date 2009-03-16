@@ -48,12 +48,8 @@ class Rend_Controller_Action_Helper_Config extends Zend_Controller_Action_Helper
      */
     public function getConfig()
     {
-        if (!$this->_config) {
-            $this->_config = Zend_Controller_Front::getInstance()
-                                                  ->getParam("rendConfig");
-        }
-
-        return $this->_config;
+        return Zend_Controller_Front::getInstance()
+                                    ->getParam("rendConfig");
     }
 
 }
