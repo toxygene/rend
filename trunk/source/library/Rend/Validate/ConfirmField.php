@@ -45,7 +45,15 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_MATCH => "This value does not match the '%field%' field"
+        self::NOT_MATCH => "The value does not match the '%field%' field"
+    );
+
+    /**
+     * Message variables
+     * @var array
+     */
+    protected $_messageVariables = array(
+        "field" => "_field"
     );
 
     /**
@@ -62,6 +70,7 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
      */
     public function __construct($field = null)
     {
+        die($field);
         $this->_field = $field;
     }
 
