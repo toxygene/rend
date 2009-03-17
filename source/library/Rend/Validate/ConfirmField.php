@@ -70,7 +70,6 @@ class Rend_Validate_ConfirmField extends Zend_Validate_Abstract
      */
     public function __construct($field = null)
     {
-        die($field);
         $this->_field = $field;
     }
 
