@@ -3,7 +3,7 @@ bootstrap, config file, unit testing and the default modular MVC folder
 layout.
 
 To begin using it, you'll need to make copies of the -dist files.
- * /application/config/config.ini
+ * /application/configs/config.ini
  * /public/.htaccess
 
 Make sure you set the REND_MODE in the .htaccess file to 'development' if
