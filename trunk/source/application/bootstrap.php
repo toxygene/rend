@@ -19,16 +19,16 @@ function rendErrorHandler($errno, $errstr, $errfile, $errline)
 }
 
 if (isset($bootstrap) && $bootstrap) {
-    set_error_handler("rendErrorHandler"); 
+    set_error_handler("rendErrorHandler");
 
     error_reporting(E_ALL | E_STRICT);
-    ini_set("error_log", "../data/logs/phperrors.log");
+    ini_set("error_log", "{$basePath}/data/logs/phperrors.log");
     ini_set("log_errors", true);
 
     $paths = array();
-    $paths[] = realPath("../library");
-    $paths[] = realPath("../application/models");
-    foreach (glob("../application/modules/*/models") as $path) {
+    $paths[] = realPath("{$basePath}/library");
+    $paths[] = realPath("{$basePath}/application/models");
+    foreach (glob("{$basePath}/application/modules/*/models") as $path) {
         $paths[] = realPath($path);
     }
 
@@ -46,7 +46,7 @@ if (isset($bootstrap) && $bootstrap) {
 require_once "Zend/Config/Ini.php";
 
 $config = new Zend_Config_Ini(
-    "../application/configs/config.ini",
+    "{$basePath}/application/configs/config.ini",
     $_SERVER["REND_MODE"]
 );
 
@@ -72,8 +72,8 @@ $factoryLoader = new Rend_FactoryLoader(
 
 $frontController->setParam("rendConfig", $config)
                 ->setParam("rendFactoryLoader", $factoryLoader)
-                ->addControllerDirectory("../application/controllers", "default")
-                ->addModuleDirectory("../application/modules");
+                ->addControllerDirectory("{$basePath}/application/controllers", "default")
+                ->addModuleDirectory("{$basePath}/application/modules");
 
 if (isset($config->routes)) {
     $frontController->getRouter()
@@ -109,5 +109,5 @@ Zend_Controller_Action_HelperBroker::addHelper(
 require_once "Zend/Layout.php";
 
 Zend_Layout::startMvc(array(
-    "viewBasePath" => "../application/layouts"
+    "viewBasePath" => "{$basePath}/application/layouts"
 ));
