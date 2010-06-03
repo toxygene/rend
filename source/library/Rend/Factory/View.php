@@ -51,6 +51,12 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
     protected $_escape;
 
     /**
+     * Filter
+     * @var array|string
+     */
+    protected $_filter;
+
+    /**
      * Filter paths
      * @var array
      */
@@ -108,6 +114,10 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
 
         if ($this->_escape) {
             $view->setEscape($this->_escape);
+        }
+
+        if ($this->_filter) {
+            $view->setFilter($this->_filter);
         }
 
         if ($this->_filterPaths) {
@@ -188,6 +198,18 @@ class Rend_Factory_View extends Rend_Base_Abstract implements Rend_Factory_View_
     public function setEscape($escape)
     {
         $this->_escape = $escape;
+        return $this;
+    }
+
+    /**
+     * Set the filter(s)
+     *
+     * @param array|string $filter
+     * @return Rend_Factory_View
+     */
+    public function setFilter($filter)
+    {
+        $this->_filter = $filter;
         return $this;
     }
 
